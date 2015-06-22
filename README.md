@@ -8,5 +8,3 @@ Typically, a Python IDE (Integrated Development Environment) allows you add a "s
 Note that xbmcstubs are literally stubs and do not include any useful code, so please don't try to run your program outside Kodi unless you add some testing code into xbmcstubs.
 
 Auto-generated XBMC Python API documentation from xbmcstubs docstrings: http://romanvm.github.io/xbmcstubs/docs
-
-License: GPL v.3 http://www.gnu.org/licenses/gpl.html
