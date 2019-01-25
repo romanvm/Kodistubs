@@ -3912,7 +3912,128 @@ class Window(object):
         You can only use the Control functions
         """
         return Control()
-    
+
+    def onAction(self, action):
+        # type: (Action) -> None
+        """
+        onAction method
+
+        This method will receive all actions that the main program will send to
+        this window.
+
+        :param action: The action id to perform, see Action to get use of them
+
+        By default, only the  ``PREVIOUS_MENU`` and  ``NAV_BACK`` actions
+        are handled. Overwrite this method to let your script handle all actions.
+        Don't forget to capture  ``ACTION_PREVIOUS_MENU`` or ``ACTION_NAV_BACK``,
+        else the user can't close this window.
+
+        Example::
+
+            # Define own function where becomes called from Kodi
+            def onAction(self, action):
+                if action.getId() == ACTION_PREVIOUS_MENU:
+                    print('action received: previous')
+                    self.close()
+                if action.getId() == ACTION_SHOW_INFO:
+                    print('action received: show info')
+                if action.getId() == ACTION_STOP:
+                    print('action received: stop')
+                if action.getId() == ACTION_PAUSE:
+                    print('action received: pause')
+        """
+        pass
+
+    def onControl(self, control):
+        # type: (Control) -> None
+        """
+        onControl method
+
+        This method will receive all click events on owned and selected controls
+        when the control itself doesn't handle the message.
+
+        :param control: The Control class
+
+        Example::
+
+            # Define own function where becomes called from Kodi
+            def onControl(self, control):
+                print("Window.onControl(control=[%s])"%control)
+        """
+        pass
+
+    def onClick(self, controlId):
+        # type: (int) -> None
+        """
+        onClick method
+
+        This method will receive all click events that the main program will
+        send to this window.
+
+        :param controlId: The one time clicked GUI control identifier
+
+        Example::
+
+            # Define own function where becomes called from Kodi
+            def onClick(self,controlId):
+                if controlId == 10:
+                    print("The control with Id 10 is clicked")
+        """
+        pass
+
+    def onDoubleClick(self, controlId):
+        # type: (int) -> None
+        """
+        onDoubleClick method
+
+        This method will receive all double click events that the main program
+        will send to this window.
+
+        :param controlId: The double clicked GUI control identifier
+
+        Example::
+
+            # Define own function where becomes called from Kodi
+            def onDoubleClick(self,controlId):
+                if controlId == 10:
+                    print("The control with Id 10 is double clicked")
+        """
+        pass
+
+    def onFocus(self, controlId):
+        # type: (int) -> None
+        """
+        onFocus method
+
+        This method will receive all focus events that the main program will
+        send to this window.
+
+        :param controlId: The focused GUI control identifier
+
+        Example::
+
+            # Define own function where becomes called from Kodi
+            def onDoubleClick(self,controlId):
+                if controlId == 10:
+                    print("The control with Id 10 is focused")
+        """
+        pass
+
+    def onInit(self):
+        # type: () -> None
+        """
+        onInit method
+
+        This method will be called to initialize the window
+
+        Example::
+
+            # Define own function where becomes called from Kodi
+            def onInit(self):
+                print("Window.onInit method called from Kodi")
+        """
+        pass
+
 
 class WindowDialog(Window):
     """
