@@ -1487,6 +1487,130 @@ class Player(object):
         """
         pass
 
+    def onPlayBackStarted(self):
+        # type: () -> None
+        """
+        onPlayBackStarted method.
+
+        Will be called when Kodi player starts. Video or audio might not be
+        available at this point. Use onAVStarted() instead if you need to detect
+        if Kodi is actually playing a media file (i.e, if a stream is available)
+        """
+        pass
+
+    def onAVStarted(self):
+        # type: () -> None
+        """
+        onAVStarted method.
+
+        Will be called when Kodi has a video or audiostream.
+
+        New function added.
+        """
+        pass
+
+    def onAVChange(self):
+        # type: () -> None
+        """
+        onAVChange method.
+
+        Will be called when Kodi has a video, audio or subtitle stream.
+        Also happens when the stream changes.
+
+        New function added.
+        """
+        pass
+
+    def onPlayBackEnded(self):
+        # type: () -> None
+        """
+        onPlayBackEnded method.
+
+        Will be called when Kodi stops playing a file.
+        """
+        pass
+
+    def onPlayBackStopped(self):
+        # type: () -> None
+        """
+        onPlayBackStopped method.
+
+        Will be called when user stops Kodi playing a file.
+        """
+        pass
+
+    def onPlayBackError(self):
+        # type: () -> None
+        """
+        onPlayBackError method.
+
+        Will be called when playback stops due to an error.
+        """
+        pass
+
+    def onPlayBackPaused(self):
+        # type: () -> None
+        """
+        onPlayBackPaused method.
+
+        Will be called when user pauses a playing file.
+        """
+        pass
+
+    def onPlayBackResumed(self):
+        # type: () -> None
+        """
+        onPlayBackResumed method.
+
+        Will be called when user resumes a paused file.
+        """
+        pass
+
+    def onQueueNextItem(self):
+        # type: () -> None
+        """
+        onQueueNextItem method.
+
+        Will be called when user queues the next item.
+        """
+        pass
+
+    def onPlayBackSpeedChanged(self, speed):
+        # type: (int) -> None
+        """
+        onPlayBackSpeedChanged method.
+
+        Will be called when players speed changes (eg. user FF/RW).
+
+        :param speed: [integer] Current speed of player
+
+        Negative speed means player is rewinding, 1 is normal playback speed.
+        """
+        pass
+
+    def onPlayBackSeek(self, time, seekOffset):
+        # type: (int, int) -> None
+        """
+        onPlayBackSeek method.
+
+        Will be called when user seeks to a time.
+
+        :param time: [integer] Time to seek to
+        :param seekOffset: [integer] ?
+        """
+        pass
+
+    def onPlayBackSeekChapter(self, chapter):
+        # type: (int) -> None
+        """
+        onPlayBackSeekChapter method.
+
+        Will be called when user performs a chapter seek.
+
+        :param chapter: [integer] Chapter to seek to
+        """
+        pass
+
 
 class PlayList(object):
     """
