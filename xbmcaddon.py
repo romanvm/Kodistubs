@@ -3,261 +3,284 @@
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
 """
-Kodi's addon class
+**Kodi's addon class.**
+
+Offers classes and functions that manipulate the add-on settings, information
+and localization.
+
+Creates a new AddOn class.
+
+:param id: [opt] string - id of the addon as specified inaddon.xml
+
+.. note::
+    Specifying the addon id is not needed.  Important however is that
+    the addon folder has the same name as the AddOn id provided
+    inaddon.xml.  You can optionally specify the addon id from another
+    installed addon to retrieve settings from it.
+
+**id** is optional as it will be auto detected for this add-on
+instance.Example::
+
+    ..
+    self.Addon = xbmcaddon.Addon()
+    self.Addon = xbmcaddon.Addon('script.foo.bar')
+    ..
 """
-from typing import Union
 
 __kodistubs__ = True
 
-str_type = Union[str, unicode]
 
-
-class Addon(object):
+class Addon:
     """
-    Kodi's addon class
+    **Kodi's addon class.**
 
     Offers classes and functions that manipulate the add-on settings, information
     and localization.
 
     Creates a new AddOn class.
 
-    :param id: [opt] string - id of the addon as specified in addon.xml
+    :param id: [opt] string - id of the addon as specified inaddon.xml
 
-    Specifying the addon id is not needed. Important however is that the addon
-    folder has the same name as the AddOn id provided in addon.xml.
-    You can optionally specify the addon id from another installed addon
-    to retrieve settings from it.**id** is optional as it will be auto detected
-    for this add-on instance.
+    .. note::
+        Specifying the addon id is not needed.  Important however is that
+        the addon folder has the same name as the AddOn id provided
+        inaddon.xml.  You can optionally specify the addon id from another
+        installed addon to retrieve settings from it.
 
-    Example::
+    **id** is optional as it will be auto detected for this add-on
+    instance.Example::
 
+        ..
         self.Addon = xbmcaddon.Addon()
         self.Addon = xbmcaddon.Addon('script.foo.bar')
+        ..
     """
     
-    def __init__(self, id=None):
-        # type: (str) -> None
+    def __init__(self, id: str = None) -> None:
         pass
     
-    def getLocalizedString(self, id):
-        # type: (int) -> unicode
+    def getLocalizedString(self, id: int) -> str:
         """
-        Returns an addon's localized 'unicode string'. 
+        Returns an addon's localized 'unicode string'.
 
-        :param id: integer - id# for string you want to localize. 
+        :param id: integer - id# for string you want to localize.
         :return: Localized 'unicode string'
 
-        **id** is optional as it will be auto detected for this add-on instance.
+        **id** is optional as it will be auto detected for this add-on
+        instance.Example::
 
-        Example::
-
-            locstr = self.Addon.getLocalizedString(32000)
-        """
-        return u""
-    
-    def getSetting(self, id):
-        # type: (str) -> str
-        """
-        Returns the value of a setting as a unicode string. 
-
-        :param id: string - id of the setting that the module needs to access. 
-        :return: Setting as a unicode string
-
-        **id** is optional as it will be auto detected for this add-on instance.
-
-        Example::
-
-            apikey = self.Addon.getSetting('apikey')
+            ..
+            locstr = self.Addon.`getLocalizedString`(32000)
+            ..
         """
         return ""
     
-    def getSettingBool(self, id):
-        # type: (str) -> bool
+    def getSetting(self, id: str) -> str:
         """
-        Returns the value of a setting as a boolean. 
+        Returns the value of a setting as a unicode string.
 
-        :param id: string - id of the setting that the module needs to access. 
+        :param id: string - id of the setting that the module needs to access.
+        :return: Setting as a unicode string
+
+        **id** is optional as it will be auto detected for this add-on
+        instance.Example::
+
+            ..
+            apikey = self.Addon.`getSetting`('apikey')
+            ..
+        """
+        return ""
+    
+    def getSettingBool(self, id: str) -> bool:
+        """
+        Returns the value of a setting as a boolean.
+
+        :param id: string - id of the setting that the module needs to access.
         :return: Setting as a boolean
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             enabled = self.Addon.getSettingBool('enabled')
+            ..
         """
         return True
     
-    def getSettingInt(self, id):
-        # type: (str) -> int
+    def getSettingInt(self, id: str) -> int:
         """
-        Returns the value of a setting as an integer. 
+        Returns the value of a setting as an integer.
 
-        :param id: string - id of the setting that the module needs to access. 
+        :param id: string - id of the setting that the module needs to access.
         :return: Setting as an integer
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             max = self.Addon.getSettingInt('max')
+            ..
         """
         return 0
     
-    def getSettingNumber(self, id):
-        # type: (str) -> float
+    def getSettingNumber(self, id: str) -> float:
         """
-        Returns the value of a setting as a floating point number. 
+        Returns the value of a setting as a floating point number.
 
-        :param id: string - id of the setting that the module needs to access. 
+        :param id: string - id of the setting that the module needs to access.
         :return: Setting as a floating point number
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             max = self.Addon.getSettingNumber('max')
+            ..
         """
         return 0.0
     
-    def getSettingString(self, id):
-        # type: (str) -> str
+    def getSettingString(self, id: str) -> str:
         """
-        Returns the value of a setting as a unicode string. 
+        Returns the value of a setting as a unicode string.
 
-        :param id: string - id of the setting that the module needs to access. 
+        :param id: string - id of the setting that the module needs to access.
         :return: Setting as a unicode string
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             apikey = self.Addon.getSettingString('apikey')
+            ..
         """
         return ""
     
-    def setSetting(self, id, value):
-        # type: (str, str_type) -> None
+    def setSetting(self, id: str, value: str) -> None:
         """
-        Sets a script setting. 
+        Sets a script setting.
 
-        :param id: string - id of the setting that the module needs to access. 
+        :param id: string - id of the setting that the module needs to access.
         :param value: string or unicode - value of the setting.
 
-        You can use the above as keywords for arguments.**id** is optional
-        as it will be auto detected for this add-on instance.
+        .. note::
+            You can use the above as keywords for arguments.
 
-        Example::
+        **id** is optional as it will be auto detected for this add-on
+        instance.Example::
 
-            self.Addon.setSetting(id='username', value='teamkodi')
+            ..
+            self.Addon.`setSetting`(id='username', value='teamkodi')
+            ..
         """
         pass
     
-    def setSettingBool(self, id, value):
-        # type: (str, bool) -> bool
+    def setSettingBool(self, id: str, value: bool) -> bool:
         """
-        Sets a script setting. 
+        Sets a script setting.
 
-        :param id: string - id of the setting that the module needs to access. 
-        :param value: boolean - value of the setting. 
+        :param id: string - id of the setting that the module needs to access.
+        :param value: boolean - value of the setting.
         :return: True if the value of the setting was set, false otherwise
 
-        You can use the above as keywords for arguments.
+        .. note::
+            You can use the above as keywords for arguments.
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             self.Addon.setSettingBool(id='enabled', value=True)
+            ..
         """
         return True
     
-    def setSettingInt(self, id, value):
-        # type: (str, int) -> bool
+    def setSettingInt(self, id: str, value: int) -> bool:
         """
-        Sets a script setting. 
+        Sets a script setting.
 
-        :param id: string - id of the setting that the module needs to access. 
-        :param value: integer - value of the setting. 
+        :param id: string - id of the setting that the module needs to access.
+        :param value: integer - value of the setting.
         :return: True if the value of the setting was set, false otherwise
 
-        You can use the above as keywords for arguments.
+        .. note::
+            You can use the above as keywords for arguments.
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             self.Addon.setSettingInt(id='max', value=5)
+            ..
         """
         return True
     
-    def setSettingNumber(self, id, value):
-        # type: (str, float) -> bool
+    def setSettingNumber(self, id: str, value: float) -> bool:
         """
-        Sets a script setting. 
+        Sets a script setting.
 
-        :param id: string - id of the setting that the module needs to access. 
-        :param value: float - value of the setting. 
+        :param id: string - id of the setting that the module needs to access.
+        :param value: float - value of the setting.
         :return: True if the value of the setting was set, false otherwise
 
-        You can use the above as keywords for arguments.
+        .. note::
+            You can use the above as keywords for arguments.
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             self.Addon.setSettingNumber(id='max', value=5.5)
+            ..
         """
         return True
     
-    def setSettingString(self, id, value):
-        # type: (str, str_type) -> bool
+    def setSettingString(self, id: str, value: str) -> bool:
         """
-        Sets a script setting. 
+        Sets a script setting.
 
-        :param id: string - id of the setting that the module needs to access. 
-        :param value: string or unicode - value of the setting. 
+        :param id: string - id of the setting that the module needs to access.
+        :param value: string or unicode - value of the setting.
         :return: True if the value of the setting was set, false otherwise
 
-        You can use the above as keywords for arguments.
+        .. note::
+            You can use the above as keywords for arguments.
 
-        New function added.
+          New function added.Example::
 
-        Example::
-
+            ..
             self.Addon.setSettingString(id='username', value='teamkodi')
+            ..
         """
         return True
     
-    def openSettings(self):
-        # type: () -> None
+    def openSettings(self) -> None:
         """
-        Opens this scripts settings dialog. 
+        Opens this scripts settings dialog.
 
         Example::
 
+            ..
             self.Addon.openSettings()
+            ..
         """
         pass
     
-    def getAddonInfo(self, id):
-        # type: (str) -> str
+    def getAddonInfo(self, id: str) -> str:
         """
-        Returns the value of an addon property as a string. 
+        Returns the value of an addon property as a string.
 
         :param id: string - id of the property that the module needs to access.
-            Choices for the property are:
 
-        ======= ========== ============ ===========
-        author  changelog  description  disclaimer 
-        fanart  icon       id           name       
-        path    profile    stars        summary    
-        type    version                            
-        ======= ========== ============ ===========
+        Choices for the property are
+
+        ====== ========= =========== ========== 
+                                                
+        ====== ========= =========== ========== 
+        author changelog description disclaimer 
+        fanart icon      id          name       
+        path   profile   stars       summary    
+        type   version                          
+        ====== ========= =========== ========== 
 
         :return: AddOn property as a string
 
         Example::
 
+            ..
             version = self.Addon.getAddonInfo('version')
+            ..
         """
         return ""
