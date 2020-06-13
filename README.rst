@@ -14,7 +14,7 @@ and methods.
 
 You can install Kodistubs into your working virtual environment using ``pip``::
 
-    $ pip install Kodistubs
+    $ pip install git+https://github.com/romanvm/Kodistubs.git@matrix
 
 Read `Kodi stubs documentation`_ for more info on how to use Kodi stubs.
 
