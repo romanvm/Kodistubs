@@ -16,7 +16,6 @@ setup(
     py_modules=[
         'xbmc', 'xbmcaddon', 'xbmcgui', 'xbmcplugin', 'xbmcvfs', 'xbmcdrm'
     ],
-    install_requires=['typing'],
     zip_safe=False,
     description='Stub modules that re-create Kodi Python API',
     long_description=long_descr,
