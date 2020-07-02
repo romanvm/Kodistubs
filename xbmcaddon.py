@@ -3,28 +3,7 @@
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
 """
-**Kodi's addon class.**
-
-Offers classes and functions that manipulate the add-on settings, information
-and localization.
-
-Creates a new AddOn class.
-
-:param id: [opt] string - id of the addon as specified inaddon.xml
-
-.. note::
-    Specifying the addon id is not needed.  Important however is that
-    the addon folder has the same name as the AddOn id provided
-    inaddon.xml.  You can optionally specify the addon id from another
-    installed addon to retrieve settings from it.
-
-**id** is optional as it will be auto detected for this add-on
-instance.Example::
-
-    ..
-    self.Addon = xbmcaddon.Addon()
-    self.Addon = xbmcaddon.Addon('script.foo.bar')
-    ..
+Kodi's addon class
 """
 from typing import Optional
 

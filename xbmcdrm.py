@@ -3,13 +3,7 @@
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
 """
-**Kodi's DRM class.**
-
-:param UUID: String 16 byte UUID of the `DRM` system to use
-:param cipherAlgorithm: String algorithm used for en / decryption
-:param macAlgorithm: String algorithm used for sign / verify
-:raises RuntimeException: if the session can not be established  New class
-added.
+Kodi's DRM class
 """
 from typing import Union, Dict
 
