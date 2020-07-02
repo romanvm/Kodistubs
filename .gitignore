@@ -114,3 +114,4 @@ epydoc.cfg
 _docs/
 venv/
 venv.cmd
+.venv3/
