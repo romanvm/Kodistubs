@@ -8,7 +8,7 @@
 Offers classes and functions offers access to the Virtual File Server (VFS)
 which you can use to manipulate files and folders.
 """
-from typing import Union, List, Tuple
+from typing import Union, List, Tuple, Optional
 
 __kodistubs__ = True
 
@@ -38,7 +38,7 @@ class File:
         ..
     """
     
-    def __init__(self, filepath: str, mode: str = None) -> None:
+    def __init__(self, filepath: str, mode: Optional[str] = None) -> None:
         pass
     
     def read(self, numBytes: int = 0) -> str:

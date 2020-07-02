@@ -10,7 +10,7 @@ playing and that allow manipulation of the media player (such as starting a new
 song). You can also find system information using the functions available in
 this library.
 """
-from typing import Union, List, Tuple
+from typing import Union, List, Tuple, Optional
 
 __kodistubs__ = True
 
@@ -1119,7 +1119,7 @@ class Player:
         pass
     
     def play(self, item: Union[str, 'PlayList'] = "",
-             listitem: 'xbmcgui.ListItem' = None,
+             listitem: Optional['xbmcgui.ListItem'] = None,
              windowed: bool = False,
              startpos: int = -1) -> None:
         """
@@ -1567,7 +1567,7 @@ class PlayList:
         """
         return 0
     
-    def add(self, url: str, listitem: 'xbmcgui.ListItem' = None, index: int = -1) -> None:
+    def add(self, url: str, listitem: Optional['xbmcgui.ListItem'] = None, index: int = -1) -> None:
         """
         Adds a new file to the playlist.
 

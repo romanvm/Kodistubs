@@ -8,7 +8,7 @@
 Offers classes and functions that manipulate the Graphical User Interface
 through windows, dialogs, and various control widgets.
 """
-from typing import Union, List, Dict, Tuple
+from typing import Union, List, Dict, Tuple, Optional
 
 import xbmc as _xbmc
 
@@ -666,9 +666,9 @@ class ControlLabel(Control):
                  width: int,
                  height: int,
                  label: str,
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
                  alignment: int = 0,
                  hasPath: bool = False,
                  angle: int = 0) -> None:
@@ -689,11 +689,11 @@ class ControlLabel(Control):
         return ""
     
     def setLabel(self, label: str = "",
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
-                 shadowColor: str = None,
-                 focusedColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
+                 shadowColor: Optional[str] = None,
+                 focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
         Set's text for this label.
@@ -772,20 +772,20 @@ class ControlEdit(Control):
                  width: int,
                  height: int,
                  label: str,
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
                  _alignment: int = 0,
-                 focusTexture: str = None,
-                 noFocusTexture: str = None) -> None:
+                 focusTexture: Optional[str] = None,
+                 noFocusTexture: Optional[str] = None) -> None:
         pass
     
     def setLabel(self, label: str = "",
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
-                 shadowColor: str = None,
-                 focusedColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
+                 shadowColor: Optional[str] = None,
+                 focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
         Set's text heading for this edit control.
@@ -943,11 +943,11 @@ class ControlList(Control):
                  y: int,
                  width: int,
                  height: int,
-                 font: str = None,
-                 textColor: str = None,
-                 buttonTexture: str = None,
-                 buttonFocusTexture: str = None,
-                 selectedColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 buttonTexture: Optional[str] = None,
+                 buttonFocusTexture: Optional[str] = None,
+                 selectedColor: Optional[str] = None,
                  _imageWidth: int = 10,
                  _imageHeight: int = 10,
                  _itemTextXOffset: int = 10,
@@ -1274,8 +1274,8 @@ class ControlFadeLabel(Control):
                  y: int,
                  width: int,
                  height: int,
-                 font: str = None,
-                 textColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
                  _alignment: int = 0) -> None:
         pass
     
@@ -1346,8 +1346,8 @@ class ControlTextBox(Control):
                  y: int,
                  width: int,
                  height: int,
-                 font: str = None,
-                 textColor: str = None) -> None:
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None) -> None:
         pass
     
     def setText(self, text: str) -> None:
@@ -1463,7 +1463,7 @@ class ControlImage(Control):
                  height: int,
                  filename: str,
                  aspectRatio: int = 0,
-                 colorDiffuse: str = None) -> None:
+                 colorDiffuse: Optional[str] = None) -> None:
         pass
     
     def setImage(self, imageFilename: str, useCache: bool = True) -> None:
@@ -1554,11 +1554,11 @@ class ControlProgress(Control):
                  y: int,
                  width: int,
                  height: int,
-                 texturebg: str = None,
-                 textureleft: str = None,
-                 texturemid: str = None,
-                 textureright: str = None,
-                 textureoverlay: str = None) -> None:
+                 texturebg: Optional[str] = None,
+                 textureleft: Optional[str] = None,
+                 texturemid: Optional[str] = None,
+                 textureright: Optional[str] = None,
+                 textureoverlay: Optional[str] = None) -> None:
         pass
     
     def setPercent(self, pct: float) -> None:
@@ -1662,25 +1662,25 @@ class ControlButton(Control):
                  width: int,
                  height: int,
                  label: str,
-                 focusTexture: str = None,
-                 noFocusTexture: str = None,
+                 focusTexture: Optional[str] = None,
+                 noFocusTexture: Optional[str] = None,
                  textOffsetX: int = 10,
                  textOffsetY: int = 2,
                  alignment: int = (0|4),
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
                  angle: int = 0,
-                 shadowColor: str = None,
-                 focusedColor: str = None) -> None:
+                 shadowColor: Optional[str] = None,
+                 focusedColor: Optional[str] = None) -> None:
         pass
     
     def setLabel(self, label: str = "",
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
-                 shadowColor: str = None,
-                 focusedColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
+                 shadowColor: Optional[str] = None,
+                 focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
         Set's this buttons text attributes.
@@ -1855,21 +1855,21 @@ class ControlRadioButton(Control):
                  width: int,
                  height: int,
                  label: str,
-                 focusOnTexture: str = None,
-                 noFocusOnTexture: str = None,
-                 focusOffTexture: str = None,
-                 noFocusOffTexture: str = None,
+                 focusOnTexture: Optional[str] = None,
+                 noFocusOnTexture: Optional[str] = None,
+                 focusOffTexture: Optional[str] = None,
+                 noFocusOffTexture: Optional[str] = None,
                  textOffsetX: int = 10,
                  textOffsetY: int = 2,
                  _alignment: int = (0|4),
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
                  angle: int = 0,
-                 shadowColor: str = None,
-                 focusedColor: str = None,
-                 disabledOnTexture: str = None,
-                 disabledOffTexture: str = None) -> None:
+                 shadowColor: Optional[str] = None,
+                 focusedColor: Optional[str] = None,
+                 disabledOnTexture: Optional[str] = None,
+                 disabledOffTexture: Optional[str] = None) -> None:
         pass
     
     def setSelected(self, selected: bool) -> None:
@@ -1906,11 +1906,11 @@ class ControlRadioButton(Control):
         return True
     
     def setLabel(self, label: str = "",
-                 font: str = None,
-                 textColor: str = None,
-                 disabledColor: str = None,
-                 shadowColor: str = None,
-                 focusedColor: str = None,
+                 font: Optional[str] = None,
+                 textColor: Optional[str] = None,
+                 disabledColor: Optional[str] = None,
+                 shadowColor: Optional[str] = None,
+                 focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
         Set's the radio buttons text attributes.
@@ -2007,9 +2007,9 @@ class ControlSlider(Control):
                  y: int,
                  width: int,
                  height: int,
-                 textureback: str = None,
-                 texture: str = None,
-                 texturefocus: str = None,
+                 textureback: Optional[str] = None,
+                 texture: Optional[str] = None,
+                 texturefocus: Optional[str] = None,
                  orientation: int = 1) -> None:
         pass
     
@@ -2216,7 +2216,7 @@ class Dialog:
     def multiselect(self, heading: str,
                     options: List[Union[str, 'ListItem']],
                     autoclose: int = 0,
-                    preselect: List[int] = None,
+                    preselect: Optional[List[int]] = None,
                     useDetails: bool = False) -> List[int]:
         """
         Show a multi-select dialog.

@@ -10,7 +10,7 @@ through Kodi's standard menu structure. While plugins don't have the same
 flexibility as scripts, they boast significantly quicker development time and a
 more consistent user experience.
 """
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 import xbmcgui as _xbmcgui
 
@@ -329,10 +329,10 @@ def setPluginCategory(handle: int, category: str) -> None:
 
 
 def setPluginFanart(handle: int,
-                    image: str = None,
-                    color1: str = None,
-                    color2: str = None,
-                    color3: str = None) -> None:
+                    image: Optional[str] = None,
+                    color1: Optional[str] = None,
+                    color2: Optional[str] = None,
+                    color3: Optional[str] = None) -> None:
     """
     Sets the plugins fanart and color for skins to display.
 

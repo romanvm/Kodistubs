@@ -26,6 +26,7 @@ instance.Example::
     self.Addon = xbmcaddon.Addon('script.foo.bar')
     ..
 """
+from typing import Optional
 
 __kodistubs__ = True
 
@@ -56,7 +57,7 @@ class Addon:
         ..
     """
     
-    def __init__(self, id: str = None) -> None:
+    def __init__(self, id: Optional[str] = None) -> None:
         pass
     
     def getLocalizedString(self, id: int) -> str:
