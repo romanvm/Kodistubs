@@ -20,7 +20,7 @@ Read `Kodi stubs documentation`_ for more info on how to use Kodi stubs.
 
 **Warning**: Kodistubs are literally stubs and do not include any useful code,
 so don't try to run your program outside Kodi unless you add some testing code into Kodistubs
-or use some mocking library to mock Kodi Pyhton API.
+or use some mocking library to mock Kodi Python API.
 
 Current Kodistubs have been generated from scratch using Doxygen XML files and
 SWIG XML Python binding definitions that, in their turn, have been generated
