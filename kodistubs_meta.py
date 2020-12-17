@@ -4,7 +4,7 @@
 
 import datetime
 
-VERSION = '19.0+alpha1'
+VERSION = '19.0+beta2'
 AUTHOR = 'Roman Miroshnychenko'
 EMAIL = 'roman1972@gmail.com'
 YEAR = datetime.datetime.now().year
