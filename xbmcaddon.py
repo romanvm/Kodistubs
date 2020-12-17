@@ -28,7 +28,9 @@ class Addon:
         installed addon to retrieve settings from it.
 
     **id** is optional as it will be auto detected for this add-on
-    instance.Example::
+    instance.
+
+    Example::
 
         ..
         self.Addon = xbmcaddon.Addon()
@@ -47,10 +49,12 @@ class Addon:
         :return: Localized 'unicode string'
 
         **id** is optional as it will be auto detected for this add-on
-        instance.Example::
+        instance.
+
+        Example::
 
             ..
-            locstr = self.Addon.`getLocalizedString`(32000)
+            locstr = self.Addon.getLocalizedString(32000)
             ..
         """
         return ""
@@ -63,10 +67,12 @@ class Addon:
         :return: Setting as a unicode string
 
         **id** is optional as it will be auto detected for this add-on
-        instance.Example::
+        instance.
+
+        Example::
 
             ..
-            apikey = self.Addon.`getSetting`('apikey')
+            apikey = self.Addon.getSetting('apikey')
             ..
         """
         return ""
@@ -78,7 +84,9 @@ class Addon:
         :param id: string - id of the setting that the module needs to access.
         :return: Setting as a boolean
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             enabled = self.Addon.getSettingBool('enabled')
@@ -93,7 +101,9 @@ class Addon:
         :param id: string - id of the setting that the module needs to access.
         :return: Setting as an integer
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             max = self.Addon.getSettingInt('max')
@@ -108,7 +118,9 @@ class Addon:
         :param id: string - id of the setting that the module needs to access.
         :return: Setting as a floating point number
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             max = self.Addon.getSettingNumber('max')
@@ -123,7 +135,9 @@ class Addon:
         :param id: string - id of the setting that the module needs to access.
         :return: Setting as a unicode string
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             apikey = self.Addon.getSettingString('apikey')
@@ -142,10 +156,12 @@ class Addon:
             You can use the above as keywords for arguments.
 
         **id** is optional as it will be auto detected for this add-on
-        instance.Example::
+        instance.
+
+        Example::
 
             ..
-            self.Addon.`setSetting`(id='username', value='teamkodi')
+            self.Addon.setSetting(id='username', value='teamkodi')
             ..
         """
         pass
@@ -161,7 +177,9 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             self.Addon.setSettingBool(id='enabled', value=True)
@@ -180,7 +198,9 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             self.Addon.setSettingInt(id='max', value=5)
@@ -199,7 +219,9 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             self.Addon.setSettingNumber(id='max', value=5.5)
@@ -218,7 +240,9 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-          New function added.Example::
+        New function added.
+
+        Example::
 
             ..
             self.Addon.setSettingString(id='username', value='teamkodi')
@@ -246,8 +270,6 @@ class Addon:
 
         Choices for the property are
 
-        ====== ========= =========== ========== 
-                                                
         ====== ========= =========== ========== 
         author changelog description disclaimer 
         fanart icon      id          name       
