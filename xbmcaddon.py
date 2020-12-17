@@ -3,7 +3,7 @@
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
 """
-Kodi's addon class
+**Kodi's addon class**
 """
 from typing import Optional
 
