@@ -1,4 +1,3 @@
-# coding: utf-8
 # This file is generated from Kodi source code and post-edited
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
@@ -17,13 +16,11 @@ __kodistubs__ = True
 DRIVE_NOT_READY = 1
 ENGLISH_NAME = 2
 LOGDEBUG = 0
-LOGERROR = 4
-LOGFATAL = 6
+LOGERROR = 3
+LOGFATAL = 4
 LOGINFO = 1
-LOGNONE = 7
-LOGNOTICE = 2
-LOGSEVERE = 5
-LOGWARNING = 3
+LOGNONE = 5
+LOGWARNING = 2
 PLAYLIST_MUSIC = 0
 PLAYLIST_VIDEO = 1
 SERVER_AIRPLAYSERVER = 2
@@ -66,7 +63,7 @@ class InfoTagMusic:
 
         :return: [integer] database id.
 
-          New function added.
+        @python_v18 New function added.
         """
         return 0
     
@@ -102,7 +99,7 @@ class InfoTagMusic:
         song   If it is defined as a song    
         ====== ============================= 
 
-          New function added.
+        @python_v18 New function added.
         """
         return ""
     
@@ -232,7 +229,7 @@ class InfoTagMusic:
 
         :return: [string] MusicBrainz Recording ID
 
-          New function added.
+        @python_v19 New function added.
         """
         return ""
     
@@ -242,7 +239,7 @@ class InfoTagMusic:
 
         :return: [list] MusicBrainz Artist IDs
 
-          New function added.
+        @python_v19 New function added.
         """
         return [""]
     
@@ -252,7 +249,7 @@ class InfoTagMusic:
 
         :return: [string] MusicBrainz Release ID
 
-          New function added.
+        @python_v19 New function added.
         """
         return ""
     
@@ -262,7 +259,7 @@ class InfoTagMusic:
 
         :return: [string] MusicBrainz Release Group ID
 
-          New function added.
+        @python_v19 New function added.
         """
         return ""
     
@@ -272,7 +269,7 @@ class InfoTagMusic:
 
         :return: [list] MusicBrainz Release Artist IDs
 
-          New function added.
+        @python_v19 New function added.
         """
         return [""]
     
@@ -562,7 +559,7 @@ class InfoTagVideo:
 
         :return: [integer] database id
 
-          New function added.
+        @python_v17 New function added.
         """
         return 0
     
@@ -636,7 +633,7 @@ class InfoTagVideo:
 
         :return: [string] TV show title
 
-          New function added.
+        @python_v17 New function added.
         """
         return ""
     
@@ -660,7 +657,7 @@ class InfoTagVideo:
         episode    The type is used as a series episode 
         ========== ==================================== 
 
-          New function added.
+        @python_v17 New function added.
         """
         return ""
     
@@ -696,6 +693,16 @@ class InfoTagVideo:
         """
         return ""
     
+    def getFilenameAndPath(self) -> str:
+        """
+        To get the full path with filename where the video is stored.
+
+        :return: [string] File name and Path
+
+        @python_v19 New function added.
+        """
+        return ""
+    
     def getIMDBNumber(self) -> str:
         """
         To get theIMDb number of the video (if present).
@@ -710,7 +717,7 @@ class InfoTagVideo:
 
         :return: [integer] season number
 
-          New function added.
+        @python_v17 New function added.
         """
         return 0
     
@@ -720,7 +727,7 @@ class InfoTagVideo:
 
         :return: [integer] episode number
 
-          New function added.
+        @python_v17 New function added.
         """
         return 0
     
@@ -794,7 +801,7 @@ class InfoTagVideo:
 
         :return: [string] Trailer path
 
-          New function added.
+        @python_v17 New function added.
         """
         return ""
     
@@ -804,7 +811,7 @@ class InfoTagVideo:
 
         :return: [std::vector<std::string>] Artist name
 
-          New function added.
+        @python_v18 New function added.
         """
         return [""]
     
@@ -814,7 +821,7 @@ class InfoTagVideo:
 
         :return: [string] Album name
 
-          New function added.
+        @python_v18 New function added.
         """
         return ""
     
@@ -824,7 +831,7 @@ class InfoTagVideo:
 
         :return: [int] Track number
 
-          New function added.
+        @python_v18 New function added.
         """
         return 0
     
@@ -834,7 +841,7 @@ class InfoTagVideo:
 
         :return: [unsigned int] Duration
 
-          New function added.
+        @python_v18 New function added.
         """
         return 0
     
@@ -858,8 +865,8 @@ class Keyboard:
         kb.setHeading('Enter password') # optional
         kb.setHiddenInput(True) # optional
         kb.doModal()
-        if (kb.isConfirmed()):
-          text = kb.getText()
+        if kb.isConfirmed():
+            text = kb.getText()
         ..
     """
     
@@ -872,8 +879,9 @@ class Keyboard:
         """
         Show keyboard and wait for user action.
 
-        :param autoclose: [opt] integer - milliseconds to autoclose dialog. (default=do not
-            autoclose)
+        :param autoclose: [opt] integer - milliseconds to autoclose dialog.
+            (default=do not autoclose)
+
         Example::
 
             ..
@@ -929,9 +937,8 @@ class Keyboard:
         Returns the user input as a string.
 
         .. note::
-            This will always return the text entry even if you cancel the
-            keyboard. Use the `isConfirmed()` method to check if user cancelled
-            the keyboard.
+            This will always return the text entry even if you cancel the keyboard.
+            Use the `isConfirmed()` method to check if user cancelled the keyboard.
 
         :return: get the in keyboard entered text
 
@@ -949,9 +956,11 @@ class Keyboard:
 
         :return: true if confirmed, if cancelled false
 
-        Example::    ..
+        Example::
+
+            ..
             if (kb.isConfirmed()):
-              ..
+            ..
         """
         return True
     
@@ -1016,7 +1025,7 @@ class Monitor:
             Will be called when library clean has ended and return video or
             music to indicate which library is being scanned
 
-          New function added.
+        @python_v14 New function added.
         """
         pass
     
@@ -1030,7 +1039,7 @@ class Monitor:
             Will be called when library clean has ended and return video or
             music to indicate which library has been scanned
 
-          New function added.
+        @python_v14 New function added.
         """
         pass
     
@@ -1044,7 +1053,7 @@ class Monitor:
             Will be called when library clean has ended and return video or
             music to indicate which library has been cleaned
 
-          New function added.
+        @python_v14 New function added.
         """
         pass
     
@@ -1058,7 +1067,7 @@ class Monitor:
             Will be called when library clean has ended and return video or
             music to indicate which library has been finished
 
-          New function added.
+        @python_v14 New function added.
         """
         pass
     
@@ -1073,7 +1082,7 @@ class Monitor:
         .. note::
             Will be called when Kodi receives or sends a notification
 
-          New function added.
+        @python_v13 New function added.
         """
         pass
     
@@ -1087,7 +1096,17 @@ class Monitor:
         :param timeout: [opt] float - timeout in seconds. Default: no timeout.
         :return: True when abort have been requested, False if a timeout is given and the operation times out.
 
-          New function added.
+        @python_v14 New function added.
+
+        Example::
+
+            ..
+            monitor = xbmc.Monitor()
+            # do something
+            monitor.waitForAbort(10) # sleeps for 10 secs or returns early if kodi aborts
+            if monitor.abortRequested():
+            # abort was requested to Kodi (e.g. shutdown), do your cleanup logic
+            ..
         """
         return True
     
@@ -1097,7 +1116,7 @@ class Monitor:
 
         :return: True if requested
 
-          New function added.
+        @python_v14 New function added.
         """
         return True
     
@@ -1118,22 +1137,22 @@ class Player:
     def __init__(self) -> None:
         pass
     
-    def play(self, item: Union[str, 'PlayList'] = "",
+    def play(self, item: Union[str,  'PlayList'] = "",
              listitem: Optional['xbmcgui.ListItem'] = None,
              windowed: bool = False,
              startpos: int = -1) -> None:
         """
-        Play a item.
+        Play an item.
 
         :param item: [opt] string - filename, url or playlist
         :param listitem: [opt] listitem - used with setInfo() to set different infolabels.
         :param windowed: [opt] bool - true=play video windowed, false=play users
-            preference.(default)
+            preference. (default)
         :param startpos: [opt] int - starting position when playing a playlist. Default = -1
 
         .. note::
             If item is not given then the `Player` will try to play the current
-            item in the current playlist.   You can use the above as keywords
+            item in the current playlist. You can use the above as keywords
             for arguments and skip certain optional arguments.  Once you use a
             keyword, all following arguments require the keyword.
 
@@ -1218,7 +1237,7 @@ class Player:
 
         :return: True if kodi is playing using an external player.
 
-          New function added.
+        @python_v18 New function added.
         """
         return True
     
@@ -1231,7 +1250,6 @@ class Player:
             an OS specific file or external url.
 
         :return: Playing filename
-
         :raises Exception: If player is not playing a file.
         """
         return ""
@@ -1243,7 +1261,6 @@ class Player:
         Returns the current time of the current playing media as fractional seconds.
 
         :return: Current time as fractional seconds
-
         :raises Exception: If player is not playing a file.
         """
         return 0.0
@@ -1319,7 +1336,9 @@ class Player:
         :param item: ListItem with new info
         :raises Exception: If player is not playing a file
 
-        New function added.Example::
+        @python_v18 New function added.
+
+        Example::
 
             ...
             item = xbmcgui.ListItem()
@@ -1337,7 +1356,6 @@ class Player:
         Returns the VideoInfoTag of the current playing Movie.
 
         :return: Video info tag
-
         :raises Exception: If player is not playing a file or current file is not a movie file.
         """
         return InfoTagVideo()
@@ -1349,7 +1367,6 @@ class Player:
         Returns the MusicInfoTag of the current playing 'Song'.
 
         :return: Music info tag
-
         :raises Exception: If player is not playing a file or current file is not a music file.
         """
         return InfoTagMusic()
@@ -1361,7 +1378,6 @@ class Player:
         Returns the RadioRDSInfoTag of the current playing 'Radio Song if. present'.
 
         :return: Radio RDS info tag
-
         :raises Exception: If player is not playing a file or current file is not a rds file.
         """
         return InfoTagRadioRDS()
@@ -1374,7 +1390,6 @@ class Player:
         accurate to the full second.
 
         :return: Total time of the current playing media
-
         :raises Exception: If player is not playing a file.
         """
         return 0.0
@@ -1383,7 +1398,7 @@ class Player:
         """
         Get Audio stream names
 
-        :return: `List` of audio streams as name
+        :return: List of audio streams as name
         """
         return [""]
     
@@ -1405,7 +1420,7 @@ class Player:
         """
         Get Video stream names
 
-        :return: `List` of video streams as name
+        :return: List of video streams as name
         """
         return [""]
     
@@ -1428,8 +1443,10 @@ class Player:
         onPlayBackStarted method.
 
         Will be called when Kodi player starts. Video or audio might not be available at
-        this point.  Use `onAVStarted()` instead if you need to detect if Kodi is
-        actually playing a media file (i.e, if a stream is available)
+        this point.
+
+        @python_v18 Use `onAVStarted()` instead if you need to detect if Kodi is actually
+        playing a media file (i.e, if a stream is available)
         """
         pass
     
@@ -1437,7 +1454,9 @@ class Player:
         """
         onAVStarted method.
 
-        Will be called when Kodi has a video or audiostream.  New function added.
+        Will be called when Kodi has a video or audiostream.
+
+        @python_v18 New function added.
         """
         pass
     
@@ -1446,7 +1465,9 @@ class Player:
         onAVChange method.
 
         Will be called when Kodi has a video, audio or subtitle stream. Also happens
-        when the stream changes.  New function added.
+        when the stream changes.
+
+        @python_v18 New function added.
         """
         pass
     
@@ -1567,7 +1588,9 @@ class PlayList:
         """
         return 0
     
-    def add(self, url: str, listitem: Optional['xbmcgui.ListItem'] = None, index: int = -1) -> None:
+    def add(self, url: str,
+            listitem: Optional['xbmcgui.ListItem'] = None,
+            index: int = -1) -> None:
         """
         Adds a new file to the playlist.
 
@@ -1577,7 +1600,7 @@ class PlayList:
 
         .. note::
             You can use the above as keywords for arguments and skip certain
-            optional arguments.  Once you use a keyword, all following
+            optional arguments. Once you use a keyword, all following
             arguments require the keyword.
 
         Example::
@@ -1587,7 +1610,7 @@ class PlayList:
             video = 'F:\\movies\\Ironman.mov'
             listitem = xbmcgui.ListItem('Ironman', thumbnailImage='F:\\movies\\Ironman.tbn')
             listitem.setInfo('video', {'Title': 'Ironman', 'Genre': 'Science Fiction'})
-            playlist.add(url=video, listitem=listitem, index=7)n
+            playlist.add(url=video, listitem=listitem, index=7)
             ..
         """
         pass
@@ -1693,7 +1716,7 @@ class RenderCapture:
 
         :return: Format of captured image: 'BGRA'
 
-          Image will now always be returned in BGRA
+        @python_v17 Image will now always be returned in BGRA
         """
         return ""
     
@@ -1707,7 +1730,7 @@ class RenderCapture:
         .. note::
             The size of the image is m_width * m_height * 4
 
-          Added the option to specify wait time in msec.
+        @python_v17 Added the option to specify wait time in msec.
         """
         return bytearray()
     
@@ -1717,11 +1740,10 @@ class RenderCapture:
 
         :param width: Width capture image should be rendered to
         :param height: Height capture image should should be rendered to
-          Removed the option to pass **flags**
+
+        @python_v17 Removed the option to pass **flags**
         """
         pass
-    
-
 
 
 def log(msg: str, level: int = LOGDEBUG) -> None:
@@ -1731,29 +1753,40 @@ def log(msg: str, level: int = LOGDEBUG) -> None:
     :param msg: string - text to output.
     :param level: [opt] integer - log level to output at.(default=LOGDEBUG)
 
-    =============== ================================================================================================================================================= 
-    Value:          Description:                                                                                                                                      
-    =============== ================================================================================================================================================= 
-    xbmc.LOGDEBUG   In depth information about the status of Kodi. This information can pretty much only be deciphered by a developer or long time Kodi power user.   
-    xbmc.LOGINFO    Something has happened. It's not a problem, we just thought you might want to know. Fairly excessive output that most people won't care about.    
-    xbmc.LOGNOTICE  Similar to INFO but the average Joe might want to know about these events. This level and above are logged by default.                            
-    xbmc.LOGWARNING Something potentially bad has happened. If Kodi did something you didn't expect, this is probably why. Watch for errors to follow.                
-    xbmc.LOGERROR   This event is bad. Something has failed. You likely noticed problems with the application be it skin artifacts, failure of playback a crash, etc. 
-    xbmc.LOGFATAL   We're screwed. Kodi is about to crash.                                                                                                            
-    =============== ================================================================================================================================================= 
+    =============== ================================================================================
+    Value:          Description:
+    =============== ================================================================================
+    xbmc.LOGDEBUG   In depth information about the status of Kodi. This information can pretty much
+                    only be deciphered by a developer or long time Kodi power user.
+    xbmc.LOGINFO    Something has happened. It's not a problem, we just thought you might want
+                    to know. Fairly excessive output that most people won't care about.
+    xbmc.LOGWARNING Something potentially bad has happened. If Kodi did something you didn't expect,
+                    this is probably why. Watch for errors to follow.
+    xbmc.LOGERROR   This event is bad. Something has failed. You likely noticed problems with
+                    the application be it skin artifacts, failure of playback a crash, etc.
+    xbmc.LOGFATAL   We're screwed. Kodi is about to crash.
+    =============== ================================================================================
 
     .. note::
-        You can use the above as keywords for arguments and skip certain
-        optional arguments. Once you use a keyword, all following
-        arguments require the keyword.
+        Addon developers are advised to keep ``LOGDEBUG`` as the default
+        logging level and to use conservative logging (log only if
+        needed). Excessive logging makes it harder to debug kodi itself.
 
-    Text is written to the log for the following conditions.loglevel == -1 (NONE, nothing at all is logged)
+    Logging in kodi has a global configuration level that controls how
+    text is written to the log. This global logging behaviour can be
+    changed in the GUI (**Settings -> System -> Logging**) (debug toggle)
+    or furthered configured in advancedsettings (loglevel setting).
+    Text is written to the log for the following conditions:
+    loglevel == -1 (NONE, nothing at all is logged to the log)
 
-    loglevel == 0 (NORMAL, shows LOGNOTICE, LOGERROR, LOGSEVERE and LOGFATAL)
+    loglevel == 0 (NORMAL, shows ``LOGINFO``,``LOGWARNING``,``LOGERROR``
+    and ``LOGFATAL``) - Default kodi behaviour
 
-    loglevel == 1 (DEBUG, shows all) See pydocs for valid values for level.
+    loglevel == 1 (DEBUG, shows all) - Behaviour if you toggle debug log in the GUI
 
-      Default level changed from LOGNOTICE to LOGDEBUG
+    @python_v17 Default level changed from ``LOGNOTICE`` to ``LOGDEBUG``
+
+    @python_v19 Removed ``LOGNOTICE`` (use ``LOGINFO``) and ``LOGSEVERE`` (use ``LOGFATAL``)
 
     Example::
 
@@ -1811,7 +1844,9 @@ def executebuiltin(function: str, wait: bool = False) -> None:
 
     :param function: string - builtin function to execute.
 
-    List of functions -http://kodi.wiki/view/List_of_Built_In_FunctionsExample::
+    List of builtin functions
+
+    Example::
 
         ..
         xbmc.executebuiltin('Skin.SetString(abc,def)')
@@ -1827,7 +1862,7 @@ def executeJSONRPC(jsonrpccommand: str) -> str:
     :param jsonrpccommand: string - jsonrpc command to execute.
     :return: jsonrpc return string
 
-    List of commands -Example::
+    Example::
 
         ..
         response = xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method": "JSONRPC.Introspect", "id": 1 }')
@@ -1838,14 +1873,18 @@ def executeJSONRPC(jsonrpccommand: str) -> str:
 
 def sleep(timemillis: int) -> None:
     """
-    Sleeps for 'time' msec.
+    Sleeps for 'time' (msec).
 
     :param time: integer - number of msec to sleep.
-    :raises PyExc_TypeError: If time is not an integer.
+    :raises TypeError: If time is not an integer.
 
-    .. note::
-        This is useful if you have for example a Player class that is
-        waiting for onPlayBackEnded() calls.
+    This is useful if you need to sleep for a small amount of time (milisecond
+    range) somewhere in your addon logic. Please note that Kodi will attempt to stop
+    any running scripts when signaled to exit and wait for a maximum of 5 seconds
+    before trying to force stop your script. If your addon makes use
+    of `xbmc.sleep()` incorrectly (long periods of time, e.g. that exceed the force
+    stop waiting time) it may lead to Kodi hanging on shutdown. In case your addon
+    needs long sleep/idle periods use `xbmc.Monitor().waitForAbort(secs)` instead.
 
     Example::
 
@@ -1913,7 +1952,9 @@ def getLanguage(format: int = ENGLISH_NAME, region: bool = False) -> str:
         the returned language string
     :return: The active language as a string
 
-      Added new options **format** and **region**.Example::
+    @python_v13 Added new options **format** and **region**.
+
+    Example::
 
         ..
         language = xbmc.getLanguage(xbmc.ENGLISH_NAME)
@@ -1983,7 +2024,9 @@ def getInfoLabel(cLine: str) -> str:
     :param infotag: string - infoTag for value you want returned.
     :return: InfoLabel as a string
 
-    List of InfoTags -http://kodi.wiki/view/InfoLabelsExample::
+    List of InfoTags - http://kodi.wiki/view/InfoLabels
+
+    Example::
 
         ..
         label = xbmc.getInfoLabel('Weather.Conditions')
@@ -1999,7 +2042,9 @@ def getInfoImage(infotag: str) -> str:
     :param infotag: string - infotag for value you want returned
     :return: Filename including path to the InfoImage's thumbnail as a string
 
-    List of InfoTags -http://kodi.wiki/view/InfoLabelsExample::
+    List of InfoTags - http://kodi.wiki/view/InfoLabels
+
+    Example::
 
         ..
         filename = xbmc.getInfoImage('Weather.Conditions')
@@ -2013,9 +2058,11 @@ def playSFX(filename: str, useCached: bool = True) -> None:
     Plays a wav file by filename
 
     :param filename: string - filename of the wav file to play
-    :param useCached: [opt] bool - False = Dump any previously cached wav associated with
-        filename
-      Added new option **useCached**.Example::
+    :param useCached: [opt] bool - False = Dump any previously cached wav associated with filename
+
+    @python_v14 Added new option **useCached**.
+
+    Example::
 
         ..
         xbmc.playSFX('special://xbmc/scripts/dingdong.wav')
@@ -2029,7 +2076,7 @@ def stopSFX() -> None:
     """
     Stops wav file
 
-      New function added.
+    @python_v14 New function added.
 
     Example::
 
@@ -2044,7 +2091,7 @@ def enableNavSounds(yesNo: bool) -> None:
     """
     Enables/Disables nav sounds
 
-    :param yesNo: integer - enable (True) or disable (False) nav sounds
+    :param yesNo: bool - enable (True) or disable (False) nav sounds
 
     Example::
 
@@ -2060,9 +2107,9 @@ def getCondVisibility(condition: str) -> bool:
     Get visibility conditions
 
     :param condition: string - condition to check
-    :return: True (1) or False (0) as a bool
+    :return: True (if the condition is verified) or False (otherwise)
 
-    List of Conditions -http://kodi.wiki/view/List_of_Boolean_Conditions
+    List of boolean conditions
 
     .. note::
         You can combine two (or more) of the above settings by
@@ -2097,7 +2144,7 @@ def getCacheThumbName(path: str) -> str:
     """
     Get thumb cache filename.
 
-    :param path: string or unicode - path to file
+    :param path: string - path to file
     :return: Thumb cache filename
 
     Example::
@@ -2113,18 +2160,19 @@ def translatePath(path: str) -> str:
     """
     Returns the translated path.
 
-    :param path: string or unicode - Path to format
+    :param path: string - Path to format
     :return: Translated path
 
     .. note::
         Only useful if you are coding for both Linux and Windows. e.g.
-        Converts 'special://masterprofile/script_data' ->
-        '/home/user/XBMC/UserData/script_data' on Linux.
+        Converts 'special://home' -> '/home/[username]/.kodi' on Linux.
+
+    @python_v19 Deprecated **xbmc.translatePath**. Moved to **xbmcvfs.translatePath**
 
     Example::
 
         ..
-        fpath = xbmc.translatePath('special://masterprofile/script_data')
+        fpath = xbmc.translatePath('special://home')
         ..
     """
     return ""
@@ -2135,7 +2183,7 @@ def getCleanMovieTitle(path: str,
     """
     Get clean movie title and year string if available.
 
-    :param path: string or unicode - String to clean
+    :param path: string - String to clean
     :param usefoldername: [opt] bool - use folder names (defaults to false)
     :return: Clean movie title and year string if available.
 
@@ -2177,8 +2225,8 @@ def getSupportedMedia(mediaType: str) -> str:
 
     .. note::
         Media type can be (video, music, picture). The return value is a
-        pipe separated string of filetypes (eg. '.mov|.avi').  You can use
-        the above as keywords for arguments.
+        pipe separated string of filetypes (eg. '.mov |.avi').  You can
+        use the above as keywords for arguments.
 
     Example::
 
@@ -2197,9 +2245,8 @@ def skinHasImage(image: str) -> bool:
     :return: True if the image file exists in the skin
 
     .. note::
-        If the media resides in a subfolder include it. (eg. home-
-        myfiles\home-myfiles2.png). You can use the above as keywords for
-        arguments.
+        If the media resides in a subfolder include it. (eg. home - myfiles\home-myfiles2.png).
+        You can use the above as keywords for arguments.
 
     Example::
 
@@ -2214,8 +2261,7 @@ def startServer(iTyp: int, bStart: bool, bWait: bool = False) -> bool:
     """
     Start or stop a server.
 
-    :param typ: integer - use SERVER_* constants  Used format of the returned language
-        string
+    :param typ: integer - use SERVER_* constants  Used format of the returned language string
 
     ========================= ====================================================================== 
     Value                     Description                                                            
@@ -2230,8 +2276,7 @@ def startServer(iTyp: int, bStart: bool, bWait: bool = False) -> bool:
     ========================= ====================================================================== 
 
     :param bStart: bool - start (True) or stop (False) a server
-    :param bWait: [opt] bool - wait on stop before returning (not supported by all
-        servers)
+    :param bWait: [opt] bool - wait on stop before returning (not supported by all servers)
     :return: bool - True or False
 
     Example::
@@ -2280,8 +2325,8 @@ def getUserAgent() -> str:
         ..
         xbmc.getUserAgent()
         ..
-    example output: Kodi/17.0-ALPHA1 (X11; Linux x86_64) Ubuntu/15.10 App_Bitness/64
-    Version/17.0-ALPHA1-Git:2015-12-23-5770d28
+
+    example output: ``Kodi/17.0-ALPHA1 (X11; Linux x86_64) Ubuntu/15.10 App_Bitness/64 Version/17.0-ALPHA1-Git:2015-12-23-5770d28``
     """
     return ""
 
@@ -2304,7 +2349,9 @@ def convertLanguage(language: str, format: int) -> str:
 
     :return: Converted Language string
 
-      New function added.Example::
+    @python_v13 New function added.
+
+    Example::
 
         ..
         language = xbmc.convertLanguage(English, xbmc.ISO_639_2)
