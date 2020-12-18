@@ -1,4 +1,3 @@
-# coding: utf-8
 # This file is generated from Kodi source code and post-edited
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
@@ -27,8 +26,8 @@ class Addon:
         inaddon.xml.  You can optionally specify the addon id from another
         installed addon to retrieve settings from it.
 
-    **id** is optional as it will be auto detected for this add-on
-    instance.
+    @python_v13 **id** is optional as it will be auto detected for this
+    add-on instance.
 
     Example::
 
@@ -43,13 +42,13 @@ class Addon:
     
     def getLocalizedString(self, id: int) -> str:
         """
-        Returns an addon's localized 'unicode string'.
+        Returns an addon's localized 'string'.
 
         :param id: integer - id# for string you want to localize.
-        :return: Localized 'unicode string'
+        :return: Localized 'string'
 
-        **id** is optional as it will be auto detected for this add-on
-        instance.
+        @python_v13 **id** is optional as it will be auto detected for this
+        add-on instance.
 
         Example::
 
@@ -61,13 +60,13 @@ class Addon:
     
     def getSetting(self, id: str) -> str:
         """
-        Returns the value of a setting as a unicode string.
+        Returns the value of a setting as string.
 
         :param id: string - id of the setting that the module needs to access.
-        :return: Setting as a unicode string
+        :return: Setting as a string
 
-        **id** is optional as it will be auto detected for this add-on
-        instance.
+        @python_v13 **id** is optional as it will be auto detected for this
+        add-on instance.
 
         Example::
 
@@ -84,7 +83,7 @@ class Addon:
         :param id: string - id of the setting that the module needs to access.
         :return: Setting as a boolean
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -101,7 +100,7 @@ class Addon:
         :param id: string - id of the setting that the module needs to access.
         :return: Setting as an integer
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -118,7 +117,7 @@ class Addon:
         :param id: string - id of the setting that the module needs to access.
         :return: Setting as a floating point number
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -130,12 +129,12 @@ class Addon:
     
     def getSettingString(self, id: str) -> str:
         """
-        Returns the value of a setting as a unicode string.
+        Returns the value of a setting as a string.
 
         :param id: string - id of the setting that the module needs to access.
-        :return: Setting as a unicode string
+        :return: Setting as a string
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -150,13 +149,13 @@ class Addon:
         Sets a script setting.
 
         :param id: string - id of the setting that the module needs to access.
-        :param value: string or unicode - value of the setting.
+        :param value: string - value of the setting.
 
         .. note::
             You can use the above as keywords for arguments.
 
-        **id** is optional as it will be auto detected for this add-on
-        instance.
+        @python_v13 **id** is optional as it will be auto detected for this
+        add-on instance.
 
         Example::
 
@@ -177,7 +176,7 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -198,7 +197,7 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -219,7 +218,7 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -240,7 +239,7 @@ class Addon:
         .. note::
             You can use the above as keywords for arguments.
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
