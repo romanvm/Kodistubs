@@ -308,7 +308,7 @@ VERTICAL = 1
 
 class Control:
     """
-    **Code based skin access.**
+    **Code based skin access**
 
     Offers classes and functions that manipulate the add-on gui controls.
 
@@ -1079,7 +1079,9 @@ class ControlList(Control):
         .. note::
             You can use the above as keywords for arguments.
 
-        Large lists benefit considerably, than using the standard `addItem()`Example::
+        Large lists benefit considerably, than using the standard ``addItem()``
+
+        Example::
 
             ...
             cList.addItems(items=listitems)
@@ -2259,7 +2261,7 @@ class Dialog:
               customlabel: str = "",
               autoclose: int = 0) -> bool:
         """
-        **Yes / no dialog **
+        **Yes / no dialog**
 
         The Yes / No dialog can be used to inform the user about questions and get the
         answer.
@@ -2273,13 +2275,13 @@ class Dialog:
             autoclose)
         :return: Returns True if 'Yes' was pressed, else False.
 
-        @python_v13 Added new option**autoclose **.
+        @python_v13 Added new option**autoclose**.
 
-        @python_v19 Renamed option**line1 ** to**message **.
+        @python_v19 Renamed option**line1** to **message**.
 
-        @python_v19 Removed option**line2 **.
+        @python_v19 Removed option **line2**.
 
-        @python_v19 Removed option**line3 **.
+        @python_v19 Removed option **line3**.
 
         @python_v19 Added new option**customlabel**.
 
@@ -2318,7 +2320,7 @@ class Dialog:
                preselect: int = -1,
                useDetails: bool = False) -> int:
         """
-        **Select dialog **
+        **Select dialog**
 
         Show of a dialog to select of an entry as a key
 
@@ -2402,7 +2404,7 @@ class Dialog:
     
     def ok(self, heading: str, message: str) -> bool:
         """
-        **OK dialog **
+        **OK dialog**
 
         The functions permit the call of a dialog of information, a confirmation of the
         user by press from OK required.
@@ -2430,7 +2432,7 @@ class Dialog:
                    text: str,
                    usemono: bool = False) -> None:
         """
-        **TextViewer dialog **
+        **TextViewer dialog**
 
         The text viewer dialog can be used to display descriptions, help texts or other
         larger texts.
@@ -2726,12 +2728,12 @@ class Dialog:
         ============================= =========================================== 
         Parameter                     Format                                      
         ============================= =========================================== 
-        ``xbmcgui.INPUT_ALPHANUM``   (standard keyboard)
-        ``xbmcgui.INPUT_NUMERIC``    (format: #)
-        ``xbmcgui.INPUT_DATE``       (format: DD/MM/YYYY)
-        ``xbmcgui.INPUT_TIME``       (format: HH:MM)
-        ``xbmcgui.INPUT_IPADDRESS``  (format: #.#.#.#)
-        ``xbmcgui.INPUT_PASSWORD``   (return md5 hash of input, input is masked)
+        ``xbmcgui.INPUT_ALPHANUM``    (standard keyboard)
+        ``xbmcgui.INPUT_NUMERIC``     (format: #)
+        ``xbmcgui.INPUT_DATE``        (format: DD/MM/YYYY)
+        ``xbmcgui.INPUT_TIME``        (format: HH:MM)
+        ``xbmcgui.INPUT_IPADDRESS``   (format: #.#.#.#)
+        ``xbmcgui.INPUT_PASSWORD``    (return md5 hash of input, input is masked)
         ============================= =========================================== 
 
         :param option: [opt] integer - option for the dialog. (see Options below)  Password
@@ -3278,7 +3280,7 @@ class ListItem:
         :param type: string - type of
         :param infoLabels: dictionary - pairs of``{ label: value }``
 
-        **Available types **
+        **Available types**
 
         ============ ==================== 
         Command name Description          
@@ -3298,7 +3300,7 @@ class ListItem:
             Once you use a keyword, all following arguments require the
             keyword.
 
-        **General Values ** (that apply to all types):
+        **General Values** (that apply to all types):
 
         ========== ============================================================================ 
         Info label Description                                                                  
@@ -3308,7 +3310,7 @@ class ListItem:
         date       string (d.m.Y / 01.01.2009) - file date                                      
         ========== ============================================================================ 
 
-        **Video Values **:
+        **Video Values**:
 
         ============= ==============================================================================
         Info label    Description
@@ -3372,7 +3374,7 @@ class ListItem:
                       You also need to set the correct 'mediatype'!
         ============= ==============================================================================
 
-        **Music Values **:
+        **Music Values**:
 
         ======================== ===================================================================
         Info label               Description                                                                                                          
@@ -3411,7 +3413,7 @@ class ListItem:
         exif*       string (See kodi_pictures_infotag for valid strings) 
         =========== ==================================================== 
 
-        **Game Values **:
+        **Game Values**:
 
         ========== ============================= 
         Info label Description                   
@@ -3429,7 +3431,7 @@ class ListItem:
         @python_v14 Added new label **discnumber**.
 
         @python_v15 **duration ** has to be set in seconds.
-        @python_v16 Added new label **mediatype **.
+        @python_v16 Added new label **mediatype**.
         @python_v17 Added labels **setid **, **set**, **imdbnumber**, **code**, **dbid** (video),
         **path** and **userrating**. Expanded the possible infoLabels for the option **mediatype**.
 
@@ -3486,12 +3488,11 @@ class ListItem:
         Label   Description                                                
         ======= ========================================================== 
         image   string (http://www.someurl.com/someimage.png)              
-        preview [opt] string (http://www.someurl.com/somepreviewimage.png) 
-        ======= ========================================================== 
-
-        | colors | [opt] string (either comma separated Kodi hex values
-        ("FFFFFFFF,DDDDDDDD") or TVDB RGB Int Triplets
-        ("|68,69,59|69,70,58|78,78,68|"))
+        preview [opt] string (http://www.someurl.com/somepreviewimage.png)
+        colors  [opt] string (either comma separated Kodi hex values
+                ("FFFFFFFF,DDDDDDDD") or TVDB RGB Int Triplets
+                ("|68,69,59|69,70,58|78,78,68|"))
+        ======= ==========================================================
 
         @python_v18 New function added.
 
@@ -3621,7 +3622,7 @@ class ListItem:
             playback of an item. Others may be used in the skin to add extra
             information, such as 'WatchedCount' for tvshow items
 
-        **Internal Properties **
+        **Internal Properties**
 
         ============ ===============================================================================
         Key          Description                                                                                                                
@@ -4308,7 +4309,7 @@ class WindowXML(Window):
     Deleting this window will activate the old window that was active and
     resets (not delete) all controls that are associated with this window.
 
-    @python_v18 New param added **isMedia **.
+    @python_v18 New param added **isMedia**.
 
     Example::
 
@@ -4537,7 +4538,7 @@ class WindowXML(Window):
 
 class WindowXMLDialog(WindowXML):
     """
-    **GUI xml window dialog **
+    **GUI xml window dialog**
 
     Creates a new xml file based window dialog class.
 

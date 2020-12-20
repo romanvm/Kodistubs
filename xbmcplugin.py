@@ -315,7 +315,7 @@ def setContent(handle: int, content: str) -> None:
 
     Available content strings
 
-   ====== ======= ======== ===========
+    ====== ======= ======== ===========
     files  songs   artists  albums      
     movies tvshows episodes musicvideos 
     videos images  games                
