@@ -39,9 +39,12 @@ extensions = [
 ]
 
 autodoc_member_order = 'bysource'
-autodoc_default_flags = ['members', 'show-inheritance']
+autodoc_default_options = {
+    'members': True,
+    'show-inheritance': True,
+}
 autosummary_generate = True
-intersphinx_mapping = {'https://docs.python.org/2.7': None}
+intersphinx_mapping = {'https://docs.python.org/3.8': None}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

@@ -16,7 +16,6 @@ setup(
     py_modules=[
         'xbmc', 'xbmcaddon', 'xbmcgui', 'xbmcplugin', 'xbmcvfs', 'xbmcdrm'
     ],
-    install_requires=['typing'],
     zip_safe=False,
     description='Stub modules that re-create Kodi Python API',
     long_description=long_descr,
@@ -29,7 +28,7 @@ setup(
         'Environment :: Plugins',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
         ]

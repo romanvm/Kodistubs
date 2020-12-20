@@ -115,3 +115,4 @@ _docs/
 venv/
 venv.cmd
 .venv3/
+docs/_autosummary/xbmc*
