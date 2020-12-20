@@ -61,17 +61,16 @@ so you can use `mypy`_ or other compatible tool to check types of function/metho
 arguments and return values in your code.
 
 .. code-block:: python
-  :emphasize-lines: 2
+  :emphasize-lines: 1
 
-  def getInfoLabel(cLine):
-      # type: (str) -> str
+  def getInfoLabel(cLine: str) -> str:
       """
       Get a info label
 
       :param infotag: string - infoTag for value you want returned.
       :return: InfoLabel as a string
 
-      List of InfoTags -- <http://kodi.wiki/view/InfoLabels>
+      List of InfoTags - http://kodi.wiki/view/InfoLabels
 
       Example::
 
@@ -84,18 +83,11 @@ arguments and return values in your code.
 Some IDEs, for example PyCharm, support type annotation and provide warnings
 about type incompatibility.
 
-The following table explains some of the type annotations:
+.. note::
+  ``Union[type1, type2]`` means that a function or a method accepts or returns
+  either ``type1`` or ``type2``.
 
-======================= =============================================================
-Type annotation         Function/method argument or return value
-======================= =============================================================
-``str``                 Accepts or returns a UTF-8 encoded byte string (:class:`str`)
-``str_type``            Accepts both :class:`str` and :class:`unicode`
-``int_type``            Accepts both :class:`int` and :class:`long`
-``Union[type1, type2]`` Accepts or returns either ``type1`` or ``type2``
-======================= =============================================================
-
-.. _PEP-484: https://www.python.org/dev/peps/pep-0484/#suggested-syntax-for-python-2-7-and-straddling-code
+.. _PEP-484: https://www.python.org/dev/peps/pep-0484/
 .. _mypy: http://mypy-lang.org/
 
 Testing Code
@@ -120,7 +112,7 @@ Also the root URL of this documentation (without :file:`index.html`) can be used
 for `intersphinx`_. For example::
 
     intersphinx_mapping = {
-        'https://docs.python.org/2.7': None,
+        'https://docs.python.org/3.8: None,
         'http://romanvm.github.io/Kodistubs': None,  # Reference to Kodi stubs
     }
 

@@ -1,4 +1,3 @@
-# coding: utf-8
 # This file is generated from Kodi source code and post-edited
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
@@ -12,7 +11,7 @@ more consistent user experience.
 """
 from typing import List, Tuple, Optional
 
-import xbmcgui as _xbmcgui
+from xbmcgui import ListItem
 
 __kodistubs__ = True
 
@@ -63,15 +62,14 @@ SORT_METHOD_VIDEO_YEAR = 18
 
 def addDirectoryItem(handle: int,
                      url: str,
-                     listitem: _xbmcgui.ListItem,
+                     listitem: ListItem,
                      isFolder: bool = False,
                      totalItems: int = 0) -> bool:
     """
     Callback function to pass directory contents back to Kodi.
 
     :param handle: integer - handle the plugin was started with.
-    :param url: string - url of the entry. would be ``plugin://`` for another virtual
-        directory
+    :param url: string - url of the entry. would be ``plugin://`` for another virtual directory
     :param listitem: ListItem - item to add.
     :param isFolder: [opt] bool - True=folder / False=not a folder(default).
     :param totalItems: [opt] integer - total number of items that will be passed.(used for
@@ -93,7 +91,7 @@ def addDirectoryItem(handle: int,
 
 
 def addDirectoryItems(handle: int,
-                      items: List[Tuple[str, _xbmcgui.ListItem, bool]],
+                      items: List[Tuple[str,  ListItem,  bool]],
                       totalItems: int = 0) -> bool:
     """
     Callback function to pass directory contents back to Kodi as a list.
@@ -125,12 +123,13 @@ def endOfDirectory(handle: int,
     virtualPythonFolder module is reached.
 
     :param handle: integer - handle the plugin was started with.
-    :param succeeded: [opt] bool - True=script completed successfully(Default)/False=Script
-        did not.
+    :param succeeded: [opt] bool - True=script completed successfully(Default),
+        False=Script did not.
     :param updateListing: [opt] bool - True=this folder should update the current
-        listing/False=Folder is a subfolder(Default).
+        listing/False=Folder is a subfolder (Default).
     :param cacheToDisc: [opt] bool - True=Folder will cache if extended
-        time(default)/False=this folder will never cache to disc.
+        time(default), False=this folder will never cache to disc.
+
     Example::
 
         ..
@@ -142,12 +141,12 @@ def endOfDirectory(handle: int,
 
 def setResolvedUrl(handle: int,
                    succeeded: bool,
-                   listitem: _xbmcgui.ListItem) -> None:
+                   listitem: ListItem) -> None:
     """
     Callback function to tell Kodi that the file plugin has been resolved to a url
 
     :param handle: integer - handle the plugin was started with.
-    :param succeeded: bool - True=script completed successfully/False=Script did not.
+    :param succeeded: bool - True=script completed successfully, False=Script did not.
     :param listitem: ListItem - item the file plugin resolved to for playback.
 
     Example::
@@ -161,20 +160,21 @@ def setResolvedUrl(handle: int,
 
 def addSortMethod(handle: int,
                   sortMethod: int,
+                  labelMask: str = "",
                   label2Mask: str = "") -> None:
     """
     Adds a sorting method for the media list.
 
     :param handle: integer - handle the plugin was started with.
-    :param sortMethod: integer - see available sort methods at the bottom (or see
-        SortFileItem.h).
+    :param sortMethod: integer - see available sort methods at the bottom (or see SortUtils).
 
-    =================================================================== ======================================================= 
+    =================================================================== ============================
     Value                                                               Description                                             
-    =================================================================== ======================================================= 
+    =================================================================== ============================
     xbmcplugin.SORT_METHOD_NONE                                         Do not sort                                             
     xbmcplugin.SORT_METHOD_LABEL                                        Sort by label                                           
-    xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE                             Sort by the label and ignore "The" before               
+    xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE                             Sort by the label and ignore
+                                                                        "The" before
     xbmcplugin.SORT_METHOD_DATE                                         Sort by the date                                        
     xbmcplugin.SORT_METHOD_SIZE                                         Sort by the size                                        
     xbmcplugin.SORT_METHOD_FILE                                         Sort by the file                                        
@@ -182,11 +182,14 @@ def addSortMethod(handle: int,
     xbmcplugin.SORT_METHOD_TRACKNUM                                     Sort by the track number                                
     xbmcplugin.SORT_METHOD_DURATION                                     Sort by the duration                                    
     xbmcplugin.SORT_METHOD_TITLE                                        Sort by the title                                       
-    xbmcplugin.SORT_METHOD_TITLE_IGNORE_THE                             Sort by the title and ignore "The" before               
+    xbmcplugin.SORT_METHOD_TITLE_IGNORE_THE                             Sort by the title and ignore
+                                                                        "The" before
     xbmcplugin.SORT_METHOD_ARTIST                                       Sort by the artist                                      
-    xbmcplugin.SORT_METHOD_ARTIST_IGNORE_THE                            Sort by the artist and ignore "The" before              
+    xbmcplugin.SORT_METHOD_ARTIST_IGNORE_THE                            Sort by the artist and ignore
+                                                                        "The" before
     xbmcplugin.SORT_METHOD_ALBUM                                        Sort by the album                                       
-    xbmcplugin.SORT_METHOD_ALBUM_IGNORE_THE                             Sort by the album and ignore "The" before               
+    xbmcplugin.SORT_METHOD_ALBUM_IGNORE_THE                             Sort by the album and ignore
+                                                                        "The" before
     xbmcplugin.SORT_METHOD_GENRE                                        Sort by the genre                                       
     xbmcplugin.SORT_SORT_METHOD_VIDEO_YEAR, xbmcplugin.SORT_METHOD_YEAR Sort by the year                                        
     xbmcplugin.SORT_METHOD_VIDEO_RATING                                 Sort by the video rating                                
@@ -195,27 +198,43 @@ def addSortMethod(handle: int,
     xbmcplugin.SORT_METHOD_EPISODE                                      Sort by the episode                                     
     xbmcplugin.SORT_METHOD_VIDEO_TITLE                                  Sort by the video title                                 
     xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE                             Sort by the video sort title                            
-    xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE_IGNORE_THE                  Sort by the video sort title and ignore "The" before    
+    xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE_IGNORE_THE                  Sort by the video sort title
+                                                                        and ignore "The" before
     xbmcplugin.SORT_METHOD_PRODUCTIONCODE                               Sort by the production code                             
     xbmcplugin.SORT_METHOD_SONG_RATING                                  Sort by the song rating                                 
     xbmcplugin.SORT_METHOD_MPAA_RATING                                  Sort by the mpaa rating                                 
     xbmcplugin.SORT_METHOD_VIDEO_RUNTIME                                Sort by video runtime                                   
     xbmcplugin.SORT_METHOD_STUDIO                                       Sort by the studio                                      
-    xbmcplugin.SORT_METHOD_STUDIO_IGNORE_THE                            Sort by the studio and ignore "The" before              
+    xbmcplugin.SORT_METHOD_STUDIO_IGNORE_THE                            Sort by the studio and
+                                                                        ignore "The" before
     xbmcplugin.SORT_METHOD_UNSORTED                                     Use list not sorted                                     
     xbmcplugin.SORT_METHOD_BITRATE                                      Sort by the bitrate                                     
     xbmcplugin.SORT_METHOD_LISTENERS                                    Sort by the listeners                                   
     xbmcplugin.SORT_METHOD_COUNTRY                                      Sort by the country                                     
     xbmcplugin.SORT_METHOD_DATEADDED                                    Sort by the added date                                  
     xbmcplugin.SORT_METHOD_FULLPATH                                     Sort by the full path name                              
-    xbmcplugin.SORT_METHOD_LABEL_IGNORE_FOLDERS                         Sort by the label names and ignore related folder names 
+    xbmcplugin.SORT_METHOD_LABEL_IGNORE_FOLDERS                         Sort by the label names and
+                                                                        ignore related folder names
     xbmcplugin.SORT_METHOD_LASTPLAYED                                   Sort by last played date                                
     xbmcplugin.SORT_METHOD_PLAYCOUNT                                    Sort by the play count                                  
     xbmcplugin.SORT_METHOD_CHANNEL                                      Sort by the channel                                     
     xbmcplugin.SORT_METHOD_DATE_TAKEN                                   Sort by the taken date                                  
-    xbmcplugin.SORT_METHOD_VIDEO_USER_RATING                            Sort by the rating of the user of video                 
-    xbmcplugin.SORT_METHOD_SONG_USER_RATING                             Sort by the rating of the user of song                  
-    =================================================================== ======================================================= 
+    xbmcplugin.SORT_METHOD_VIDEO_USER_RATING                            Sort by the rating of
+                                                                        the user of video
+    xbmcplugin.SORT_METHOD_SONG_USER_RATING                             Sort by the rating of
+                                                                        the user of song
+    =================================================================== ============================
+
+    :param labelMask: [opt] string - the label mask to use for the first label.  applies to:
+
+    ========================== ========================
+    sortMethod                 labelMask               
+    ========================== ========================
+    SORT_METHOD_TRACKNUM       Defaults to ``[%N. ]%T``
+    SORT_METHOD_EPISODE        Defaults to ``%H. %T``
+    SORT_METHOD_PRODUCTIONCODE Defaults to ``%H. %T``
+    All other sort methods     Defaults to ``%T``
+    ========================== ========================
 
     :param label2Mask: [opt] string - the label mask to use for the second label. Defaults
         to``%D``  applies to:
@@ -233,11 +252,15 @@ def addSortMethod(handle: int,
     .. note::
         to add multiple sort methods just call the method multiple times.
 
-      Added new sort **SORT_METHOD_DATE_TAKEN**, **SORT_METHOD_COUNTRY**, **S
-    ORT_METHOD_DATEADDED**, **SORT_METHOD_FULLPATH**, **SORT_METHOD_LABEL_IG
-    NORE_FOLDERS**, **SORT_METHOD_LASTPLAYED**, **SORT_METHOD_PLAYCOUNT**, **
-    SORT_METHOD_CHANNEL**.  Added new
-    sort **SORT_METHOD_VIDEO_USER_RATING**.Example::
+    @python_v13 Added new sort **SORT_METHOD_DATE_TAKEN**, **SORT_METHOD_COUNTRY**,
+    **SORT_METHOD_DATEADDED**, **SORT_METHOD_FULLPATH**, **SORT_METHOD_LABEL_IGNORE_FOLDERS**,
+    **SORT_METHOD_LASTPLAYED**, **SORT_METHOD_PLAYCOUNT**, **SORT_METHOD_CHANNEL**.
+
+    @python_v17 Added new sort **SORT_METHOD_VIDEO_USER_RATING**.
+
+    @python_v19 Added new option **labelMask**.
+
+    Example::
 
         ..
         xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORTMETHOD_DATEADDED)
@@ -292,9 +315,7 @@ def setContent(handle: int, content: str) -> None:
 
     Available content strings
 
-    ====== ======= ======== =========== 
-                                        
-    ====== ======= ======== =========== 
+    ====== ======= ======== ===========
     files  songs   artists  albums      
     movies tvshows episodes musicvideos 
     videos images  games                
@@ -303,7 +324,9 @@ def setContent(handle: int, content: str) -> None:
     Use **videos** for all videos which do not apply to the more specific mentioned
     ones like "movies", "episodes" etc. A good example is youtube.
 
-      Added new **games** contentExample::
+    @python_v18 Added new **games** content
+
+    Example::
 
         ..
         xbmcplugin.setContent(int(sys.argv[1]), 'movies')

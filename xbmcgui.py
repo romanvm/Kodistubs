@@ -1,4 +1,3 @@
-# coding: utf-8
 # This file is generated from Kodi source code and post-edited
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
@@ -10,10 +9,107 @@ through windows, dialogs, and various control widgets.
 """
 from typing import Union, List, Dict, Tuple, Optional
 
-import xbmc as _xbmc
+from xbmc import InfoTagVideo, InfoTagMusic
 
 __kodistubs__ = True
 
+ACTION_ANALOG_FORWARD = 113
+ACTION_ANALOG_MOVE = 49
+ACTION_ANALOG_MOVE_X_LEFT = 601
+ACTION_ANALOG_MOVE_X_RIGHT = 602
+ACTION_ANALOG_MOVE_Y_DOWN = 604
+ACTION_ANALOG_MOVE_Y_UP = 603
+ACTION_ANALOG_REWIND = 114
+ACTION_ANALOG_SEEK_BACK = 125
+ACTION_ANALOG_SEEK_FORWARD = 124
+ACTION_ASPECT_RATIO = 19
+ACTION_AUDIO_DELAY = 161
+ACTION_AUDIO_DELAY_MIN = 54
+ACTION_AUDIO_DELAY_PLUS = 55
+ACTION_AUDIO_NEXT_LANGUAGE = 56
+ACTION_BACKSPACE = 110
+ACTION_BIG_STEP_BACK = 23
+ACTION_BIG_STEP_FORWARD = 22
+ACTION_BROWSE_SUBTITLE = 247
+ACTION_BUILT_IN_FUNCTION = 122
+ACTION_CALIBRATE_RESET = 48
+ACTION_CALIBRATE_SWAP_ARROWS = 47
+ACTION_CHANGE_RESOLUTION = 57
+ACTION_CHANNEL_DOWN = 185
+ACTION_CHANNEL_NUMBER_SEP = 192
+ACTION_CHANNEL_SWITCH = 183
+ACTION_CHANNEL_UP = 184
+ACTION_CHAPTER_OR_BIG_STEP_BACK = 98
+ACTION_CHAPTER_OR_BIG_STEP_FORWARD = 97
+ACTION_CONTEXT_MENU = 117
+ACTION_COPY_ITEM = 81
+ACTION_CREATE_BOOKMARK = 96
+ACTION_CREATE_EPISODE_BOOKMARK = 95
+ACTION_CURSOR_LEFT = 120
+ACTION_CURSOR_RIGHT = 121
+ACTION_CYCLE_SUBTITLE = 99
+ACTION_CYCLE_TONEMAP_METHOD = 261
+ACTION_DECREASE_PAR = 220
+ACTION_DECREASE_RATING = 137
+ACTION_DELETE_ITEM = 80
+ACTION_ENTER = 135
+ACTION_ERROR = 998
+ACTION_FILTER = 233
+ACTION_FILTER_CLEAR = 150
+ACTION_FIRST_PAGE = 159
+ACTION_FORWARD = 16
+ACTION_GESTURE_ABORT = 505
+ACTION_GESTURE_BEGIN = 501
+ACTION_GESTURE_END = 599
+ACTION_GESTURE_NOTIFY = 500
+ACTION_GESTURE_PAN = 504
+ACTION_GESTURE_ROTATE = 503
+ACTION_GESTURE_SWIPE_DOWN = 541
+ACTION_GESTURE_SWIPE_DOWN_TEN = 550
+ACTION_GESTURE_SWIPE_LEFT = 511
+ACTION_GESTURE_SWIPE_LEFT_TEN = 520
+ACTION_GESTURE_SWIPE_RIGHT = 521
+ACTION_GESTURE_SWIPE_RIGHT_TEN = 530
+ACTION_GESTURE_SWIPE_UP = 531
+ACTION_GESTURE_SWIPE_UP_TEN = 540
+ACTION_GESTURE_ZOOM = 502
+ACTION_GUIPROFILE_BEGIN = 204
+ACTION_HDR_TOGGLE = 260
+ACTION_HIGHLIGHT_ITEM = 8
+ACTION_INCREASE_PAR = 219
+ACTION_INCREASE_RATING = 136
+ACTION_INPUT_TEXT = 244
+ACTION_LAST_PAGE = 160
+ACTION_MENU = 163
+ACTION_MOUSE_DOUBLE_CLICK = 103
+ACTION_MOUSE_DRAG = 106
+ACTION_MOUSE_DRAG_END = 109
+ACTION_MOUSE_END = 109
+ACTION_MOUSE_LEFT_CLICK = 100
+ACTION_MOUSE_LONG_CLICK = 108
+ACTION_MOUSE_MIDDLE_CLICK = 102
+ACTION_MOUSE_MOVE = 107
+ACTION_MOUSE_RIGHT_CLICK = 101
+ACTION_MOUSE_START = 100
+ACTION_MOUSE_WHEEL_DOWN = 105
+ACTION_MOUSE_WHEEL_UP = 104
+ACTION_MOVE_DOWN = 4
+ACTION_MOVE_ITEM = 82
+ACTION_MOVE_ITEM_DOWN = 116
+ACTION_MOVE_ITEM_UP = 115
+ACTION_MOVE_LEFT = 1
+ACTION_MOVE_RIGHT = 2
+ACTION_MOVE_UP = 3
+ACTION_MUTE = 91
+ACTION_NAV_BACK = 92
+ACTION_NEXT_CHANNELGROUP = 186
+ACTION_NEXT_CONTROL = 181
+ACTION_NEXT_ITEM = 14
+ACTION_NEXT_LETTER = 140
+ACTION_NEXT_PICTURE = 28
+ACTION_NEXT_SCENE = 138
+ACTION_NEXT_SUBTITLE = 26
+ACTION_NONE = 0
 ACTION_NOOP = 999
 ACTION_PAGE_DOWN = 6
 ACTION_PAGE_UP = 5
@@ -209,16 +305,12 @@ NOTIFICATION_WARNING = 'warning'
 PASSWORD_VERIFY = 1
 VERTICAL = 1
 
-INT_MAX = 2147483647
-
 
 class Control:
     """
-    **Code based skin access.**
+    **Code based skin access**
 
     Offers classes and functions that manipulate the add-on gui controls.
-
-    **Code based skin access.**
 
     Kodi is noted as having a very flexible and robust framework for its GUI, making
     theme-skinning and personal customization very accessible. Users can create
@@ -307,7 +399,7 @@ class Control:
     
     def setEnabled(self, enabled: bool) -> None:
         """
-        Set's the control's enabled/disabled state.
+        Sets the control's enabled/disabled state.
 
         :param enabled: bool - True=enabled / False=disabled.
 
@@ -321,9 +413,13 @@ class Control:
     
     def setVisible(self, visible: bool) -> None:
         """
-        Set's the control's visible/hidden state.
+        Sets the control's visible/hidden state.
 
         :param visible: bool - True=visible / False=hidden.
+
+        @python_v19 You can now define the visible state of a control before
+        it being added to a window. This value will be taken into account when
+        the control is later added.
 
         Example::
 
@@ -335,22 +431,27 @@ class Control:
     
     def isVisible(self) -> bool:
         """
-        Get the control's visible/hidden state.
+        Get the control's visible/hidden state with respect to the container/window
 
-          New function added.
+        .. note::
+            If a given control is set visible (c.f.`setVisible()` but was not
+            yet added to a window, this method will return ``False`` (the
+            control is not visible yet since it was not added to the window).
+
+        @python_v18 New function added.
 
         Example::
 
             ...
             if self.button.isVisible():
-                ...
+            ...
         """
         return True
     
     def setVisibleCondition(self, visible: str,
                             allowHiddenFocus: bool = False) -> None:
         """
-        Set's the control's visible condition.
+        Sets the control's visible condition.
 
         Allows Kodi to control the visible status of the control.
 
@@ -370,7 +471,7 @@ class Control:
     
     def setEnableCondition(self, enable: str) -> None:
         """
-        Set's the control's enabled condition.
+        Sets the control's enabled condition.
 
         Allows Kodi to control the enabled status of the control.
 
@@ -387,9 +488,9 @@ class Control:
         """
         pass
     
-    def setAnimations(self, eventAttr: List[Tuple[str, str]]) -> None:
+    def setAnimations(self, eventAttr: List[Tuple[str,  str]]) -> None:
         """
-        Set's the control's animations.
+        Sets the control's animations.
 
         **[(event,attr,)*]**: list - A list of tuples consisting of event and attributes
         pairs.
@@ -410,7 +511,7 @@ class Control:
     
     def setPosition(self, x: int, y: int) -> None:
         """
-        Set's the controls position.
+        Sets the controls position.
 
         :param x: integer - x coordinate of control.
         :param y: integer - y coordinate of control.
@@ -428,7 +529,7 @@ class Control:
     
     def setWidth(self, width: int) -> None:
         """
-        Set's the controls width.
+        Sets the controls width.
 
         :param width: integer - width of control.
 
@@ -442,7 +543,7 @@ class Control:
     
     def setHeight(self, height: int) -> None:
         """
-        Set's the controls height.
+        Sets the controls height.
 
         :param height: integer - height of control.
 
@@ -459,7 +560,7 @@ class Control:
                       left: 'Control',
                       right: 'Control') -> None:
         """
-        Set's the controls navigation.
+        Sets the controls navigation.
 
         :param up: control object - control to navigate to on up.
         :param down: control object - control to navigate to on down.
@@ -483,7 +584,7 @@ class Control:
     
     def controlUp(self, up: 'Control') -> None:
         """
-        Set's the controls up navigation.
+        Sets the controls up navigation.
 
         :param control: control object - control to navigate to on up.
         :raises TypeError: if one of the supplied arguments is not a control type.
@@ -503,7 +604,7 @@ class Control:
     
     def controlDown(self, control: 'Control') -> None:
         """
-        Set's the controls down navigation.
+        Sets the controls down navigation.
 
         :param control: control object - control to navigate to on down.
         :raises TypeError: if one of the supplied arguments is not a control type.
@@ -523,7 +624,7 @@ class Control:
     
     def controlLeft(self, control: 'Control') -> None:
         """
-        Set's the controls left navigation.
+        Sets the controls left navigation.
 
         :param control: control object - control to navigate to on left.
         :raises TypeError: if one of the supplied arguments is not a control type.
@@ -543,7 +644,7 @@ class Control:
     
     def controlRight(self, control: 'Control') -> None:
         """
-        Set's the controls right navigation.
+        Sets the controls right navigation.
 
         :param control: control object - control to navigate to on right.
         :raises TypeError: if one of the supplied arguments is not a control type.
@@ -566,10 +667,6 @@ class ControlSpin(Control):
     """
     **Used for cycling up/down controls.**
 
-    Offers classes and functions that manipulate the add-on gui controls.
-
-    **Code based skin access.**
-
     The spin control is used for when a list of options can be chosen (such as a
     page up/down control). You can choose the position, size, and look of the spin
     control.
@@ -577,8 +674,9 @@ class ControlSpin(Control):
     .. note::
         This class include also all calls from `Control`
 
-    **Not working yet**. You can't create this object, it is returned by objects
-    like `ControlTextBox` and `ControlList`.
+    .. warning::
+        **Not working yet**. You can't create this object, it is returned by objects
+        like ` ControlTextBox` and `ControlList`.
     """
     
     def __init__(self) -> None:
@@ -591,7 +689,7 @@ class ControlSpin(Control):
                     upDisabled: str,
                     downDisabled: str) -> None:
         """
-        Set's textures for this control.
+        Sets textures for this control.
 
         Texture are image files that are used for example in the skin
 
@@ -617,9 +715,6 @@ class ControlSpin(Control):
 class ControlLabel(Control):
     """
     **Used to show some lines of text.**
-
-    {`ControlLabel`(x, y, width, height, label[, font, textColor, disabledColor,
-    alignment, hasPath, angle]) }
 
     The label control is used for displaying text in Kodi. You can choose the font,
     size, colour, location and contents of the text to be displayed.
@@ -696,14 +791,13 @@ class ControlLabel(Control):
                  focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
-        Set's text for this label.
+        Sets text for this label.
 
         :param label: string or unicode - text string.
         :param font: [opt] string - font used for label text. (e.g. 'font13')
         :param textColor: [opt] hexstring - color of enabled label's label. (e.g. '0xFFFFFFFF')
         :param disabledColor: [opt] hexstring - color of disabled label's label. (e.g. '0xFFFF3300')
-        :param shadowColor: [opt] hexstring - color of button's label's shadow. (e.g.
-            '0xFF000000')
+        :param shadowColor: [opt] hexstring - color of button's label's shadow. (e.g. '0xFF000000')
         :param focusedColor: [opt] hexstring - color of focused button's label. (e.g. '0xFF00FFFF')
         :param label2: [opt] string or unicode - text string.
 
@@ -719,9 +813,6 @@ class ControlLabel(Control):
 class ControlEdit(Control):
     """
     **Used as an input control for the osd keyboard and other input fields.**
-
-    {`ControlEdit`(x, y, width, height, label[, font, textColor, disabledColor,
-    alignment, focusTexture, noFocusTexture]) }
 
     The edit control allows a user to input text in Kodi. You can choose the font,
     size, colour, location and header of the text to be displayed.
@@ -760,7 +851,11 @@ class ControlEdit(Control):
         arguments require the keyword.  After you create the control, you
         need to add it to the window with addControl().
 
-      Deprecated **isPassword**  Removed **isPassword**Example::
+    @python_v18 Deprecated **isPassword**
+
+    @python_v19 Removed **isPassword**
+
+    Example::
 
         ...
         self.edit = xbmcgui.ControlEdit(100, 250, 125, 75, 'Status')
@@ -788,14 +883,13 @@ class ControlEdit(Control):
                  focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
-        Set's text heading for this edit control.
+        Sets text heading for this edit control.
 
         :param label: string or unicode - text string.
         :param font: [opt] string - font used for label text. (e.g. 'font13')
         :param textColor: [opt] hexstring - color of enabled label's label. (e.g. '0xFFFFFFFF')
         :param disabledColor: [opt] hexstring - color of disabled label's label. (e.g. '0xFFFF3300')
-        :param shadowColor: [opt] hexstring - color of button's label's shadow. (e.g.
-            '0xFF000000')
+        :param shadowColor: [opt] hexstring - color of button's label's shadow. (e.g. '0xFF000000')
         :param focusedColor: [opt] hexstring - color of focused button's label. (e.g. '0xFF00FFFF')
         :param label2: [opt] string or unicode - text string.
 
@@ -823,7 +917,7 @@ class ControlEdit(Control):
     
     def setText(self, text: str) -> None:
         """
-        Set's text value for this edit control.
+        Sets text value for this edit control.
 
         :param value: string or unicode - text string.
 
@@ -841,7 +935,9 @@ class ControlEdit(Control):
 
         :return: Text value of control
 
-          New function added.Example::
+        @python_v14 New function added.
+
+        Example::
 
             ...
             value = self.edit.getText()
@@ -855,22 +951,28 @@ class ControlEdit(Control):
 
         :param type: integer - type of the edit control.
 
-        =============================== =========================================== 
-        Param                           Definition                                  
-        =============================== =========================================== 
-        xbmcgui.INPUT_TYPE_TEXT         (standard keyboard)                         
-        xbmcgui.INPUT_TYPE_NUMBER       (format: #)                                 
-        xbmcgui.INPUT_TYPE_DATE         (format: DD/MM/YYYY)                        
-        xbmcgui.INPUT_TYPE_TIME         (format: HH:MM)                             
-        xbmcgui.INPUT_TYPE_IPADDRESS    (format: #.#.#.#)                           
-        xbmcgui.INPUT_TYPE_PASSWORD     (input is masked)                           
-        xbmcgui.INPUT_TYPE_PASSWORD_MD5 (input is masked, return md5 hash of input) 
-        xbmcgui.INPUT_TYPE_SECONDS      (format: SS or MM:SS or HH:MM:SS or MM min) 
-        =============================== =========================================== 
+        ============================================= =========================================== 
+        Param                                         Definition                                  
+        ============================================= =========================================== 
+        xbmcgui.INPUT_TYPE_TEXT                       (standard keyboard)                         
+        xbmcgui.INPUT_TYPE_NUMBER                     (format: #)                                 
+        xbmcgui.INPUT_TYPE_DATE                       (format: DD/MM/YYYY)                        
+        xbmcgui.INPUT_TYPE_TIME                       (format: HH:MM)                             
+        xbmcgui.INPUT_TYPE_IPADDRESS                  (format: #.#.#.#)                           
+        xbmcgui.INPUT_TYPE_PASSWORD                   (input is masked)                           
+        xbmcgui.INPUT_TYPE_PASSWORD_MD5               (input is masked, return md5 hash of input) 
+        xbmcgui.INPUT_TYPE_SECONDS                    (format: SS or MM:SS or HH:MM:SS or MM min) 
+        xbmcgui.INPUT_TYPE_PASSWORD_NUMBER_VERIFY_NEW (numeric input is masked)                   
+        ============================================= =========================================== 
 
         :param heading: string or unicode - heading that will be used for to numeric or
             keyboard dialog when the edit control is clicked.
-          New function added.Example::
+
+        @python_v18 New function added.
+
+        @python_v19 New option added to mask numeric input.
+
+        Example::
 
             ...
             self.edit.setType(xbmcgui.INPUT_TYPE_TIME, 'Please enter the time')
@@ -882,10 +984,6 @@ class ControlEdit(Control):
 class ControlList(Control):
     """
     **Used for a scrolling lists of items. Replaces the list control.**
-
-    {`ControlList`(x, y, width, height[, font, textColor, buttonTexture,
-    buttonFocusTexture, selectedColor, imageWidth, imageHeight, itemTextXOffset,
-    itemTextYOffset, itemHeight, space, alignmentY, shadowColor]) }
 
     The list container is one of several containers used to display items from file
     lists in various ways. The list container is very flexible - it's only
@@ -957,7 +1055,7 @@ class ControlList(Control):
                  _alignmentY: int = 4) -> None:
         pass
     
-    def addItem(self, item: Union[str, 'ListItem'],
+    def addItem(self, item: Union[str,  'ListItem'],
                 sendMessage: bool = True) -> None:
         """
         Add a new item to this list control.
@@ -972,7 +1070,7 @@ class ControlList(Control):
         """
         pass
     
-    def addItems(self, items: List[Union[str, 'ListItem']]) -> None:
+    def addItems(self, items: List[Union[str,  'ListItem']]) -> None:
         """
         Adds a list of listitems or strings to this list control.
 
@@ -981,7 +1079,9 @@ class ControlList(Control):
         .. note::
             You can use the above as keywords for arguments.
 
-        Large lists benefit considerably, than using the standard `addItem()`Example::
+        Large lists benefit considerably, than using the standard ``addItem()``
+
+        Example::
 
             ...
             cList.addItems(items=listitems)
@@ -1008,7 +1108,10 @@ class ControlList(Control):
         Remove an item by index number.
 
         :param index: integer - index number of the item to remove.
-          New function added.Example::
+
+        @python_v13 New function added.
+
+        Example::
 
             ...
             cList.removeItem(12)
@@ -1020,22 +1123,23 @@ class ControlList(Control):
         """
         Clear all ListItems in this control list.
 
-        Calling```reset()``` will destroy any```ListItem``` objects in
-        the```ControlList``` if not hold by any other class. Make sure you you don't
-        call```addItems()``` with the previous```ListItem``` references after
-        calling```reset()```. If you need to preserve the```ListItem``` objects
-        after```reset()``` make sure you store them as members of your```WindowXML```
+        Calling ``reset()`` will destroy any ``ListItem`` objects in
+        the ``ControlList`` if not hold by any other class. Make sure you you don't
+        call ``addItems()`` with the previous ``ListItem`` references after
+        calling ``reset()``. If you need to preserve the ``ListItem`` objects
+        after ``reset()`` make sure you store them as members of your ``WindowXML``
         class (see examples).
 
-        **Examples:**
+        Example::
 
             ...
             cList.reset()
             ...
-        The below example shows you how you can reset the```ControlList``` but this time
-        avoiding```ListItem``` object destruction. The example assumes ``self`` as
-        a```WindowXMLDialog``` instance containing a```ControlList``` with id = 800. The
-        class preserves the```ListItem``` objects in a class member variable.
+
+        The below example shows you how you can reset the ``ControlList`` but this time
+        avoiding ``ListItem`` object destruction. The example assumes ``self`` as
+        a ``WindowXMLDialog`` instance containing a ``ControlList`` with id = 800. The
+        class preserves the ``ListItem`` objects in a class member variable::
 
             ...
             # Get all the ListItem objects in the control
@@ -1119,7 +1223,7 @@ class ControlList(Control):
     
     def setSpace(self, space: int) -> None:
         """
-        Set's the space between items.
+        Sets the space between items.
 
         :param space: [opt] integer - space between items.
 
@@ -1192,7 +1296,7 @@ class ControlList(Control):
         Returns a given `ListItem` in this `List`.
 
         :param index: integer - index number of item to return.
-        :return: `List` item
+        :return: ListItem
 
         :raises ValueError: if index is out of range.
 
@@ -1208,7 +1312,7 @@ class ControlList(Control):
         """
         Fills a static list with a list of listitems.
 
-        :param items: `List` - list of listitems to add.
+        :param items: - list of listitems to add.
 
         .. note::
             You can use the above as keywords for arguments.
@@ -1259,8 +1363,8 @@ class ControlFadeLabel(Control):
 
     .. note::
         You can use the above as keywords for arguments and skip certain
-        optional arguments.  Once you use a keyword, all following
-        arguments require the keyword.  After you create the control, you
+        optional arguments. Once you use a keyword, all following
+        arguments require the keyword. After you create the control, you
         need to add it to the window with addControl().
 
     Example::
@@ -1286,7 +1390,7 @@ class ControlFadeLabel(Control):
         :param label: string or unicode - text string to add.
 
         .. note::
-            To remove added text use```reset()``` for them.
+            To remove added text use ``reset()`` for them.
 
         Example::
 
@@ -1330,8 +1434,8 @@ class ControlTextBox(Control):
 
     .. note::
         You can use the above as keywords for arguments and skip certain
-        optional arguments.  Once you use a keyword, all following
-        arguments require the keyword.  After you create the control, you
+        optional arguments. Once you use a keyword, all following
+        arguments require the keyword. After you create the control, you
         need to add it to the window with addControl().
 
     Example::
@@ -1339,6 +1443,20 @@ class ControlTextBox(Control):
         ...
         # ControlTextBox(x, y, width, height[, font, textColor])
         self.textbox = xbmcgui.ControlTextBox(100, 250, 300, 300, textColor='0xFFFFFFFF')
+        ...
+
+    As stated above, the GUI control is only created once added to a window. The
+    example below shows how a `ControlTextBox` can be created, added to the current
+    window and have some of its properties changed.
+
+    Extended example::
+
+        ...
+        textbox = xbmcgui.ControlTextBox(100, 250, 300, 300, textColor='0xFFFFFFFF')
+        window = xbmcgui.Window(xbmcgui.getCurrentWindowId())
+        window.addControl(textbox)
+        textbox.setText("My Text Box")
+        textbox.scroll()
         ...
     """
     
@@ -1352,9 +1470,12 @@ class ControlTextBox(Control):
     
     def setText(self, text: str) -> None:
         """
-        Set's the text for this textbox.
+        Sets the text for this textbox.
 
-        :param text: string or unicode - text string.
+        :param text: string - text string.
+
+        @python_v19 setText can now be used before adding the control to the window
+        (the defined value is taken into consideration when the control is created)
 
         Example::
 
@@ -1371,6 +1492,8 @@ class ControlTextBox(Control):
 
         :return: To get text from box
 
+        @python_v19 ``getText()`` can now be used before adding the control to the window
+
         Example::
 
             ...
@@ -1383,6 +1506,9 @@ class ControlTextBox(Control):
     def reset(self) -> None:
         """
         Clear's this textbox.
+
+        @python_v19 ``reset()`` will reset any text defined for this control even before
+        you add the control to the window
 
         Example::
 
@@ -1398,6 +1524,9 @@ class ControlTextBox(Control):
         Scrolls to the given position.
 
         :param id: integer - position to scroll to.
+
+        .. note::
+            ``scroll()`` only works after the control is added to a window.
 
         Example::
 
@@ -1415,7 +1544,13 @@ class ControlTextBox(Control):
         :param delay: integer - Scroll delay (in ms)
         :param time: integer - Scroll time (in ms)
         :param repeat: integer - Repeat time
-          New function added.Example::
+
+        .. note::
+            autoScroll only works after you add the control to a window.
+
+        @python_v15 New function added.
+
+        Example::
 
             ...
             self.textbox.autoScroll(1, 2, 1)
@@ -1439,14 +1574,14 @@ class ControlImage(Control):
     :param width: integer - width of control.
     :param height: integer - height of control.
     :param filename: string - image filename.
-    :param aspectRatio: [opt] integer - (values 0 = stretch (default), 1 = scale up (crops), 2
-        = scale down (black bar)
+    :param aspectRatio: [opt] integer - (values 0 = stretch (default), 1 = scale up (crops),
+        2 = scale down (black bar)
     :param colorDiffuse: hexString - (example, '0xC0FF0000' (red tint))
 
     .. note::
         You can use the above as keywords for arguments and skip certain
-        optional arguments.  Once you use a keyword, all following
-        arguments require the keyword.  After you create the control, you
+        optional arguments. Once you use a keyword, all following
+        arguments require the keyword. After you create the control, you
         need to add it to the window with addControl().
 
     Example::
@@ -1472,7 +1607,10 @@ class ControlImage(Control):
 
         :param filename: string - image filename.
         :param useCache: [opt] bool - True=use cache (default) / False=don't use cache.
-          Added new option **useCache**.Example::
+
+        @python_v13 Added new option **useCache**.
+
+        Example::
 
             ...
             # setImage(filename[, useCache])
@@ -1502,9 +1640,6 @@ class ControlProgress(Control):
     """
     **Used to show the progress of a particular operation.**
 
-    { ControlProgress(x, y, width, height, filename[, texturebg, textureleft,
-    texturemid, textureright, textureoverlay]) }
-
     The progress control is used to show the progress of an item that may take a
     long time, or to show how far through a movie you are. You can choose the
     position, size, and look of the progress control.
@@ -1520,8 +1655,7 @@ class ControlProgress(Control):
     :param texturebg: [opt] string - specifies the image file whichshould be displayed in
         the background of the progress control.
     :param textureleft: [opt] string - specifies the image file whichshould be displayed for
-        the left side of the progress bar. This is rendered on the left
-        side of the bar.
+        the left side of the progress bar. This is rendered on the left side of the bar.
     :param texturemid: [opt] string - specifies the image file which should be displayed for
         the middl portion of the progress bar. This is the ``fill`` texture
         used to fill up the bar. It's positioned on the right of
@@ -1529,8 +1663,7 @@ class ControlProgress(Control):
         the``<lefttexture>`` and``<righttexture>`` textures, depending on
         how far progressed the item is.
     :param textureright: [opt] string - specifies the image file which should be displayed for
-        the right side of the progress bar. This is rendered on the right
-        side of the bar.
+        the right side of the progress bar. This is rendered on the right side of the bar.
     :param textureoverlay: [opt] string - specifies the image file which should be displayed over
         the top of all other images in the progress bar. It is centered
         vertically and horizontally within the space taken up by the
@@ -1599,10 +1732,6 @@ class ControlButton(Control):
     """
     **A standard push button control.**
 
-    {`ControlButton`(x, y, width, height, label[, focusTexture, noFocusTexture,
-    textOffsetX, textOffsetY, alignment, font, textColor, disabledColor, angle,
-    shadowColor, focusedColor]) }
-
     The button control is used for creating push buttons in Kodi. You can choose the
     position, size, and look of the button, as well as choosing what action(s)
     should be performed when pushed.
@@ -1666,7 +1795,7 @@ class ControlButton(Control):
                  noFocusTexture: Optional[str] = None,
                  textOffsetX: int = 10,
                  textOffsetY: int = 2,
-                 alignment: int = (0|4),
+                 alignment: int = (0 | 4),
                  font: Optional[str] = None,
                  textColor: Optional[str] = None,
                  disabledColor: Optional[str] = None,
@@ -1683,7 +1812,7 @@ class ControlButton(Control):
                  focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
-        Set's this buttons text attributes.
+        Sets this buttons text attributes.
 
         :param label: [opt] string or unicode - text string.
         :param font: [opt] string - font used for label text. (e.g. 'font13')
@@ -1711,7 +1840,7 @@ class ControlButton(Control):
     
     def setDisabledColor(self, color: str) -> None:
         """
-        Set's this buttons disabled color.
+        Sets this buttons disabled color.
 
         :param disabledColor: hexstring - color of disabled button's label. (e.g. '0xFFFF3300')
 
@@ -1741,9 +1870,9 @@ class ControlButton(Control):
     
     def getLabel2(self) -> str:
         """
-        Returns the buttons label2 as a unicode string.
+        Returns the buttons label2 as a string.
 
-        :return: Unicode string of label 2
+        :return: string of label 2
 
         Example::
 
@@ -1790,16 +1919,11 @@ class ControlGroup(Control):
 
 class ControlRadioButton(Control):
     """
-    **For control a radio button (as used for on/off settings).**
-
-    {`ControlRadioButton`(x, y, width, height, label[, focusOnTexture,
-    noFocusOnTexture, focusOffTexture, noFocusOffTexture, textOffsetX, textOffsetY,
-    alignment, font, textColor, disabledColor]) }
+    **A radio button control (as used for on/off settings).**
 
     The radio button control is used for creating push button on/off settings in
-    Kodi. You can choose the position, size, and look of the button. When the user
-    clicks on the radio button, the state will change, toggling the extra textures
-    (textureradioon and textureradiooff). Used for settings controls.
+    Kodi. You can choose the position, size, and look of the button, as well as the
+    focused and unfocused radio textures. Used for settings controls.
 
     .. note::
         This class include also all calls from `Control`
@@ -1813,6 +1937,8 @@ class ControlRadioButton(Control):
     :param noFocusOnTexture: [opt] string - filename for radio ON not focused texture.
     :param focusOfTexture: [opt] string - filename for radio OFF focused texture.
     :param noFocusOffTexture: [opt] string - filename for radio OFF not focused texture.
+    :param focusTexture: [opt] string - filename for focused button texture.
+    :param noFocusTexture: [opt] string - filename for not focused button texture.
     :param textOffsetX: [opt] integer - horizontal text offset
     :param textOffsetY: [opt] integer - vertical text offset
     :param alignment: [opt] integer - alignment of label  Flags for alignment used as bits
@@ -1841,9 +1967,9 @@ class ControlRadioButton(Control):
         arguments require the keyword.  After you create the control, you
         need to add it to the window with addControl().
 
-      New function added.  Deprecated **focusTexture**
-    and **noFocusTexture**. Use **focusOnTexture** and **noFocusOnTexture**.
-    Removed **focusTexture** and **noFocusTexture**.Example::
+    @python_v13 New function added.
+
+    Example::
 
         ...
         self.radiobutton = xbmcgui.ControlRadioButton(100, 250, 200, 50, 'Enable', font='font14')
@@ -1859,6 +1985,8 @@ class ControlRadioButton(Control):
                  noFocusOnTexture: Optional[str] = None,
                  focusOffTexture: Optional[str] = None,
                  noFocusOffTexture: Optional[str] = None,
+                 focusTexture: Optional[str] = None,
+                 noFocusTexture: Optional[str] = None,
                  textOffsetX: int = 10,
                  textOffsetY: int = 2,
                  _alignment: int = (0|4),
@@ -1913,7 +2041,7 @@ class ControlRadioButton(Control):
                  focusedColor: Optional[str] = None,
                  label2: str = "") -> None:
         """
-        Set's the radio buttons text attributes.
+        Sets the radio buttons text attributes.
 
         :param label: string or unicode - text string.
         :param font: [opt] string - font used for label text. (e.g. 'font13')
@@ -1970,9 +2098,6 @@ class ControlSlider(Control):
     """
     **Used for a volume slider.**
 
-    { ControlSlider(x, y, width, height[, textureback, texture, texturefocus,
-    orientation]) }
-
     The slider control is used for things where a sliding bar best represents the
     operation at hand (such as a volume control or seek control). You can choose the
     position, size, and look of the slider control.
@@ -1996,7 +2121,9 @@ class ControlSlider(Control):
         arguments require the keyword.  After you create the control, you
         need to add it to the window with addControl().
 
-    **orientation** option added.Example::
+    @python_v17 **orientation** option added.
+
+    Example::
 
         ...
         self.slider = xbmcgui.ControlSlider(100, 250, 350, 40)
@@ -2047,7 +2174,9 @@ class ControlSlider(Control):
 
         :return: int - value of slider
 
-          New function added.Example::
+        @python_v18 New function added.
+
+        Example::
 
             ...
             print(self.slider.getInt())
@@ -2063,7 +2192,10 @@ class ControlSlider(Control):
         :param min: int - min of slider
         :param delta: int - step size of slider
         :param max: int - max of slider
-          New function added.Example::
+
+        @python_v18 New function added.
+
+        Example::
 
             ...
             self.slider.setInt(450, 200, 10, 900)
@@ -2077,7 +2209,9 @@ class ControlSlider(Control):
 
         :return: float - value of slider
 
-          New function added.Example::
+        @python_v18 New function added.
+
+        Example::
 
             ...
             print(self.slider.getFloat())
@@ -2096,7 +2230,10 @@ class ControlSlider(Control):
         :param min: float - min of slider
         :param delta: float - step size of slider
         :param max: float - max of slider
-          New function added.Example::
+
+        @python_v18 New function added.
+
+        Example::
 
             ...
             self.slider.setFloat(15.0, 10.0, 1.0, 20.0)
@@ -2124,7 +2261,7 @@ class Dialog:
               customlabel: str = "",
               autoclose: int = 0) -> bool:
         """
-        **Yes / no dialog **
+        **Yes / no dialog**
 
         The Yes / No dialog can be used to inform the user about questions and get the
         answer.
@@ -2138,9 +2275,17 @@ class Dialog:
             autoclose)
         :return: Returns True if 'Yes' was pressed, else False.
 
-          Added new option**autoclose **.  Renamed option**line1 **
-        to**message **.  Removed option**line2 **.  Removed option**line3 **.
-        Added new option**customlabel**.Example::
+        @python_v13 Added new option**autoclose**.
+
+        @python_v19 Renamed option**line1** to **message**.
+
+        @python_v19 Removed option **line2**.
+
+        @python_v19 Removed option **line3**.
+
+        @python_v19 Added new option**customlabel**.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2155,10 +2300,12 @@ class Dialog:
 
         Show the corresponding info dialog for a given listitem
 
-        :param listitem: `xbmcgui.ListItem` -`ListItem` to show info for.
+        :param listitem: `ListItem` to show info for.
         :return: Returns whether the dialog opened successfully.
 
-          New function added.Example::
+        @python_v17 New function added.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2168,12 +2315,12 @@ class Dialog:
         return True
     
     def select(self, heading: str,
-               list: List[Union[str, 'ListItem']],
+               list: List[Union[str,  'ListItem']],
                autoclose: int = 0,
                preselect: int = -1,
                useDetails: bool = False) -> int:
         """
-        **Select dialog **
+        **Select dialog**
 
         Show of a dialog to select of an entry as a key
 
@@ -2187,8 +2334,13 @@ class Dialog:
             (default=false)
         :return: Returns the position of the highlighted item as an integer.
 
-        **preselect ** option added.  Added new option**useDetails **.  Allow
-        listitems for parameter**list**Example::
+        @python_v17 **preselect** option added.
+
+        @python_v17 Added new option **useDetails**.
+
+        @python_v17 Allow listitems for parameter **list**
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2204,7 +2356,9 @@ class Dialog:
         :param list: string list - list of items.
         :return: the position of the highlighted item as an integer (-1 if cancelled).
 
-          New function addedExample::
+        @python_v17 New function added
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2214,7 +2368,7 @@ class Dialog:
         return 0
     
     def multiselect(self, heading: str,
-                    options: List[Union[str, 'ListItem']],
+                    options: List[Union[str,  'ListItem']],
                     autoclose: int = 0,
                     preselect: Optional[List[int]] = None,
                     useDetails: bool = False) -> List[int]:
@@ -2231,8 +2385,15 @@ class Dialog:
             (default=false)
         :return: Returns the selected items as a list of indices, or None if cancelled.
 
-          New function added.  Added new option **preselect**.  Added new
-        option **useDetails**.  Allow listitems for parameter **options**Example::
+        @python_v16 New function added.
+
+        @python_v17 Added new option **preselect**.
+
+        @python_v17 Added new option **useDetails**.
+
+        @python_v17 Allow listitems for parameter **options**
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2243,7 +2404,7 @@ class Dialog:
     
     def ok(self, heading: str, message: str) -> bool:
         """
-        **OK dialog **
+        **OK dialog**
 
         The functions permit the call of a dialog of information, a confirmation of the
         user by press from OK required.
@@ -2252,8 +2413,13 @@ class Dialog:
         :param message: string or unicode - message text.
         :return: Returns True if 'Ok' was pressed, else False.
 
-          Renamed option**line1 ** to**message **.  Removed option**line2 **.
-        Removed option**line3**.Example::
+        @python_v19 Renamed option **line1** to **message**.
+
+        @python_v19 Removed option **line2**.
+
+        @python_v19 Removed option **line3**.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2266,7 +2432,7 @@ class Dialog:
                    text: str,
                    usemono: bool = False) -> None:
         """
-        **TextViewer dialog **
+        **TextViewer dialog**
 
         The text viewer dialog can be used to display descriptions, help texts or other
         larger texts.
@@ -2274,7 +2440,13 @@ class Dialog:
         :param heading: string or unicode - dialog heading.
         :param text: string or unicode - text.
         :param usemono: [opt] bool - use monospace font
-          New function added.  New optional param added**usemono**.Example::
+
+
+        @python_v16 New function added.
+
+        @python_v18 New optional param added **usemono**.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2290,7 +2462,7 @@ class Dialog:
                useThumbs: bool = False,
                treatAsFolder: bool = False,
                defaultt: str = "",
-               enableMultiple: bool = False) -> Union[str, List[str]]:
+               enableMultiple: bool = False) -> Union[str,  List[str]]:
         """
         **Browser dialog**
 
@@ -2331,11 +2503,18 @@ class Dialog:
         :param treatAsFolder: [opt] boolean - if True playlists and archives act as folders.
         :param defaultt: [opt] string - default path or file.
         :param enableMultiple: [opt] boolean - if True multiple file selection is enabled.
-        :return: If enableMultiple is False (default): returns filename and/or path as a string to the location of the highlighted item, if user pressed 'Ok' or a masked item was selected. Returns the default value if dialog was canceled. If enableMultiple is True: returns tuple of marked filenames as a string if user pressed 'Ok' or a masked item was selected. Returns empty tuple if dialog was canceled.
+        :return: If enableMultiple is False (default):
+            returns filename and/or path as a string to the location of the highlighted item,
+            if user pressed 'Ok' or a masked item was selected. Returns the default value if dialog
+            was canceled. If enableMultiple is True: returns tuple of marked filenames as a string
+            if user pressed 'Ok' or a masked item was selected. Returns empty tuple
+            if dialog was canceled.
 
          If type is 0 or 3 the enableMultiple parameter is ignore
 
-          New option added to browse network and/or local drives.Example::
+        @python_v18 New option added to browse network and/or local drives.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2394,7 +2573,9 @@ class Dialog:
         :param defaultt: [opt] string - default path or file.
         :return: Returns filename and/or path as a string to the location of the highlighted item, if user pressed 'Ok' or a masked item was selected. Returns the default value if dialog was canceled.
 
-          New option added to browse network and/or local drives.Example::
+        @python_v18 New option added to browse network and/or local drives.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2413,8 +2594,7 @@ class Dialog:
         """
         **Browser dialog**
 
-        The function offer the possibility to select multiple files by the user of the
-        add-on.
+        The function offer the possibility to select multiple files by the user of the add-on.
 
         It allows all the options that are possible in Kodi itself and offers all
         support file types.
@@ -2450,9 +2630,12 @@ class Dialog:
         :param treatAsFolder: [opt] boolean - if True playlists and archives act as folders
             (default=false).
         :param defaultt: [opt] string - default path or file.
-        :return: Returns tuple of marked filenames as a string," if user pressed 'Ok' or a masked item was selected. Returns empty tuple if dialog was canceled.
+        :return: Returns tuple of marked filenames as a string," if user pressed 'Ok' or a masked
+            item was selected. Returns empty tuple if dialog was canceled.
 
-          New option added to browse network and/or local drives.Example::
+        @python_v18 New option added to browse network and/or local drives.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2473,18 +2656,24 @@ class Dialog:
 
         :param type: integer - the type of numeric dialog.
 
-        ===== =================== ============================ 
-        Param Name                Format                       
-        ===== =================== ============================ 
-        0     ShowAndGetNumber    (default format: #)          
-        1     ShowAndGetDate      (default format: DD/MM/YYYY) 
-        2     ShowAndGetTime      (default format: HH:MM)      
-        3     ShowAndGetIPAddress (default format: #.#.#.#)    
-        ===== =================== ============================ 
+        ===== ======================== ============================ 
+        Param Name                     Format                       
+        ===== ======================== ============================ 
+        0     ShowAndGetNumber         (default format: #)          
+        1     ShowAndGetDate           (default format: DD/MM/YYYY) 
+        2     ShowAndGetTime           (default format: HH:MM)      
+        3     ShowAndGetIPAddress      (default format: #.#.#.#)    
+        4     ShowAndVerifyNewPassword (default format: *)          
+        ===== ======================== ============================ 
 
-        :param heading: string or unicode - dialog heading.
+        :param heading: string or unicode - dialog heading (will be ignored for type 4).
         :param defaultt: [opt] string - default value.
+        :param bHiddenInput: [opt] bool - mask input (available for type 0).
         :return: Returns the entered data as a string. Returns the default value if dialog was canceled.
+
+        @python_v19 New option added ShowAndVerifyNewPassword.
+
+        @python_v19 Added new option **bHiddenInput**.
 
         Example::
 
@@ -2509,13 +2698,10 @@ class Dialog:
         :param time: [opt] integer - time in milliseconds (default 5000)
         :param sound: [opt] bool - play notification sound (default True)
 
-        Builtin Icons:xbmcgui.NOTIFICATION_INFO
-
-        xbmcgui.NOTIFICATION_WARNING
-
+        Builtin Icons: xbmcgui.NOTIFICATION_INFO, xbmcgui.NOTIFICATION_WARNING,
         xbmcgui.NOTIFICATION_ERROR
 
-          New function added.
+        @python_v13 New function added.
 
         Example::
 
@@ -2542,23 +2728,23 @@ class Dialog:
         ============================= =========================================== 
         Parameter                     Format                                      
         ============================= =========================================== 
-        ```xbmcgui.INPUT_ALPHANUM```  (standard keyboard)                         
-        ```xbmcgui.INPUT_NUMERIC```   (format: #)                                 
-        ```xbmcgui.INPUT_DATE```      (format: DD/MM/YYYY)                        
-        ```xbmcgui.INPUT_TIME```      (format: HH:MM)                             
-        ```xbmcgui.INPUT_IPADDRESS``` (format: #.#.#.#)                           
-        ```xbmcgui.INPUT_PASSWORD```  (return md5 hash of input, input is masked) 
+        ``xbmcgui.INPUT_ALPHANUM``    (standard keyboard)
+        ``xbmcgui.INPUT_NUMERIC``     (format: #)
+        ``xbmcgui.INPUT_DATE``        (format: DD/MM/YYYY)
+        ``xbmcgui.INPUT_TIME``        (format: HH:MM)
+        ``xbmcgui.INPUT_IPADDRESS``   (format: #.#.#.#)
+        ``xbmcgui.INPUT_PASSWORD``    (return md5 hash of input, input is masked)
         ============================= =========================================== 
 
         :param option: [opt] integer - option for the dialog. (see Options below)  Password
-            dialog:  ```xbmcgui.PASSWORD_VERIFY``` (verifies an existing
-            (default) md5 hashed password)Alphanum dialog:
-            ```xbmcgui.ALPHANUM_HIDE_INPUT``` (masks input)
-        :param autoclose: [opt] integer - milliseconds to autoclose dialog. (default=do not
-            autoclose)
+            dialog:  ``xbmcgui.PASSWORD_VERIFY`` (verifies an existing (default) md5 hashed password)
+            Alphanum dialog: ``xbmcgui.ALPHANUM_HIDE_INPUT``` (masks input)
+        :param autoclose: [opt] integer - milliseconds to autoclose dialog. (default=do not autoclose)
         :return: Returns the entered data as a string. Returns an empty string if dialog was canceled.
 
-          New function added.Example::
+        @python_v13 New function added.
+
+        Example::
 
             ..
             dialog = xbmcgui.Dialog()
@@ -2586,8 +2772,13 @@ class DialogProgress:
         .. note::
             Use `update()` to update lines and progressbar.
 
-          Renamed option **line1** to **message**.  Removed option **line2**.
-        Removed option **line3**.Example::
+        @python_v19 Renamed option **line1** to **message**.
+
+        @python_v19 Removed option **line2**.
+
+        @python_v19 Removed option **line3**.
+
+        Example::
 
             ..
             pDialog = xbmcgui.DialogProgress()
@@ -2602,8 +2793,14 @@ class DialogProgress:
 
         :param percent: integer - percent complete. (0:100)
         :param message: [opt] string or unicode - message text.
-          Renamed option **line1** to **message**.  Removed option **line2**.
-        Removed option **line3**.Example::
+
+        @python_v19 Renamed option **line1** to **message**.
+
+        @python_v19 Removed option **line2**.
+
+        @python_v19 Removed option **line3**.
+
+        Example::
 
             ..
             pDialog.update(25, 'Importing modules...')
@@ -2646,6 +2843,17 @@ class DialogProgressBG:
     def __init__(self) -> None:
         pass
     
+    def deallocating(self) -> None:
+        """
+        This method is meant to be called from the destructor of the lowest level class.
+
+        It's virtual because it's a convenient place to receive messages that we're
+        about to go be deleted but prior to any real tear-down.
+
+        Any overloading classes need to remember to pass the call up the chain.
+        """
+        pass
+    
     def create(self, heading: str, message: str = "") -> None:
         """
         Create and show a background progress dialog.
@@ -2655,7 +2863,7 @@ class DialogProgressBG:
 
         .. note::
             'heading' is used for the dialog's id. Use a unique heading.
-            Use `update()` to update heading, message and progressbar.
+            Use ``update()`` to update heading, message and progressbar.
 
         Example::
 
@@ -2723,8 +2931,12 @@ class ListItem:
     :param label: [opt] string
     :param label2: [opt] string
     :param path: [opt] string
-    **iconImage ** and**thumbnailImage ** are deprecated. Use**setArt()**.
-    Removed **iconImage** and **thumbnailImage**. Use **setArt()**.Example::
+
+    @python_v16 **iconImage** and **thumbnailImage** are deprecated. Use **setArt()**.
+
+    @python_v19 Removed **iconImage** and **thumbnailImage**. Use **setArt()**.
+
+    Example::
 
         ...
         listitem = xbmcgui.ListItem('Casino Royale')
@@ -2801,7 +3013,7 @@ class ListItem:
         """
         Sets the listitem's art
 
-        :param values: dictionary - pairs of``{ label: value }``.  Some default art values
+        :param values: dictionary - pairs of ``{ label: value }``. Some default art values
             (any string possible):
 
         ========= ======================= 
@@ -2817,7 +3029,11 @@ class ListItem:
         icon      string - image filename 
         ========= ======================= 
 
-          New function added.  Added new label **icon**.Example::
+        @python_v13 New function added.
+
+        @python_v16 Added new label **icon**.
+
+        Example::
 
             ...
             # setArt(values)
@@ -2832,7 +3048,7 @@ class ListItem:
 
         :param isFolder: bool - True=folder / False=not a folder (default).
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -2843,7 +3059,7 @@ class ListItem:
         """
         pass
     
-    def setUniqueIDs(self, dictionary: Dict[str, str],
+    def setUniqueIDs(self, dictionary: Dict[str,  str],
                      defaultrating: str = "") -> None:
         """
         Sets the listitem's uniqueID
@@ -2881,8 +3097,9 @@ class ListItem:
         :param type: string - the type of the rating. Any string.
         :param rating: float - the value of the rating.
         :param votes: int - the number of votes. Default 0.
-        :param defaultt: bool - is the default rating?. Default False.  Some example type (any
-            string possible):
+        :param defaultt: bool - is the default rating?. Default False.
+
+        Some example type (any string possible):
 
         ===== ==================== 
         Label Type                 
@@ -2909,7 +3126,7 @@ class ListItem:
         :param number: int - the number of the season.
         :param name: string - the name of the season. Default "".
 
-        New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -2924,7 +3141,9 @@ class ListItem:
         """
         Returns a listitem art path as a string, similar to an infolabel.
 
-        :param key: string - art name.  Some default art values (any string possible):
+        :param key: string - art name.
+
+        Some default art values (any string possible):
 
         ========= =================== 
         Label     Type                
@@ -2939,7 +3158,11 @@ class ListItem:
         icon      string - image path 
         ========= =================== 
 
-          New function added.Example::    ...
+        @python_v17 New function added.
+
+        Example::
+
+            ...
             poster = listitem.getArt('poster')
             ...
         """
@@ -2949,8 +3172,9 @@ class ListItem:
         """
         Returns a listitem uniqueID as a string, similar to an infolabel.
 
-        :param key: string - uniqueID name.  Some default uniqueID values (any string
-            possible):
+        :param key: string - uniqueID name.
+
+        Some default uniqueID values (any string possible):
 
         ===== ====================== 
         Label Type                   
@@ -2973,7 +3197,9 @@ class ListItem:
         """
         Returns a listitem rating as a float.
 
-        :param key: string - rating type.  Some default key values (any string possible):
+        :param key: string - rating type.
+
+        Some default key values (any string possible):
 
         ===== ================== 
         Label Type               
@@ -2996,7 +3222,9 @@ class ListItem:
         """
         Returns a listitem votes as a integer.
 
-        :param key: string - rating type.  Some default key values (any string possible):
+        :param key: string - rating type.
+
+        Some default key values (any string possible):
 
         ===== ================== 
         Label Type               
@@ -3051,7 +3279,8 @@ class ListItem:
 
         :param type: string - type of
         :param infoLabels: dictionary - pairs of``{ label: value }``
-        **Available types **
+
+        **Available types**
 
         ============ ==================== 
         Command name Description          
@@ -3065,13 +3294,13 @@ class ListItem:
         .. note::
             To set pictures exif info, prepend ``exif:`` to the label. Exif
             values must be passed as strings, separate value pairs with a
-            comma.**(eg.``{'exif:resolution': '720,480'}`` See
+            comma. (eg. ``{'exif:resolution': '720,480'}``. See
             kodi_pictures_infotag for valid strings.   You can use the above
             as keywords for arguments and skip certain optional arguments.
             Once you use a keyword, all following arguments require the
             keyword.
 
-        **General Values ** (that apply to all types):
+        **General Values** (that apply to all types):
 
         ========== ============================================================================ 
         Info label Description                                                                  
@@ -3081,11 +3310,11 @@ class ListItem:
         date       string (d.m.Y / 01.01.2009) - file date                                      
         ========== ============================================================================ 
 
-        **Video Values **:
+        **Video Values**:
 
-        ============= ===================================================================================================================== 
-        Info label    Description                                                                                                           
-        ============= ===================================================================================================================== 
+        ============= ==============================================================================
+        Info label    Description
+        ============= ==============================================================================
         genre         string (Comedy) or list of strings (["Comedy", "Animation", "Drama"])                                                 
         country       string (Germany) or list of strings (["Germany", "Italy", "France"])                                                  
         year          integer (2009)                                                                                                        
@@ -3094,7 +3323,8 @@ class ListItem:
         sortepisode   integer (4)                                                                                                           
         sortseason    integer (1)                                                                                                           
         episodeguide  string (Episode guide)                                                                                                
-        showlink      string (Battlestar Galactica) or list of strings (["Battlestar Galactica", "Caprica"])                                
+        showlink      string (Battlestar Galactica) or list of strings (["Battlestar Galactica",
+                      "Caprica"])
         top250        integer (192)                                                                                                         
         setid         integer (14)                                                                                                          
         tracknumber   integer (3)                                                                                                           
@@ -3103,9 +3333,11 @@ class ListItem:
         watched       depreciated - use playcount instead                                                                                   
         playcount     integer (2) - number of times this item has been played                                                               
         overlay       integer (2) - range is ``0..7``. See Overlay icon types for values                                                     
-        cast          list (["Michal C. Hall","Jennifer Carpenter"]) - if provided a list of tuples cast will be interpreted as castandrole 
+        cast          list (["Michal C. Hall","Jennifer Carpenter"]) - if provided a list of tuples
+                      cast will be interpreted as castandrole
         castandrole   list of tuples ([("Michael C. Hall","Dexter"),("Jennifer Carpenter","Debra")])                                        
-        director      string (Dagur Kari) or list of strings (["Dagur Kari", "Quentin Tarantino", "Chrstopher Nolan"])                      
+        director      string (Dagur Kari) or list of strings (["Dagur Kari", "Quentin Tarantino",
+                      "Chrstopher Nolan"])
         mpaa          string (PG-13)                                                                                                        
         plot          string (Long Description)                                                                                             
         plotoutline   string (Short Description)                                                                                            
@@ -3113,19 +3345,23 @@ class ListItem:
         originaltitle string (Big Fan)                                                                                                      
         sorttitle     string (Big Fan)                                                                                                      
         duration      integer (245) - duration in seconds                                                                                   
-        studio        string (Warner Bros.) or list of strings (["Warner Bros.", "Disney", "Paramount"])                                    
+        studio        string (Warner Bros.) or list of strings (["Warner Bros.", "Disney",
+                      "Paramount"])
         tagline       string (An awesome movie) - short description of movie                                                                
-        writer        string (Robert D. Siegel) or list of strings (["Robert D. Siegel", "Jonathan Nolan", "J.K. Rowling"])                 
+        writer        string (Robert D. Siegel) or list of strings (["Robert D. Siegel",
+                      "Jonathan Nolan", "J.K. Rowling"])
         tvshowtitle   string (Heroes)                                                                                                       
         premiered     string (2005-03-04)                                                                                                   
         status        string (Continuing) - status of a TVshow                                                                              
         set           string (Batman Collection) - name of the collection                                                                   
         setoverview   string (All Batman movies) - overview of the collection                                                               
-        tag           string (cult) or list of strings (["cult", "documentary", "best movies"]) - movie tag                                 
+        tag           string (cult) or list of strings (["cult", "documentary", "best movies"]) -
+                      movie tag
         imdbnumber    string (tt0110293) - IMDb code                                                                                        
         code          string (101) - Production code                                                                                        
         aired         string (2008-12-07)                                                                                                   
-        credits       string (Andy Kaufman) or list of strings (["Dagur Kari", "Quentin Tarantino", "Chrstopher Nolan"]) - writing credits  
+        credits       string (Andy Kaufman) or list of strings (["Dagur Kari", "Quentin Tarantino",
+                      "Chrstopher Nolan"]) - writing credits
         lastplayed    string (Y-m-d h:m:s = 2009-04-05 23:16:04)                                                                            
         album         string (The Joshua Tree)                                                                                              
         artist        list (['U2'])                                                                                                         
@@ -3134,14 +3370,15 @@ class ListItem:
         trailer       string (/home/user/trailer.avi)                                                                                       
         dateadded     string (Y-m-d h:m:s = 2009-04-05 23:16:04)                                                                            
         mediatype     string - "video", "movie", "tvshow", "season", "episode" or "musicvideo"                                              
-        dbid          integer (23) - Only add this for items which are part of the local db. You also need to set the correct 'mediatype'!  
-        ============= ===================================================================================================================== 
+        dbid          integer (23) - Only add this for items which are part of the local db.
+                      You also need to set the correct 'mediatype'!
+        ============= ==============================================================================
 
-        **Music Values **:
+        **Music Values**:
 
-        ======================== ==================================================================================================================== 
+        ======================== ===================================================================
         Info label               Description                                                                                                          
-        ======================== ==================================================================================================================== 
+        ======================== ===================================================================
         tracknumber              integer (8)                                                                                                          
         discnumber               integer (2)                                                                                                          
         duration                 integer (245) - duration in seconds                                                                                  
@@ -3156,14 +3393,15 @@ class ListItem:
         playcount                integer (2) - number of times this item has been played                                                              
         lastplayed               string (Y-m-d h:m:s = 2009-04-05 23:16:04)                                                                           
         mediatype                string - "music", "song", "album", "artist"                                                                          
-        dbid                     integer (23) - Only add this for items which are part of the local db. You also need to set the correct 'mediatype'! 
+        dbid                     integer (23) - Only add this for items which are part of
+                                 the local db. You also need to set the correct 'mediatype'!
         listeners                integer (25614)                                                                                                      
         musicbrainztrackid       string (cd1de9af-0b71-4503-9f96-9f5efe27923c)                                                                        
         musicbrainzartistid      string (d87e52c5-bb8d-4da8-b941-9f4928627dc8)                                                                        
         musicbrainzalbumid       string (24944755-2f68-3778-974e-f572a9e30108)                                                                        
         musicbrainzalbumartistid string (d87e52c5-bb8d-4da8-b941-9f4928627dc8)                                                                        
         comment                  string (This is a great song)                                                                                        
-        ======================== ==================================================================================================================== 
+        ======================== ===================================================================
 
         **Picture Values**:
 
@@ -3175,7 +3413,7 @@ class ListItem:
         exif*       string (See kodi_pictures_infotag for valid strings) 
         =========== ==================================================== 
 
-        **Game Values **:
+        **Game Values**:
 
         ========== ============================= 
         Info label Description                   
@@ -3190,15 +3428,19 @@ class ListItem:
         gameclient string (game.libretro.fceumm) 
         ========== ============================= 
 
-          Added new label**discnumber **.**duration ** has to be set in seconds.
-        Added new label**mediatype **.  Added
-        labels**setid **,**set **,**imdbnumber **,**code **,**dbid **
-        (video),**path ** and**userrating **. Expanded the possible infoLabels
-        for the option**mediatype **.  Added new**game ** type and associated
-        infolabels. Added labels**dbid ** (music),**setoverview **,**tag **,**sor
-        tepisode **,**sortseason **,**episodeguide **,**showlink **. Extended labe
-        ls**genre **,**country **,**director **,**studio **,**writer **,**tag **,**c
-        redits** to also use a list of strings.Example::
+        @python_v14 Added new label **discnumber**.
+
+        @python_v15 **duration ** has to be set in seconds.
+        @python_v16 Added new label **mediatype**.
+        @python_v17 Added labels **setid **, **set**, **imdbnumber**, **code**, **dbid** (video),
+        **path** and **userrating**. Expanded the possible infoLabels for the option **mediatype**.
+
+        @python_v18 Added new **game** type and associated infolabels. Added
+        labels **dbid** (music), **setoverview**, **tag**, **sortepisode**, **sortseason**,
+        **episodeguide**, **showlink**. Extended labels **genre**, **country**, **director**,
+        **studio**, **writer**, **tag**, **credits** to also use a list of strings.
+
+        Example::
 
             ...
             listitem.setInfo('video', { 'genre': 'Comedy' })
@@ -3223,7 +3465,9 @@ class ListItem:
         order     integer (1)                                   
         ========= ============================================= 
 
-          New function added.Example::
+        @python_v17 New function added.
+
+        Example::
 
             ...
             actors = [{"name": "Actor 1", "role": "role 1"}, {"name": "Actor 2", "role": "role 2"}]
@@ -3232,7 +3476,7 @@ class ListItem:
         """
         pass
     
-    def setAvailableFanart(self, images: List[Dict[str, str]]) -> None:
+    def setAvailableFanart(self, images: List[Dict[str,  str]]) -> None:
         """
         Set available images (needed for video scrapers)
 
@@ -3244,12 +3488,13 @@ class ListItem:
         Label   Description                                                
         ======= ========================================================== 
         image   string (http://www.someurl.com/someimage.png)              
-        preview [opt] string (http://www.someurl.com/somepreviewimage.png) 
-        ======= ========================================================== 
+        preview [opt] string (http://www.someurl.com/somepreviewimage.png)
+        colors  [opt] string (either comma separated Kodi hex values
+                ("FFFFFFFF,DDDDDDDD") or TVDB RGB Int Triplets
+                ("|68,69,59|69,70,58|78,78,68|"))
+        ======= ==========================================================
 
-        | colors | [opt] string (either comma separated Kodi hex values
-        ("FFFFFFFF,DDDDDDDD") or TVDB RGB Int Triplets
-        ("|68,69,59|69,70,58|78,78,68|"))  New function added.
+        @python_v18 New function added.
 
         Example::
 
@@ -3279,7 +3524,12 @@ class ListItem:
         :param post: [opt] bool (use post to retrieve the image, default false)
         :param isgz: [opt] bool (use gzip to retrieve the image, default false)
         :param season: [opt] integer (number of season in case of season thumb)
-          New function added.  New param added (preview).Example::
+
+        @python_v18 New function added.
+
+        @python_v19 New param added (preview).
+
+        Example::
 
             ...
             listitem.addAvailableArtwork(path_to_image_1, "thumb")
@@ -3287,7 +3537,7 @@ class ListItem:
         """
         pass
     
-    def addStreamInfo(self, cType: str, dictionary: Dict[str, str]) -> None:
+    def addStreamInfo(self, cType: str, dictionary: Dict[str,  str]) -> None:
         """
         Add a stream with details.
 
@@ -3339,17 +3589,19 @@ class ListItem:
 
         :param items: list - [(label, action),*] A list of tuples consisting of label and
             action pairs.  label string or unicode - item's label.action
-            string or unicode - any available `built-in function` .
+            string or unicode - any available built-in function.
 
         .. note::
             You can use the above as keywords for arguments and skip certain
             optional arguments.  Once you use a keyword, all following
             arguments require the keyword.
 
-          Completely removed previously available argument **replaceItems**.Example::
+        @python_v17 Completely removed previously available argument **replaceItems**.
+
+        Example::
 
             ...
-            listitem.addContextMenuItems([('Theater Showtimes', 'RunScript(special://home/scripts/showtimes/default.py,Iron Man)')])
+            listitem.addContextMenuItems([('Theater Showtimes', 'RunScript(script.myaddon,title=Iron Man)')])
             ...
         """
         pass
@@ -3364,11 +3616,31 @@ class ListItem:
         .. note::
             Key is NOT case sensitive.  You can use the above as keywords for
             arguments and skip certain optional arguments.  Once you use a
-            keyword, all following arguments require the keyword.   Some of
+            keyword, all following arguments require the keyword. Some of
             these are treated internally by Kodi, such as the 'StartOffset'
             property, which is the offset in seconds at which to start
             playback of an item. Others may be used in the skin to add extra
             information, such as 'WatchedCount' for tvshow items
+
+        **Internal Properties**
+
+        ============ ===============================================================================
+        Key          Description                                                                                                                
+        ============ ===============================================================================
+        inputstream  string (inputstream.adaptive) - Set the inputstream add-on that will be used
+                     to play the item
+        IsPlayable   string - "true", "false" - Mark the item as playable,
+                     **mandatory for playable items**
+        MimeType     string (application/x-mpegURL) - Set the MimeType of the item before playback                                              
+        ResumeTime   float (1962.0) - Set the resume point of the item in seconds                                                               
+        SpecialSort  string - "top", "bottom" - The item will remain at the top or bottom of
+                     the current list
+        StartOffset  float (60.0) - Set the offset in seconds at which to start playback of the item                                            
+        StartPercent float (15.0) - Set the percentage at which to start playback of the item                                                   
+        StationName  string ("My Station Name") - Used to enforce/override MusicPlayer.StationName
+                     infolabel from addons (e.g. in radio addons)
+        TotalTime    float (7848.0) - Set the total time of the item in seconds                                                                 
+        ============ ===============================================================================
 
         Example::
 
@@ -3383,9 +3655,13 @@ class ListItem:
         """
         Sets multiple properties for listitem's
 
-        :param values: dictionary - pairs of``{ label: value }``.
+        :param values: dictionary - pairs of ``{ label: value }``.
 
-        New function added.Example::    ...
+        @python_v18 New function added.
+
+        Example::
+
+            ...
             # setProperties(values)
             listitem.setProperties({ 'AspectRatio': '1.85', 'StartOffset' : '256.4' })
             ...
@@ -3446,7 +3722,8 @@ class ListItem:
         If disabled, HEAD requests to e.g determine mime type will not be sent.
 
         :param enable: bool to enable content lookup
-          New function added.
+
+        @python_v16 New function added.
         """
         pass
     
@@ -3461,7 +3738,8 @@ class ListItem:
             ...
             listitem.setSubtitles(['special://temp/example.srt', 'http://example.com/example.srt'])
             ...
-          New function added.
+
+        @python_v14 New function added.
         """
         pass
     
@@ -3471,29 +3749,29 @@ class ListItem:
 
         :return: [string] filename
 
-          New function added.
+        @python_v17 New function added.
         """
         return ""
     
-    def getVideoInfoTag(self) -> _xbmc.InfoTagVideo:
+    def getVideoInfoTag(self) -> InfoTagVideo:
         """
         Returns the VideoInfoTag for this item.
 
         :return: video info tag
 
-          New function added.
+        @python_v15 New function added.
         """
-        return _xbmc.InfoTagVideo()
+        return InfoTagVideo()
     
-    def getMusicInfoTag(self) -> _xbmc.InfoTagMusic:
+    def getMusicInfoTag(self) -> InfoTagMusic:
         """
         Returns the MusicInfoTag for this item.
 
         :return: music info tag
 
-          New function added.
+        @python_v15 New function added.
         """
-        return _xbmc.InfoTagMusic()
+        return InfoTagMusic()
     
 
 class Action:
@@ -3503,7 +3781,7 @@ class Action:
     This class serves in addition to identify carried out kodi_key_action_ids of
     Kodi and to be able to carry out thereby own necessary steps.
 
-    The data of this class are always transmitted by callback `Window::onAction` at a
+    The data of this class are always transmitted by callback ``Window::onAction`` at a
     window.
     """
     
@@ -3523,7 +3801,7 @@ class Action:
 
             ..
             def onAction(self, action):
-              if action.getId() == ACTION_PREVIOUS_MENU:
+                if action.getId() == ACTION_PREVIOUS_MENU:
                 print('action received: previous')
             ..
         """
@@ -3565,9 +3843,7 @@ class Window:
     classes `WindowDialog`,`WindowXML` and `WindowXMLDialog` with inserted and
     available.
 
-    Constructor for windowConstructor for window
-
-    Creates a new from Add-On usable window class. This is to create window for
+    Constructor for windowCreates a new from Add-On usable window class. This is to create window for
     related controls by system calls.
 
     :param existingWindowId: [opt] Specify an id to use an existing window.
@@ -3575,7 +3851,9 @@ class Window:
     :raises Exception: if more then 200 windows are created.
 
     Deleting this window will activate the old window that was active and
-    resets (not delete) all controls that are associated with this window.Example::
+    resets (not delete) all controls that are associated with this window.
+
+    Example::
 
         ..
         win = xbmcgui.Window()
@@ -3590,12 +3868,12 @@ class Window:
         """
         Show this window.
 
-        Shows this window by activating it, calling `close()` after it wil activate the
+        Shows this window by activating it, calling ``close()`` after it wil activate the
         current window again.
 
         .. note::
             If your script ends this window will be closed to. To show it
-            forever, make a loop at the end of your script or use `doModal()`
+            forever, make a loop at the end of your script or use ``doModal()``
             instead.
         """
         pass
@@ -3647,7 +3925,7 @@ class Window:
         """
         Removes the control from this window.
 
-        :param `Control`: `Control` class to remove
+        :param Control: `Control` class to remove
         :raises TypeError: If supplied argument is not a `Control` type
         :raises RuntimeError: If control is not added to this window
 
@@ -3659,7 +3937,7 @@ class Window:
         """
         Removes a list of controls from this window.
 
-        :param `List`: `List` with controls to remove
+        :param List: List with controls to remove
         :raises TypeError: If supplied argument is not a `Control` type
         :raises RuntimeError: If control is not added to this window
 
@@ -3672,7 +3950,9 @@ class Window:
         """
         Returns the height of this `Window` instance.
 
-        :return: `Window` height in pixels  Function changed
+        :return: `Window` height in pixels
+
+        @python_v18 Function changed
         """
         return 0
     
@@ -3680,7 +3960,9 @@ class Window:
         """
         Returns the width of this `Window` instance.
 
-        :return: `Window` width in pixels  Function changed
+        :return: `Window` width in pixels
+
+        @python_v18 Function changed
         """
         return 0
     
@@ -3788,24 +4070,27 @@ class Window:
 
         The next controls can be added to a window atm
 
-        ==================== =============================================================================================== 
+        ==================== =======================================================================
         Control-class        Description                                                                                     
-        ==================== =============================================================================================== 
+        ==================== =======================================================================
         `ControlLabel`       Label control to show text                                                                      
         `ControlFadeLabel`   The fadelabel has multiple labels which it cycles through                                       
         `ControlTextBox`     To show bigger text field                                                                       
         `ControlButton`      Brings a button to do some actions                                                              
         `ControlEdit`        The edit control allows a user to input text in Kodi                                            
-        `ControlFadeLabel`   The fade label control is used for displaying multiple pieces of text in the same space in Kodi 
+        `ControlFadeLabel`   The fade label control is used for displaying multiple pieces of text
+                             in the same space in Kodi
         `ControlList`        Add a list for something like files                                                             
         `ControlGroup`       Is for a group which brings the others together                                                 
         `ControlImage`       Controls a image on skin                                                                        
         `ControlRadioButton` For a radio button which handle boolean values                                                  
         `ControlProgress`    Progress bar for a performed work or something else                                             
-        `ControlSlider`      The slider control is used for things where a sliding bar best represents the operation at hand 
+        `ControlSlider`      The slider control is used for things where a sliding bar best
+                             represents the operation at hand
         `ControlSpin`        The spin control is used for when a list of options can be chosen                               
-        `ControlTextBox`     The text box is used for showing a large multipage piece of text in Kodi                        
-        ==================== ===============================================================================================
+        `ControlTextBox`     The text box is used for showing a large multipage piece of
+                             text in Kodi
+        ==================== =======================================================================
         """
         pass
     
@@ -3813,8 +4098,8 @@ class Window:
         """
         Add a list of Controls to this window.
 
-        :param `List`: `List` with controls to add
-        :raises TypeError: If supplied argument is not of `List` type, or a control is not
+        :param List: List with controls to add
+        :raises TypeError: If supplied argument is not of `list` type, or a control is not
             of `Control` type
         :raises ReferenceError: If control is already used in another window
         :raises RuntimeError: Should not happen :-)
@@ -3848,9 +4133,9 @@ class Window:
         :param action: The action id to perform, see `Action` to get use of them
 
         .. note::
-              By default, only the ``PREVIOUS_MENU`` and ``NAV_BACK actions``
-            are handled.Overwrite this method to let your script handle all
-            actions.Don't forget to capture ``ACTION_PREVIOUS_MENU``
+            By default, only the ``PREVIOUS_MENU`` and ``NAV_BACK`` actions are
+            handled. Overwrite this method to let your script handle all
+            actions. Don't forget to capture ``ACTION_PREVIOUS_MENU``
             or ``ACTION_NAV_BACK``, else the user can't close this window.
 
         Example::
@@ -3858,15 +4143,15 @@ class Window:
             ..
             # Define own function where becomes called from Kodi
             def onAction(self, action):
-              if action.getId() == ACTION_PREVIOUS_MENU:
-                print('action received: previous')
-                self.close()
-              if action.getId() == ACTION_SHOW_INFO:
-                print('action received: show info')
-              if action.getId() == ACTION_STOP:
-                print('action received: stop')
-              if action.getId() == ACTION_PAUSE:
-                print('action received: pause')
+            if action.getId() == ACTION_PREVIOUS_MENU:
+            print('action received: previous')
+            self.close()
+            if action.getId() == ACTION_SHOW_INFO:
+            print('action received: show info')
+            if action.getId() == ACTION_STOP:
+            print('action received: stop')
+            if action.getId() == ACTION_PAUSE:
+            print('action received: pause')
             ..
         """
         pass
@@ -3886,7 +4171,7 @@ class Window:
             ..
             # Define own function where becomes called from Kodi
             def onControl(self, control):
-              print("Window.onControl(control=[%s])"%control)
+                print("Window.onControl(control=[%s])"%control)
             ..
         """
         pass
@@ -3906,8 +4191,8 @@ class Window:
             ..
             # Define own function where becomes called from Kodi
             def onClick(self,controlId):
-              if controlId == 10:
-                print("The control with Id 10 is clicked")
+                if controlId == 10:
+                    print("The control with Id 10 is clicked")
             ..
         """
         pass
@@ -3927,8 +4212,8 @@ class Window:
             ..
             # Define own function where becomes called from Kodi
             def onDoubleClick(self,controlId):
-              if controlId == 10:
-                print("The control with Id 10 is double clicked")
+                if controlId == 10:
+                    print("The control with Id 10 is double clicked")
             ..
         """
         pass
@@ -3947,9 +4232,9 @@ class Window:
 
             ..
             # Define own function where becomes called from Kodi
-             def onDoubleClick(self,controlId):
-               if controlId == 10:
-                 print("The control with Id 10 is focused")
+            def onDoubleClick(self,controlId):
+                if controlId == 10:
+                    print("The control with Id 10 is focused")
             ..
         """
         pass
@@ -3967,7 +4252,7 @@ class Window:
             ..
             # Define own function where becomes called from Kodi
             def onInit(self):
-              print("Window.onInit method called from Kodi")
+                print("Window.onInit method called from Kodi")
             ..
         """
         pass
@@ -3985,7 +4270,9 @@ class WindowDialog(Window):
     :raises Exception: if more then 200 windows are created.
 
     Deleting this window will activate the old window that was active and
-    resets (not delete) all controls that are associated with this window.Example::
+    resets (not delete) all controls that are associated with this window.
+
+    Example::
 
         ..
         dialog = xbmcgui.WindowDialog()
@@ -4008,8 +4295,7 @@ class WindowXML(Window):
 
     :param xmlFilename: string - the name of the xml file to look for.
     :param scriptPath: string - path to script. used to fallback to if the xml doesn't exist
-        in the current skin. (eg
-        xbmcaddon.Addon().getAddonInfo('path').decode('utf-8'))
+        in the current skin. (eg xbmcaddon.Addon().getAddonInfo('path'))
     :param defaultSkin: [opt] string - name of the folder in the skins path to look in for the
         xml. (default='Default')
     :param defaultRes: [opt] string - default skins resolution. (1080i, 720p, ntsc16x9, ntsc,
@@ -4018,28 +4304,34 @@ class WindowXML(Window):
         mediawindow. (default=False)
     :raises Exception: if more then 200 windows are created.
 
-    Skin folder structure is e.g.**resources/skins/Default/720p **
+    Skin folder structure is e.g. **resources/skins/Default/720p**
 
     Deleting this window will activate the old window that was active and
     resets (not delete) all controls that are associated with this window.
-    New param added**isMedia **.Example::
+
+    @python_v18 New param added **isMedia**.
+
+    Example::
 
         ..
-        win = xbmcgui.WindowXML('script-Lyrics-main.xml', xbmcaddon.Addon().getAddonInfo('path').decode('utf-8'), 'default', '1080i', False)
+        win = xbmcgui.WindowXML('script-Lyrics-main.xml', xbmcaddon.Addon().getAddonInfo('path'), 'default', '1080i', False)
         win.doModal()
         del win
         ..
+
     On functions defined input variable ``controlId`` (GUI control identifier)** is
     the on window.xml defined value behind type added with ``id="..."`` and used
     to identify for changes there and on callbacks.
 
+    .. code-block:: xml
+
         <control type="label" id="31">
-          <description>Title Label</description>
-          ...
+        <description>Title Label</description>
+        ...
         </control>
         <control type="progress" id="32">
-          <description>progress control</description>
-          ...
+        <description>progress control</description>
+        ...
         </control>
     """
     
@@ -4050,17 +4342,18 @@ class WindowXML(Window):
                  isMedia: bool = False) -> None:
         pass
     
-    def addItem(self, item: Union[str, ListItem],
-                position: int = INT_MAX) -> None:
+    def addItem(self, item: Union[str,  ListItem],
+                position: int = 2147483647) -> None:
         """
         Add a new item to this `Window ``List`.
 
         :param item: string, unicode or `ListItem` - item to add.
-        :param position: [opt] integer - position of item to add. (NO Int = Adds to bottom,0
-            adds to top, 1 adds to one below from top,-1 adds to one above
+        :param position: [opt] integer - position of item to add. (NO Int = Adds to bottom,
+            0 adds to top, 1 adds to one below from top,-1 adds to one above
             from bottom etc etc )  If integer positions are greater than list
             size, negative positions will add to top of list, positive
             positions will add to bottom of list
+
         Example::
 
             ..
@@ -4069,7 +4362,7 @@ class WindowXML(Window):
         """
         pass
     
-    def addItems(self, items: List[Union[str, ListItem]]) -> None:
+    def addItems(self, items: List[Union[str,  ListItem]]) -> None:
         """
         Add a list of items to to the window list.
 
@@ -4099,7 +4392,7 @@ class WindowXML(Window):
     
     def getCurrentListPosition(self) -> int:
         """
-        Gets the current position in the `Window ``List`.
+        Gets the current position in the `Window` List.
 
         Example::
 
@@ -4111,7 +4404,7 @@ class WindowXML(Window):
     
     def setCurrentListPosition(self, position: int) -> None:
         """
-        Set the current position in the `Window ``List`.
+        Set the current position in the `Window` List.
 
         :param position: integer - position of item to set.
 
@@ -4125,7 +4418,7 @@ class WindowXML(Window):
     
     def getListItem(self, position: int) -> ListItem:
         """
-        Returns a given `ListItem` in this `Window ``List`.
+        Returns a given `ListItem` in this `Window` List.
 
         :param position: integer - position of item to return.
 
@@ -4139,7 +4432,7 @@ class WindowXML(Window):
     
     def getListSize(self) -> int:
         """
-        Returns the number of items in this `Window ``List`.
+        Returns the number of items in this `Window` List.
 
         Example::
 
@@ -4151,7 +4444,7 @@ class WindowXML(Window):
     
     def clearList(self) -> None:
         """
-        Clear the `Window ``List`.
+        Clear the `Window` List.
 
         Example::
 
@@ -4169,11 +4462,13 @@ class WindowXML(Window):
         :param value: string or unicode - value of property.
 
         .. note::
-            Key is NOT case sensitive.  You can use the above as keywords for
-            arguments and skip certain optional arguments.  Once you use a
+            Key is NOT case sensitive. You can use the above as keywords for
+            arguments and skip certain optional arguments. Once you use a
             keyword, all following arguments require the keyword.
 
-          Changed function from **setProperty** to **setContainerProperty**.Example::
+        @python_v17 Changed function from **setProperty** to **setContainerProperty**.
+
+        Example::
 
             ..
             self.setContainerProperty('Category', 'Newest')
@@ -4186,6 +4481,7 @@ class WindowXML(Window):
         Sets the content type of the container.
 
         :param value: string or unicode - content value.
+
         **Available content types**
 
         =========== ========================================= 
@@ -4215,7 +4511,9 @@ class WindowXML(Window):
         years       Music, Videos                             
         =========== ========================================= 
 
-          Added new function.Example::
+        @python_v18 Added new function.
+
+        Example::
 
             ..
             self.setContent('movies')
@@ -4227,7 +4525,7 @@ class WindowXML(Window):
         """
         Get the id of the currently visible container.
 
-          Added new function.
+        @python_v17 Added new function.
 
         Example::
 
@@ -4240,14 +4538,13 @@ class WindowXML(Window):
 
 class WindowXMLDialog(WindowXML):
     """
-    **GUI xml window dialog **
+    **GUI xml window dialog**
 
     Creates a new xml file based window dialog class.
 
     :param xmlFilename: string - the name of the xml file to look for.
     :param scriptPath: string - path to script. used to fallback to if the xml doesn't exist
-        in the current skin.
-        (eg `xbmcaddon.Addon().getAddonInfo('path').decode('utf-8'))`
+        in the current skin. (eg xbmcaddon.Addon().getAddonInfo('path'))
     :param defaultSkin: [opt] string - name of the folder in the skins path to look in for the
         xml. (default='Default')
     :param defaultRes: [opt] string - default skins resolution. (1080i, 720p, ntsc16x9, ntsc,
@@ -4255,26 +4552,29 @@ class WindowXMLDialog(WindowXML):
     :raises Exception: if more then 200 windows are created.
 
     .. note::
-        Skin folder structure is e.g.**resources/skins/Default/720p **
+        Skin folder structure is e.g. **resources/skins/Default/720p**
 
     Example::
 
         ..
-        dialog = xbmcgui.WindowXMLDialog('script-Lyrics-main.xml', xbmcaddon.Addon().getAddonInfo('path').decode('utf-8'), 'default', '1080i')
+        dialog = xbmcgui.WindowXMLDialog('script-Lyrics-main.xml', xbmcaddon.Addon().getAddonInfo('path'), 'default', '1080i')
         dialog.doModal()
         del dialog
         ..
+
     On functions defined input variable ``controlId`` (GUI control identifier)** is
     the on window.xml defined value behind type added with ``id="..."`` and used
     to identify for changes there and on callbacks.
 
+    .. code-block:: xml
+
         <control type="label" id="31">
-          <description>Title Label</description>
-          ...
+        <description>Title Label</description>
+        ...
         </control>
         <control type="progress" id="32">
-          <description>progress control</description>
-          ...
+        <description>progress control</description>
+        ...
         </control>
     """
     
@@ -4283,8 +4583,6 @@ class WindowXMLDialog(WindowXML):
                  defaultSkin: str = "Default",
                  defaultRes: str = "720p") -> None:
         pass
-    
-
 
 
 def getCurrentWindowId() -> int:
@@ -4321,7 +4619,9 @@ def getScreenHeight() -> int:
     """
     Returns the height of this screen.
 
-    :return: Screen height  New function added.
+    :return: Screen height
+
+    @python_v18 New function added.
     """
     return 0
 
@@ -4330,6 +4630,8 @@ def getScreenWidth() -> int:
     """
     Returns the width of this screen.
 
-    :return: Screen width  New function added.
+    :return: Screen width
+
+    @python_v18 New function added.
     """
     return 0

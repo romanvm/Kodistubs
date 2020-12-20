@@ -17,6 +17,7 @@ setup(
         'xbmc', 'xbmcaddon', 'xbmcgui', 'xbmcplugin', 'xbmcvfs', 'xbmcdrm'
     ],
     zip_safe=False,
+    python_requires='>=3.6',
     description='Stub modules that re-create Kodi Python API',
     long_description=long_descr,
     author=AUTHOR,  # The new Kodistubs have been generated from scratch

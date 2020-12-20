@@ -1,4 +1,3 @@
-# coding: utf-8
 # This file is generated from Kodi source code and post-edited
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
@@ -27,15 +26,20 @@ class File:
     w    Open for write 
     ==== ============== 
 
-      Added context manager supportExample::    ..
+    @python_v19 Added context manager support
+
+    Example::
+
+        ..
         f = xbmcvfs.File(file, 'w')
         ..
-    **Example (v19 and up):**
+
+    Example (v19 and up)::
 
         ..
         with xbmcvfs.File(file, 'w') as f:
-          ..
-        ..
+            ..
+            ..
     """
     
     def __init__(self, filepath: str, mode: Optional[str] = None) -> None:
@@ -55,12 +59,13 @@ class File:
             b = f.read()
             f.close()
             ..
-        **Example (v19 and up):**
+
+        Example (v19 and up)::
 
             ..
             with xbmcvfs.File(file) as file:
-              b = f.read()
-            ..
+                b = f.read()
+                ..
         """
         return ""
     
@@ -78,16 +83,17 @@ class File:
             b = f.readBytes()
             f.close()
             ..
-        **Example (v19 and up):**
+
+        Example (v19 and up)::
 
             ..
             with xbmcvfs.File(file) as f:
-              b = f.readBytes()
-            ..
+                b = f.readBytes()
+                ..
         """
         return bytearray()
     
-    def write(self, buffer: Union[str, bytearray]) -> bool:
+    def write(self, buffer: Union[str,  bytes,  bytearray]) -> bool:
         """
         To write given data in file.
 
@@ -101,12 +107,13 @@ class File:
             result = f.write(buffer)
             f.close()
             ..
-        **Example (v19 and up):**
+
+        Example (v19 and up)::
 
             ..
-            whith xbmcvfs.File(file, 'w') as f:
-              result = f.write(buffer)
-            ..
+            with xbmcvfs.File(file, 'w') as f:
+                result = f.write(buffer)
+                ..
         """
         return True
     
@@ -123,12 +130,13 @@ class File:
             s = f.size()
             f.close()
             ..
-        **Example (v19 and up):**
+
+        Example (v19 and up)::
 
             ..
             with xbmcvfs.File(file) as f:
-              s = f.size()
-            ..
+                s = f.size()
+                ..
         """
         return 0
     
@@ -139,19 +147,23 @@ class File:
         :param seekBytes: position in the file
         :param iWhence: [opt] where in a file to seek from[0 beginning, 1 current , 2 end
             position]
-          Function changed. param **iWhence** is now optional.Example::
+
+        @python_v19 Function changed. param **iWhence** is now optional.
+
+        Example::
 
             ..
             f = xbmcvfs.File(file)
             result = f.seek(8129, 0)
             f.close()
             ..
-        **Example (v19 and up):**
+
+        Example (v19 and up)::
 
             ..
             with xbmcvfs.File(file) as f:
-              result = f.seek(8129, 0)
-            ..
+                result = f.seek(8129, 0)
+                ..
         """
         return 0
     
@@ -161,19 +173,22 @@ class File:
 
         :return: The file position
 
-          New function addedExample::
+        @python_v19 New function added
+
+        Example::
 
             ..
             f = xbmcvfs.File(file)
             s = f.tell()
             f.close()
             ..
-        **Example (v19 and up):**
+
+        Example (v19 and up)::
 
             ..
             with xbmcvfs.File(file) as f:
-              s = f.tell()
-            ..
+                s = f.tell()
+                ..
         """
         return 0
     
@@ -187,12 +202,13 @@ class File:
             f = xbmcvfs.File(file)
             f.close()
             ..
-        **Example (v19 and up):**
+
+        Example (v19 and up)::
 
             ..
             with xbmcvfs.File(file) as f:
-              ..
-            ..
+                ..
+                ..
         """
         pass
     
@@ -205,11 +221,14 @@ class Stat:
     required on all of the directories in path that lead to the file.
 
     :param path: [string] file or folder
-      New function addedExample::
+
+    @python_v12 New function added
+
+    Example::
 
         ..
-          st = xbmcvfs.Stat(path)
-          modified = st.st_mtime()
+        st = xbmcvfs.Stat(path)
+        modified = st.st_mtime()
         ..
     """
     
@@ -271,8 +290,8 @@ class Stat:
         To get total size, in bytes.
 
         The st_size field gives the size of the file (if it is a regular file or a
-        symbolic link) in bytes. The size of a symbolic link (only on Linux and Mac OS
-        X) is the length of the pathname it contains, without a terminating null byte.
+        symbolic link) in bytes. The size of a symbolic link (only on Linux and Mac OS X)
+        is the length of the pathname it contains, without a terminating null byte.
 
         :return: st_size
         """
@@ -372,6 +391,81 @@ def exists(path: str) -> bool:
         ..
     """
     return True
+
+
+def makeLegalFilename(filename: str) -> str:
+    """
+    Returns a legal filename or path as a string.
+
+    :param filename: string - filename/path to make legal
+    :return: Legal filename or path as a string
+
+    .. note::
+        The returned value is platform-specific. This is due to the fact
+        that the chars that need to be replaced to make a path legal
+        depend on the underlying OS filesystem. This is useful, for
+        example, if you want to create a file or folder based on data over
+        which you have no control (e.g. an external API).
+
+    @python_v19 New function added (replaces old **xbmc.makeLegalFilename**)
+
+    Example::
+
+        ..
+        # windows
+        >> xbmcvfs.makeLegalFilename('C://Trailers/Ice Age: The Meltdown.avi')
+        C:\Trailers\Ice Age_ The Meltdown.avi
+        # non-windows
+        >> xbmcvfs.makeLegalFilename("///\\jk???lj????.mpg")
+        /jk___lj____.mpg
+        ..
+    """
+    return ""
+
+
+def translatePath(path: str) -> str:
+    """
+    Returns the translated path.
+
+    :param path: string - Path to format
+    :return: Translated path
+
+    .. note::
+        Only useful if you are coding for both Linux and Windows. e.g.
+        Converts 'special://home' -> '/home/[username]/.kodi' on Linux.
+
+    @python_v19 New function added (replaces old **xbmc.translatePath**)
+
+    Example::
+
+        ..
+        fpath = xbmcvfs.translatePath('special://home')
+        ..
+    """
+    return ""
+
+
+def validatePath(path: str) -> str:
+    """
+    Returns the validated path.
+
+    :param path: string - Path to format
+    :return: Validated path
+
+    .. note::
+        The result is platform-specific. Only useful if you are coding for
+        multiple platfforms for fixing slash problems (e.g. Corrects
+        'Z://something' -> 'Z:\something').
+
+    @python_v19 New function added (replaces old **xbmc.validatePath**)
+
+    Example::
+
+        ..
+        fpath = xbmcvfs.validatePath(somepath)
+        ..
+    """
+    return ""
 
 
 def mkdir(path: str) -> bool:
