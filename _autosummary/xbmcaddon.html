@@ -1,0 +1,494 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xbmcaddon &#8212; Kodistubs  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="xbmcdrm" href="xbmcdrm.html" />
+    <link rel="prev" title="xbmc" href="xbmc.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-xbmcaddon">
+<span id="xbmcaddon"></span><h1>xbmcaddon<a class="headerlink" href="#module-xbmcaddon" title="Permalink to this headline">¶</a></h1>
+<p><strong>Kodi’s addon class</strong></p>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#xbmcaddon.Addon" title="xbmcaddon.Addon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Addon</span></code></a>(id)</p></td>
+<td><p><strong>Kodi’s addon class.</strong></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="xbmcaddon.Addon">
+<em class="property">class </em><code class="sig-prename descclassname">xbmcaddon.</code><code class="sig-name descname">Addon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xbmcaddon.html#Addon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p><strong>Kodi’s addon class.</strong></p>
+<p>Offers classes and functions that manipulate the add-on settings, information
+and localization.</p>
+<p>Creates a new AddOn class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – [opt] string - id of the addon as specified inaddon.xml</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Specifying the addon id is not needed.  Important however is that
+the addon folder has the same name as the AddOn id provided
+inaddon.xml.  You can optionally specify the addon id from another
+installed addon to retrieve settings from it.</p>
+</div>
+<p>&#64;python_v13 <strong>id</strong> is optional as it will be auto detected for this
+add-on instance.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span> <span class="o">=</span> <span class="n">xbmcaddon</span><span class="o">.</span><span class="n">Addon</span><span class="p">()</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span> <span class="o">=</span> <span class="n">xbmcaddon</span><span class="o">.</span><span class="n">Addon</span><span class="p">(</span><span class="s1">&#39;script.foo.bar&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="xbmcaddon.Addon.getLocalizedString">
+<code class="sig-name descname">getLocalizedString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.getLocalizedString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.getLocalizedString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an addon’s localized ‘string’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – integer - id# for string you want to localize.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Localized ‘string’</p>
+</dd>
+</dl>
+<p>&#64;python_v13 <strong>id</strong> is optional as it will be auto detected for this
+add-on instance.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="n">locstr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">getLocalizedString</span><span class="p">(</span><span class="mi">32000</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.getSetting">
+<code class="sig-name descname">getSetting</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.getSetting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.getSetting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of a setting as string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – string - id of the setting that the module needs to access.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Setting as a string</p>
+</dd>
+</dl>
+<p>&#64;python_v13 <strong>id</strong> is optional as it will be auto detected for this
+add-on instance.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="n">apikey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">getSetting</span><span class="p">(</span><span class="s1">&#39;apikey&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.getSettingBool">
+<code class="sig-name descname">getSettingBool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.getSettingBool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.getSettingBool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of a setting as a boolean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – string - id of the setting that the module needs to access.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Setting as a boolean</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">getSettingBool</span><span class="p">(</span><span class="s1">&#39;enabled&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.getSettingInt">
+<code class="sig-name descname">getSettingInt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#int" title="(in Python v3.8)">int</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.getSettingInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.getSettingInt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of a setting as an integer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – string - id of the setting that the module needs to access.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Setting as an integer</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="nb">max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">getSettingInt</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.getSettingNumber">
+<code class="sig-name descname">getSettingNumber</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)">float</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.getSettingNumber"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.getSettingNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of a setting as a floating point number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – string - id of the setting that the module needs to access.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Setting as a floating point number</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="nb">max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">getSettingNumber</span><span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.getSettingString">
+<code class="sig-name descname">getSettingString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.getSettingString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.getSettingString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of a setting as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – string - id of the setting that the module needs to access.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Setting as a string</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="n">apikey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">getSettingString</span><span class="p">(</span><span class="s1">&#39;apikey&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.setSetting">
+<code class="sig-name descname">setSetting</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/constants.html#None" title="(in Python v3.8)">None</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.setSetting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.setSetting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a script setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – string - id of the setting that the module needs to access.</p></li>
+<li><p><strong>value</strong> – string - value of the setting.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the above as keywords for arguments.</p>
+</div>
+<p>&#64;python_v13 <strong>id</strong> is optional as it will be auto detected for this
+add-on instance.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">setSetting</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;teamkodi&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.setSettingBool">
+<code class="sig-name descname">setSettingBool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/functions.html#bool" title="(in Python v3.8)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.setSettingBool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.setSettingBool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a script setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – string - id of the setting that the module needs to access.</p></li>
+<li><p><strong>value</strong> – boolean - value of the setting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the value of the setting was set, false otherwise</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the above as keywords for arguments.</p>
+</div>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">setSettingBool</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;enabled&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.setSettingInt">
+<code class="sig-name descname">setSettingInt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.setSettingInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.setSettingInt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a script setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – string - id of the setting that the module needs to access.</p></li>
+<li><p><strong>value</strong> – integer - value of the setting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the value of the setting was set, false otherwise</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the above as keywords for arguments.</p>
+</div>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">setSettingInt</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.setSettingNumber">
+<code class="sig-name descname">setSettingNumber</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.setSettingNumber"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.setSettingNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a script setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – string - id of the setting that the module needs to access.</p></li>
+<li><p><strong>value</strong> – float - value of the setting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the value of the setting was set, false otherwise</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the above as keywords for arguments.</p>
+</div>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">setSettingNumber</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">5.5</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.setSettingString">
+<code class="sig-name descname">setSettingString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/functions.html#bool" title="(in Python v3.8)">bool</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.setSettingString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.setSettingString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a script setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – string - id of the setting that the module needs to access.</p></li>
+<li><p><strong>value</strong> – string or unicode - value of the setting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the value of the setting was set, false otherwise</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the above as keywords for arguments.</p>
+</div>
+<p>&#64;python_v18 New function added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">setSettingString</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;teamkodi&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.openSettings">
+<code class="sig-name descname">openSettings</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/constants.html#None" title="(in Python v3.8)">None</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.openSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.openSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens this scripts settings dialog.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">openSettings</span><span class="p">()</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="xbmcaddon.Addon.getAddonInfo">
+<code class="sig-name descname">getAddonInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)">str</a><a class="reference internal" href="../_modules/xbmcaddon.html#Addon.getAddonInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xbmcaddon.Addon.getAddonInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of an addon property as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> – string - id of the property that the module needs to access.</p>
+</dd>
+</dl>
+<p>Choices for the property are</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 25%" />
+<col style="width: 31%" />
+<col style="width: 28%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>author</p></td>
+<td><p>changelog</p></td>
+<td><p>description</p></td>
+<td><p>disclaimer</p></td>
+</tr>
+<tr class="row-even"><td><p>fanart</p></td>
+<td><p>icon</p></td>
+<td><p>id</p></td>
+<td><p>name</p></td>
+</tr>
+<tr class="row-odd"><td><p>path</p></td>
+<td><p>profile</p></td>
+<td><p>stars</p></td>
+<td><p>summary</p></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>version</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>AddOn property as a string</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Addon</span><span class="o">.</span><span class="n">getAddonInfo</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Kodistubs</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=Kodistubs&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../using.html">Using Kodistubs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Kodi Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="xbmc.html">xbmc</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">xbmcaddon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcdrm.html">xbmcdrm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcgui.html">xbmcgui</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcplugin.html">xbmcplugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcvfs.html">xbmcvfs</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../modules.html">Kodi Python API</a><ul>
+      <li>Previous: <a href="xbmc.html" title="previous chapter">xbmc</a></li>
+      <li>Next: <a href="xbmcdrm.html" title="next chapter">xbmcdrm</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/Kodistubs" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

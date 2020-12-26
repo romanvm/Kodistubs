@@ -1,0 +1,2467 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xbmc &#8212; Kodistubs  documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for xbmc</h1><div class="highlight"><pre>
+<span></span><span class="c1"># This file is generated from Kodi source code and post-edited</span>
+<span class="c1"># to correct code style and docstrings formatting.</span>
+<span class="c1"># License: GPL v.3 &lt;https://www.gnu.org/licenses/gpl-3.0.en.html&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">**General functions on Kodi.**</span>
+
+<span class="sd">Offers classes and functions that provide information about the media currently</span>
+<span class="sd">playing and that allow manipulation of the media player (such as starting a new</span>
+<span class="sd">song). You can also find system information using the functions available in</span>
+<span class="sd">this library.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">__kodistubs__</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">DRIVE_NOT_READY</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ENGLISH_NAME</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">ISO_639_1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ISO_639_2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">LOGDEBUG</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">LOGERROR</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">LOGFATAL</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">LOGINFO</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">LOGNONE</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">LOGWARNING</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">PLAYLIST_MUSIC</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">PLAYLIST_VIDEO</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">SERVER_AIRPLAYSERVER</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">SERVER_EVENTSERVER</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">SERVER_JSONRPCSERVER</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">SERVER_UPNPRENDERER</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">SERVER_UPNPSERVER</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">SERVER_WEBSERVER</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">SERVER_ZEROCONF</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">TRAY_CLOSED_MEDIA_PRESENT</span> <span class="o">=</span> <span class="mi">96</span>
+<span class="n">TRAY_CLOSED_NO_MEDIA</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">TRAY_OPEN</span> <span class="o">=</span> <span class="mi">16</span>
+
+
+<div class="viewcode-block" id="InfoTagMusic"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic">[docs]</a><span class="k">class</span> <span class="nc">InfoTagMusic</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s music info tag class.**</span>
+
+<span class="sd">    To get music info tag data of currently played source.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Info tag load is only be possible from present player class.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ...</span>
+<span class="sd">        tag = xbmc.Player().getMusicInfoTag()</span>
+<span class="sd">        </span>
+<span class="sd">        title = tag.getTitle()</span>
+<span class="sd">        url   = tag.getURL()</span>
+<span class="sd">        ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="InfoTagMusic.getDbId"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getDbId">[docs]</a>    <span class="k">def</span> <span class="nf">getDbId</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get identification number of tag in database.</span>
+
+<span class="sd">        :return: [integer] database id.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getURL"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getURL">[docs]</a>    <span class="k">def</span> <span class="nf">getURL</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns url of source as string from music info tag.</span>
+
+<span class="sd">        :return: [string] Url of source</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getTitle">[docs]</a>    <span class="k">def</span> <span class="nf">getTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the title from music as string on info tag.</span>
+
+<span class="sd">        :return: [string] Music title</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getMediaType"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getMediaType">[docs]</a>    <span class="k">def</span> <span class="nf">getMediaType</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the media type of the music item.</span>
+
+<span class="sd">        :return: [string] media type</span>
+
+<span class="sd">        Available strings about media type for music:</span>
+
+<span class="sd">        ====== ============================= </span>
+<span class="sd">        String Description                   </span>
+<span class="sd">        ====== ============================= </span>
+<span class="sd">        artist If it is defined as an artist </span>
+<span class="sd">        album  If it is defined as an album  </span>
+<span class="sd">        song   If it is defined as a song    </span>
+<span class="sd">        ====== ============================= </span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getArtist"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getArtist">[docs]</a>    <span class="k">def</span> <span class="nf">getArtist</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the artist from music as string if present.</span>
+
+<span class="sd">        :return: [string] Music artist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getAlbum"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getAlbum">[docs]</a>    <span class="k">def</span> <span class="nf">getAlbum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the album from music tag as string if present.</span>
+
+<span class="sd">        :return: [string] Music album name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getAlbumArtist"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getAlbumArtist">[docs]</a>    <span class="k">def</span> <span class="nf">getAlbumArtist</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the album artist from music tag as string if present.</span>
+
+<span class="sd">        :return: [string] Music album artist name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getGenre"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getGenre">[docs]</a>    <span class="k">def</span> <span class="nf">getGenre</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the genre name from music tag as string if present.</span>
+
+<span class="sd">        :return: [string] Genre name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getDuration"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getDuration">[docs]</a>    <span class="k">def</span> <span class="nf">getDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the duration of music as integer from info tag.</span>
+
+<span class="sd">        :return: [integer] Duration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getRating"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getRating">[docs]</a>    <span class="k">def</span> <span class="nf">getRating</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the scraped rating as integer.</span>
+
+<span class="sd">        :return: [integer] Rating</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getUserRating"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getUserRating">[docs]</a>    <span class="k">def</span> <span class="nf">getUserRating</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the user rating as integer (-1 if not existing)</span>
+
+<span class="sd">        :return: [integer] User rating</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getTrack"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getTrack">[docs]</a>    <span class="k">def</span> <span class="nf">getTrack</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the track number (if present) from music info tag as integer.</span>
+
+<span class="sd">        :return: [integer] Track number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getDisc"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getDisc">[docs]</a>    <span class="k">def</span> <span class="nf">getDisc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the disk number (if present) from music info tag as integer.</span>
+
+<span class="sd">        :return: [integer] Disc number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getReleaseDate"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getReleaseDate">[docs]</a>    <span class="k">def</span> <span class="nf">getReleaseDate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the release date as string from music info tag (if present).</span>
+
+<span class="sd">        :return: [string] Release date</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getListeners"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getListeners">[docs]</a>    <span class="k">def</span> <span class="nf">getListeners</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the listeners as integer from music info tag.</span>
+
+<span class="sd">        :return: [integer] Listeners</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getPlayCount"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getPlayCount">[docs]</a>    <span class="k">def</span> <span class="nf">getPlayCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of carried out playbacks.</span>
+
+<span class="sd">        :return: [integer] Playback count</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getLastPlayed"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getLastPlayed">[docs]</a>    <span class="k">def</span> <span class="nf">getLastPlayed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns last played time as string from music info tag.</span>
+
+<span class="sd">        :return: [string] Last played date / time on tag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getComment"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getComment">[docs]</a>    <span class="k">def</span> <span class="nf">getComment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns comment as string from music info tag.</span>
+
+<span class="sd">        :return: [string] Comment on tag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getLyrics"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getLyrics">[docs]</a>    <span class="k">def</span> <span class="nf">getLyrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a string from lyrics.</span>
+
+<span class="sd">        :return: [string] Lyrics on tag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getMusicBrainzTrackID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getMusicBrainzTrackID">[docs]</a>    <span class="k">def</span> <span class="nf">getMusicBrainzTrackID</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the MusicBrainz Recording ID from music info tag (if present).</span>
+
+<span class="sd">        :return: [string] MusicBrainz Recording ID</span>
+
+<span class="sd">        @python_v19 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getMusicBrainzArtistID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getMusicBrainzArtistID">[docs]</a>    <span class="k">def</span> <span class="nf">getMusicBrainzArtistID</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the MusicBrainz Artist IDs from music info tag (if present).</span>
+
+<span class="sd">        :return: [list] MusicBrainz Artist IDs</span>
+
+<span class="sd">        @python_v19 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getMusicBrainzAlbumID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getMusicBrainzAlbumID">[docs]</a>    <span class="k">def</span> <span class="nf">getMusicBrainzAlbumID</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the MusicBrainz Release ID from music info tag (if present).</span>
+
+<span class="sd">        :return: [string] MusicBrainz Release ID</span>
+
+<span class="sd">        @python_v19 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getMusicBrainzReleaseGroupID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getMusicBrainzReleaseGroupID">[docs]</a>    <span class="k">def</span> <span class="nf">getMusicBrainzReleaseGroupID</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the MusicBrainz Release Group ID from music info tag (if present).</span>
+
+<span class="sd">        :return: [string] MusicBrainz Release Group ID</span>
+
+<span class="sd">        @python_v19 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagMusic.getMusicBrainzAlbumArtistID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagMusic.getMusicBrainzAlbumArtistID">[docs]</a>    <span class="k">def</span> <span class="nf">getMusicBrainzAlbumArtistID</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the MusicBrainz Release Artist IDs from music info tag (if present).</span>
+
+<span class="sd">        :return: [list] MusicBrainz Release Artist IDs</span>
+
+<span class="sd">        @python_v19 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span></div></div>
+    
+
+<div class="viewcode-block" id="InfoTagRadioRDS"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS">[docs]</a><span class="k">class</span> <span class="nc">InfoTagRadioRDS</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s radio RDS info tag class.**</span>
+
+<span class="sd">    To get radio RDS info tag data of currently played `PVR` radio channel source.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Info tag load is only be possible from present player class.  Also</span>
+<span class="sd">        is all the data variable from radio channels and not known on</span>
+<span class="sd">        beginning of radio receiving.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ...</span>
+<span class="sd">        tag = xbmc.Player().getRadioRDSInfoTag()</span>
+<span class="sd">        </span>
+<span class="sd">        title  = tag.getTitle()</span>
+<span class="sd">        artist = tag.getArtist()</span>
+<span class="sd">        ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getTitle">[docs]</a>    <span class="k">def</span> <span class="nf">getTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Title of the item on the air; i.e. song title.</span>
+
+<span class="sd">        :return: Title</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getBand"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getBand">[docs]</a>    <span class="k">def</span> <span class="nf">getBand</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Band of the item on air.</span>
+
+<span class="sd">        :return: Band</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getArtist"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getArtist">[docs]</a>    <span class="k">def</span> <span class="nf">getArtist</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Artist of the item on air.</span>
+
+<span class="sd">        :return: Artist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getComposer"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getComposer">[docs]</a>    <span class="k">def</span> <span class="nf">getComposer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the Composer of the music.</span>
+
+<span class="sd">        :return: Composer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getConductor"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getConductor">[docs]</a>    <span class="k">def</span> <span class="nf">getConductor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the Conductor of the Band.</span>
+
+<span class="sd">        :return: Conductor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getAlbum"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getAlbum">[docs]</a>    <span class="k">def</span> <span class="nf">getAlbum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Album of item on air.</span>
+
+<span class="sd">        :return: Album name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getComment"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getComment">[docs]</a>    <span class="k">def</span> <span class="nf">getComment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Comment text from channel.</span>
+
+<span class="sd">        :return: Comment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getAlbumTrackNumber"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getAlbumTrackNumber">[docs]</a>    <span class="k">def</span> <span class="nf">getAlbumTrackNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the album track number of currently sended music.</span>
+
+<span class="sd">        :return: Track Number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoNews"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoNews">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoNews</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get News informations.</span>
+
+<span class="sd">        :return: News Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoNewsLocal"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoNewsLocal">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoNewsLocal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Local news informations.</span>
+
+<span class="sd">        :return: Local News Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoSport"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoSport">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoSport</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Sport informations.</span>
+
+<span class="sd">        :return: Sport Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoStock"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoStock">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoStock</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Stock informations.</span>
+
+<span class="sd">        :return: Stock Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoWeather"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoWeather">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoWeather</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Weather informations.</span>
+
+<span class="sd">        :return: Weather Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoHoroscope"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoHoroscope">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoHoroscope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Horoscope informations.</span>
+
+<span class="sd">        :return: Horoscope Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoCinema"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoCinema">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoCinema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Cinema informations.</span>
+
+<span class="sd">        :return: Cinema Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoLottery"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoLottery">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoLottery</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Lottery informations.</span>
+
+<span class="sd">        :return: Lottery Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getInfoOther"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getInfoOther">[docs]</a>    <span class="k">def</span> <span class="nf">getInfoOther</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get other informations.</span>
+
+<span class="sd">        :return: Other Information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getEditorialStaff"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getEditorialStaff">[docs]</a>    <span class="k">def</span> <span class="nf">getEditorialStaff</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Editorial Staff names.</span>
+
+<span class="sd">        :return: Editorial Staff</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getProgStation"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getProgStation">[docs]</a>    <span class="k">def</span> <span class="nf">getProgStation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Name describing station.</span>
+
+<span class="sd">        :return: Program Station</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getProgStyle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getProgStyle">[docs]</a>    <span class="k">def</span> <span class="nf">getProgStyle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The the radio channel style currently used.</span>
+
+<span class="sd">        :return: Program Style</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getProgHost"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getProgHost">[docs]</a>    <span class="k">def</span> <span class="nf">getProgHost</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Host of current radio show.</span>
+
+<span class="sd">        :return: Program Host</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getProgWebsite"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getProgWebsite">[docs]</a>    <span class="k">def</span> <span class="nf">getProgWebsite</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Link to URL (web page) for radio station homepage.</span>
+
+<span class="sd">        :return: Program Website</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getProgNow"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getProgNow">[docs]</a>    <span class="k">def</span> <span class="nf">getProgNow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Current radio program show.</span>
+
+<span class="sd">        :return: Program Now</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getProgNext"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getProgNext">[docs]</a>    <span class="k">def</span> <span class="nf">getProgNext</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Next program show.</span>
+
+<span class="sd">        :return: Program Next</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getPhoneHotline"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getPhoneHotline">[docs]</a>    <span class="k">def</span> <span class="nf">getPhoneHotline</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Telephone number of the radio station&#39;s hotline.</span>
+
+<span class="sd">        :return: Phone Hotline</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getEMailHotline"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getEMailHotline">[docs]</a>    <span class="k">def</span> <span class="nf">getEMailHotline</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Email address of the radio station&#39;s studio.</span>
+
+<span class="sd">        :return: EMail Hotline</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getPhoneStudio"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getPhoneStudio">[docs]</a>    <span class="k">def</span> <span class="nf">getPhoneStudio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Telephone number of the radio station&#39;s studio.</span>
+
+<span class="sd">        :return: Phone Studio</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getEMailStudio"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getEMailStudio">[docs]</a>    <span class="k">def</span> <span class="nf">getEMailStudio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Email address of radio station studio.</span>
+
+<span class="sd">        :return: EMail Studio</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagRadioRDS.getSMSStudio"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagRadioRDS.getSMSStudio">[docs]</a>    <span class="k">def</span> <span class="nf">getSMSStudio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        SMS (Text Messaging) number for studio.</span>
+
+<span class="sd">        :return: SMS Studio</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div></div>
+    
+
+<div class="viewcode-block" id="InfoTagVideo"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo">[docs]</a><span class="k">class</span> <span class="nc">InfoTagVideo</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s video info tag class.**</span>
+
+<span class="sd">    To get video info tag data of currently played source.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Info tag load is only be possible from present player class.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ...</span>
+<span class="sd">        tag = xbmc.Player().getVideoInfoTag()</span>
+<span class="sd">        </span>
+<span class="sd">        title = tag.getTitle()</span>
+<span class="sd">        file  = tag.getFile()</span>
+<span class="sd">        ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="InfoTagVideo.getDbId"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getDbId">[docs]</a>    <span class="k">def</span> <span class="nf">getDbId</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get identification number of tag in database</span>
+
+<span class="sd">        :return: [integer] database id</span>
+
+<span class="sd">        @python_v17 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getDirector"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getDirector">[docs]</a>    <span class="k">def</span> <span class="nf">getDirector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Getfilm director who has made the film (if present).</span>
+
+<span class="sd">        :return: [string] Film director name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getWritingCredits"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getWritingCredits">[docs]</a>    <span class="k">def</span> <span class="nf">getWritingCredits</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the writing credits if present from video info tag.</span>
+
+<span class="sd">        :return: [string] Writing credits</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getGenre"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getGenre">[docs]</a>    <span class="k">def</span> <span class="nf">getGenre</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get theVideo Genre if available.</span>
+
+<span class="sd">        :return: [string] Genre name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getTagLine"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getTagLine">[docs]</a>    <span class="k">def</span> <span class="nf">getTagLine</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get video tag line if available.</span>
+
+<span class="sd">        :return: [string] Video tag line</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getPlotOutline"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getPlotOutline">[docs]</a>    <span class="k">def</span> <span class="nf">getPlotOutline</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the outline plot of the video if present.</span>
+
+<span class="sd">        :return: [string] Outline plot</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getPlot"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getPlot">[docs]</a>    <span class="k">def</span> <span class="nf">getPlot</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the plot of the video if present.</span>
+
+<span class="sd">        :return: [string] Plot</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getPictureURL"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getPictureURL">[docs]</a>    <span class="k">def</span> <span class="nf">getPictureURL</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a picture URL of the video to show as screenshot.</span>
+
+<span class="sd">        :return: [string] Picture URL</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getTitle">[docs]</a>    <span class="k">def</span> <span class="nf">getTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the video title.</span>
+
+<span class="sd">        :return: [string] Video title</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getTVShowTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getTVShowTitle">[docs]</a>    <span class="k">def</span> <span class="nf">getTVShowTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the video TV show title.</span>
+
+<span class="sd">        :return: [string] TV show title</span>
+
+<span class="sd">        @python_v17 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getMediaType"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getMediaType">[docs]</a>    <span class="k">def</span> <span class="nf">getMediaType</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the media type of the video.</span>
+
+<span class="sd">        :return: [string] media type</span>
+
+<span class="sd">        Available strings about media type for video:</span>
+
+<span class="sd">        ========== ==================================== </span>
+<span class="sd">        String     Description                          </span>
+<span class="sd">        ========== ==================================== </span>
+<span class="sd">        video      For normal video                     </span>
+<span class="sd">        set        For a selection of video             </span>
+<span class="sd">        musicvideo To define it as music video          </span>
+<span class="sd">        movie      To define it as normal movie         </span>
+<span class="sd">        tvshow     If this is it defined as tvshow      </span>
+<span class="sd">        season     The type is used as a series season  </span>
+<span class="sd">        episode    The type is used as a series episode </span>
+<span class="sd">        ========== ==================================== </span>
+
+<span class="sd">        @python_v17 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getVotes"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getVotes">[docs]</a>    <span class="k">def</span> <span class="nf">getVotes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the video votes if available from video info tag.</span>
+
+<span class="sd">        :return: [string] Votes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getCast"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getCast">[docs]</a>    <span class="k">def</span> <span class="nf">getCast</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the cast of the video when available.</span>
+
+<span class="sd">        :return: [string] Video casts</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getFile"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getFile">[docs]</a>    <span class="k">def</span> <span class="nf">getFile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the video file name.</span>
+
+<span class="sd">        :return: [string] File name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getPath"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getPath">[docs]</a>    <span class="k">def</span> <span class="nf">getPath</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the path where the video is stored.</span>
+
+<span class="sd">        :return: [string] Path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getFilenameAndPath"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getFilenameAndPath">[docs]</a>    <span class="k">def</span> <span class="nf">getFilenameAndPath</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the full path with filename where the video is stored.</span>
+
+<span class="sd">        :return: [string] File name and Path</span>
+
+<span class="sd">        @python_v19 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getIMDBNumber"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getIMDBNumber">[docs]</a>    <span class="k">def</span> <span class="nf">getIMDBNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get theIMDb number of the video (if present).</span>
+
+<span class="sd">        :return: [string] IMDb number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getSeason"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getSeason">[docs]</a>    <span class="k">def</span> <span class="nf">getSeason</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get season number of a series</span>
+
+<span class="sd">        :return: [integer] season number</span>
+
+<span class="sd">        @python_v17 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getEpisode"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getEpisode">[docs]</a>    <span class="k">def</span> <span class="nf">getEpisode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get episode number of a series</span>
+
+<span class="sd">        :return: [integer] episode number</span>
+
+<span class="sd">        @python_v17 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getYear"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getYear">[docs]</a>    <span class="k">def</span> <span class="nf">getYear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get production year of video if present.</span>
+
+<span class="sd">        :return: [integer] Production Year</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getRating"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getRating">[docs]</a>    <span class="k">def</span> <span class="nf">getRating</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the video rating if present as float (double where supported).</span>
+
+<span class="sd">        :return: [float] The rating of the video</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getUserRating"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getUserRating">[docs]</a>    <span class="k">def</span> <span class="nf">getUserRating</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the user rating if present as integer.</span>
+
+<span class="sd">        :return: [integer] The user rating of the video</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getPlayCount"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getPlayCount">[docs]</a>    <span class="k">def</span> <span class="nf">getPlayCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the number of plays of the video.</span>
+
+<span class="sd">        :return: [integer] Play Count</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getLastPlayed"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getLastPlayed">[docs]</a>    <span class="k">def</span> <span class="nf">getLastPlayed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the last played date / time as string.</span>
+
+<span class="sd">        :return: [string] Last played date / time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getOriginalTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getOriginalTitle">[docs]</a>    <span class="k">def</span> <span class="nf">getOriginalTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the original title of the video.</span>
+
+<span class="sd">        :return: [string] Original title</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getPremiered"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getPremiered">[docs]</a>    <span class="k">def</span> <span class="nf">getPremiered</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To getpremiered date of the video, if available.</span>
+
+<span class="sd">        :return: [string]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getFirstAired"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getFirstAired">[docs]</a>    <span class="k">def</span> <span class="nf">getFirstAired</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns first aired date as string from info tag.</span>
+
+<span class="sd">        :return: [string] First aired date</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getTrailer"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getTrailer">[docs]</a>    <span class="k">def</span> <span class="nf">getTrailer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the path where the trailer is stored.</span>
+
+<span class="sd">        :return: [string] Trailer path</span>
+
+<span class="sd">        @python_v17 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getArtist"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getArtist">[docs]</a>    <span class="k">def</span> <span class="nf">getArtist</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the artist name (for musicvideos)</span>
+
+<span class="sd">        :return: [std::vector&lt;std::string&gt;] Artist name</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getAlbum"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getAlbum">[docs]</a>    <span class="k">def</span> <span class="nf">getAlbum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the album name (for musicvideos)</span>
+
+<span class="sd">        :return: [string] Album name</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getTrack"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getTrack">[docs]</a>    <span class="k">def</span> <span class="nf">getTrack</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the track number (for musicvideos)</span>
+
+<span class="sd">        :return: [int] Track number</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="InfoTagVideo.getDuration"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getDuration">[docs]</a>    <span class="k">def</span> <span class="nf">getDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get the duration</span>
+
+<span class="sd">        :return: [unsigned int] Duration</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div></div>
+    
+
+<div class="viewcode-block" id="Keyboard"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard">[docs]</a><span class="k">class</span> <span class="nc">Keyboard</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s keyboard class.**</span>
+
+<span class="sd">    Creates a new `Keyboard` object with default text heading and hidden input flag</span>
+<span class="sd">    if supplied.</span>
+
+<span class="sd">    :param default: : [opt] string - default text entry.</span>
+<span class="sd">    :param heading: : [opt] string - keyboard heading.</span>
+<span class="sd">    :param hidden: : [opt] boolean - True for hidden text entry.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        kb = xbmc.Keyboard(&#39;default&#39;, &#39;heading&#39;, True)</span>
+<span class="sd">        kb.setDefault(&#39;password&#39;) # optional</span>
+<span class="sd">        kb.setHeading(&#39;Enter password&#39;) # optional</span>
+<span class="sd">        kb.setHiddenInput(True) # optional</span>
+<span class="sd">        kb.doModal()</span>
+<span class="sd">        if kb.isConfirmed():</span>
+<span class="sd">            text = kb.getText()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">heading</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">hidden</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="Keyboard.doModal"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard.doModal">[docs]</a>    <span class="k">def</span> <span class="nf">doModal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autoclose</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show keyboard and wait for user action.</span>
+
+<span class="sd">        :param autoclose: [opt] integer - milliseconds to autoclose dialog.</span>
+<span class="sd">            (default=do not autoclose)</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            kb.doModal(30000)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Keyboard.setDefault"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard.setDefault">[docs]</a>    <span class="k">def</span> <span class="nf">setDefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the default text entry.</span>
+
+<span class="sd">        :param line: string - default text entry.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            kb.setDefault(&#39;password&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Keyboard.setHiddenInput"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard.setHiddenInput">[docs]</a>    <span class="k">def</span> <span class="nf">setHiddenInput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows hidden text entry.</span>
+
+<span class="sd">        :param hidden: boolean - True for hidden text entry.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            kb.setHiddenInput(True)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Keyboard.setHeading"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard.setHeading">[docs]</a>    <span class="k">def</span> <span class="nf">setHeading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">heading</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the keyboard heading.</span>
+
+<span class="sd">        :param heading: string - keyboard heading.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            kb.setHeading(&#39;Enter password&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Keyboard.getText"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard.getText">[docs]</a>    <span class="k">def</span> <span class="nf">getText</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the user input as a string.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            This will always return the text entry even if you cancel the keyboard.</span>
+<span class="sd">            Use the `isConfirmed()` method to check if user cancelled the keyboard.</span>
+
+<span class="sd">        :return: get the in keyboard entered text</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            text = kb.getText()</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="Keyboard.isConfirmed"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard.isConfirmed">[docs]</a>    <span class="k">def</span> <span class="nf">isConfirmed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns False if the user cancelled the input.</span>
+
+<span class="sd">        :return: true if confirmed, if cancelled false</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            if (kb.isConfirmed()):</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+    
+
+<div class="viewcode-block" id="Monitor"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor">[docs]</a><span class="k">class</span> <span class="nc">Monitor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s monitor class.**</span>
+
+<span class="sd">    Creates a new monitor to notify addon about changes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="Monitor.onSettingsChanged"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onSettingsChanged">[docs]</a>    <span class="k">def</span> <span class="nf">onSettingsChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onSettingsChanged method.</span>
+
+<span class="sd">        Will be called when addon settings are changed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onScreensaverActivated"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onScreensaverActivated">[docs]</a>    <span class="k">def</span> <span class="nf">onScreensaverActivated</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onScreensaverActivated method.</span>
+
+<span class="sd">        Will be called when screensaver kicks in</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onScreensaverDeactivated"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onScreensaverDeactivated">[docs]</a>    <span class="k">def</span> <span class="nf">onScreensaverDeactivated</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onScreensaverDeactivated method.</span>
+
+<span class="sd">        Will be called when screensaver goes off</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onDPMSActivated"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onDPMSActivated">[docs]</a>    <span class="k">def</span> <span class="nf">onDPMSActivated</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onDPMSActivated method.</span>
+
+<span class="sd">        Will be called when energysaving/DPMS gets active</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onDPMSDeactivated"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onDPMSDeactivated">[docs]</a>    <span class="k">def</span> <span class="nf">onDPMSDeactivated</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onDPMSDeactivated method.</span>
+
+<span class="sd">        Will be called when energysaving/DPMS is turned off</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onScanStarted"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onScanStarted">[docs]</a>    <span class="k">def</span> <span class="nf">onScanStarted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onScanStarted method.</span>
+
+<span class="sd">        :param library: Video / music as string</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will be called when library clean has ended and return video or</span>
+<span class="sd">            music to indicate which library is being scanned</span>
+
+<span class="sd">        @python_v14 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onScanFinished"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onScanFinished">[docs]</a>    <span class="k">def</span> <span class="nf">onScanFinished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onScanFinished method.</span>
+
+<span class="sd">        :param library: Video / music as string</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will be called when library clean has ended and return video or</span>
+<span class="sd">            music to indicate which library has been scanned</span>
+
+<span class="sd">        @python_v14 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onCleanStarted"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onCleanStarted">[docs]</a>    <span class="k">def</span> <span class="nf">onCleanStarted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onCleanStarted method.</span>
+
+<span class="sd">        :param library: Video / music as string</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will be called when library clean has ended and return video or</span>
+<span class="sd">            music to indicate which library has been cleaned</span>
+
+<span class="sd">        @python_v14 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onCleanFinished"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onCleanFinished">[docs]</a>    <span class="k">def</span> <span class="nf">onCleanFinished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">library</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onCleanFinished method.</span>
+
+<span class="sd">        :param library: Video / music as string</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will be called when library clean has ended and return video or</span>
+<span class="sd">            music to indicate which library has been finished</span>
+
+<span class="sd">        @python_v14 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.onNotification"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.onNotification">[docs]</a>    <span class="k">def</span> <span class="nf">onNotification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onNotification method.</span>
+
+<span class="sd">        :param sender: Sender of the notification</span>
+<span class="sd">        :param method: Name of the notification</span>
+<span class="sd">        :param data: JSON-encoded data of the notification</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will be called when Kodi receives or sends a notification</span>
+
+<span class="sd">        @python_v13 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Monitor.waitForAbort"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.waitForAbort">[docs]</a>    <span class="k">def</span> <span class="nf">waitForAbort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wait for Abort</span>
+
+<span class="sd">        Block until abort is requested, or until timeout occurs. If an abort requested</span>
+<span class="sd">        have already been made, return immediately.</span>
+
+<span class="sd">        :param timeout: [opt] float - timeout in seconds. Default: no timeout.</span>
+<span class="sd">        :return: True when abort have been requested, False if a timeout is given and the operation times out.</span>
+
+<span class="sd">        @python_v14 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            monitor = xbmc.Monitor()</span>
+<span class="sd">            # do something</span>
+<span class="sd">            monitor.waitForAbort(10) # sleeps for 10 secs or returns early if kodi aborts</span>
+<span class="sd">            if monitor.abortRequested():</span>
+<span class="sd">            # abort was requested to Kodi (e.g. shutdown), do your cleanup logic</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Monitor.abortRequested"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Monitor.abortRequested">[docs]</a>    <span class="k">def</span> <span class="nf">abortRequested</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if abort has been requested.</span>
+
+<span class="sd">        :return: True if requested</span>
+
+<span class="sd">        @python_v14 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+    
+
+<div class="viewcode-block" id="Player"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player">[docs]</a><span class="k">class</span> <span class="nc">Player</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s player.**</span>
+
+<span class="sd">    To become and create the class to play something.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ...</span>
+<span class="sd">        xbmc.Player().play(url, listitem, windowed)</span>
+<span class="sd">        ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="Player.play"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.play">[docs]</a>    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>  <span class="s1">&#39;PlayList&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+             <span class="n">listitem</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">windowed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+             <span class="n">startpos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Play an item.</span>
+
+<span class="sd">        :param item: [opt] string - filename, url or playlist</span>
+<span class="sd">        :param listitem: [opt] listitem - used with setInfo() to set different infolabels.</span>
+<span class="sd">        :param windowed: [opt] bool - true=play video windowed, false=play users</span>
+<span class="sd">            preference. (default)</span>
+<span class="sd">        :param startpos: [opt] int - starting position when playing a playlist. Default = -1</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            If item is not given then the `Player` will try to play the current</span>
+<span class="sd">            item in the current playlist. You can use the above as keywords</span>
+<span class="sd">            for arguments and skip certain optional arguments.  Once you use a</span>
+<span class="sd">            keyword, all following arguments require the keyword.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ...</span>
+<span class="sd">            listitem = xbmcgui.ListItem(&#39;Ironman&#39;)</span>
+<span class="sd">            listitem.setInfo(&#39;video&#39;, {&#39;Title&#39;: &#39;Ironman&#39;, &#39;Genre&#39;: &#39;Science Fiction&#39;})</span>
+<span class="sd">            xbmc.Player().play(url, listitem, windowed)</span>
+<span class="sd">            xbmc.Player().play(playlist, listitem, windowed, startpos)</span>
+<span class="sd">            ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.stop"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop playing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.pause"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.pause">[docs]</a>    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pause or resume playing if already paused.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.playnext"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.playnext">[docs]</a>    <span class="k">def</span> <span class="nf">playnext</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Play next item in playlist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.playprevious"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.playprevious">[docs]</a>    <span class="k">def</span> <span class="nf">playprevious</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Play previous item in playlist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.playselected"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.playselected">[docs]</a>    <span class="k">def</span> <span class="nf">playselected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selected</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Play a certain item from the current playlist.</span>
+
+<span class="sd">        :param selected: Integer - Item to select</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.isPlaying"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.isPlaying">[docs]</a>    <span class="k">def</span> <span class="nf">isPlaying</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check Kodi is playing something.</span>
+
+<span class="sd">        :return: True if Kodi is playing a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Player.isPlayingAudio"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.isPlayingAudio">[docs]</a>    <span class="k">def</span> <span class="nf">isPlayingAudio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check for playing audio.</span>
+
+<span class="sd">        :return: True if Kodi is playing an audio file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Player.isPlayingVideo"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.isPlayingVideo">[docs]</a>    <span class="k">def</span> <span class="nf">isPlayingVideo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check for playing video.</span>
+
+<span class="sd">        :return: True if Kodi is playing a video.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Player.isPlayingRDS"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.isPlayingRDS">[docs]</a>    <span class="k">def</span> <span class="nf">isPlayingRDS</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check for playing radio data system (RDS).</span>
+
+<span class="sd">        :return: True if kodi is playing a radio data system (RDS).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Player.isExternalPlayer"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.isExternalPlayer">[docs]</a>    <span class="k">def</span> <span class="nf">isExternalPlayer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check for external player.</span>
+
+<span class="sd">        :return: True if kodi is playing using an external player.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Player.getPlayingFile"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getPlayingFile">[docs]</a>    <span class="k">def</span> <span class="nf">getPlayingFile</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current playing file as a string.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            For LiveTV, returns a **pvr://** url which is not translatable to</span>
+<span class="sd">            an OS specific file or external url.</span>
+
+<span class="sd">        :return: Playing filename</span>
+<span class="sd">        :raises Exception: If player is not playing a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="Player.getTime"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getTime">[docs]</a>    <span class="k">def</span> <span class="nf">getTime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get playing time.</span>
+
+<span class="sd">        Returns the current time of the current playing media as fractional seconds.</span>
+
+<span class="sd">        :return: Current time as fractional seconds</span>
+<span class="sd">        :raises Exception: If player is not playing a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+    
+<div class="viewcode-block" id="Player.seekTime"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.seekTime">[docs]</a>    <span class="k">def</span> <span class="nf">seekTime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seekTime</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Seek time.</span>
+
+<span class="sd">        Seeks the specified amount of time as fractional seconds. The time specified is</span>
+<span class="sd">        relative to the beginning of the currently. playing media file.</span>
+
+<span class="sd">        :param seekTime: Time to seek as fractional seconds</span>
+<span class="sd">        :raises Exception: If player is not playing a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.setSubtitles"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.setSubtitles">[docs]</a>    <span class="k">def</span> <span class="nf">setSubtitles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtitleFile</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set subtitle file and enable subtitles.</span>
+
+<span class="sd">        :param subtitleFile: File to use as source ofsubtitles</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.showSubtitles"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.showSubtitles">[docs]</a>    <span class="k">def</span> <span class="nf">showSubtitles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bVisible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enable / disable subtitles.</span>
+
+<span class="sd">        :param visible: [boolean] True for visible subtitles.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ...</span>
+<span class="sd">            xbmc.Player().showSubtitles(True)</span>
+<span class="sd">            ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.getSubtitles"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getSubtitles">[docs]</a>    <span class="k">def</span> <span class="nf">getSubtitles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get subtitle stream name.</span>
+
+<span class="sd">        :return: Stream name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="Player.getAvailableSubtitleStreams"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getAvailableSubtitleStreams">[docs]</a>    <span class="k">def</span> <span class="nf">getAvailableSubtitleStreams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Subtitle stream names.</span>
+
+<span class="sd">        :return: `List` of subtitle streams as name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="Player.setSubtitleStream"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.setSubtitleStream">[docs]</a>    <span class="k">def</span> <span class="nf">setSubtitleStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iStream</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set Subtitle Stream.</span>
+
+<span class="sd">        :param iStream: [int] Subtitle stream to select for play</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ...</span>
+<span class="sd">            xbmc.Player().setSubtitleStream(1)</span>
+<span class="sd">            ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.updateInfoTag"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.updateInfoTag">[docs]</a>    <span class="k">def</span> <span class="nf">updateInfoTag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update info labels for currently playing item.</span>
+
+<span class="sd">        :param item: ListItem with new info</span>
+<span class="sd">        :raises Exception: If player is not playing a file</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ...</span>
+<span class="sd">            item = xbmcgui.ListItem()</span>
+<span class="sd">            item.setPath(xbmc.Player().getPlayingFile())</span>
+<span class="sd">            item.setInfo(&#39;music&#39;, {&#39;title&#39; : &#39;foo&#39;, &#39;artist&#39; : &#39;bar&#39;})</span>
+<span class="sd">            xbmc.Player().updateInfoTag(item)</span>
+<span class="sd">            ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.getVideoInfoTag"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getVideoInfoTag">[docs]</a>    <span class="k">def</span> <span class="nf">getVideoInfoTag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InfoTagVideo</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get video info tag.</span>
+
+<span class="sd">        Returns the VideoInfoTag of the current playing Movie.</span>
+
+<span class="sd">        :return: Video info tag</span>
+<span class="sd">        :raises Exception: If player is not playing a file or current file is not a movie file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">InfoTagVideo</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="Player.getMusicInfoTag"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getMusicInfoTag">[docs]</a>    <span class="k">def</span> <span class="nf">getMusicInfoTag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InfoTagMusic</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get music info tag.</span>
+
+<span class="sd">        Returns the MusicInfoTag of the current playing &#39;Song&#39;.</span>
+
+<span class="sd">        :return: Music info tag</span>
+<span class="sd">        :raises Exception: If player is not playing a file or current file is not a music file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">InfoTagMusic</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="Player.getRadioRDSInfoTag"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getRadioRDSInfoTag">[docs]</a>    <span class="k">def</span> <span class="nf">getRadioRDSInfoTag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InfoTagRadioRDS</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get Radio RDS info tag</span>
+
+<span class="sd">        Returns the RadioRDSInfoTag of the current playing &#39;Radio Song if. present&#39;.</span>
+
+<span class="sd">        :return: Radio RDS info tag</span>
+<span class="sd">        :raises Exception: If player is not playing a file or current file is not a rds file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">InfoTagRadioRDS</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="Player.getTotalTime"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getTotalTime">[docs]</a>    <span class="k">def</span> <span class="nf">getTotalTime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        To get total playing time.</span>
+
+<span class="sd">        Returns the total time of the current playing media in seconds. This is only</span>
+<span class="sd">        accurate to the full second.</span>
+
+<span class="sd">        :return: Total time of the current playing media</span>
+<span class="sd">        :raises Exception: If player is not playing a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+    
+<div class="viewcode-block" id="Player.getAvailableAudioStreams"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getAvailableAudioStreams">[docs]</a>    <span class="k">def</span> <span class="nf">getAvailableAudioStreams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Audio stream names</span>
+
+<span class="sd">        :return: List of audio streams as name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="Player.setAudioStream"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.setAudioStream">[docs]</a>    <span class="k">def</span> <span class="nf">setAudioStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iStream</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set Audio Stream.</span>
+
+<span class="sd">        :param iStream: [int] Audio stream to select for play</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ...</span>
+<span class="sd">            xbmc.Player().setAudioStream(1)</span>
+<span class="sd">            ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.getAvailableVideoStreams"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.getAvailableVideoStreams">[docs]</a>    <span class="k">def</span> <span class="nf">getAvailableVideoStreams</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Video stream names</span>
+
+<span class="sd">        :return: List of video streams as name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="Player.setVideoStream"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.setVideoStream">[docs]</a>    <span class="k">def</span> <span class="nf">setVideoStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iStream</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set Video Stream.</span>
+
+<span class="sd">        :param iStream: [int] Video stream to select for play</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ...</span>
+<span class="sd">            xbmc.Player().setVideoStream(1)</span>
+<span class="sd">            ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackStarted"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackStarted">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackStarted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackStarted method.</span>
+
+<span class="sd">        Will be called when Kodi player starts. Video or audio might not be available at</span>
+<span class="sd">        this point.</span>
+
+<span class="sd">        @python_v18 Use `onAVStarted()` instead if you need to detect if Kodi is actually</span>
+<span class="sd">        playing a media file (i.e, if a stream is available)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onAVStarted"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onAVStarted">[docs]</a>    <span class="k">def</span> <span class="nf">onAVStarted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onAVStarted method.</span>
+
+<span class="sd">        Will be called when Kodi has a video or audiostream.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onAVChange"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onAVChange">[docs]</a>    <span class="k">def</span> <span class="nf">onAVChange</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onAVChange method.</span>
+
+<span class="sd">        Will be called when Kodi has a video, audio or subtitle stream. Also happens</span>
+<span class="sd">        when the stream changes.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackEnded"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackEnded">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackEnded</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackEnded method.</span>
+
+<span class="sd">        Will be called when Kodi stops playing a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackStopped"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackStopped">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackStopped</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackStopped method.</span>
+
+<span class="sd">        Will be called when user stops Kodi playing a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackError"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackError">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackError</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackError method.</span>
+
+<span class="sd">        Will be called when playback stops due to an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackPaused"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackPaused">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackPaused</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackPaused method.</span>
+
+<span class="sd">        Will be called when user pauses a playing file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackResumed"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackResumed">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackResumed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackResumed method.</span>
+
+<span class="sd">        Will be called when user resumes a paused file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onQueueNextItem"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onQueueNextItem">[docs]</a>    <span class="k">def</span> <span class="nf">onQueueNextItem</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onQueueNextItem method.</span>
+
+<span class="sd">        Will be called when user queues the next item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackSpeedChanged"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackSpeedChanged">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackSpeedChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackSpeedChanged method.</span>
+
+<span class="sd">        Will be called when players speed changes (eg. user FF/RW).</span>
+
+<span class="sd">        :param speed: [integer] Current speed of player</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Negative speed means player is rewinding, 1 is normal playback</span>
+<span class="sd">            speed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackSeek"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackSeek">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackSeek</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seekOffset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackSeek method.</span>
+
+<span class="sd">        Will be called when user seeks to a time.</span>
+
+<span class="sd">        :param time: [integer] Time to seek to</span>
+<span class="sd">        :param seekOffset: [integer] ?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Player.onPlayBackSeekChapter"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Player.onPlayBackSeekChapter">[docs]</a>    <span class="k">def</span> <span class="nf">onPlayBackSeekChapter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chapter</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        onPlayBackSeekChapter method.</span>
+
+<span class="sd">        Will be called when user performs a chapter seek.</span>
+
+<span class="sd">        :param chapter: [integer] Chapter to seek to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+    
+
+<div class="viewcode-block" id="PlayList"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList">[docs]</a><span class="k">class</span> <span class="nc">PlayList</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s Play `List` class.**</span>
+
+<span class="sd">    To create and edit a playlist which can be handled by the player.</span>
+
+<span class="sd">    :param playList: [integer] To define the stream type</span>
+
+<span class="sd">    ===== =================== =================================== </span>
+<span class="sd">    Value Integer String      Description                         </span>
+<span class="sd">    ===== =================== =================================== </span>
+<span class="sd">    0     xbmc.PLAYLIST_MUSIC Playlist for music files or streams </span>
+<span class="sd">    1     xbmc.PLAYLIST_VIDEO Playlist for video files or streams </span>
+<span class="sd">    ===== =================== =================================== </span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ...</span>
+<span class="sd">        play=xbmc.PlayList(xbmc.PLAYLIST_VIDEO)</span>
+<span class="sd">        ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">playList</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="PlayList.getPlayListId"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.getPlayListId">[docs]</a>    <span class="k">def</span> <span class="nf">getPlayListId</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the `PlayList` Identifier</span>
+
+<span class="sd">        :return: Id as an integer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="PlayList.add"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">listitem</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a new file to the playlist.</span>
+
+<span class="sd">        :param url: string or unicode - filename or url to add.</span>
+<span class="sd">        :param listitem: [opt] listitem - used with setInfo() to set different infolabels.</span>
+<span class="sd">        :param index: [opt] integer - position to add playlist item. (default=end)</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments and skip certain</span>
+<span class="sd">            optional arguments. Once you use a keyword, all following</span>
+<span class="sd">            arguments require the keyword.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)</span>
+<span class="sd">            video = &#39;F:\\movies\\Ironman.mov&#39;</span>
+<span class="sd">            listitem = xbmcgui.ListItem(&#39;Ironman&#39;, thumbnailImage=&#39;F:\\movies\\Ironman.tbn&#39;)</span>
+<span class="sd">            listitem.setInfo(&#39;video&#39;, {&#39;Title&#39;: &#39;Ironman&#39;, &#39;Genre&#39;: &#39;Science Fiction&#39;})</span>
+<span class="sd">            playlist.add(url=video, listitem=listitem, index=7)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="PlayList.load"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load a playlist.</span>
+
+<span class="sd">        Clear current playlist and copy items from the file to this Playlist filename</span>
+<span class="sd">        can be like .pls or .m3u ...</span>
+
+<span class="sd">        :param filename: File with list to play inside</span>
+<span class="sd">        :return: False if unable to load playlist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="PlayList.remove"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove an item with this filename from the playlist.</span>
+
+<span class="sd">        :param filename: The file to remove from list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="PlayList.clear"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clear all items in the playlist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="PlayList.size"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.size">[docs]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the total number of PlayListItems in this playlist.</span>
+
+<span class="sd">        :return: Amount of playlist entries.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="PlayList.shuffle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.shuffle">[docs]</a>    <span class="k">def</span> <span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shuffle the playlist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="PlayList.unshuffle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.unshuffle">[docs]</a>    <span class="k">def</span> <span class="nf">unshuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unshuffle the playlist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="PlayList.getposition"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.PlayList.getposition">[docs]</a>    <span class="k">def</span> <span class="nf">getposition</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the position of the current song in this playlist.</span>
+
+<span class="sd">        :return: Position of the current song</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div></div>
+    
+
+<div class="viewcode-block" id="RenderCapture"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.RenderCapture">[docs]</a><span class="k">class</span> <span class="nc">RenderCapture</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s render capture.**</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="RenderCapture.getWidth"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.RenderCapture.getWidth">[docs]</a>    <span class="k">def</span> <span class="nf">getWidth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get width</span>
+
+<span class="sd">        To get width of captured image as set during `RenderCapture.capture()`. Returns 0</span>
+<span class="sd">        prior to calling capture.</span>
+
+<span class="sd">        :return: Width or 0 prior to calling capture</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="RenderCapture.getHeight"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.RenderCapture.getHeight">[docs]</a>    <span class="k">def</span> <span class="nf">getHeight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get height</span>
+
+<span class="sd">        To get height of captured image as set during `RenderCapture.capture()`. Returns</span>
+<span class="sd">        0 prior to calling capture.</span>
+
+<span class="sd">        :return: height or 0 prior to calling capture</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="RenderCapture.getAspectRatio"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.RenderCapture.getAspectRatio">[docs]</a>    <span class="k">def</span> <span class="nf">getAspectRatio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get aspect ratio of currently displayed video.</span>
+
+<span class="sd">        :return: Aspect ratio</span>
+
+<span class="sd">        This may be called prior to calling `RenderCapture.capture()`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+    
+<div class="viewcode-block" id="RenderCapture.getImageFormat"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.RenderCapture.getImageFormat">[docs]</a>    <span class="k">def</span> <span class="nf">getImageFormat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get image format</span>
+
+<span class="sd">        :return: Format of captured image: &#39;BGRA&#39;</span>
+
+<span class="sd">        @python_v17 Image will now always be returned in BGRA</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="RenderCapture.getImage"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.RenderCapture.getImage">[docs]</a>    <span class="k">def</span> <span class="nf">getImage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msecs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns captured image as a bytearray.</span>
+
+<span class="sd">        :param msecs: [opt] Milliseconds to wait. Waits 1000ms if not specified</span>
+<span class="sd">        :return: Captured image as a bytearray</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            The size of the image is m_width * m_height * 4</span>
+
+<span class="sd">        @python_v17 Added the option to specify wait time in msec.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytearray</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="RenderCapture.capture"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.RenderCapture.capture">[docs]</a>    <span class="k">def</span> <span class="nf">capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Issue capture request.</span>
+
+<span class="sd">        :param width: Width capture image should be rendered to</span>
+<span class="sd">        :param height: Height capture image should should be rendered to</span>
+
+<span class="sd">        @python_v17 Removed the option to pass **flags**</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+
+
+<div class="viewcode-block" id="log"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.log">[docs]</a><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">LOGDEBUG</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write a string to Kodi&#39;s log file and the debug window.</span>
+
+<span class="sd">    :param msg: string - text to output.</span>
+<span class="sd">    :param level: [opt] integer - log level to output at.(default=LOGDEBUG)</span>
+
+<span class="sd">    =============== ================================================================================</span>
+<span class="sd">    Value:          Description:</span>
+<span class="sd">    =============== ================================================================================</span>
+<span class="sd">    xbmc.LOGDEBUG   In depth information about the status of Kodi. This information can pretty much</span>
+<span class="sd">                    only be deciphered by a developer or long time Kodi power user.</span>
+<span class="sd">    xbmc.LOGINFO    Something has happened. It&#39;s not a problem, we just thought you might want</span>
+<span class="sd">                    to know. Fairly excessive output that most people won&#39;t care about.</span>
+<span class="sd">    xbmc.LOGWARNING Something potentially bad has happened. If Kodi did something you didn&#39;t expect,</span>
+<span class="sd">                    this is probably why. Watch for errors to follow.</span>
+<span class="sd">    xbmc.LOGERROR   This event is bad. Something has failed. You likely noticed problems with</span>
+<span class="sd">                    the application be it skin artifacts, failure of playback a crash, etc.</span>
+<span class="sd">    xbmc.LOGFATAL   We&#39;re screwed. Kodi is about to crash.</span>
+<span class="sd">    =============== ================================================================================</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Addon developers are advised to keep ``LOGDEBUG`` as the default</span>
+<span class="sd">        logging level and to use conservative logging (log only if</span>
+<span class="sd">        needed). Excessive logging makes it harder to debug kodi itself.</span>
+
+<span class="sd">    Logging in kodi has a global configuration level that controls how</span>
+<span class="sd">    text is written to the log. This global logging behaviour can be</span>
+<span class="sd">    changed in the GUI (**Settings -&gt; System -&gt; Logging**) (debug toggle)</span>
+<span class="sd">    or furthered configured in advancedsettings (loglevel setting).</span>
+<span class="sd">    Text is written to the log for the following conditions:</span>
+<span class="sd">    loglevel == -1 (NONE, nothing at all is logged to the log)</span>
+
+<span class="sd">    loglevel == 0 (NORMAL, shows ``LOGINFO``,``LOGWARNING``,``LOGERROR``</span>
+<span class="sd">    and ``LOGFATAL``) - Default kodi behaviour</span>
+
+<span class="sd">    loglevel == 1 (DEBUG, shows all) - Behaviour if you toggle debug log in the GUI</span>
+
+<span class="sd">    @python_v17 Default level changed from ``LOGNOTICE`` to ``LOGDEBUG``</span>
+
+<span class="sd">    @python_v19 Removed ``LOGNOTICE`` (use ``LOGINFO``) and ``LOGSEVERE`` (use ``LOGFATAL``)</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.log(msg=&#39;This is a test string.&#39;, level=xbmc.LOGDEBUG);</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="shutdown"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.shutdown">[docs]</a><span class="k">def</span> <span class="nf">shutdown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shutdown the htpc.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.shutdown()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="restart"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.restart">[docs]</a><span class="k">def</span> <span class="nf">restart</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Restart the htpc.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.restart()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="executescript"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.executescript">[docs]</a><span class="k">def</span> <span class="nf">executescript</span><span class="p">(</span><span class="n">script</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute a python script.</span>
+
+<span class="sd">    :param script: string - script filename to execute.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.executescript(&#39;special://home/scripts/update.py&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="executebuiltin"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.executebuiltin">[docs]</a><span class="k">def</span> <span class="nf">executebuiltin</span><span class="p">(</span><span class="n">function</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wait</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute a built in Kodi function.</span>
+
+<span class="sd">    :param function: string - builtin function to execute.</span>
+
+<span class="sd">    List of builtin functions</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.executebuiltin(&#39;Skin.SetString(abc,def)&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="executeJSONRPC"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.executeJSONRPC">[docs]</a><span class="k">def</span> <span class="nf">executeJSONRPC</span><span class="p">(</span><span class="n">jsonrpccommand</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute an JSONRPC command.</span>
+
+<span class="sd">    :param jsonrpccommand: string - jsonrpc command to execute.</span>
+<span class="sd">    :return: jsonrpc return string</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        response = xbmc.executeJSONRPC(&#39;{ &quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;method&quot;: &quot;JSONRPC.Introspect&quot;, &quot;id&quot;: 1 }&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="sleep"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.sleep">[docs]</a><span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="n">timemillis</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sleeps for &#39;time&#39; (msec).</span>
+
+<span class="sd">    :param time: integer - number of msec to sleep.</span>
+<span class="sd">    :raises TypeError: If time is not an integer.</span>
+
+<span class="sd">    This is useful if you need to sleep for a small amount of time (milisecond</span>
+<span class="sd">    range) somewhere in your addon logic. Please note that Kodi will attempt to stop</span>
+<span class="sd">    any running scripts when signaled to exit and wait for a maximum of 5 seconds</span>
+<span class="sd">    before trying to force stop your script. If your addon makes use</span>
+<span class="sd">    of `xbmc.sleep()` incorrectly (long periods of time, e.g. that exceed the force</span>
+<span class="sd">    stop waiting time) it may lead to Kodi hanging on shutdown. In case your addon</span>
+<span class="sd">    needs long sleep/idle periods use `xbmc.Monitor().waitForAbort(secs)` instead.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.sleep(2000) # sleeps for 2 seconds</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="getLocalizedString"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getLocalizedString">[docs]</a><span class="k">def</span> <span class="nf">getLocalizedString</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get a localized &#39;unicode string&#39;.</span>
+
+<span class="sd">    :param id: integer - id# for string you want to localize.</span>
+<span class="sd">    :return: Localized &#39;unicode string&#39;</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        See strings.po in``\language\{yourlanguage}\`` for which id you</span>
+<span class="sd">        need for a string.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        locstr = xbmc.getLocalizedString(6)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getSkinDir"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getSkinDir">[docs]</a><span class="k">def</span> <span class="nf">getSkinDir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the active skin directory.</span>
+
+<span class="sd">    :return: The active skin directory as a string</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This is not the full path like</span>
+<span class="sd">        &#39;special://home/addons/MediaCenter&#39;, but only &#39;MediaCenter&#39;.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        skindir = xbmc.getSkinDir()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getLanguage"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getLanguage">[docs]</a><span class="k">def</span> <span class="nf">getLanguage</span><span class="p">(</span><span class="nb">format</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">ENGLISH_NAME</span><span class="p">,</span> <span class="n">region</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the active language.</span>
+
+<span class="sd">    :param format: [opt] format of the returned language string</span>
+
+<span class="sd">    ================= ========================================================== </span>
+<span class="sd">    Value             Description                                                </span>
+<span class="sd">    ================= ========================================================== </span>
+<span class="sd">    xbmc.ISO_639_1    Two letter code as defined in ISO 639-1                    </span>
+<span class="sd">    xbmc.ISO_639_2    Three letter code as defined in ISO 639-2/T or ISO 639-2/B </span>
+<span class="sd">    xbmc.ENGLISH_NAME Full language name in English (default)                    </span>
+<span class="sd">    ================= ========================================================== </span>
+
+<span class="sd">    :param region: [opt] append the region delimited by &quot;-&quot; of the language (setting) to</span>
+<span class="sd">        the returned language string</span>
+<span class="sd">    :return: The active language as a string</span>
+
+<span class="sd">    @python_v13 Added new options **format** and **region**.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        language = xbmc.getLanguage(xbmc.ENGLISH_NAME)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getIPAddress"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getIPAddress">[docs]</a><span class="k">def</span> <span class="nf">getIPAddress</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the current ip address.</span>
+
+<span class="sd">    :return: The current ip address as a string</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        ip = xbmc.getIPAddress()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getDVDState"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getDVDState">[docs]</a><span class="k">def</span> <span class="nf">getDVDState</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the dvd state as an integer.</span>
+
+<span class="sd">    :return: Values for state are:</span>
+
+<span class="sd">    ===== ============================== </span>
+<span class="sd">    Value Name                           </span>
+<span class="sd">    ===== ============================== </span>
+<span class="sd">    1     xbmc.DRIVE_NOT_READY           </span>
+<span class="sd">    16    xbmc.TRAY_OPEN                 </span>
+<span class="sd">    64    xbmc.TRAY_CLOSED_NO_MEDIA      </span>
+<span class="sd">    96    xbmc.TRAY_CLOSED_MEDIA_PRESENT </span>
+<span class="sd">    ===== ============================== </span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        dvdstate = xbmc.getDVDState()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="getFreeMem"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getFreeMem">[docs]</a><span class="k">def</span> <span class="nf">getFreeMem</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get amount of free memory in MB.</span>
+
+<span class="sd">    :return: The amount of free memory in MB as an integer</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        freemem = xbmc.getFreeMem()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="getInfoLabel"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getInfoLabel">[docs]</a><span class="k">def</span> <span class="nf">getInfoLabel</span><span class="p">(</span><span class="n">cLine</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get a info label</span>
+
+<span class="sd">    :param infotag: string - infoTag for value you want returned.</span>
+<span class="sd">    :return: InfoLabel as a string</span>
+
+<span class="sd">    List of InfoTags - http://kodi.wiki/view/InfoLabels</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        label = xbmc.getInfoLabel(&#39;Weather.Conditions&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getInfoImage"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getInfoImage">[docs]</a><span class="k">def</span> <span class="nf">getInfoImage</span><span class="p">(</span><span class="n">infotag</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get filename including path to the InfoImage&#39;s thumbnail.</span>
+
+<span class="sd">    :param infotag: string - infotag for value you want returned</span>
+<span class="sd">    :return: Filename including path to the InfoImage&#39;s thumbnail as a string</span>
+
+<span class="sd">    List of InfoTags - http://kodi.wiki/view/InfoLabels</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        filename = xbmc.getInfoImage(&#39;Weather.Conditions&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="playSFX"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.playSFX">[docs]</a><span class="k">def</span> <span class="nf">playSFX</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">useCached</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plays a wav file by filename</span>
+
+<span class="sd">    :param filename: string - filename of the wav file to play</span>
+<span class="sd">    :param useCached: [opt] bool - False = Dump any previously cached wav associated with filename</span>
+
+<span class="sd">    @python_v14 Added new option **useCached**.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.playSFX(&#39;special://xbmc/scripts/dingdong.wav&#39;)</span>
+<span class="sd">        xbmc.playSFX(&#39;special://xbmc/scripts/dingdong.wav&#39;,False)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="stopSFX"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.stopSFX">[docs]</a><span class="k">def</span> <span class="nf">stopSFX</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stops wav file</span>
+
+<span class="sd">    @python_v14 New function added.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.stopSFX()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="enableNavSounds"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.enableNavSounds">[docs]</a><span class="k">def</span> <span class="nf">enableNavSounds</span><span class="p">(</span><span class="n">yesNo</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enables/Disables nav sounds</span>
+
+<span class="sd">    :param yesNo: bool - enable (True) or disable (False) nav sounds</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.enableNavSounds(True)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="getCondVisibility"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getCondVisibility">[docs]</a><span class="k">def</span> <span class="nf">getCondVisibility</span><span class="p">(</span><span class="n">condition</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get visibility conditions</span>
+
+<span class="sd">    :param condition: string - condition to check</span>
+<span class="sd">    :return: True (if the condition is verified) or False (otherwise)</span>
+
+<span class="sd">    List of boolean conditions</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        You can combine two (or more) of the above settings by</span>
+<span class="sd">        using ``+`` as an AND operator, ``|`` as an OR operator, ``!``</span>
+<span class="sd">        as a NOT operator, and ``[`` and ``]`` to bracket expressions.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        visible = xbmc.getCondVisibility(&#39;[Control.IsVisible(41) + !Control.IsVisible(12)]&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="getGlobalIdleTime"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getGlobalIdleTime">[docs]</a><span class="k">def</span> <span class="nf">getGlobalIdleTime</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the elapsed idle time in seconds.</span>
+
+<span class="sd">    :return: Elapsed idle time in seconds as an integer</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        t = xbmc.getGlobalIdleTime()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="getCacheThumbName"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getCacheThumbName">[docs]</a><span class="k">def</span> <span class="nf">getCacheThumbName</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get thumb cache filename.</span>
+
+<span class="sd">    :param path: string - path to file</span>
+<span class="sd">    :return: Thumb cache filename</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        thumb = xbmc.getCacheThumbName(&#39;f:\\videos\\movie.avi&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="translatePath"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.translatePath">[docs]</a><span class="k">def</span> <span class="nf">translatePath</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the translated path.</span>
+
+<span class="sd">    :param path: string - Path to format</span>
+<span class="sd">    :return: Translated path</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Only useful if you are coding for both Linux and Windows. e.g.</span>
+<span class="sd">        Converts &#39;special://home&#39; -&gt; &#39;/home/[username]/.kodi&#39; on Linux.</span>
+
+<span class="sd">    @python_v19 Deprecated **xbmc.translatePath**. Moved to **xbmcvfs.translatePath**</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        fpath = xbmc.translatePath(&#39;special://home&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getCleanMovieTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getCleanMovieTitle">[docs]</a><span class="k">def</span> <span class="nf">getCleanMovieTitle</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                       <span class="n">usefoldername</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get clean movie title and year string if available.</span>
+
+<span class="sd">    :param path: string - String to clean</span>
+<span class="sd">    :param usefoldername: [opt] bool - use folder names (defaults to false)</span>
+<span class="sd">    :return: Clean movie title and year string if available.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        title, year = xbmc.getCleanMovieTitle(&#39;/path/to/moviefolder/test.avi&#39;, True)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getRegion"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getRegion">[docs]</a><span class="k">def</span> <span class="nf">getRegion</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns your regions setting as a string for the specified id.</span>
+
+<span class="sd">    :param id: string - id of setting to return</span>
+<span class="sd">    :return: Region setting</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        choices are (dateshort, datelong, time, meridiem, tempunit,</span>
+<span class="sd">        speedunit) You can use the above as keywords for arguments.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        date_long_format = xbmc.getRegion(&#39;datelong&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="getSupportedMedia"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getSupportedMedia">[docs]</a><span class="k">def</span> <span class="nf">getSupportedMedia</span><span class="p">(</span><span class="n">mediaType</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the supported file types for the specific media.</span>
+
+<span class="sd">    :param media: string - media type</span>
+<span class="sd">    :return: Supported file types for the specific media as a string</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Media type can be (video, music, picture). The return value is a</span>
+<span class="sd">        pipe separated string of filetypes (eg. &#39;.mov |.avi&#39;).  You can</span>
+<span class="sd">        use the above as keywords for arguments.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        mTypes = xbmc.getSupportedMedia(&#39;video&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="skinHasImage"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.skinHasImage">[docs]</a><span class="k">def</span> <span class="nf">skinHasImage</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check skin for presence of Image.</span>
+
+<span class="sd">    :param image: string - image filename</span>
+<span class="sd">    :return: True if the image file exists in the skin</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        If the media resides in a subfolder include it. (eg. home - myfiles\home-myfiles2.png).</span>
+<span class="sd">        You can use the above as keywords for arguments.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        exists = xbmc.skinHasImage(&#39;ButtonFocusedTexture.png&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="startServer"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.startServer">[docs]</a><span class="k">def</span> <span class="nf">startServer</span><span class="p">(</span><span class="n">iTyp</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bStart</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">bWait</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start or stop a server.</span>
+
+<span class="sd">    :param typ: integer - use SERVER_* constants  Used format of the returned language string</span>
+
+<span class="sd">    ========================= ====================================================================== </span>
+<span class="sd">    Value                     Description                                                            </span>
+<span class="sd">    ========================= ====================================================================== </span>
+<span class="sd">    xbmc.SERVER_WEBSERVER     To control Kodi&#39;s builtin webserver                                    </span>
+<span class="sd">    xbmc.SERVER_AIRPLAYSERVER AirPlay is a proprietary protocol stack/suite developed by Apple Inc.  </span>
+<span class="sd">    xbmc.SERVER_JSONRPCSERVER Control JSON-RPC HTTP/TCP socket-based interface                       </span>
+<span class="sd">    xbmc.SERVER_UPNPRENDERER  UPnP client (aka UPnP renderer)                                        </span>
+<span class="sd">    xbmc.SERVER_UPNPSERVER    Control built-in UPnP A/V media server (UPnP-server)                   </span>
+<span class="sd">    xbmc.SERVER_EVENTSERVER   Set eventServer part that accepts remote device input on all platforms </span>
+<span class="sd">    xbmc.SERVER_ZEROCONF      Control Kodi&#39;s Avahi Zeroconf                                          </span>
+<span class="sd">    ========================= ====================================================================== </span>
+
+<span class="sd">    :param bStart: bool - start (True) or stop (False) a server</span>
+<span class="sd">    :param bWait: [opt] bool - wait on stop before returning (not supported by all servers)</span>
+<span class="sd">    :return: bool - True or False</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.startServer(xbmc.SERVER_AIRPLAYSERVER, False)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="audioSuspend"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.audioSuspend">[docs]</a><span class="k">def</span> <span class="nf">audioSuspend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Suspend Audio engine.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.audioSuspend()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="audioResume"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.audioResume">[docs]</a><span class="k">def</span> <span class="nf">audioResume</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Resume Audio engine.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.audioResume()</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="getUserAgent"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.getUserAgent">[docs]</a><span class="k">def</span> <span class="nf">getUserAgent</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns Kodi&#39;s HTTP UserAgent string</span>
+
+<span class="sd">    :return: HTTP user agent</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        xbmc.getUserAgent()</span>
+<span class="sd">        ..</span>
+
+<span class="sd">    example output: ``Kodi/17.0-ALPHA1 (X11; Linux x86_64) Ubuntu/15.10 App_Bitness/64 Version/17.0-ALPHA1-Git:2015-12-23-5770d28``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="convertLanguage"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.convertLanguage">[docs]</a><span class="k">def</span> <span class="nf">convertLanguage</span><span class="p">(</span><span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the given language converted to the given format as a string.</span>
+
+<span class="sd">    :param language: string either as name in English, two letter code (ISO 639-1), or</span>
+<span class="sd">        three letter code (ISO 639-2/T(B)</span>
+<span class="sd">    :param format: format of the returned language string</span>
+
+<span class="sd">    ================= ========================================================== </span>
+<span class="sd">    Value             Description                                                </span>
+<span class="sd">    ================= ========================================================== </span>
+<span class="sd">    xbmc.ISO_639_1    Two letter code as defined in ISO 639-1                    </span>
+<span class="sd">    xbmc.ISO_639_2    Three letter code as defined in ISO 639-2/T or ISO 639-2/B </span>
+<span class="sd">    xbmc.ENGLISH_NAME Full language name in English (default)                    </span>
+<span class="sd">    ================= ========================================================== </span>
+
+<span class="sd">    :return: Converted Language string</span>
+
+<span class="sd">    @python_v13 New function added.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        language = xbmc.convertLanguage(English, xbmc.ISO_639_2)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Kodistubs</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=Kodistubs&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../using.html">Using Kodistubs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Kodi Python API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/Kodistubs" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
