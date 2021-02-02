@@ -44,7 +44,13 @@ class File:
     
     def __init__(self, filepath: str, mode: Optional[str] = None) -> None:
         pass
-    
+
+    def __enter__(self):  # Required for context manager
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):  # Required for context manager
+        pass
+
     def read(self, numBytes: int = 0) -> str:
         """
         Read file parts as string.
