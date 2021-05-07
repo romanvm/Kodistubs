@@ -2294,7 +2294,6 @@ class Dialog:
               message: str,
               nolabel: str = "",
               yeslabel: str = "",
-              customlabel: str = "",
               autoclose: int = 0) -> bool:
         """
         **Yes / no dialog**
@@ -2306,7 +2305,6 @@ class Dialog:
         :param message: string or unicode - message text.
         :param nolabel: [opt] label to put on the no button.
         :param yeslabel: [opt] label to put on the yes button.
-        :param customlabel: [opt] label to put on the custom button.
         :param autoclose: [opt] integer - milliseconds to autoclose dialog. (default=do not
             autoclose)
         :return: Returns True if 'Yes' was pressed, else False.
@@ -2319,8 +2317,6 @@ class Dialog:
 
         @python_v19 Removed option **line3**.
 
-        @python_v19 Added new option**customlabel**.
-
         Example::
 
             ..
@@ -2329,7 +2325,41 @@ class Dialog:
             ..
         """
         return True
-    
+
+    def yesnocustom(self, heading: str,
+              message: str,
+              customlabel: str,
+              nolabel: str = "",
+              yeslabel: str = "",
+              autoclose: int = 0) -> int:
+        """
+        **Yes / no / custom dialog**
+
+        The YesNoCustom dialog can be used to inform the user about questions and get the
+        answer. The dialog provides a third button appart from yes and no. Button labels
+        are fully customizable.
+
+        :param heading: string or unicode - dialog heading.
+        :param message: string or unicode - message text.
+        :param customlabel: [opt] label to put on the custom button.
+        :param nolabel: [opt] label to put on the no button.
+        :param yeslabel: [opt] label to put on the yes button.
+        :param autoclose: [opt] integer - milliseconds to autoclose dialog. (default=do not
+            autoclose)
+        :return: Returns the integer value for the selected button (-1:cancelled, 0:no,
+            1:yes, 2:custom)
+
+        @python_v19 New function added.
+
+        Example::
+
+            ..
+            dialog = xbmcgui.Dialog()
+            ret = dialog.yesnocustom('Kodi', 'Question?', 'Maybe')
+            ..
+        """
+        return 1
+
     def info(self, item: 'ListItem') -> bool:
         """
         **Info dialog**
