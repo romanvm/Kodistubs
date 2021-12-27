@@ -1846,7 +1846,7 @@ def executebuiltin(function: str, wait: bool = False) -> None:
 
     :param function: string - builtin function to execute.
 
-    List of builtin functions
+    List of builtin functions: https://kodi.wiki/view/List_of_built-in_functions
 
     Example::
 
