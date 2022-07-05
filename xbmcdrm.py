@@ -58,10 +58,10 @@ class CryptoSession:
                  macAlgorithm: str) -> None:
         pass
     
-    def GetKeyRequest(self, init: Union[str,  bytes,  bytearray],
+    def GetKeyRequest(self, init: Union[str, bytes, bytearray],
                       mimeType: str,
                       offlineKey: bool,
-                      optionalParameters: Dict[str,  str]) -> bytearray:
+                      optionalParameters: Dict[str, str]) -> bytearray:
         """
         Generate a key request
 
@@ -94,14 +94,14 @@ class CryptoSession:
         """
         Request a system specific property value of the DRM system.
 
-        :param name: string - Name of the property to query
+        :param Name: string - Name of the property to query
         :return: Value of the requested property
 
         @python_v18 New function added.
         """
         return ""
     
-    def ProvideKeyResponse(self, response: Union[str,  bytes,  bytearray]) -> str:
+    def ProvideKeyResponse(self, response: Union[str, bytes, bytearray]) -> str:
         """
         Provide a key response
 
@@ -148,9 +148,9 @@ class CryptoSession:
         """
         pass
     
-    def Decrypt(self, cipherKeyId: Union[str,  bytes,  bytearray],
-                input: Union[str,  bytes,  bytearray],
-                iv: Union[str,  bytes,  bytearray]) -> bytearray:
+    def Decrypt(self, cipherKeyId: Union[str, bytes, bytearray],
+                input: Union[str, bytes, bytearray],
+                iv: Union[str, bytes, bytearray]) -> bytearray:
         """
         Decrypt an encrypted data by using session keys.
 
@@ -165,9 +165,9 @@ class CryptoSession:
         """
         return bytearray()
     
-    def Encrypt(self, cipherKeyId: Union[str,  bytes,  bytearray],
-                input: Union[str,  bytes,  bytearray],
-                iv: Union[str,  bytes,  bytearray]) -> bytearray:
+    def Encrypt(self, cipherKeyId: Union[str, bytes, bytearray],
+                input: Union[str, bytes, bytearray],
+                iv: Union[str, bytes, bytearray]) -> bytearray:
         """
         Encrypt data by using session keys.
 
@@ -182,8 +182,8 @@ class CryptoSession:
         """
         return bytearray()
     
-    def Sign(self, macKeyId: Union[str,  bytes,  bytearray],
-             message: Union[str,  bytes,  bytearray]) -> bytearray:
+    def Sign(self, macKeyId: Union[str, bytes, bytearray],
+             message: Union[str, bytes, bytearray]) -> bytearray:
         """
         Generate a DRM encrypted signature for a text message.
 
@@ -197,9 +197,9 @@ class CryptoSession:
         """
         return bytearray()
     
-    def Verify(self, macKeyId: Union[str,  bytes,  bytearray],
-               message: Union[str,  bytes,  bytearray],
-               signature: Union[str,  bytes,  bytearray]) -> bool:
+    def Verify(self, macKeyId: Union[str, bytes, bytearray],
+               message: Union[str, bytes, bytearray],
+               signature: Union[str, bytes, bytearray]) -> bool:
         """
         Verify the validity of a DRM signature of a text message.
 

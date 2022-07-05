@@ -18,7 +18,7 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 autosummary_generate = True
-intersphinx_mapping = {'https://docs.python.org/3.8': None}
+intersphinx_mapping = {'https://docs.python.org/3.10': None}
 
 templates_path = ['_templates']
 
@@ -32,7 +32,7 @@ author = kodistubs_meta.AUTHOR
 
 version = kodistubs_meta.VERSION
 
-language = None
+language = 'en'
 
 exclude_patterns = ['_build']
 

@@ -2,11 +2,13 @@
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
 """
-**Kodi's addon class**
+**Kodi's addon class.**
 """
-from typing import Optional
+from typing import List, Optional
 
 __kodistubs__ = True
+
+
 
 
 class Addon:
@@ -53,10 +55,26 @@ class Addon:
         Example::
 
             ..
-            locstr = self.Addon.getLocalizedString(32000)
+            locstr = self.Addon.`getLocalizedString`(32000)
             ..
         """
         return ""
+    
+    def getSettings(self) -> 'Settings':
+        """
+        Returns a wrapper around the addon's settings.
+
+        :return: `Settings` wrapper
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings = self.Addon.getSettings()
+            ..
+        """
+        return Settings()
     
     def getSetting(self, id: str) -> str:
         """
@@ -85,6 +103,8 @@ class Addon:
 
         @python_v18 New function added.
 
+        @python_v20 Deprecated. Use **`Settings.getBool()`** instead.
+
         Example::
 
             ..
@@ -101,6 +121,8 @@ class Addon:
         :return: Setting as an integer
 
         @python_v18 New function added.
+
+        @python_v20 Deprecated. Use **`Settings.getInt()`** instead.
 
         Example::
 
@@ -119,6 +141,8 @@ class Addon:
 
         @python_v18 New function added.
 
+        @python_v20 Deprecated. Use **`Settings.getNumber()`** instead.
+
         Example::
 
             ..
@@ -135,6 +159,8 @@ class Addon:
         :return: Setting as a string
 
         @python_v18 New function added.
+
+        @python_v20 Deprecated. Use **`Settings.getString()`** instead.
 
         Example::
 
@@ -160,7 +186,7 @@ class Addon:
         Example::
 
             ..
-            self.Addon.setSetting(id='username', value='teamkodi')
+            self.Addon.`setSetting`(id='username', value='teamkodi')
             ..
         """
         pass
@@ -177,6 +203,8 @@ class Addon:
             You can use the above as keywords for arguments.
 
         @python_v18 New function added.
+
+        @python_v20 Deprecated. Use **`Settings.setBool()`** instead.
 
         Example::
 
@@ -199,6 +227,8 @@ class Addon:
 
         @python_v18 New function added.
 
+        @python_v20 Deprecated. Use **`Settings.setInt()`** instead.
+
         Example::
 
             ..
@@ -220,6 +250,8 @@ class Addon:
 
         @python_v18 New function added.
 
+        @python_v20 Deprecated. Use **`Settings.setNumber()`** instead.
+
         Example::
 
             ..
@@ -240,6 +272,8 @@ class Addon:
             You can use the above as keywords for arguments.
 
         @python_v18 New function added.
+
+        @python_v20 Deprecated. Use **`Settings.setString()`** instead.
 
         Example::
 
@@ -285,3 +319,324 @@ class Addon:
             ..
         """
         return ""
+    
+
+class Settings:
+    """
+    **Add-on settings**
+
+    This wrapper provides access to the settings specific to an add-on. It supports
+    reading and writing specific setting values.
+
+    @python_v20 New class added.
+
+    Example::
+
+        ...
+        settings = xbmcaddon.Addon('id').getSettings()
+        ...
+    """
+    
+    def getBool(self, id: str) -> bool:
+        """
+        Returns the value of a setting as a boolean.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: bool - Setting as a boolean
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            enabled = settings.getBool('enabled')
+            ..
+        """
+        return True
+    
+    def getInt(self, id: str) -> int:
+        """
+        Returns the value of a setting as an integer.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: integer - Setting as an integer
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            max = settings.getInt('max')
+            ..
+        """
+        return 0
+    
+    def getNumber(self, id: str) -> float:
+        """
+        Returns the value of a setting as a floating point number.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: float - Setting as a floating point number
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            max = settings.getNumber('max')
+            ..
+        """
+        return 0.0
+    
+    def getString(self, id: str) -> str:
+        """
+        Returns the value of a setting as a unicode string.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: string - Setting as a unicode string
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            apikey = settings.getString('apikey')
+            ..
+        """
+        return ""
+    
+    def getBoolList(self, id: str) -> List[bool]:
+        """
+        Returns the value of a setting as a list of booleans.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: list - Setting as a list of booleans
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            enabled = settings.getBoolList('enabled')
+            ..
+        """
+        return [True]
+    
+    def getIntList(self, id: str) -> List[int]:
+        """
+        Returns the value of a setting as a list of integers.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: list - Setting as a list of integers
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            ids = settings.getIntList('ids')
+            ..
+        """
+        return [0]
+    
+    def getNumberList(self, id: str) -> List[float]:
+        """
+        Returns the value of a setting as a list of floating point numbers.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: list - Setting as a list of floating point numbers
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            max = settings.getNumberList('max')
+            ..
+        """
+        return [0.0]
+    
+    def getStringList(self, id: str) -> List[str]:
+        """
+        Returns the value of a setting as a list of unicode strings.
+
+        :param id: string - id of the setting that the module needs to access.
+        :return: list - Setting as a list of unicode strings
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            views = settings.getStringList('views')
+            ..
+        """
+        return [""]
+    
+    def setBool(self, id: str, value: bool) -> None:
+        """
+        Sets the value of a setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param value: bool - value of the setting.
+        :return: bool - True if the value of the setting was set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setBool(id='enabled', value=True)
+            ..
+        """
+        pass
+    
+    def setInt(self, id: str, value: int) -> None:
+        """
+        Sets the value of a setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param value: integer - value of the setting.
+        :return: bool - True if the value of the setting was set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setInt(id='max', value=5)
+            ..
+        """
+        pass
+    
+    def setNumber(self, id: str, value: float) -> None:
+        """
+        Sets the value of a setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param value: float - value of the setting.
+        :return: bool - True if the value of the setting was set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setNumber(id='max', value=5.5)
+            ..
+        """
+        pass
+    
+    def setString(self, id: str, value: str) -> None:
+        """
+        Sets the value of a setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param value: string or unicode - value of the setting.
+        :return: bool - True if the value of the setting was set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setString(id='username', value='teamkodi')
+            ..
+        """
+        pass
+    
+    def setBoolList(self, id: str, values: List[bool]) -> None:
+        """
+        Sets the boolean values of a list setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param values: list of boolean - values of the setting.
+        :return: bool - True if the values of the setting were set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setBoolList(id='enabled', values=[ True, False ])
+            ..
+        """
+        pass
+    
+    def setIntList(self, id: str, values: List[int]) -> None:
+        """
+        Sets the integer values of a list setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param values: list of int - values of the setting.
+        :return: bool - True if the values of the setting were set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setIntList(id='max', values=[ 5, 23 ])
+            ..
+        """
+        pass
+    
+    def setNumberList(self, id: str, values: List[float]) -> None:
+        """
+        Sets the floating point values of a list setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param values: list of float - values of the setting.
+        :return: bool - True if the values of the setting were set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setNumberList(id='max', values=[ 5.5, 5.8 ])
+            ..
+        """
+        pass
+    
+    def setStringList(self, id: str, values: List[str]) -> None:
+        """
+        Sets the string values of a list setting.
+
+        :param id: string - id of the setting that the module needs to access.
+        :param values: list of string or unicode - values of the setting.
+        :return: bool - True if the values of the setting were set, false otherwise
+
+        .. note::
+            You can use the above as keywords for arguments.
+
+        @python_v20 New function added.
+
+        Example::
+
+            ..
+            settings.setStringList(id='username', values=[ 'team', 'kodi' ])
+            ..
+        """
+        pass

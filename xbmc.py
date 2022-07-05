@@ -9,42 +9,221 @@ playing and that allow manipulation of the media player (such as starting a new
 song). You can also find system information using the functions available in
 this library.
 """
-from typing import Union, List, Tuple, Optional
+from typing import Union, List, Dict, Tuple, Optional
 
 __kodistubs__ = True
 
-DRIVE_NOT_READY = 1
-ENGLISH_NAME = 2
-ISO_639_1 = 0
-ISO_639_2 = 1
-LOGDEBUG = 0
-LOGERROR = 3
-LOGFATAL = 4
-LOGINFO = 1
-LOGNONE = 5
-LOGWARNING = 2
+SERVER_WEBSERVER = 0
+SERVER_AIRPLAYSERVER = 0
+SERVER_UPNPSERVER = 0
+SERVER_UPNPRENDERER = 0
+SERVER_EVENTSERVER = 0
+SERVER_JSONRPCSERVER = 0
+SERVER_ZEROCONF = 0
 PLAYLIST_MUSIC = 0
-PLAYLIST_VIDEO = 1
-SERVER_AIRPLAYSERVER = 2
-SERVER_EVENTSERVER = 6
-SERVER_JSONRPCSERVER = 3
-SERVER_UPNPRENDERER = 4
-SERVER_UPNPSERVER = 5
-SERVER_WEBSERVER = 1
-SERVER_ZEROCONF = 7
-TRAY_CLOSED_MEDIA_PRESENT = 96
-TRAY_CLOSED_NO_MEDIA = 64
-TRAY_OPEN = 16
+PLAYLIST_VIDEO = 0
+TRAY_OPEN = 0
+DRIVE_NOT_READY = 0
+TRAY_CLOSED_NO_MEDIA = 0
+TRAY_CLOSED_MEDIA_PRESENT = 0
+LOGDEBUG = 0
+LOGINFO = 0
+LOGWARNING = 0
+LOGERROR = 0
+LOGFATAL = 0
+LOGNONE = 0
+ISO_639_1 = 0
+ISO_639_2 = 0
+ENGLISH_NAME = 0
 
+
+class InfoTagGame:
+    """
+    **Kodi's game info tag class.**
+
+    Access and / or modify the game metadata of a ListItem.
+
+    @python_v20 New class added.
+
+    Example::
+
+        ...
+        tag = item.getGameInfoTag()
+        
+        title = tag.getTitle()
+        tag.setDeveloper('John Doe')
+        ...
+    """
+    
+    def __init__(self, offscreen: bool = False) -> None:
+        pass
+    
+    def getTitle(self) -> str:
+        """
+        Gets the title of the game.
+
+        :return: [string] title
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getPlatform(self) -> str:
+        """
+        Gets the platform on which the game is run.
+
+        :return: [string] platform
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getGenres(self) -> List[str]:
+        """
+        Gets the genres of the game.
+
+        :return: [list] genres
+
+        @python_v20 New function added.
+        """
+        return [""]
+    
+    def getPublisher(self) -> str:
+        """
+        Gets the publisher of the game.
+
+        :return: [string] publisher
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getDeveloper(self) -> str:
+        """
+        Gets the developer of the game.
+
+        :return: [string] developer
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getOverview(self) -> str:
+        """
+        Gets the overview of the game.
+
+        :return: [string] overview
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getYear(self) -> int:
+        """
+        Gets the year in which the game was published.
+
+        :return: [integer] year
+
+        @python_v20 New function added.
+        """
+        return 0
+    
+    def getGameClient(self) -> str:
+        """
+        Gets the add-on ID of the game client executing the game.
+
+        :return: [string] game client
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def setTitle(self, title: str) -> None:
+        """
+        Sets the title of the game.
+
+        :param title: string - title.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPlatform(self, platform: str) -> None:
+        """
+        Sets the platform on which the game is run.
+
+        :param platform: string - platform.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setGenres(self, genres: List[str]) -> None:
+        """
+        Sets the genres of the game.
+
+        :param genres: list - genres.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPublisher(self, publisher: str) -> None:
+        """
+        Sets the publisher of the game.
+
+        :param publisher: string - publisher.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDeveloper(self, developer: str) -> None:
+        """
+        Sets the developer of the game.
+
+        :param developer: string - title.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setOverview(self, overview: str) -> None:
+        """
+        Sets the overview of the game.
+
+        :param overview: string - overview.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setYear(self, year: int) -> None:
+        """
+        Sets the year in which the game was published.
+
+        :param year: integer - year.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setGameClient(self, gameClient: str) -> None:
+        """
+        Sets the add-on ID of the game client executing the game.
+
+        :param gameClient: string - game client.
+
+        @python_v20 New function added.
+        """
+        pass
+    
 
 class InfoTagMusic:
     """
     **Kodi's music info tag class.**
 
-    To get music info tag data of currently played source.
-
-    .. note::
-        Info tag load is only be possible from present player class.
+    Access and / or modify the music metadata of a ListItem.
 
     Example::
 
@@ -56,7 +235,7 @@ class InfoTagMusic:
         ...
     """
     
-    def __init__(self) -> None:
+    def __init__(self, offscreen: bool = False) -> None:
         pass
     
     def getDbId(self) -> int:
@@ -134,14 +313,36 @@ class InfoTagMusic:
         Returns the genre name from music tag as string if present.
 
         :return: [string] Genre name
+
+        @python_v20 Deprecated. Use **`getGenres()`** instead.
         """
         return ""
+    
+    def getGenres(self) -> List[str]:
+        """
+        Returns the list of genres from music tag if present.
+
+        :return: [list]`List` of genres
+
+        @python_v20 New function added.
+        """
+        return [""]
     
     def getDuration(self) -> int:
         """
         Returns the duration of music as integer from info tag.
 
         :return: [integer] Duration
+        """
+        return 0
+    
+    def getYear(self) -> int:
+        """
+        Returns the year of music as integer from info tag.
+
+        :return: [integer] Year
+
+        @python_v20 New function added.
         """
         return 0
     
@@ -206,6 +407,18 @@ class InfoTagMusic:
         Returns last played time as string from music info tag.
 
         :return: [string] Last played date / time on tag
+
+        @python_v20 Deprecated. Use **`getLastPlayedAsW3C()`** instead.
+        """
+        return ""
+    
+    def getLastPlayedAsW3C(self) -> str:
+        """
+        Returns last played time as string in W3C format (YYYY-MM-DDThh:mm:ssTZD).
+
+        :return: [string] Last played datetime (W3C)
+
+        @python_v20 New function added.
         """
         return ""
     
@@ -274,6 +487,326 @@ class InfoTagMusic:
         @python_v19 New function added.
         """
         return [""]
+    
+    def setDbId(self, dbId: int, type: str) -> None:
+        """
+        Set the database identifier of the music item.
+
+        :param dbId: integer - Database identifier.
+        :param type: string - Media type of the item.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setURL(self, url: str) -> None:
+        """
+        Set the URL of the music item.
+
+        :param url: string - URL.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMediaType(self, mediaType: str) -> None:
+        """
+        Set the media type of the music item.
+
+        :param mediaType: string - Media type.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTrack(self, track: int) -> None:
+        """
+        Set the track number of the song.
+
+        :param track: integer - Track number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDisc(self, disc: int) -> None:
+        """
+        Set the disc number of the song.
+
+        :param disc: integer - Disc number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDuration(self, duration: int) -> None:
+        """
+        Set the duration of the song.
+
+        :param duration: integer - Duration in seconds.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setYear(self, year: int) -> None:
+        """
+        Set the year of the music item.
+
+        :param year: integer - Year.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setReleaseDate(self, releaseDate: str) -> None:
+        """
+        Set the release date of the music item.
+
+        :param releaseDate: string - Release date in ISO8601 format (YYYY, YYYY-MM or YYYY-MM-DD).
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setListeners(self, listeners: int) -> None:
+        """
+        Set the number of listeners of the music item.
+
+        :param listeners: integer - Number of listeners.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPlayCount(self, playcount: int) -> None:
+        """
+        Set the playcount of the music item.
+
+        :param playcount: integer - Playcount.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setGenres(self, genres: List[str]) -> None:
+        """
+        Set the genres of the music item.
+
+        :param genres: list - Genres.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setAlbum(self, album: str) -> None:
+        """
+        Set the album of the music item.
+
+        :param album: string - Album.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setArtist(self, artist: str) -> None:
+        """
+        Set the artist(s) of the music item.
+
+        :param artist: string - Artist(s).
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setAlbumArtist(self, albumArtist: str) -> None:
+        """
+        Set the album artist(s) of the music item.
+
+        :param albumArtist: string - Album artist(s).
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTitle(self, title: str) -> None:
+        """
+        Set the title of the music item.
+
+        :param title: string - Title.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setRating(self, rating: float) -> None:
+        """
+        Set the rating of the music item.
+
+        :param rating: float - Rating.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setUserRating(self, userrating: int) -> None:
+        """
+        Set the user rating of the music item.
+
+        :param userrating: integer - User rating.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setLyrics(self, lyrics: str) -> None:
+        """
+        Set the lyrics of the song.
+
+        :param lyrics: string - Lyrics.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setLastPlayed(self, lastPlayed: str) -> None:
+        """
+        Set the last played date of the music item.
+
+        :param lastPlayed: string - Last played date (YYYY-MM-DD HH:MM:SS).
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMusicBrainzTrackID(self, musicBrainzTrackID: str) -> None:
+        """
+        Set the MusicBrainz track ID of the song.
+
+        :param musicBrainzTrackID: string - MusicBrainz track ID.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMusicBrainzArtistID(self, musicBrainzArtistID: List[str]) -> None:
+        """
+        Set the MusicBrainz artist IDs of the music item.
+
+        :param musicBrainzArtistID: list - MusicBrainz artist IDs.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMusicBrainzAlbumID(self, musicBrainzAlbumID: str) -> None:
+        """
+        Set the MusicBrainz album ID of the music item.
+
+        :param musicBrainzAlbumID: string - MusicBrainz album ID.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMusicBrainzReleaseGroupID(self, musicBrainzReleaseGroupID: str) -> None:
+        """
+        Set the MusicBrainz release group ID of the music item.
+
+        :param musicBrainzReleaseGroupID: string - MusicBrainz release group ID.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMusicBrainzAlbumArtistID(self, musicBrainzAlbumArtistID: List[str]) -> None:
+        """
+        Set the MusicBrainz album artist IDs of the music item.
+
+        :param musicBrainzAlbumArtistID: list - MusicBrainz album artist IDs.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setComment(self, comment: str) -> None:
+        """
+        Set the comment of the music item.
+
+        :param comment: string - Comment.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+
+class InfoTagPicture:
+    """
+    **Kodi's picture info tag class.**
+
+    Access and / or modify the picture metadata of a ListItem.
+
+    @python_v20 New class added.
+
+    Example::
+
+        ...
+        tag = item.getPictureInfoTag()
+        
+        datetime_taken  = tag.getDateTimeTaken()
+        tag.setResolution(1920, 1080)
+        ...
+    """
+    
+    def __init__(self, offscreen: bool = False) -> None:
+        pass
+    
+    def getResolution(self) -> str:
+        """
+        Get the resolution of the picture in the format "w x h".
+
+        :return: [string] Resolution of the picture in the format "w x h".
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def setResolution(self, width: int, height: int) -> None:
+        """
+        Sets the resolution of the picture.
+
+        :param width: int - Width of the picture in pixels.
+        :param height: int - Height of the picture in pixels.
+        
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDateTimeTaken(self, datetimetaken: str) -> None:
+        """
+        Sets the date and time at which the picture was taken in W3C format. The
+        following formats are supported:
+
+        YYYY
+
+        YYYY-MM-DD
+
+        YYYY-MM-DDThh:mm[TZD]
+
+        YYYY-MM-DDThh:mm:ss[TZD] where the timezone (TZD) is always optional and can be
+        in one of the following formats:
+
+        Z (for UTC)
+
+        +hh:mm
+
+        -hh:mm
+
+        :param datetimetaken: string - Date and time at which the picture was taken in W3C format.
+
+        @python_v20 New function added.
+        """
+        pass
     
 
 class InfoTagRadioRDS:
@@ -533,14 +1066,423 @@ class InfoTagRadioRDS:
         return ""
     
 
+class Actor:
+    """
+    **`Actor` class used in combination with `InfoTagVideo`.**
+
+    Represents a single actor in the cast of a video item wrapped by `InfoTagVideo`.
+
+    @python_v20 New class added.
+
+    Example::
+
+        ...
+        actor = xbmc.Actor('Sean Connery', 'James Bond', order=1)
+        ...
+    """
+    
+    def __init__(self, name: str = "",
+                 role: str = "",
+                 order: int = -1,
+                 thumbnail: str = "") -> None:
+        pass
+    
+    def getName(self) -> str:
+        """
+        Get the name of the actor.
+
+        :return: [string] Name of the actor
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getRole(self) -> str:
+        """
+        Get the role of the actor in the specific video item.
+
+        :return: [string] Role of the actor in the specific video item
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getOrder(self) -> int:
+        """
+        Get the order of the actor in the cast of the specific video item.
+
+        :return: [integer] Order of the actor in the cast of the specific video item
+
+        @python_v20 New function added.
+        """
+        return 0
+    
+    def getThumbnail(self) -> str:
+        """
+        Get the path / URL to the thumbnail of the actor.
+
+        :return: [string] Path / URL to the thumbnail of the actor
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def setName(self, name: str) -> None:
+        """
+        Set the name of the actor.
+
+        :param name: string - Name of the actor.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setRole(self, role: str) -> None:
+        """
+        Set the role of the actor in the specific video item.
+
+        :param role: string - Role of the actor in the specific video item.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setOrder(self, order: int) -> None:
+        """
+        Set the order of the actor in the cast of the specific video item.
+
+        :param order: integer - Order of the actor in the cast of the specific video item.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setThumbnail(self, thumbnail: str) -> None:
+        """
+        Set the path / URL to the thumbnail of the actor.
+
+        :param thumbnail: string - Path / URL to the thumbnail of the actor.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+
+class VideoStreamDetail:
+    """
+    **Video stream details class used in combination with `InfoTagVideo`.**
+
+    Represents a single selectable video stream for a video item wrapped
+    by `InfoTagVideo`.
+
+    @python_v20 New class added.
+
+    Example::
+
+        ...
+        videostream = xbmc.VideoStreamDetail(1920, 1080, language='English')
+        ...
+    """
+    
+    def __init__(self, width: int = 0,
+                 height: int = 0,
+                 aspect: float = 0.0,
+                 duration: int = 0,
+                 codec: str = "",
+                 stereoMode: str = "",
+                 language: str = "",
+                 hdrType: str = "") -> None:
+        pass
+    
+    def getWidth(self) -> int:
+        """
+        Get the width of the video stream in pixel.
+
+        :return: [integer] Width of the video stream
+
+        @python_v20 New function added.
+        """
+        return 0
+    
+    def getHeight(self) -> int:
+        """
+        Get the height of the video stream in pixel.
+
+        :return: [integer] Height of the video stream
+
+        @python_v20 New function added.
+        """
+        return 0
+    
+    def getAspect(self) -> float:
+        """
+        Get the aspect ratio of the video stream.
+
+        :return: [float] Aspect ratio of the video stream
+
+        @python_v20 New function added.
+        """
+        return 0.0
+    
+    def getDuration(self) -> int:
+        """
+        Get the duration of the video stream in seconds.
+
+        :return: [float] Duration of the video stream in seconds
+
+        @python_v20 New function added.
+        """
+        return 0
+    
+    def getCodec(self) -> str:
+        """
+        Get the codec of the stream.
+
+        :return: [string] Codec of the stream
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getStereoMode(self) -> str:
+        """
+        Get the stereo mode of the video stream.
+
+        :return: [string] Stereo mode of the video stream
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getLanguage(self) -> str:
+        """
+        Get the language of the stream.
+
+        :return: [string] Language of the stream
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getHDRType(self) -> str:
+        """
+        Get the HDR type of the stream.
+
+        :return: [string] HDR type of the stream
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def setWidth(self, width: int) -> None:
+        """
+        Set the width of the video stream in pixel.
+
+        :param width: integer - Width of the video stream in pixel.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setHeight(self, height: int) -> None:
+        """
+        Set the height of the video stream in pixel.
+
+        :param height: integer - Height of the video stream in pixel.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setAspect(self, aspect: float) -> None:
+        """
+        Set the aspect ratio of the video stream.
+
+        :param aspect: float - Aspect ratio of the video stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDuration(self, duration: int) -> None:
+        """
+        Set the duration of the video stream in seconds.
+
+        :param duration: integer - Duration of the video stream in seconds.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setCodec(self, codec: str) -> None:
+        """
+        Set the codec of the stream.
+
+        :param codec: string - Codec of the stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setStereoMode(self, stereoMode: str) -> None:
+        """
+        Set the stereo mode of the video stream.
+
+        :param stereoMode: string - Stereo mode of the video stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setLanguage(self, language: str) -> None:
+        """
+        Set the language of the stream.
+
+        :param language: string - Language of the stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setHDRType(self, hdrType: str) -> None:
+        """
+        Set the HDR type of the stream.
+
+        :param hdrType: string - HDR type of the stream. The following types are supported:
+            dolbyvision, hdr10, hlg
+
+        @python_v20 New function added.
+        """
+        pass
+    
+
+class AudioStreamDetail:
+    """
+    **Audio stream details class used in combination with `InfoTagVideo`.**
+
+    Represents a single selectable audio stream for a video item wrapped
+    by `InfoTagVideo`.
+
+    @python_v20 New class added.
+
+    Example::
+
+        ...
+        audiostream = xbmc.AudioStreamDetail(6, 'DTS', 'English')
+        ...
+    """
+    
+    def __init__(self, channels: int = -1,
+                 codec: str = "",
+                 language: str = "") -> None:
+        pass
+    
+    def getChannels(self) -> int:
+        """
+        Get the number of channels in the stream.
+
+        :return: [integer] Number of channels in the stream
+
+        @python_v20 New function added.
+        """
+        return 0
+    
+    def getCodec(self) -> str:
+        """
+        Get the codec of the stream.
+
+        :return: [string] Codec of the stream
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def getLanguage(self) -> str:
+        """
+        Get the language of the stream.
+
+        :return: [string] Language of the stream
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def setChannels(self, channels: int) -> None:
+        """
+        Set the number of channels in the stream.
+
+        :param channels: integer - Number of channels in the stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setCodec(self, codec: str) -> None:
+        """
+        Set the codec of the stream.
+
+        :param codec: string - Codec of the stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setLanguage(self, language: str) -> None:
+        """
+        Set the language of the stream.
+
+        :param language: string - Language of the stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+
+class SubtitleStreamDetail:
+    """
+    **Subtitle stream details class used in combination with `InfoTagVideo`.**
+
+    Represents a single selectable subtitle stream for a video item wrapped
+    by `InfoTagVideo`.
+
+    @python_v20 New class added.
+
+    Example::
+
+        ...
+        subtitlestream = xbmc.SubtitleStreamDetail('English')
+        ...
+    """
+    
+    def __init__(self, language: str = "") -> None:
+        pass
+    
+    def getLanguage(self) -> str:
+        """
+        Get the language of the stream.
+
+        :return: [string] Language of the stream
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def setLanguage(self, language: str) -> None:
+        """
+        Set the language of the stream.
+
+        :param language: string - Language of the stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+
 class InfoTagVideo:
     """
     **Kodi's video info tag class.**
 
-    To get video info tag data of currently played source.
-
-    .. note::
-        Info tag load is only be possible from present player class.
+    Access and / or modify the video metadata of a ListItem.
 
     Example::
 
@@ -552,7 +1494,7 @@ class InfoTagVideo:
         ...
     """
     
-    def __init__(self) -> None:
+    def __init__(self, offscreen: bool = False) -> None:
         pass
     
     def getDbId(self) -> int:
@@ -570,24 +1512,60 @@ class InfoTagVideo:
         Getfilm director who has made the film (if present).
 
         :return: [string] Film director name.
+
+        @python_v20 Deprecated. Use **`getDirectors()`** instead.
         """
         return ""
+    
+    def getDirectors(self) -> List[str]:
+        """
+        Get a list offilm directors who have made the film (if present).
+
+        :return: [list]`List` of film director names.
+
+        @python_v20 New function added.
+        """
+        return [""]
     
     def getWritingCredits(self) -> str:
         """
         Get the writing credits if present from video info tag.
 
         :return: [string] Writing credits
+
+        @python_v20 Deprecated. Use **`getWriters()`** instead.
         """
         return ""
+    
+    def getWriters(self) -> List[str]:
+        """
+        Get the list of writers (if present) from video info tag.
+
+        :return: [list] `List` of writers
+
+        @python_v20 New function added.
+        """
+        return [""]
     
     def getGenre(self) -> str:
         """
         To get theVideo Genre if available.
 
         :return: [string] Genre name
+
+        @python_v20 Deprecated. Use **`getGenres()`** instead.
         """
         return ""
+    
+    def getGenres(self) -> List[str]:
+        """
+        Get the list ofVideo Genres if available.
+
+        :return: [list]`List` of genres
+
+        @python_v20 New function added.
+        """
+        return [""]
     
     def getTagLine(self) -> str:
         """
@@ -668,16 +1646,52 @@ class InfoTagVideo:
         Get the video votes if available from video info tag.
 
         :return: [string] Votes
+
+        @python_v20 Deprecated. Use **`getVotesAsInt()`** instead.
         """
         return ""
+    
+    def getVotesAsInt(self, type: str = "") -> int:
+        """
+        Get the votes of the rating (if available) as an integer.
+
+        :param type: [opt] string - the type of the rating.  Some rating type values (any
+            string possible):
+
+        ===== ================== 
+        Label Type               
+        ===== ================== 
+        imdb  string - type name 
+        tvdb  string - type name 
+        tmdb  string - type name 
+        anidb string - type name 
+        ===== ================== 
+
+        :return: [integer] Votes
+
+        @python_v20 New function added.
+        """
+        return 0
     
     def getCast(self) -> str:
         """
         To get the cast of the video when available.
 
         :return: [string] Video casts
+
+        @python_v20 Deprecated. Use **`getActors()`** instead.
         """
         return ""
+    
+    def getActors(self) -> List[Actor]:
+        """
+        Get the cast of the video if available.
+
+        :return: [list]`List` of actors
+
+        @python_v20 New function added.
+        """
+        return [Actor()]
     
     def getFile(self) -> str:
         """
@@ -741,11 +1755,25 @@ class InfoTagVideo:
         """
         return 0
     
-    def getRating(self) -> float:
+    def getRating(self, type: str = "") -> float:
         """
         Get the video rating if present as float (double where supported).
 
+        :param type: [opt] string - the type of the rating.  Some rating type values (any
+            string possible):
+
+        ===== ================== 
+        Label Type               
+        ===== ================== 
+        imdb  string - type name 
+        tvdb  string - type name 
+        tmdb  string - type name 
+        anidb string - type name 
+        ===== ================== 
+
         :return: [float] The rating of the video
+
+        @python_v20 Optional ``type`` parameter added.
         """
         return 0.0
     
@@ -770,6 +1798,18 @@ class InfoTagVideo:
         Get the last played date / time as string.
 
         :return: [string] Last played date / time
+
+        @python_v20 Deprecated. Use **`getLastPlayedAsW3C()`** instead.
+        """
+        return ""
+    
+    def getLastPlayedAsW3C(self) -> str:
+        """
+        Get last played datetime as string in W3C format (YYYY-MM-DDThh:mm:ssTZD).
+
+        :return: [string] Last played datetime (W3C)
+
+        @python_v20 New function added.
         """
         return ""
     
@@ -786,6 +1826,18 @@ class InfoTagVideo:
         To getpremiered date of the video, if available.
 
         :return: [string]
+
+        @python_v20 Deprecated. Use **`getPremieredAsW3C()`** instead.
+        """
+        return ""
+    
+    def getPremieredAsW3C(self) -> str:
+        """
+        Getpremiered date as string in W3C format (YYYY-MM-DD).
+
+        :return: [string] Premiered date (W3C)
+
+        @python_v20 New function added.
         """
         return ""
     
@@ -794,6 +1846,18 @@ class InfoTagVideo:
         Returns first aired date as string from info tag.
 
         :return: [string] First aired date
+
+        @python_v20 Deprecated. Use **`getFirstAiredAsW3C()`** instead.
+        """
+        return ""
+    
+    def getFirstAiredAsW3C(self) -> str:
+        """
+        Get first aired date as string in W3C format (YYYY-MM-DD).
+
+        :return: [string] First aired date (W3C)
+
+        @python_v20 New function added.
         """
         return ""
     
@@ -811,7 +1875,7 @@ class InfoTagVideo:
         """
         To get the artist name (for musicvideos)
 
-        :return: [std::vector<std::string>] Artist name
+        :return: [List[str]] Artist name
 
         @python_v18 New function added.
         """
@@ -847,6 +1911,653 @@ class InfoTagVideo:
         """
         return 0
     
+    def getResumeTime(self) -> float:
+        """
+        Gets the resume time of the video item.
+
+        :return: [double] Resume time
+
+        @python_v20 New function added.
+        """
+        return 0.0
+    
+    def setSortEpisode(self, sortEpisode: int) -> None:
+        """
+        Gets the total duration stored with the resume time of the video item.
+
+        :return: [double] Total duration stored with the resume time
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def getUniqueID(self, key: str) -> str:
+        """
+        Get the unique ID of the given key. A unique ID is an identifier used by a
+        (online) video database used to identify a video in its database.
+
+        :param key: string - uniqueID name.  Some default uniqueID values (any string
+            possible):
+
+        ===== ====================== 
+        Label Type                   
+        ===== ====================== 
+        imdb  string - uniqueid name 
+        tvdb  string - uniqueid name 
+        tmdb  string - uniqueid name 
+        anidb string - uniqueid name 
+        ===== ====================== 
+
+        @python_v20 New function added.
+        """
+        return ""
+    
+    def setUniqueID(self, uniqueID: str,
+                    type: str = "",
+                    isDefault: bool = False) -> None:
+        """
+        Set the given unique ID. A unique ID is an identifier used by a (online) video
+        database used to identify a video in its database.
+
+        :param uniqueID: string - value of the unique ID.
+        :param type: [opt] string - type / label of the unique ID.
+        :param isDefault: [opt] bool - whether the given unique ID is the default unique ID.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setUniqueIDs(self, uniqueIDs: Dict[str, str],
+                     defaultUniqueID: str = "") -> None:
+        """
+        Set the given unique IDs. A unique ID is an identifier used by a (online) video
+        database used to identify a video in its database.
+
+        :param values: dictionary - pairs of{ 'label: 'value' }`.
+        :param defaultUniqueID: [opt] string - the name of default uniqueID.
+
+        Some example values (any string possible):
+
+        ===== ====================== 
+        Label Type                   
+        ===== ====================== 
+        imdb  string - uniqueid name 
+        tvdb  string - uniqueid name 
+        tmdb  string - uniqueid name 
+        anidb string - uniqueid name 
+        ===== ====================== 
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDbId(self, dbId: int) -> None:
+        """
+        Set the database identifier of the video item.
+
+        :param dbId: integer - Database identifier.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setYear(self, year: int) -> None:
+        """
+        Set the year of the video item.
+
+        :param year: integer - Year.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setEpisode(self, episode: int) -> None:
+        """
+        Set the episode number of the episode.
+
+        :param episode: integer - Episode number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setSeason(self, season: int) -> None:
+        """
+        Set the season number of the video item.
+
+        :param season: integer - Season number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setSortSeason(self, sortSeason: int) -> None:
+        """
+        Set the season sort number of the season.
+
+        :param sortSeason: integer - Season sort number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setEpisodeGuide(self, episodeGuide: str) -> None:
+        """
+        Set the episode guide of the video item.
+
+        :param episodeGuide: string - Episode guide.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTop250(self, top250: int) -> None:
+        """
+        Set the top 250 number of the video item.
+
+        :param top250: integer - Top 250 number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setSetId(self, setId: int) -> None:
+        """
+        Set the movie set identifier of the video item.
+
+        :param setId: integer - Set identifier.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTrackNumber(self, trackNumber: int) -> None:
+        """
+        Set the track number of the music video item.
+
+        :param trackNumber: integer - Track number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setRating(self, rating: float,
+                  votes: int = 0,
+                  type: str = "",
+                  isDefault: bool = False) -> None:
+        """
+        Set the rating of the video item.
+
+        :param rating: float - Rating number.
+        :param votes: integer - Number of votes.
+        :param type: string - Type of the rating.
+        :param isDefault: bool - Whether the rating is the default or not.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setRatings(self, ratings: Dict[str,  Tuple[float, int]],
+                   defaultRating: str = "") -> None:
+        """
+        Set the ratings of the video item.
+
+        :param ratings: dictionary -{ 'type: (rating, votes) }`.
+        :param defaultRating: string - Type / Label of the default rating.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setUserRating(self, userRating: int) -> None:
+        """
+        Set the user rating of the video item.
+
+        :param userRating: integer - User rating.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPlaycount(self, playcount: int) -> None:
+        """
+        Set the playcount of the video item.
+
+        :param playcount: integer - Playcount.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMpaa(self, mpaa: str) -> None:
+        """
+        Set the MPAA rating of the video item.
+
+        :param mpaa: string - MPAA rating.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPlot(self, plot: str) -> None:
+        """
+        Set the plot of the video item.
+
+        :param plot: string - Plot.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPlotOutline(self, plotOutline: str) -> None:
+        """
+        Set the plot outline of the video item.
+
+        :param plotOutline: string - Plot outline.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTitle(self, title: str) -> None:
+        """
+        Set the title of the video item.
+
+        :param title: string - Title.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setOriginalTitle(self, originalTitle: str) -> None:
+        """
+        Set the original title of the video item.
+
+        :param originalTitle: string - Original title.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setSortTitle(self, sortTitle: str) -> None:
+        """
+        Set the sort title of the video item.
+
+        :param sortTitle: string - Sort title.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTagLine(self, tagLine: str) -> None:
+        """
+        Set the tagline of the video item.
+
+        :param tagLine: string - Tagline.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTvShowTitle(self, tvshowTitle: str) -> None:
+        """
+        Set the TV show title of the video item.
+
+        :param tvshowTitle: string - TV show title.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTvShowStatus(self, tvshowStatus: str) -> None:
+        """
+        Set the TV show status of the video item.
+
+        :param tvshowStatus: string - TV show status.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setGenres(self, genre: List[str]) -> None:
+        """
+        Set the genres of the video item.
+
+        :param genre: list - Genres.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setCountries(self, countries: List[str]) -> None:
+        """
+        Set the countries of the video item.
+
+        :param countries: list - Countries.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDirectors(self, directors: List[str]) -> None:
+        """
+        Set the directors of the video item.
+
+        :param directors: list - Directors.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setStudios(self, studios: List[str]) -> None:
+        """
+        Set the studios of the video item.
+
+        :param studios: list - Studios.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setWriters(self, writers: List[str]) -> None:
+        """
+        Set the writers of the video item.
+
+        :param writers: list - Writers.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDuration(self, duration: int) -> None:
+        """
+        Set the duration of the video item.
+
+        :param duration: integer - Duration in seconds.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPremiered(self, premiered: str) -> None:
+        """
+        Set the premiere date of the video item.
+
+        :param premiered: string - Premiere date.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setSet(self, set: str) -> None:
+        """
+        Set the movie set (name) of the video item.
+
+        :param set: string - Movie set (name).
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setSetOverview(self, setOverview: str) -> None:
+        """
+        Set the movie set overview of the video item.
+
+        :param setOverview: string - Movie set overview.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTags(self, tags: List[str]) -> None:
+        """
+        Set the tags of the video item.
+
+        :param tags: list - Tags.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setProductionCode(self, productionCode: str) -> None:
+        """
+        Set the production code of the video item.
+
+        :param productionCode: string - Production code.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setFirstAired(self, firstAired: str) -> None:
+        """
+        Set the first aired date of the video item.
+
+        :param firstAired: string - First aired date.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setLastPlayed(self, lastPlayed: str) -> None:
+        """
+        Set the last played date of the video item.
+
+        :param lastPlayed: string - Last played date (YYYY-MM-DD HH:MM:SS).
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setAlbum(self, album: str) -> None:
+        """
+        Set the album of the video item.
+
+        :param album: string - Album.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setVotes(self, votes: int) -> None:
+        """
+        Set the number of votes of the video item.
+
+        :param votes: integer - Number of votes.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setTrailer(self, trailer: str) -> None:
+        """
+        Set the trailer of the video item.
+
+        :param trailer: string - Trailer.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setPath(self, path: str) -> None:
+        """
+        Set the path of the video item.
+
+        :param path: string - Path.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setFilenameAndPath(self, filenameAndPath: str) -> None:
+        """
+        Set the filename and path of the video item.
+
+        :param filenameAndPath: string - Filename and path.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setIMDBNumber(self, imdbNumber: str) -> None:
+        """
+        Set the IMDb number of the video item.
+
+        :param imdbNumber: string - IMDb number.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setDateAdded(self, dateAdded: str) -> None:
+        """
+        Set the date added of the video item.
+
+        :param dateAdded: string - Date added (YYYY-MM-DD HH:MM:SS).
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setMediaType(self, mediaType: str) -> None:
+        """
+        Set the media type of the video item.
+
+        :param mediaType: string - Media type.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setShowLinks(self, showLinks: List[str]) -> None:
+        """
+        Set the TV show links of the movie.
+
+        :param showLinks: list - TV show links.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setArtists(self, artists: List[str]) -> None:
+        """
+        Set the artists of the music video item.
+
+        :param artists: list - Artists.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setCast(self, actors: List[Actor]) -> None:
+        """
+        Set the cast / actors of the video item.
+
+        :param actors: list - Cast / Actors.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def setResumePoint(self, time: float, totalTime: float = 0.0) -> None:
+        """
+        Set the resume point of the video item.
+
+        :param time: float - Resume point in seconds.
+        :param totalTime: float - Total duration in seconds.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def addSeason(self, number: int, name: str = "") -> None:
+        """
+        Add a season with name. It needs at least the season number.
+
+        :param number: int - the number of the season.
+        :param name: string - the name of the season. Default "".
+
+        @python_v20 New function added.
+
+        Example::
+
+            ...
+            # addSeason(number, name))
+            infotagvideo.addSeason(1, "Murder House")
+            ...
+        """
+        pass
+    
+    def addSeasons(self, namedSeasons: List[Tuple[int,  str]]) -> None:
+        """
+        Add named seasons to the TV show.
+
+        :param namedSeasons: list -``[ (season, name) ]``.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def addVideoStream(self, stream: VideoStreamDetail) -> None:
+        """
+        Add a video stream to the video item.
+
+        :param stream: `VideoStreamDetail` - Video stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def addAudioStream(self, stream: AudioStreamDetail) -> None:
+        """
+        Add an audio stream to the video item.
+
+        :param stream: `AudioStreamDetail` - Audio stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def addSubtitleStream(self, stream: SubtitleStreamDetail) -> None:
+        """
+        Add a subtitle stream to the video item.
+
+        :param stream: `SubtitleStreamDetail` - Subtitle stream.
+
+        @python_v20 New function added.
+        """
+        pass
+    
+    def addAvailableArtwork(self, url: str,
+                            art_type: str = "",
+                            preview: str = "",
+                            referrer: str = "",
+                            cache: str = "",
+                            post: bool = False,
+                            isgz: bool = False,
+                            season: int = -1) -> None:
+        """
+        Add an image to available artworks (needed for video scrapers)
+
+        :param url: string - image path url
+        :param art_type: string - image type
+        :param preview: [opt] string - image preview path url
+        :param referrer: [opt] string - referrer url
+        :param cache: [opt] string - filename in cache
+        :param post: [opt] bool - use post to retrieve the image (default false)
+        :param isgz: [opt] bool - use gzip to retrieve the image (default false)
+        :param season: [opt] integer - number of season in case of season thumb
+
+        @python_v20 New function added.
+
+        Example::
+
+            ...
+            infotagvideo.addAvailableArtwork(path_to_image_1, "thumb")
+            ...
+        """
+        pass
+    
 
 class Keyboard:
     """
@@ -867,8 +2578,8 @@ class Keyboard:
         kb.setHeading('Enter password') # optional
         kb.setHiddenInput(True) # optional
         kb.doModal()
-        if kb.isConfirmed():
-            text = kb.getText()
+        if (kb.isConfirmed()):
+        text = kb.getText()
         ..
     """
     
@@ -881,8 +2592,8 @@ class Keyboard:
         """
         Show keyboard and wait for user action.
 
-        :param autoclose: [opt] integer - milliseconds to autoclose dialog.
-            (default=do not autoclose)
+        :param autoclose: [opt] integer - milliseconds to autoclose dialog. (default=do not
+            autoclose)
 
         Example::
 
@@ -939,8 +2650,9 @@ class Keyboard:
         Returns the user input as a string.
 
         .. note::
-            This will always return the text entry even if you cancel the keyboard.
-            Use the `isConfirmed()` method to check if user cancelled the keyboard.
+            This will always return the text entry even if you cancel the
+            keyboard. Use the `isConfirmed()` method to check if user cancelled
+            the keyboard.
 
         :return: get the in keyboard entered text
 
@@ -1149,12 +2861,12 @@ class Player:
         :param item: [opt] string - filename, url or playlist
         :param listitem: [opt] listitem - used with setInfo() to set different infolabels.
         :param windowed: [opt] bool - true=play video windowed, false=play users
-            preference. (default)
+            preference.(default)
         :param startpos: [opt] int - starting position when playing a playlist. Default = -1
 
         .. note::
             If item is not given then the `Player` will try to play the current
-            item in the current playlist. You can use the above as keywords
+            item in the current playlist.   You can use the above as keywords
             for arguments and skip certain optional arguments.  Once you use a
             keyword, all following arguments require the keyword.
 
@@ -1255,6 +2967,18 @@ class Player:
         :raises Exception: If player is not playing a file.
         """
         return ""
+    
+    def getPlayingItem(self) -> 'xbmcgui.ListItem':
+        """
+        Returns the current playing item.
+
+        :return: Playing item
+        :raises Exception: If player is not playing a file.
+
+        @python_v20 New function added.
+        """
+        from xbmcgui import ListItem
+        return ListItem()
     
     def getTime(self) -> float:
         """
@@ -1400,7 +3124,7 @@ class Player:
         """
         Get Audio stream names
 
-        :return: List of audio streams as name
+        :return: `List` of audio streams as name
         """
         return [""]
     
@@ -1422,7 +3146,7 @@ class Player:
         """
         Get Video stream names
 
-        :return: List of video streams as name
+        :return: `List` of video streams as name
         """
         return [""]
     
@@ -1602,7 +3326,7 @@ class PlayList:
 
         .. note::
             You can use the above as keywords for arguments and skip certain
-            optional arguments. Once you use a keyword, all following
+            optional arguments.  Once you use a keyword, all following
             arguments require the keyword.
 
         Example::
@@ -1778,13 +3502,15 @@ def log(msg: str, level: int = LOGDEBUG) -> None:
     text is written to the log. This global logging behaviour can be
     changed in the GUI (**Settings -> System -> Logging**) (debug toggle)
     or furthered configured in advancedsettings (loglevel setting).
+
     Text is written to the log for the following conditions:
-    loglevel == -1 (NONE, nothing at all is logged to the log)
 
-    loglevel == 0 (NORMAL, shows ``LOGINFO``,``LOGWARNING``,``LOGERROR``
-    and ``LOGFATAL``) - Default kodi behaviour
+    * loglevel == -1 (NONE, nothing at all is logged to the log)
 
-    loglevel == 1 (DEBUG, shows all) - Behaviour if you toggle debug log in the GUI
+    * loglevel == 0 (NORMAL, shows ``LOGINFO``,``LOGWARNING``,``LOGERROR``
+      and ``LOGFATAL``) - Default kodi behaviour
+
+    * loglevel == 1 (DEBUG, shows all) - Behaviour if you toggle debug log in the GUI
 
     @python_v17 Default level changed from ``LOGNOTICE`` to ``LOGDEBUG``
 
@@ -1845,6 +3571,8 @@ def executebuiltin(function: str, wait: bool = False) -> None:
     Execute a built in Kodi function.
 
     :param function: string - builtin function to execute.
+    :param wait: [opt] bool - If Kodi should wait for the builtin function execution to
+        finish (default False)
 
     List of builtin functions: https://kodi.wiki/view/List_of_built-in_functions
 
@@ -2026,7 +3754,7 @@ def getInfoLabel(cLine: str) -> str:
     :param infotag: string - infoTag for value you want returned.
     :return: InfoLabel as a string
 
-    List of InfoTags - http://kodi.wiki/view/InfoLabels
+    List of InfoLabels: https://kodi.wiki/view/InfoLabels
 
     Example::
 
@@ -2044,7 +3772,7 @@ def getInfoImage(infotag: str) -> str:
     :param infotag: string - infotag for value you want returned
     :return: Filename including path to the InfoImage's thumbnail as a string
 
-    List of InfoTags - http://kodi.wiki/view/InfoLabels
+    List of InfoTags: http://kodi.wiki/view/InfoLabels
 
     Example::
 
@@ -2060,7 +3788,8 @@ def playSFX(filename: str, useCached: bool = True) -> None:
     Plays a wav file by filename
 
     :param filename: string - filename of the wav file to play
-    :param useCached: [opt] bool - False = Dump any previously cached wav associated with filename
+    :param useCached: [opt] bool - False = Dump any previously cached wav associated with
+        filename
 
     @python_v14 Added new option **useCached**.
 
@@ -2111,7 +3840,7 @@ def getCondVisibility(condition: str) -> bool:
     :param condition: string - condition to check
     :return: True (if the condition is verified) or False (otherwise)
 
-    List of boolean conditions
+    List of boolean conditions: https://kodi.wiki/view/List_of_boolean_conditions
 
     .. note::
         You can combine two (or more) of the above settings by
@@ -2158,28 +3887,6 @@ def getCacheThumbName(path: str) -> str:
     return ""
 
 
-def translatePath(path: str) -> str:
-    """
-    Returns the translated path.
-
-    :param path: string - Path to format
-    :return: Translated path
-
-    .. note::
-        Only useful if you are coding for both Linux and Windows. e.g.
-        Converts 'special://home' -> '/home/[username]/.kodi' on Linux.
-
-    @python_v19 Deprecated **xbmc.translatePath**. Moved to **xbmcvfs.translatePath**
-
-    Example::
-
-        ..
-        fpath = xbmc.translatePath('special://home')
-        ..
-    """
-    return ""
-
-
 def getCleanMovieTitle(path: str,
                        usefoldername: bool = False) -> Tuple[str, str]:
     """
@@ -2207,7 +3914,7 @@ def getRegion(id: str) -> str:
 
     .. note::
         choices are (dateshort, datelong, time, meridiem, tempunit,
-        speedunit) You can use the above as keywords for arguments.
+        speedunit)
 
     Example::
 
@@ -2227,8 +3934,7 @@ def getSupportedMedia(mediaType: str) -> str:
 
     .. note::
         Media type can be (video, music, picture). The return value is a
-        pipe separated string of filetypes (eg. '.mov |.avi').  You can
-        use the above as keywords for arguments.
+        pipe separated string of filetypes (eg. ``'.mov |.avi'``).
 
     Example::
 
@@ -2247,8 +3953,8 @@ def skinHasImage(image: str) -> bool:
     :return: True if the image file exists in the skin
 
     .. note::
-        If the media resides in a subfolder include it. (eg. home - myfiles\home-myfiles2.png).
-        You can use the above as keywords for arguments.
+        If the media resides in a subfolder include it.
+        (eg. home-myfiles\home-myfiles2.png).
 
     Example::
 
@@ -2259,11 +3965,12 @@ def skinHasImage(image: str) -> bool:
     return True
 
 
-def startServer(iTyp: int, bStart: bool, bWait: bool = False) -> bool:
+def startServer(iTyp: int, bStart: bool) -> bool:
     """
     Start or stop a server.
 
-    :param typ: integer - use SERVER_* constants  Used format of the returned language string
+    :param typ: integer - use SERVER_* constants  Used format of the returned language
+        string
 
     ========================= ====================================================================== 
     Value                     Description                                                            
@@ -2278,8 +3985,9 @@ def startServer(iTyp: int, bStart: bool, bWait: bool = False) -> bool:
     ========================= ====================================================================== 
 
     :param bStart: bool - start (True) or stop (False) a server
-    :param bWait: [opt] bool - wait on stop before returning (not supported by all servers)
     :return: bool - True or False
+
+    @python_v20 Removed option **bWait**.
 
     Example::
 
@@ -2328,7 +4036,8 @@ def getUserAgent() -> str:
         xbmc.getUserAgent()
         ..
 
-    example output: ``Kodi/17.0-ALPHA1 (X11; Linux x86_64) Ubuntu/15.10 App_Bitness/64 Version/17.0-ALPHA1-Git:2015-12-23-5770d28``
+    example output: Kodi/17.0-ALPHA1 (X11; Linux x86_64) Ubuntu/15.10 App_Bitness/64
+    Version/17.0-ALPHA1-Git:2015-12-23-5770d28
     """
     return ""
 
