@@ -1,0 +1,27 @@
+name: Publish Docs
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+    - name: Build HTML docs
+      run: |
+        pip install Sphinx
+        cd docs
+        make html
+    - name: Publish docs to GH pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: docs/_build/html
