@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>xbmcdrm &#8212; Kodistubs  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="xbmcgui" href="xbmcgui.html" />
+    <link rel="prev" title="xbmcaddon" href="xbmcaddon.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-xbmcdrm">
+<span id="xbmcdrm"></span><h1>xbmcdrm<a class="headerlink" href="#module-xbmcdrm" title="Permalink to this heading">¶</a></h1>
+<p><strong>Kodi’s DRM class.</strong></p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#xbmcdrm.CryptoSession" title="xbmcdrm.CryptoSession"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CryptoSession</span></code></a>(UUID, cipherAlgorithm, ...)</p></td>
+<td><p><strong>Kodi's DRM class.</strong></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xbmcdrm.</span></span><span class="sig-name descname"><span class="pre">CryptoSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">UUID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cipherAlgorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">macAlgorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.10/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p><strong>Kodi’s DRM class.</strong></p>
+<p>Offers classes and functions that allow a developer to work with DRM-protected
+contents like Widevine.</p>
+<p>This type of functionality is closely related to the type of DRM used and the
+service to be implemented.</p>
+<p>Using the <cite>CryptoSession</cite> constructor allow you to have access to a DRM session.
+With a DRM session you can read and write the DRM
+properties <cite>GetPropertyString</cite>,`SetPropertyString` and establish session keys
+with GetKeyRequest and <cite>ProvideKeyResponse</cite>, or resume previous session keys
+with <cite>RestoreKeys</cite>.</p>
+<p>When the session keys are established you can use these methods to perform
+various operations:<cite>Encrypt</cite> /<cite>Decrypt</cite> for data encryption / decryption,`Sign`
+/<cite>Verify</cite> for make or verify data-signature. Useful for example to implement
+encrypted communication between a client and the server.</p>
+<p>An example where such functionality is useful is the Message Security Layer
+(MSL) transmission protocol used in some VOD applications. This protocol (or
+rather framework) is used to increase the level of security in the exchange of
+messages (such as licences, manifests or other data), which defines a security
+extension / layer on top of the HTTP protocol.</p>
+<p>Constructor for DRM crypto session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>UUID</strong> – string - 16 byte UUID of the DRM system to use</p></li>
+<li><p><strong>cipherAlgorithm</strong> – string - Algorithm used for encryption / decryption ciphers</p></li>
+<li><p><strong>macAlgorithm</strong> – string - Algorithm used for sign / verify</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeException</strong> – If the session can not be established</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New class added.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>
+<span class="n">uuid_widevine</span> <span class="o">=</span> <span class="s1">&#39;edef8ba9-79d6-4ace-a3c8-27dcd51d21ed&#39;</span>
+<span class="n">crypto_session</span> <span class="o">=</span> <span class="n">xbmcdrm</span><span class="o">.</span><span class="n">CryptoSession</span><span class="p">(</span><span class="n">uuid_widevine</span><span class="p">,</span> <span class="s1">&#39;AES/CBC/NoPadding&#39;</span><span class="p">,</span> <span class="s1">&#39;HmacSHA256&#39;</span><span class="p">)</span>
+<span class="o">..</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.GetKeyRequest">
+<span class="sig-name descname"><span class="pre">GetKeyRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mimeType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offlineKey</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">optionalParameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.GetKeyRequest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.GetKeyRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a key request</p>
+<p>Generate a key request, used for request/response exchange between the app and a
+license server to obtain or release keys used to decrypt encrypted content.
+After the app has received the key request response from the license server, it
+should deliver to the response to the DRM instance using the
+method <cite>ProvideKeyResponse</cite>, to activate the keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init</strong> – byte - Initialization bytes container-specific data, its meaning is
+interpreted based on the mime type provided in the mimeType
+parameter. It could contain, for example, the content ID, key ID
+or other data required in generating the key request.</p></li>
+<li><p><strong>mimeType</strong> – string - Type of media which is exchanged (e.g. “application/xml”,
+“video/mp4”)</p></li>
+<li><p><strong>offlineKey</strong> – bool - Specifies the type of the request. The request may be to
+acquire keys for Streaming or Offline content</p></li>
+<li><p><strong>optionalParameters</strong> – [opt] map - Will be included in the key request message to allow a
+client application to provide additional message parameters to the
+server</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>byte - The opaque key request data (challenge) which is send to key server</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>&#64;python_v19 With python 3 the init param must be a bytearray instead of byte.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.GetPropertyString">
+<span class="sig-name descname"><span class="pre">GetPropertyString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.GetPropertyString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.GetPropertyString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request a system specific property value of the DRM system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Name</strong> – string - Name of the property to query</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value of the requested property</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.ProvideKeyResponse">
+<span class="sig-name descname"><span class="pre">ProvideKeyResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.ProvideKeyResponse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.ProvideKeyResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a key response</p>
+<p>When a key response is received from the license server, must be sent to the DRM
+instance by using provideKeyResponse. See also GetKeyRequest.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>response</strong> – byte - Key data returned from the license server</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A keySetId if the response is for an offline key requests which can be used later
+with restoreKeys, else return empty for streaming key requests.</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>&#64;python_v19 With python 3 the response argument must be a bytearray instead of byte.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.RemoveKeys">
+<span class="sig-name descname"><span class="pre">RemoveKeys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.RemoveKeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.RemoveKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all keys currently loaded in a session.</p>
+<p>&#64;python_v18 New function added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.RestoreKeys">
+<span class="sig-name descname"><span class="pre">RestoreKeys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keySetId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.RestoreKeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.RestoreKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restores session keys stored during previous <cite>ProvideKeyResponse</cite> call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keySetId</strong> – string - Identifies the saved key set to restore. This value must
+never be null.</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.SetPropertyString">
+<span class="sig-name descname"><span class="pre">SetPropertyString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.SetPropertyString"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.SetPropertyString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a system specific property value in the DRM system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – string - Name of the property. This value must never be null.</p></li>
+<li><p><strong>value</strong> – string - Value of the property to set. This value must never be null.</p></li>
+</ul>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.Decrypt">
+<span class="sig-name descname"><span class="pre">Decrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cipherKeyId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.Decrypt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.Decrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrypt an encrypted data by using session keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cipherKeyId</strong> – byte - Encryption key id (provided from a service handshake)</p></li>
+<li><p><strong>input</strong> – byte - Cipher text to decrypt</p></li>
+<li><p><strong>iv</strong> – byte - Initialization vector of cipher text</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decrypted input data</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>&#64;python_v19 With python 3 all arguments need to be of type bytearray instead of byte.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.Encrypt">
+<span class="sig-name descname"><span class="pre">Encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cipherKeyId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.Encrypt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.Encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encrypt data by using session keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cipherKeyId</strong> – byte - Encryption key id (provided from a service handshake)</p></li>
+<li><p><strong>input</strong> – byte - Encrypted text</p></li>
+<li><p><strong>iv</strong> – byte - Initialization vector of encrypted text</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>byte - Encrypted input data</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>&#64;python_v19 With python 3 all arguments need to be of type bytearray instead of byte.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.Sign">
+<span class="sig-name descname"><span class="pre">Sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">macKeyId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.Sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.Sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a DRM encrypted signature for a text message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>macKeyId</strong> – byte - HMAC key id (provided from a service handshake)</p></li>
+<li><p><strong>message</strong> – byte - Message text on which to base the signature</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>byte - Signature</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>&#64;python_v19 With python 3 all arguments need to be of type bytearray instead of byte.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xbmcdrm.CryptoSession.Verify">
+<span class="sig-name descname"><span class="pre">Verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">macKeyId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3.10/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytes" title="(in Python v3.10)"><span class="pre">bytes</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#bytearray" title="(in Python v3.10)"><span class="pre">bytearray</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3.10/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/xbmcdrm.html#CryptoSession.Verify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xbmcdrm.CryptoSession.Verify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify the validity of a DRM signature of a text message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>macKeyId</strong> – byte - HMAC key id (provided from a service handshake)</p></li>
+<li><p><strong>message</strong> – byte - Message text on which the signature is based</p></li>
+<li><p><strong>signature</strong> – byte - The signature to verify</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true when the signature is valid</p>
+</dd>
+</dl>
+<p>&#64;python_v18 New function added.</p>
+<p>&#64;python_v19 With python 3 for all arguments is needed to pass bytearray instead of byte.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Kodistubs</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=Kodistubs&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../using.html">Using Kodistubs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Kodi Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="xbmc.html">xbmc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcaddon.html">xbmcaddon</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">xbmcdrm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcgui.html">xbmcgui</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcplugin.html">xbmcplugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xbmcvfs.html">xbmcvfs</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../modules.html">Kodi Python API</a><ul>
+      <li>Previous: <a href="xbmcaddon.html" title="previous chapter">xbmcaddon</a></li>
+      <li>Next: <a href="xbmcgui.html" title="next chapter">xbmcgui</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/Kodistubs" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

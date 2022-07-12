@@ -1,0 +1,748 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xbmcaddon &#8212; Kodistubs  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for xbmcaddon</h1><div class="highlight"><pre>
+<span></span><span class="c1"># This file is generated from Kodi source code and post-edited</span>
+<span class="c1"># to correct code style and docstrings formatting.</span>
+<span class="c1"># License: GPL v.3 &lt;https://www.gnu.org/licenses/gpl-3.0.en.html&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">**Kodi&#39;s addon class.**</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">__kodistubs__</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+
+
+<div class="viewcode-block" id="Addon"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon">[docs]</a><span class="k">class</span> <span class="nc">Addon</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s addon class.**</span>
+
+<span class="sd">    Offers classes and functions that manipulate the add-on settings, information</span>
+<span class="sd">    and localization.</span>
+
+<span class="sd">    Creates a new AddOn class.</span>
+
+<span class="sd">    :param id: [opt] string - id of the addon as specified inaddon.xml</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Specifying the addon id is not needed.  Important however is that</span>
+<span class="sd">        the addon folder has the same name as the AddOn id provided</span>
+<span class="sd">        inaddon.xml.  You can optionally specify the addon id from another</span>
+<span class="sd">        installed addon to retrieve settings from it.</span>
+
+<span class="sd">    @python_v13 **id** is optional as it will be auto detected for this</span>
+<span class="sd">    add-on instance.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        self.Addon = xbmcaddon.Addon()</span>
+<span class="sd">        self.Addon = xbmcaddon.Addon(&#39;script.foo.bar&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="Addon.getLocalizedString"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getLocalizedString">[docs]</a>    <span class="k">def</span> <span class="nf">getLocalizedString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an addon&#39;s localized &#39;string&#39;.</span>
+
+<span class="sd">        :param id: integer - id# for string you want to localize.</span>
+<span class="sd">        :return: Localized &#39;string&#39;</span>
+
+<span class="sd">        @python_v13 **id** is optional as it will be auto detected for this</span>
+<span class="sd">        add-on instance.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            locstr = self.Addon.`getLocalizedString`(32000)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="Addon.getSettings"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getSettings">[docs]</a>    <span class="k">def</span> <span class="nf">getSettings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Settings&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a wrapper around the addon&#39;s settings.</span>
+
+<span class="sd">        :return: `Settings` wrapper</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings = self.Addon.getSettings()</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Settings</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="Addon.getSetting"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getSetting">[docs]</a>    <span class="k">def</span> <span class="nf">getSetting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as string.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: Setting as a string</span>
+
+<span class="sd">        @python_v13 **id** is optional as it will be auto detected for this</span>
+<span class="sd">        add-on instance.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            apikey = self.Addon.getSetting(&#39;apikey&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="Addon.getSettingBool"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getSettingBool">[docs]</a>    <span class="k">def</span> <span class="nf">getSettingBool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a boolean.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: Setting as a boolean</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.getBool()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            enabled = self.Addon.getSettingBool(&#39;enabled&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Addon.getSettingInt"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getSettingInt">[docs]</a>    <span class="k">def</span> <span class="nf">getSettingInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as an integer.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: Setting as an integer</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.getInt()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            max = self.Addon.getSettingInt(&#39;max&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="Addon.getSettingNumber"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getSettingNumber">[docs]</a>    <span class="k">def</span> <span class="nf">getSettingNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a floating point number.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: Setting as a floating point number</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.getNumber()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            max = self.Addon.getSettingNumber(&#39;max&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+    
+<div class="viewcode-block" id="Addon.getSettingString"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getSettingString">[docs]</a>    <span class="k">def</span> <span class="nf">getSettingString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a string.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: Setting as a string</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.getString()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            apikey = self.Addon.getSettingString(&#39;apikey&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="Addon.setSetting"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.setSetting">[docs]</a>    <span class="k">def</span> <span class="nf">setSetting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a script setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: string - value of the setting.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v13 **id** is optional as it will be auto detected for this</span>
+<span class="sd">        add-on instance.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            self.Addon.`setSetting`(id=&#39;username&#39;, value=&#39;teamkodi&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Addon.setSettingBool"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.setSettingBool">[docs]</a>    <span class="k">def</span> <span class="nf">setSettingBool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a script setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: boolean - value of the setting.</span>
+<span class="sd">        :return: True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.setBool()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            self.Addon.setSettingBool(id=&#39;enabled&#39;, value=True)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Addon.setSettingInt"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.setSettingInt">[docs]</a>    <span class="k">def</span> <span class="nf">setSettingInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a script setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: integer - value of the setting.</span>
+<span class="sd">        :return: True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.setInt()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            self.Addon.setSettingInt(id=&#39;max&#39;, value=5)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Addon.setSettingNumber"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.setSettingNumber">[docs]</a>    <span class="k">def</span> <span class="nf">setSettingNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a script setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: float - value of the setting.</span>
+<span class="sd">        :return: True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.setNumber()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            self.Addon.setSettingNumber(id=&#39;max&#39;, value=5.5)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Addon.setSettingString"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.setSettingString">[docs]</a>    <span class="k">def</span> <span class="nf">setSettingString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a script setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: string or unicode - value of the setting.</span>
+<span class="sd">        :return: True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v20 Deprecated. Use **`Settings.setString()`** instead.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            self.Addon.setSettingString(id=&#39;username&#39;, value=&#39;teamkodi&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Addon.openSettings"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.openSettings">[docs]</a>    <span class="k">def</span> <span class="nf">openSettings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens this scripts settings dialog.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            self.Addon.openSettings()</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Addon.getAddonInfo"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Addon.getAddonInfo">[docs]</a>    <span class="k">def</span> <span class="nf">getAddonInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of an addon property as a string.</span>
+
+<span class="sd">        :param id: string - id of the property that the module needs to access.</span>
+
+<span class="sd">        Choices for the property are</span>
+
+<span class="sd">        ====== ========= =========== ========== </span>
+<span class="sd">        author changelog description disclaimer </span>
+<span class="sd">        fanart icon      id          name       </span>
+<span class="sd">        path   profile   stars       summary    </span>
+<span class="sd">        type   version                          </span>
+<span class="sd">        ====== ========= =========== ========== </span>
+
+<span class="sd">        :return: AddOn property as a string</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            version = self.Addon.getAddonInfo(&#39;version&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div></div>
+    
+
+<div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings">[docs]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Add-on settings**</span>
+
+<span class="sd">    This wrapper provides access to the settings specific to an add-on. It supports</span>
+<span class="sd">    reading and writing specific setting values.</span>
+
+<span class="sd">    @python_v20 New class added.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ...</span>
+<span class="sd">        settings = xbmcaddon.Addon(&#39;id&#39;).getSettings()</span>
+<span class="sd">        ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="Settings.getBool"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getBool">[docs]</a>    <span class="k">def</span> <span class="nf">getBool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a boolean.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: bool - Setting as a boolean</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            enabled = settings.getBool(&#39;enabled&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="Settings.getInt"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getInt">[docs]</a>    <span class="k">def</span> <span class="nf">getInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as an integer.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: integer - Setting as an integer</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            max = settings.getInt(&#39;max&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+    
+<div class="viewcode-block" id="Settings.getNumber"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getNumber">[docs]</a>    <span class="k">def</span> <span class="nf">getNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a floating point number.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: float - Setting as a floating point number</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            max = settings.getNumber(&#39;max&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+    
+<div class="viewcode-block" id="Settings.getString"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getString">[docs]</a>    <span class="k">def</span> <span class="nf">getString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a unicode string.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: string - Setting as a unicode string</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            apikey = settings.getString(&#39;apikey&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="Settings.getBoolList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getBoolList">[docs]</a>    <span class="k">def</span> <span class="nf">getBoolList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a list of booleans.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: list - Setting as a list of booleans</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            enabled = settings.getBoolList(&#39;enabled&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="Settings.getIntList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getIntList">[docs]</a>    <span class="k">def</span> <span class="nf">getIntList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a list of integers.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: list - Setting as a list of integers</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            ids = settings.getIntList(&#39;ids&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="Settings.getNumberList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getNumberList">[docs]</a>    <span class="k">def</span> <span class="nf">getNumberList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a list of floating point numbers.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: list - Setting as a list of floating point numbers</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            max = settings.getNumberList(&#39;max&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="Settings.getStringList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.getStringList">[docs]</a>    <span class="k">def</span> <span class="nf">getStringList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of a setting as a list of unicode strings.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :return: list - Setting as a list of unicode strings</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            views = settings.getStringList(&#39;views&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span></div>
+    
+<div class="viewcode-block" id="Settings.setBool"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setBool">[docs]</a>    <span class="k">def</span> <span class="nf">setBool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the value of a setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: bool - value of the setting.</span>
+<span class="sd">        :return: bool - True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setBool(id=&#39;enabled&#39;, value=True)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Settings.setInt"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setInt">[docs]</a>    <span class="k">def</span> <span class="nf">setInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the value of a setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: integer - value of the setting.</span>
+<span class="sd">        :return: bool - True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setInt(id=&#39;max&#39;, value=5)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Settings.setNumber"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setNumber">[docs]</a>    <span class="k">def</span> <span class="nf">setNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the value of a setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: float - value of the setting.</span>
+<span class="sd">        :return: bool - True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setNumber(id=&#39;max&#39;, value=5.5)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Settings.setString"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setString">[docs]</a>    <span class="k">def</span> <span class="nf">setString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the value of a setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param value: string or unicode - value of the setting.</span>
+<span class="sd">        :return: bool - True if the value of the setting was set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setString(id=&#39;username&#39;, value=&#39;teamkodi&#39;)</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Settings.setBoolList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setBoolList">[docs]</a>    <span class="k">def</span> <span class="nf">setBoolList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the boolean values of a list setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param values: list of boolean - values of the setting.</span>
+<span class="sd">        :return: bool - True if the values of the setting were set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setBoolList(id=&#39;enabled&#39;, values=[ True, False ])</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Settings.setIntList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setIntList">[docs]</a>    <span class="k">def</span> <span class="nf">setIntList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the integer values of a list setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param values: list of int - values of the setting.</span>
+<span class="sd">        :return: bool - True if the values of the setting were set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setIntList(id=&#39;max&#39;, values=[ 5, 23 ])</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Settings.setNumberList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setNumberList">[docs]</a>    <span class="k">def</span> <span class="nf">setNumberList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the floating point values of a list setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param values: list of float - values of the setting.</span>
+<span class="sd">        :return: bool - True if the values of the setting were set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setNumberList(id=&#39;max&#39;, values=[ 5.5, 5.8 ])</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="Settings.setStringList"><a class="viewcode-back" href="../_autosummary/xbmcaddon.html#xbmcaddon.Settings.setStringList">[docs]</a>    <span class="k">def</span> <span class="nf">setStringList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the string values of a list setting.</span>
+
+<span class="sd">        :param id: string - id of the setting that the module needs to access.</span>
+<span class="sd">        :param values: list of string or unicode - values of the setting.</span>
+<span class="sd">        :return: bool - True if the values of the setting were set, false otherwise</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            You can use the above as keywords for arguments.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            ..</span>
+<span class="sd">            settings.setStringList(id=&#39;username&#39;, values=[ &#39;team&#39;, &#39;kodi&#39; ])</span>
+<span class="sd">            ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Kodistubs</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=Kodistubs&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../using.html">Using Kodistubs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Kodi Python API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/Kodistubs" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
