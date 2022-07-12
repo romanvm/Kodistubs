@@ -44,6 +44,12 @@ class File:
     
     def __init__(self, filepath: str, mode: Optional[str] = None) -> None:
         pass
+
+    def __enter__(self) -> 'File':  # Required for context manager
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):  # Required for context manager
+        pass
     
     def read(self, numBytes: int = 0) -> str:
         """
@@ -290,8 +296,8 @@ class Stat:
         To get total size, in bytes.
 
         The st_size field gives the size of the file (if it is a regular file or a
-        symbolic link) in bytes. The size of a symbolic link (only on Linux and Mac OS
-        X) is the length of the pathname it contains, without a terminating null byte.
+        symbolic link) in bytes. The size of a symbolic link (only on Linux and Mac OS X)
+        is the length of the pathname it contains, without a terminating null byte.
 
         :return: st_size
         """
@@ -434,7 +440,9 @@ def translatePath(path: str) -> str:
         Only useful if you are coding for both Linux and Windows. e.g.
         Converts 'special://home' -> '/home/[username]/.kodi' on Linux.
 
-    @python_v19 New function added (replaces old **xbmc.translatePath**)Example::
+    @python_v19 New function added (replaces old **xbmc.translatePath**)
+
+    Example::
 
         ..
         fpath = xbmcvfs.translatePath('special://home')
