@@ -1474,7 +1474,7 @@ class SubtitleStreamDetail:
         @python_v20 New function added.
         """
         pass
-    
+
 
 class InfoTagVideo:
     """
@@ -1623,17 +1623,17 @@ class InfoTagVideo:
 
         Available strings about media type for video:
 
-        ========== ==================================== 
-        String     Description                          
-        ========== ==================================== 
-        video      For normal video                     
-        set        For a selection of video             
-        musicvideo To define it as music video          
-        movie      To define it as normal movie         
-        tvshow     If this is it defined as tvshow      
-        season     The type is used as a series season  
-        episode    The type is used as a series episode 
-        ========== ==================================== 
+        ========== ====================================
+        String     Description
+        ========== ====================================
+        video      For normal video
+        set        For a selection of video
+        musicvideo To define it as music video
+        movie      To define it as normal movie
+        tvshow     If this is it defined as tvshow
+        season     The type is used as a series season
+        episode    The type is used as a series episode
+        ========== ====================================
 
         @python_v17 New function added.
         """
@@ -1656,14 +1656,14 @@ class InfoTagVideo:
         :param type: [opt] string - the type of the rating.  Some rating type values (any
             string possible):
 
-        ===== ================== 
-        Label Type               
-        ===== ================== 
-        imdb  string - type name 
-        tvdb  string - type name 
-        tmdb  string - type name 
-        anidb string - type name 
-        ===== ================== 
+        ===== ==================
+        Label Type
+        ===== ==================
+        imdb  string - type name
+        tvdb  string - type name
+        tmdb  string - type name
+        anidb string - type name
+        ===== ==================
 
         :return: [integer] Votes
 
@@ -1760,14 +1760,14 @@ class InfoTagVideo:
         :param type: [opt] string - the type of the rating.  Some rating type values (any
             string possible):
 
-        ===== ================== 
-        Label Type               
-        ===== ================== 
-        imdb  string - type name 
-        tvdb  string - type name 
-        tmdb  string - type name 
-        anidb string - type name 
-        ===== ================== 
+        ===== ==================
+        Label Type
+        ===== ==================
+        imdb  string - type name
+        tvdb  string - type name
+        tmdb  string - type name
+        anidb string - type name
+        ===== ==================
 
         :return: [float] The rating of the video
 
@@ -1918,8 +1918,8 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         return 0.0
-    
-    def setSortEpisode(self, sortEpisode: int) -> None:
+
+    def getResumeTimeTotal(self) -> float:
         """
         Gets the total duration stored with the resume time of the video item.
 
@@ -1927,8 +1927,8 @@ class InfoTagVideo:
 
         @python_v20 New function added.
         """
-        pass
-    
+        return 0.0
+
     def getUniqueID(self, key: str) -> str:
         """
         Get the unique ID of the given key. A unique ID is an identifier used by a
@@ -1937,68 +1937,68 @@ class InfoTagVideo:
         :param key: string - uniqueID name.  Some default uniqueID values (any string
             possible):
 
-        ===== ====================== 
-        Label Type                   
-        ===== ====================== 
-        imdb  string - uniqueid name 
-        tvdb  string - uniqueid name 
-        tmdb  string - uniqueid name 
-        anidb string - uniqueid name 
-        ===== ====================== 
+        ===== ======================
+        Label Type
+        ===== ======================
+        imdb  string - uniqueid name
+        tvdb  string - uniqueid name
+        tmdb  string - uniqueid name
+        anidb string - uniqueid name
+        ===== ======================
 
         @python_v20 New function added.
         """
         return ""
-    
-    def setUniqueID(self, uniqueID: str,
+
+    def setUniqueID(self, uniqueid: str,
                     type: str = "",
-                    isDefault: bool = False) -> None:
+                    isdefault: bool = False) -> None:
         """
         Set the given unique ID. A unique ID is an identifier used by a (online) video
         database used to identify a video in its database.
 
-        :param uniqueID: string - value of the unique ID.
+        :param uniqueid: string - value of the unique ID.
         :param type: [opt] string - type / label of the unique ID.
-        :param isDefault: [opt] bool - whether the given unique ID is the default unique ID.
+        :param isdefault: [opt] bool - whether the given unique ID is the default unique ID.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setUniqueIDs(self, uniqueIDs: Dict[str, str],
-                     defaultUniqueID: str = "") -> None:
+                     defaultuniqueid: str = "") -> None:
         """
         Set the given unique IDs. A unique ID is an identifier used by a (online) video
         database used to identify a video in its database.
 
         :param values: dictionary - pairs of{ 'label: 'value' }`.
-        :param defaultUniqueID: [opt] string - the name of default uniqueID.
+        :param defaultuniqueid: [opt] string - the name of default uniqueID.
 
         Some example values (any string possible):
 
-        ===== ====================== 
-        Label Type                   
-        ===== ====================== 
-        imdb  string - uniqueid name 
-        tvdb  string - uniqueid name 
-        tmdb  string - uniqueid name 
-        anidb string - uniqueid name 
-        ===== ====================== 
+        ===== ======================
+        Label Type
+        ===== ======================
+        imdb  string - uniqueid name
+        tvdb  string - uniqueid name
+        tmdb  string - uniqueid name
+        anidb string - uniqueid name
+        ===== ======================
 
         @python_v20 New function added.
         """
         pass
-    
-    def setDbId(self, dbId: int) -> None:
+
+    def setDbId(self, dbid: int) -> None:
         """
         Set the database identifier of the video item.
 
-        :param dbId: integer - Database identifier.
+        :param dbid: integer - Database identifier.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setYear(self, year: int) -> None:
         """
         Set the year of the video item.
@@ -2028,27 +2028,37 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setSortSeason(self, sortSeason: int) -> None:
+
+    def setSortEpisode(self, sortepisode: int) -> None:
+        """
+        Set the episode sort number of the episode.
+
+        :param sortepisode: integer - Episode sort number.
+
+        @python_v20 New function added.
+        """
+        pass
+
+    def setSortSeason(self, sortseason: int) -> None:
         """
         Set the season sort number of the season.
 
-        :param sortSeason: integer - Season sort number.
+        :param sortseason: integer - Season sort number.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setEpisodeGuide(self, episodeGuide: str) -> None:
+
+    def setEpisodeGuide(self, episodeguide: str) -> None:
         """
         Set the episode guide of the video item.
 
-        :param episodeGuide: string - Episode guide.
+        :param episodeguide: string - Episode guide.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setTop250(self, top250: int) -> None:
         """
         Set the top 250 number of the video item.
@@ -2058,65 +2068,65 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setSetId(self, setId: int) -> None:
+
+    def setSetId(self, setid: int) -> None:
         """
         Set the movie set identifier of the video item.
 
-        :param setId: integer - Set identifier.
+        :param setid: integer - Set identifier.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setTrackNumber(self, trackNumber: int) -> None:
+
+    def setTrackNumber(self, tracknumber: int) -> None:
         """
         Set the track number of the music video item.
 
-        :param trackNumber: integer - Track number.
+        :param tracknumber: integer - Track number.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setRating(self, rating: float,
                   votes: int = 0,
                   type: str = "",
-                  isDefault: bool = False) -> None:
+                  isdefault: bool = False) -> None:
         """
         Set the rating of the video item.
 
         :param rating: float - Rating number.
         :param votes: integer - Number of votes.
         :param type: string - Type of the rating.
-        :param isDefault: bool - Whether the rating is the default or not.
+        :param isdefault: bool - Whether the rating is the default or not.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setRatings(self, ratings: Dict[str,  Tuple[float, int]],
-                   defaultRating: str = "") -> None:
+
+    def setRatings(self, ratings: Dict[str, Tuple[float, int]],
+                   defaultrating: str = "") -> None:
         """
         Set the ratings of the video item.
 
         :param ratings: dictionary -{ 'type: (rating, votes) }`.
-        :param defaultRating: string - Type / Label of the default rating.
+        :param defaultrating: string - Type / Label of the default rating.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setUserRating(self, userRating: int) -> None:
+
+    def setUserRating(self, userrating: int) -> None:
         """
         Set the user rating of the video item.
 
-        :param userRating: integer - User rating.
+        :param userrating: integer - User rating.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setPlaycount(self, playcount: int) -> None:
         """
         Set the playcount of the video item.
@@ -2126,7 +2136,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setMpaa(self, mpaa: str) -> None:
         """
         Set the MPAA rating of the video item.
@@ -2136,7 +2146,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setPlot(self, plot: str) -> None:
         """
         Set the plot of the video item.
@@ -2146,17 +2156,17 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setPlotOutline(self, plotOutline: str) -> None:
+
+    def setPlotOutline(self, plotoutline: str) -> None:
         """
         Set the plot outline of the video item.
 
-        :param plotOutline: string - Plot outline.
+        :param plotoutline: string - Plot outline.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setTitle(self, title: str) -> None:
         """
         Set the title of the video item.
@@ -2166,57 +2176,57 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setOriginalTitle(self, originalTitle: str) -> None:
+
+    def setOriginalTitle(self, originaltitle: str) -> None:
         """
         Set the original title of the video item.
 
-        :param originalTitle: string - Original title.
+        :param originaltitle: string - Original title.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setSortTitle(self, sortTitle: str) -> None:
+
+    def setSortTitle(self, sorttitle: str) -> None:
         """
         Set the sort title of the video item.
 
-        :param sortTitle: string - Sort title.
+        :param sorttitle: string - Sort title.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setTagLine(self, tagLine: str) -> None:
+
+    def setTagLine(self, tagline: str) -> None:
         """
         Set the tagline of the video item.
 
-        :param tagLine: string - Tagline.
+        :param tagline: string - Tagline.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setTvShowTitle(self, tvshowTitle: str) -> None:
+
+    def setTvShowTitle(self, tvshowtitle: str) -> None:
         """
         Set the TV show title of the video item.
 
-        :param tvshowTitle: string - TV show title.
+        :param tvshowtitle: string - TV show title.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setTvShowStatus(self, tvshowStatus: str) -> None:
+
+    def setTvShowStatus(self, status: str) -> None:
         """
         Set the TV show status of the video item.
 
-        :param tvshowStatus: string - TV show status.
+        :param status: string - TV show status.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setGenres(self, genre: List[str]) -> None:
         """
         Set the genres of the video item.
@@ -2226,7 +2236,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setCountries(self, countries: List[str]) -> None:
         """
         Set the countries of the video item.
@@ -2236,7 +2246,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setDirectors(self, directors: List[str]) -> None:
         """
         Set the directors of the video item.
@@ -2246,7 +2256,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setStudios(self, studios: List[str]) -> None:
         """
         Set the studios of the video item.
@@ -2256,7 +2266,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setWriters(self, writers: List[str]) -> None:
         """
         Set the writers of the video item.
@@ -2266,7 +2276,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setDuration(self, duration: int) -> None:
         """
         Set the duration of the video item.
@@ -2276,7 +2286,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setPremiered(self, premiered: str) -> None:
         """
         Set the premiere date of the video item.
@@ -2286,7 +2296,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setSet(self, set: str) -> None:
         """
         Set the movie set (name) of the video item.
@@ -2296,17 +2306,17 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setSetOverview(self, setOverview: str) -> None:
+
+    def setSetOverview(self, setoverview: str) -> None:
         """
         Set the movie set overview of the video item.
 
-        :param setOverview: string - Movie set overview.
+        :param setoverview: string - Movie set overview.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setTags(self, tags: List[str]) -> None:
         """
         Set the tags of the video item.
@@ -2316,37 +2326,37 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setProductionCode(self, productionCode: str) -> None:
+
+    def setProductionCode(self, productioncode: str) -> None:
         """
         Set the production code of the video item.
 
-        :param productionCode: string - Production code.
+        :param productioncode: string - Production code.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setFirstAired(self, firstAired: str) -> None:
+
+    def setFirstAired(self, firstaired: str) -> None:
         """
         Set the first aired date of the video item.
 
-        :param firstAired: string - First aired date.
+        :param firstaired: string - First aired date.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setLastPlayed(self, lastPlayed: str) -> None:
+
+    def setLastPlayed(self, lastplayed: str) -> None:
         """
         Set the last played date of the video item.
 
-        :param lastPlayed: string - Last played date (YYYY-MM-DD HH:MM:SS).
+        :param lastplayed: string - Last played date (YYYY-MM-DD HH:MM:SS).
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setAlbum(self, album: str) -> None:
         """
         Set the album of the video item.
@@ -2356,7 +2366,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setVotes(self, votes: int) -> None:
         """
         Set the number of votes of the video item.
@@ -2366,7 +2376,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setTrailer(self, trailer: str) -> None:
         """
         Set the trailer of the video item.
@@ -2376,7 +2386,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setPath(self, path: str) -> None:
         """
         Set the path of the video item.
@@ -2386,57 +2396,57 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setFilenameAndPath(self, filenameAndPath: str) -> None:
+
+    def setFilenameAndPath(self, filenameandpath: str) -> None:
         """
         Set the filename and path of the video item.
 
-        :param filenameAndPath: string - Filename and path.
+        :param filenameandpath: string - Filename and path.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setIMDBNumber(self, imdbNumber: str) -> None:
+
+    def setIMDBNumber(self, imdbnumber: str) -> None:
         """
         Set the IMDb number of the video item.
 
-        :param imdbNumber: string - IMDb number.
+        :param imdbnumber: string - IMDb number.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setDateAdded(self, dateAdded: str) -> None:
+
+    def setDateAdded(self, dateadded: str) -> None:
         """
         Set the date added of the video item.
 
-        :param dateAdded: string - Date added (YYYY-MM-DD HH:MM:SS).
+        :param dateadded: string - Date added (YYYY-MM-DD HH:MM:SS).
 
         @python_v20 New function added.
         """
         pass
-    
-    def setMediaType(self, mediaType: str) -> None:
+
+    def setMediaType(self, mediatype: str) -> None:
         """
         Set the media type of the video item.
 
-        :param mediaType: string - Media type.
+        :param mediatype: string - Media type.
 
         @python_v20 New function added.
         """
         pass
-    
-    def setShowLinks(self, showLinks: List[str]) -> None:
+
+    def setShowLinks(self, showlinks: List[str]) -> None:
         """
         Set the TV show links of the movie.
 
-        :param showLinks: list - TV show links.
+        :param showlinks: list - TV show links.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def setArtists(self, artists: List[str]) -> None:
         """
         Set the artists of the music video item.
@@ -2446,7 +2456,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def setCast(self, actors: List[Actor]) -> None:
         """
         Set the cast / actors of the video item.
@@ -2456,18 +2466,18 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
-    def setResumePoint(self, time: float, totalTime: float = 0.0) -> None:
+
+    def setResumePoint(self, time: float, totaltime: float = 0.0) -> None:
         """
         Set the resume point of the video item.
 
         :param time: float - Resume point in seconds.
-        :param totalTime: float - Total duration in seconds.
+        :param totaltime: float - Total duration in seconds.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def addSeason(self, number: int, name: str = "") -> None:
         """
         Add a season with name. It needs at least the season number.
@@ -2485,17 +2495,17 @@ class InfoTagVideo:
             ...
         """
         pass
-    
-    def addSeasons(self, namedSeasons: List[Tuple[int,  str]]) -> None:
+
+    def addSeasons(self, namedseasons: List[Tuple[int, str]]) -> None:
         """
         Add named seasons to the TV show.
 
-        :param namedSeasons: list -``[ (season, name) ]``.
+        :param namedseasons: list -``[ (season, name) ]``.
 
         @python_v20 New function added.
         """
         pass
-    
+
     def addVideoStream(self, stream: VideoStreamDetail) -> None:
         """
         Add a video stream to the video item.
@@ -2505,7 +2515,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def addAudioStream(self, stream: AudioStreamDetail) -> None:
         """
         Add an audio stream to the video item.
@@ -2515,7 +2525,7 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def addSubtitleStream(self, stream: SubtitleStreamDetail) -> None:
         """
         Add a subtitle stream to the video item.
@@ -2525,9 +2535,9 @@ class InfoTagVideo:
         @python_v20 New function added.
         """
         pass
-    
+
     def addAvailableArtwork(self, url: str,
-                            art_type: str = "",
+                            arttype: str = "",
                             preview: str = "",
                             referrer: str = "",
                             cache: str = "",
@@ -2538,7 +2548,7 @@ class InfoTagVideo:
         Add an image to available artworks (needed for video scrapers)
 
         :param url: string - image path url
-        :param art_type: string - image type
+        :param arttype: string - image type
         :param preview: [opt] string - image preview path url
         :param referrer: [opt] string - referrer url
         :param cache: [opt] string - filename in cache
@@ -2555,7 +2565,7 @@ class InfoTagVideo:
             ...
         """
         pass
-    
+
 
 class Keyboard:
     """
