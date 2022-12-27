@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>xbmcplugin &#8212; Kodistubs  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -14,6 +14,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="xbmcvfs" href="xbmcvfs.html" />
@@ -607,7 +608,20 @@ ones like “movies”, “episodes” etc. A good example is youtube.</p>
 <li class="toctree-l2"><a class="reference internal" href="xbmcaddon.html">xbmcaddon</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbmcdrm.html">xbmcdrm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbmcgui.html">xbmcgui</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">xbmcplugin</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">xbmcplugin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.addDirectoryItem"><code class="docutils literal notranslate"><span class="pre">addDirectoryItem()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.addDirectoryItems"><code class="docutils literal notranslate"><span class="pre">addDirectoryItems()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.endOfDirectory"><code class="docutils literal notranslate"><span class="pre">endOfDirectory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.setResolvedUrl"><code class="docutils literal notranslate"><span class="pre">setResolvedUrl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.addSortMethod"><code class="docutils literal notranslate"><span class="pre">addSortMethod()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.getSetting"><code class="docutils literal notranslate"><span class="pre">getSetting()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.setSetting"><code class="docutils literal notranslate"><span class="pre">setSetting()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.setContent"><code class="docutils literal notranslate"><span class="pre">setContent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.setPluginCategory"><code class="docutils literal notranslate"><span class="pre">setPluginCategory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.setPluginFanart"><code class="docutils literal notranslate"><span class="pre">setPluginFanart()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcplugin.setProperty"><code class="docutils literal notranslate"><span class="pre">setProperty()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="xbmcvfs.html">xbmcvfs</a></li>
 </ul>
 </li>
@@ -642,7 +656,7 @@ ones like “movies”, “episodes” etc. A good example is youtube.</p>
       &copy;2022, Roman Miroshnychenko.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

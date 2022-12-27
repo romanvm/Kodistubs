@@ -13,6 +13,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
    
@@ -1508,7 +1509,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
-    
+
 
 <div class="viewcode-block" id="InfoTagVideo"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo">[docs]</a><span class="k">class</span> <span class="nc">InfoTagVideo</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1657,17 +1658,17 @@
 
 <span class="sd">        Available strings about media type for video:</span>
 
-<span class="sd">        ========== ==================================== </span>
-<span class="sd">        String     Description                          </span>
-<span class="sd">        ========== ==================================== </span>
-<span class="sd">        video      For normal video                     </span>
-<span class="sd">        set        For a selection of video             </span>
-<span class="sd">        musicvideo To define it as music video          </span>
-<span class="sd">        movie      To define it as normal movie         </span>
-<span class="sd">        tvshow     If this is it defined as tvshow      </span>
-<span class="sd">        season     The type is used as a series season  </span>
-<span class="sd">        episode    The type is used as a series episode </span>
-<span class="sd">        ========== ==================================== </span>
+<span class="sd">        ========== ====================================</span>
+<span class="sd">        String     Description</span>
+<span class="sd">        ========== ====================================</span>
+<span class="sd">        video      For normal video</span>
+<span class="sd">        set        For a selection of video</span>
+<span class="sd">        musicvideo To define it as music video</span>
+<span class="sd">        movie      To define it as normal movie</span>
+<span class="sd">        tvshow     If this is it defined as tvshow</span>
+<span class="sd">        season     The type is used as a series season</span>
+<span class="sd">        episode    The type is used as a series episode</span>
+<span class="sd">        ========== ====================================</span>
 
 <span class="sd">        @python_v17 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1690,14 +1691,14 @@
 <span class="sd">        :param type: [opt] string - the type of the rating.  Some rating type values (any</span>
 <span class="sd">            string possible):</span>
 
-<span class="sd">        ===== ================== </span>
-<span class="sd">        Label Type               </span>
-<span class="sd">        ===== ================== </span>
-<span class="sd">        imdb  string - type name </span>
-<span class="sd">        tvdb  string - type name </span>
-<span class="sd">        tmdb  string - type name </span>
-<span class="sd">        anidb string - type name </span>
-<span class="sd">        ===== ================== </span>
+<span class="sd">        ===== ==================</span>
+<span class="sd">        Label Type</span>
+<span class="sd">        ===== ==================</span>
+<span class="sd">        imdb  string - type name</span>
+<span class="sd">        tvdb  string - type name</span>
+<span class="sd">        tmdb  string - type name</span>
+<span class="sd">        anidb string - type name</span>
+<span class="sd">        ===== ==================</span>
 
 <span class="sd">        :return: [integer] Votes</span>
 
@@ -1794,14 +1795,14 @@
 <span class="sd">        :param type: [opt] string - the type of the rating.  Some rating type values (any</span>
 <span class="sd">            string possible):</span>
 
-<span class="sd">        ===== ================== </span>
-<span class="sd">        Label Type               </span>
-<span class="sd">        ===== ================== </span>
-<span class="sd">        imdb  string - type name </span>
-<span class="sd">        tvdb  string - type name </span>
-<span class="sd">        tmdb  string - type name </span>
-<span class="sd">        anidb string - type name </span>
-<span class="sd">        ===== ================== </span>
+<span class="sd">        ===== ==================</span>
+<span class="sd">        Label Type</span>
+<span class="sd">        ===== ==================</span>
+<span class="sd">        imdb  string - type name</span>
+<span class="sd">        tvdb  string - type name</span>
+<span class="sd">        tmdb  string - type name</span>
+<span class="sd">        anidb string - type name</span>
+<span class="sd">        ===== ==================</span>
 
 <span class="sd">        :return: [float] The rating of the video</span>
 
@@ -1952,8 +1953,8 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mf">0.0</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setSortEpisode"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSortEpisode">[docs]</a>    <span class="k">def</span> <span class="nf">setSortEpisode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sortEpisode</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.getResumeTimeTotal"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getResumeTimeTotal">[docs]</a>    <span class="k">def</span> <span class="nf">getResumeTimeTotal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the total duration stored with the resume time of the video item.</span>
 
@@ -1961,8 +1962,8 @@
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
-    
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+
 <div class="viewcode-block" id="InfoTagVideo.getUniqueID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.getUniqueID">[docs]</a>    <span class="k">def</span> <span class="nf">getUniqueID</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the unique ID of the given key. A unique ID is an identifier used by a</span>
@@ -1971,68 +1972,68 @@
 <span class="sd">        :param key: string - uniqueID name.  Some default uniqueID values (any string</span>
 <span class="sd">            possible):</span>
 
-<span class="sd">        ===== ====================== </span>
-<span class="sd">        Label Type                   </span>
-<span class="sd">        ===== ====================== </span>
-<span class="sd">        imdb  string - uniqueid name </span>
-<span class="sd">        tvdb  string - uniqueid name </span>
-<span class="sd">        tmdb  string - uniqueid name </span>
-<span class="sd">        anidb string - uniqueid name </span>
-<span class="sd">        ===== ====================== </span>
+<span class="sd">        ===== ======================</span>
+<span class="sd">        Label Type</span>
+<span class="sd">        ===== ======================</span>
+<span class="sd">        imdb  string - uniqueid name</span>
+<span class="sd">        tvdb  string - uniqueid name</span>
+<span class="sd">        tmdb  string - uniqueid name</span>
+<span class="sd">        anidb string - uniqueid name</span>
+<span class="sd">        ===== ======================</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setUniqueID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setUniqueID">[docs]</a>    <span class="k">def</span> <span class="nf">setUniqueID</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uniqueID</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setUniqueID"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setUniqueID">[docs]</a>    <span class="k">def</span> <span class="nf">setUniqueID</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uniqueid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                     <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                    <span class="n">isDefault</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">isdefault</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the given unique ID. A unique ID is an identifier used by a (online) video</span>
 <span class="sd">        database used to identify a video in its database.</span>
 
-<span class="sd">        :param uniqueID: string - value of the unique ID.</span>
+<span class="sd">        :param uniqueid: string - value of the unique ID.</span>
 <span class="sd">        :param type: [opt] string - type / label of the unique ID.</span>
-<span class="sd">        :param isDefault: [opt] bool - whether the given unique ID is the default unique ID.</span>
+<span class="sd">        :param isdefault: [opt] bool - whether the given unique ID is the default unique ID.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setUniqueIDs"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setUniqueIDs">[docs]</a>    <span class="k">def</span> <span class="nf">setUniqueIDs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uniqueIDs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-                     <span class="n">defaultUniqueID</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+                     <span class="n">defaultuniqueid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the given unique IDs. A unique ID is an identifier used by a (online) video</span>
 <span class="sd">        database used to identify a video in its database.</span>
 
 <span class="sd">        :param values: dictionary - pairs of{ &#39;label: &#39;value&#39; }`.</span>
-<span class="sd">        :param defaultUniqueID: [opt] string - the name of default uniqueID.</span>
+<span class="sd">        :param defaultuniqueid: [opt] string - the name of default uniqueID.</span>
 
 <span class="sd">        Some example values (any string possible):</span>
 
-<span class="sd">        ===== ====================== </span>
-<span class="sd">        Label Type                   </span>
-<span class="sd">        ===== ====================== </span>
-<span class="sd">        imdb  string - uniqueid name </span>
-<span class="sd">        tvdb  string - uniqueid name </span>
-<span class="sd">        tmdb  string - uniqueid name </span>
-<span class="sd">        anidb string - uniqueid name </span>
-<span class="sd">        ===== ====================== </span>
+<span class="sd">        ===== ======================</span>
+<span class="sd">        Label Type</span>
+<span class="sd">        ===== ======================</span>
+<span class="sd">        imdb  string - uniqueid name</span>
+<span class="sd">        tvdb  string - uniqueid name</span>
+<span class="sd">        tmdb  string - uniqueid name</span>
+<span class="sd">        anidb string - uniqueid name</span>
+<span class="sd">        ===== ======================</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setDbId"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setDbId">[docs]</a>    <span class="k">def</span> <span class="nf">setDbId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dbId</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setDbId"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setDbId">[docs]</a>    <span class="k">def</span> <span class="nf">setDbId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dbid</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the database identifier of the video item.</span>
 
-<span class="sd">        :param dbId: integer - Database identifier.</span>
+<span class="sd">        :param dbid: integer - Database identifier.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setYear"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setYear">[docs]</a>    <span class="k">def</span> <span class="nf">setYear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the year of the video item.</span>
@@ -2062,27 +2063,37 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setSortSeason"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSortSeason">[docs]</a>    <span class="k">def</span> <span class="nf">setSortSeason</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sortSeason</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setSortEpisode"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSortEpisode">[docs]</a>    <span class="k">def</span> <span class="nf">setSortEpisode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sortepisode</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the episode sort number of the episode.</span>
+
+<span class="sd">        :param sortepisode: integer - Episode sort number.</span>
+
+<span class="sd">        @python_v20 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="InfoTagVideo.setSortSeason"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSortSeason">[docs]</a>    <span class="k">def</span> <span class="nf">setSortSeason</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sortseason</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the season sort number of the season.</span>
 
-<span class="sd">        :param sortSeason: integer - Season sort number.</span>
+<span class="sd">        :param sortseason: integer - Season sort number.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setEpisodeGuide"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setEpisodeGuide">[docs]</a>    <span class="k">def</span> <span class="nf">setEpisodeGuide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">episodeGuide</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setEpisodeGuide"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setEpisodeGuide">[docs]</a>    <span class="k">def</span> <span class="nf">setEpisodeGuide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">episodeguide</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the episode guide of the video item.</span>
 
-<span class="sd">        :param episodeGuide: string - Episode guide.</span>
+<span class="sd">        :param episodeguide: string - Episode guide.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setTop250"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTop250">[docs]</a>    <span class="k">def</span> <span class="nf">setTop250</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top250</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the top 250 number of the video item.</span>
@@ -2092,65 +2103,65 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setSetId"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSetId">[docs]</a>    <span class="k">def</span> <span class="nf">setSetId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setId</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setSetId"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSetId">[docs]</a>    <span class="k">def</span> <span class="nf">setSetId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setid</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the movie set identifier of the video item.</span>
 
-<span class="sd">        :param setId: integer - Set identifier.</span>
+<span class="sd">        :param setid: integer - Set identifier.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setTrackNumber"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTrackNumber">[docs]</a>    <span class="k">def</span> <span class="nf">setTrackNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trackNumber</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setTrackNumber"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTrackNumber">[docs]</a>    <span class="k">def</span> <span class="nf">setTrackNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tracknumber</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the track number of the music video item.</span>
 
-<span class="sd">        :param trackNumber: integer - Track number.</span>
+<span class="sd">        :param tracknumber: integer - Track number.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setRating"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setRating">[docs]</a>    <span class="k">def</span> <span class="nf">setRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rating</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                   <span class="n">votes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
                   <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                  <span class="n">isDefault</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+                  <span class="n">isdefault</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the rating of the video item.</span>
 
 <span class="sd">        :param rating: float - Rating number.</span>
 <span class="sd">        :param votes: integer - Number of votes.</span>
 <span class="sd">        :param type: string - Type of the rating.</span>
-<span class="sd">        :param isDefault: bool - Whether the rating is the default or not.</span>
+<span class="sd">        :param isdefault: bool - Whether the rating is the default or not.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setRatings"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setRatings">[docs]</a>    <span class="k">def</span> <span class="nf">setRatings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratings</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>  <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
-                   <span class="n">defaultRating</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setRatings"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setRatings">[docs]</a>    <span class="k">def</span> <span class="nf">setRatings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratings</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
+                   <span class="n">defaultrating</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the ratings of the video item.</span>
 
 <span class="sd">        :param ratings: dictionary -{ &#39;type: (rating, votes) }`.</span>
-<span class="sd">        :param defaultRating: string - Type / Label of the default rating.</span>
+<span class="sd">        :param defaultrating: string - Type / Label of the default rating.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setUserRating"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setUserRating">[docs]</a>    <span class="k">def</span> <span class="nf">setUserRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userRating</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setUserRating"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setUserRating">[docs]</a>    <span class="k">def</span> <span class="nf">setUserRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userrating</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the user rating of the video item.</span>
 
-<span class="sd">        :param userRating: integer - User rating.</span>
+<span class="sd">        :param userrating: integer - User rating.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setPlaycount"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setPlaycount">[docs]</a>    <span class="k">def</span> <span class="nf">setPlaycount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">playcount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the playcount of the video item.</span>
@@ -2160,7 +2171,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setMpaa"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setMpaa">[docs]</a>    <span class="k">def</span> <span class="nf">setMpaa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mpaa</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the MPAA rating of the video item.</span>
@@ -2170,7 +2181,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setPlot"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setPlot">[docs]</a>    <span class="k">def</span> <span class="nf">setPlot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the plot of the video item.</span>
@@ -2180,17 +2191,17 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setPlotOutline"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setPlotOutline">[docs]</a>    <span class="k">def</span> <span class="nf">setPlotOutline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plotOutline</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setPlotOutline"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setPlotOutline">[docs]</a>    <span class="k">def</span> <span class="nf">setPlotOutline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plotoutline</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the plot outline of the video item.</span>
 
-<span class="sd">        :param plotOutline: string - Plot outline.</span>
+<span class="sd">        :param plotoutline: string - Plot outline.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTitle">[docs]</a>    <span class="k">def</span> <span class="nf">setTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the title of the video item.</span>
@@ -2200,57 +2211,57 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setOriginalTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setOriginalTitle">[docs]</a>    <span class="k">def</span> <span class="nf">setOriginalTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">originalTitle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setOriginalTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setOriginalTitle">[docs]</a>    <span class="k">def</span> <span class="nf">setOriginalTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">originaltitle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the original title of the video item.</span>
 
-<span class="sd">        :param originalTitle: string - Original title.</span>
+<span class="sd">        :param originaltitle: string - Original title.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setSortTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSortTitle">[docs]</a>    <span class="k">def</span> <span class="nf">setSortTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sortTitle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setSortTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSortTitle">[docs]</a>    <span class="k">def</span> <span class="nf">setSortTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sorttitle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the sort title of the video item.</span>
 
-<span class="sd">        :param sortTitle: string - Sort title.</span>
+<span class="sd">        :param sorttitle: string - Sort title.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setTagLine"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTagLine">[docs]</a>    <span class="k">def</span> <span class="nf">setTagLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tagLine</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setTagLine"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTagLine">[docs]</a>    <span class="k">def</span> <span class="nf">setTagLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tagline</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the tagline of the video item.</span>
 
-<span class="sd">        :param tagLine: string - Tagline.</span>
+<span class="sd">        :param tagline: string - Tagline.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setTvShowTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTvShowTitle">[docs]</a>    <span class="k">def</span> <span class="nf">setTvShowTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tvshowTitle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setTvShowTitle"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTvShowTitle">[docs]</a>    <span class="k">def</span> <span class="nf">setTvShowTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tvshowtitle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the TV show title of the video item.</span>
 
-<span class="sd">        :param tvshowTitle: string - TV show title.</span>
+<span class="sd">        :param tvshowtitle: string - TV show title.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setTvShowStatus"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTvShowStatus">[docs]</a>    <span class="k">def</span> <span class="nf">setTvShowStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tvshowStatus</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setTvShowStatus"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTvShowStatus">[docs]</a>    <span class="k">def</span> <span class="nf">setTvShowStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the TV show status of the video item.</span>
 
-<span class="sd">        :param tvshowStatus: string - TV show status.</span>
+<span class="sd">        :param status: string - TV show status.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setGenres"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setGenres">[docs]</a>    <span class="k">def</span> <span class="nf">setGenres</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">genre</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the genres of the video item.</span>
@@ -2260,7 +2271,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setCountries"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setCountries">[docs]</a>    <span class="k">def</span> <span class="nf">setCountries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">countries</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the countries of the video item.</span>
@@ -2270,7 +2281,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setDirectors"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setDirectors">[docs]</a>    <span class="k">def</span> <span class="nf">setDirectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the directors of the video item.</span>
@@ -2280,7 +2291,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setStudios"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setStudios">[docs]</a>    <span class="k">def</span> <span class="nf">setStudios</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">studios</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the studios of the video item.</span>
@@ -2290,7 +2301,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setWriters"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setWriters">[docs]</a>    <span class="k">def</span> <span class="nf">setWriters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">writers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the writers of the video item.</span>
@@ -2300,7 +2311,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setDuration"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setDuration">[docs]</a>    <span class="k">def</span> <span class="nf">setDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the duration of the video item.</span>
@@ -2310,7 +2321,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setPremiered"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setPremiered">[docs]</a>    <span class="k">def</span> <span class="nf">setPremiered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">premiered</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the premiere date of the video item.</span>
@@ -2320,7 +2331,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setSet"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSet">[docs]</a>    <span class="k">def</span> <span class="nf">setSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">set</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the movie set (name) of the video item.</span>
@@ -2330,17 +2341,17 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setSetOverview"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSetOverview">[docs]</a>    <span class="k">def</span> <span class="nf">setSetOverview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setOverview</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setSetOverview"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setSetOverview">[docs]</a>    <span class="k">def</span> <span class="nf">setSetOverview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setoverview</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the movie set overview of the video item.</span>
 
-<span class="sd">        :param setOverview: string - Movie set overview.</span>
+<span class="sd">        :param setoverview: string - Movie set overview.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setTags"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTags">[docs]</a>    <span class="k">def</span> <span class="nf">setTags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the tags of the video item.</span>
@@ -2350,37 +2361,37 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setProductionCode"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setProductionCode">[docs]</a>    <span class="k">def</span> <span class="nf">setProductionCode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">productionCode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setProductionCode"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setProductionCode">[docs]</a>    <span class="k">def</span> <span class="nf">setProductionCode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">productioncode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the production code of the video item.</span>
 
-<span class="sd">        :param productionCode: string - Production code.</span>
+<span class="sd">        :param productioncode: string - Production code.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setFirstAired"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setFirstAired">[docs]</a>    <span class="k">def</span> <span class="nf">setFirstAired</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firstAired</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setFirstAired"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setFirstAired">[docs]</a>    <span class="k">def</span> <span class="nf">setFirstAired</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firstaired</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the first aired date of the video item.</span>
 
-<span class="sd">        :param firstAired: string - First aired date.</span>
+<span class="sd">        :param firstaired: string - First aired date.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setLastPlayed"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setLastPlayed">[docs]</a>    <span class="k">def</span> <span class="nf">setLastPlayed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lastPlayed</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setLastPlayed"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setLastPlayed">[docs]</a>    <span class="k">def</span> <span class="nf">setLastPlayed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lastplayed</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the last played date of the video item.</span>
 
-<span class="sd">        :param lastPlayed: string - Last played date (YYYY-MM-DD HH:MM:SS).</span>
+<span class="sd">        :param lastplayed: string - Last played date (YYYY-MM-DD HH:MM:SS).</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setAlbum"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setAlbum">[docs]</a>    <span class="k">def</span> <span class="nf">setAlbum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">album</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the album of the video item.</span>
@@ -2390,7 +2401,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setVotes"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setVotes">[docs]</a>    <span class="k">def</span> <span class="nf">setVotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">votes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the number of votes of the video item.</span>
@@ -2400,7 +2411,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setTrailer"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setTrailer">[docs]</a>    <span class="k">def</span> <span class="nf">setTrailer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trailer</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the trailer of the video item.</span>
@@ -2410,7 +2421,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setPath"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setPath">[docs]</a>    <span class="k">def</span> <span class="nf">setPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the path of the video item.</span>
@@ -2420,57 +2431,57 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setFilenameAndPath"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setFilenameAndPath">[docs]</a>    <span class="k">def</span> <span class="nf">setFilenameAndPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenameAndPath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setFilenameAndPath"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setFilenameAndPath">[docs]</a>    <span class="k">def</span> <span class="nf">setFilenameAndPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filenameandpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the filename and path of the video item.</span>
 
-<span class="sd">        :param filenameAndPath: string - Filename and path.</span>
+<span class="sd">        :param filenameandpath: string - Filename and path.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setIMDBNumber"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setIMDBNumber">[docs]</a>    <span class="k">def</span> <span class="nf">setIMDBNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imdbNumber</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setIMDBNumber"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setIMDBNumber">[docs]</a>    <span class="k">def</span> <span class="nf">setIMDBNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imdbnumber</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the IMDb number of the video item.</span>
 
-<span class="sd">        :param imdbNumber: string - IMDb number.</span>
+<span class="sd">        :param imdbnumber: string - IMDb number.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setDateAdded"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setDateAdded">[docs]</a>    <span class="k">def</span> <span class="nf">setDateAdded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dateAdded</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setDateAdded"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setDateAdded">[docs]</a>    <span class="k">def</span> <span class="nf">setDateAdded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dateadded</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the date added of the video item.</span>
 
-<span class="sd">        :param dateAdded: string - Date added (YYYY-MM-DD HH:MM:SS).</span>
+<span class="sd">        :param dateadded: string - Date added (YYYY-MM-DD HH:MM:SS).</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setMediaType"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setMediaType">[docs]</a>    <span class="k">def</span> <span class="nf">setMediaType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mediaType</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setMediaType"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setMediaType">[docs]</a>    <span class="k">def</span> <span class="nf">setMediaType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mediatype</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the media type of the video item.</span>
 
-<span class="sd">        :param mediaType: string - Media type.</span>
+<span class="sd">        :param mediatype: string - Media type.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setShowLinks"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setShowLinks">[docs]</a>    <span class="k">def</span> <span class="nf">setShowLinks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">showLinks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setShowLinks"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setShowLinks">[docs]</a>    <span class="k">def</span> <span class="nf">setShowLinks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">showlinks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the TV show links of the movie.</span>
 
-<span class="sd">        :param showLinks: list - TV show links.</span>
+<span class="sd">        :param showlinks: list - TV show links.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setArtists"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setArtists">[docs]</a>    <span class="k">def</span> <span class="nf">setArtists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the artists of the music video item.</span>
@@ -2480,7 +2491,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.setCast"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setCast">[docs]</a>    <span class="k">def</span> <span class="nf">setCast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Actor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the cast / actors of the video item.</span>
@@ -2490,18 +2501,18 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.setResumePoint"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setResumePoint">[docs]</a>    <span class="k">def</span> <span class="nf">setResumePoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">totalTime</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.setResumePoint"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.setResumePoint">[docs]</a>    <span class="k">def</span> <span class="nf">setResumePoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">totaltime</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the resume point of the video item.</span>
 
 <span class="sd">        :param time: float - Resume point in seconds.</span>
-<span class="sd">        :param totalTime: float - Total duration in seconds.</span>
+<span class="sd">        :param totaltime: float - Total duration in seconds.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.addSeason"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.addSeason">[docs]</a>    <span class="k">def</span> <span class="nf">addSeason</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a season with name. It needs at least the season number.</span>
@@ -2519,17 +2530,17 @@
 <span class="sd">            ...</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
-<div class="viewcode-block" id="InfoTagVideo.addSeasons"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.addSeasons">[docs]</a>    <span class="k">def</span> <span class="nf">addSeasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namedSeasons</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span>  <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="InfoTagVideo.addSeasons"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.addSeasons">[docs]</a>    <span class="k">def</span> <span class="nf">addSeasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namedseasons</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add named seasons to the TV show.</span>
 
-<span class="sd">        :param namedSeasons: list -``[ (season, name) ]``.</span>
+<span class="sd">        :param namedseasons: list -``[ (season, name) ]``.</span>
 
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.addVideoStream"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.addVideoStream">[docs]</a>    <span class="k">def</span> <span class="nf">addVideoStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">VideoStreamDetail</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a video stream to the video item.</span>
@@ -2539,7 +2550,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.addAudioStream"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.addAudioStream">[docs]</a>    <span class="k">def</span> <span class="nf">addAudioStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">AudioStreamDetail</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add an audio stream to the video item.</span>
@@ -2549,7 +2560,7 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.addSubtitleStream"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.addSubtitleStream">[docs]</a>    <span class="k">def</span> <span class="nf">addSubtitleStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">:</span> <span class="n">SubtitleStreamDetail</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a subtitle stream to the video item.</span>
@@ -2559,9 +2570,9 @@
 <span class="sd">        @python_v20 New function added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-    
+
 <div class="viewcode-block" id="InfoTagVideo.addAvailableArtwork"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.InfoTagVideo.addAvailableArtwork">[docs]</a>    <span class="k">def</span> <span class="nf">addAvailableArtwork</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                            <span class="n">art_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                            <span class="n">arttype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                             <span class="n">preview</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                             <span class="n">referrer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                             <span class="n">cache</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -2572,7 +2583,7 @@
 <span class="sd">        Add an image to available artworks (needed for video scrapers)</span>
 
 <span class="sd">        :param url: string - image path url</span>
-<span class="sd">        :param art_type: string - image type</span>
+<span class="sd">        :param arttype: string - image type</span>
 <span class="sd">        :param preview: [opt] string - image preview path url</span>
 <span class="sd">        :param referrer: [opt] string - referrer url</span>
 <span class="sd">        :param cache: [opt] string - filename in cache</span>
@@ -2589,7 +2600,7 @@
 <span class="sd">            ...</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
-    
+
 
 <div class="viewcode-block" id="Keyboard"><a class="viewcode-back" href="../_autosummary/xbmc.html#xbmc.Keyboard">[docs]</a><span class="k">class</span> <span class="nc">Keyboard</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -4159,7 +4170,7 @@
       &copy;2022, Roman Miroshnychenko.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

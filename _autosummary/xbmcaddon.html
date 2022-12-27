@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>xbmcaddon &#8212; Kodistubs  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -14,6 +14,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="xbmcdrm" href="xbmcdrm.html" />
@@ -869,7 +870,45 @@ reading and writing specific setting values.</p>
 <li class="toctree-l1"><a class="reference internal" href="../using.html">Using Kodistubs</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Kodi Python API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="xbmc.html">xbmc</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">xbmcaddon</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">xbmcaddon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcaddon.Addon"><code class="docutils literal notranslate"><span class="pre">Addon</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getLocalizedString"><code class="docutils literal notranslate"><span class="pre">Addon.getLocalizedString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getSettings"><code class="docutils literal notranslate"><span class="pre">Addon.getSettings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getSetting"><code class="docutils literal notranslate"><span class="pre">Addon.getSetting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getSettingBool"><code class="docutils literal notranslate"><span class="pre">Addon.getSettingBool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getSettingInt"><code class="docutils literal notranslate"><span class="pre">Addon.getSettingInt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getSettingNumber"><code class="docutils literal notranslate"><span class="pre">Addon.getSettingNumber()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getSettingString"><code class="docutils literal notranslate"><span class="pre">Addon.getSettingString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.setSetting"><code class="docutils literal notranslate"><span class="pre">Addon.setSetting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.setSettingBool"><code class="docutils literal notranslate"><span class="pre">Addon.setSettingBool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.setSettingInt"><code class="docutils literal notranslate"><span class="pre">Addon.setSettingInt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.setSettingNumber"><code class="docutils literal notranslate"><span class="pre">Addon.setSettingNumber()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.setSettingString"><code class="docutils literal notranslate"><span class="pre">Addon.setSettingString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.openSettings"><code class="docutils literal notranslate"><span class="pre">Addon.openSettings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Addon.getAddonInfo"><code class="docutils literal notranslate"><span class="pre">Addon.getAddonInfo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#xbmcaddon.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getBool"><code class="docutils literal notranslate"><span class="pre">Settings.getBool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getInt"><code class="docutils literal notranslate"><span class="pre">Settings.getInt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getNumber"><code class="docutils literal notranslate"><span class="pre">Settings.getNumber()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getString"><code class="docutils literal notranslate"><span class="pre">Settings.getString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getBoolList"><code class="docutils literal notranslate"><span class="pre">Settings.getBoolList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getIntList"><code class="docutils literal notranslate"><span class="pre">Settings.getIntList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getNumberList"><code class="docutils literal notranslate"><span class="pre">Settings.getNumberList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.getStringList"><code class="docutils literal notranslate"><span class="pre">Settings.getStringList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setBool"><code class="docutils literal notranslate"><span class="pre">Settings.setBool()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setInt"><code class="docutils literal notranslate"><span class="pre">Settings.setInt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setNumber"><code class="docutils literal notranslate"><span class="pre">Settings.setNumber()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setString"><code class="docutils literal notranslate"><span class="pre">Settings.setString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setBoolList"><code class="docutils literal notranslate"><span class="pre">Settings.setBoolList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setIntList"><code class="docutils literal notranslate"><span class="pre">Settings.setIntList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setNumberList"><code class="docutils literal notranslate"><span class="pre">Settings.setNumberList()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xbmcaddon.Settings.setStringList"><code class="docutils literal notranslate"><span class="pre">Settings.setStringList()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="xbmcdrm.html">xbmcdrm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbmcgui.html">xbmcgui</a></li>
 <li class="toctree-l2"><a class="reference internal" href="xbmcplugin.html">xbmcplugin</a></li>
@@ -907,7 +946,7 @@ reading and writing specific setting values.</p>
       &copy;2022, Roman Miroshnychenko.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
