@@ -15,6 +15,8 @@ __kodistubs__ = True
 
 DRIVE_NOT_READY = 1
 ENGLISH_NAME = 2
+ISO_639_1 = 0
+ISO_639_2 = 1
 LOGDEBUG = 0
 LOGERROR = 3
 LOGFATAL = 4
