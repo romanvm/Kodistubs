@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -100,7 +97,7 @@
                      <span class="n">listitem</span><span class="p">:</span> <span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">,</span>
                      <span class="n">isFolder</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                      <span class="n">totalItems</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Callback function to pass directory contents back to Kodi.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -129,7 +126,7 @@
 <div class="viewcode-block" id="addDirectoryItems"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addDirectoryItems">[docs]</a><span class="k">def</span> <span class="nf">addDirectoryItems</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                       <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>  <span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">,</span>  <span class="nb">bool</span><span class="p">]],</span>
                       <span class="n">totalItems</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Callback function to pass directory contents back to Kodi as a list.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -154,7 +151,7 @@
                    <span class="n">succeeded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                    <span class="n">updateListing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                    <span class="n">cacheToDisc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Callback function to tell Kodi that the end of the directory listing in a</span>
 <span class="sd">    virtualPythonFolder module is reached.</span>
 
@@ -178,7 +175,7 @@
 <div class="viewcode-block" id="setResolvedUrl"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setResolvedUrl">[docs]</a><span class="k">def</span> <span class="nf">setResolvedUrl</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                    <span class="n">succeeded</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                    <span class="n">listitem</span><span class="p">:</span> <span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Callback function to tell Kodi that the file plugin has been resolved to a url</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -198,7 +195,7 @@
                   <span class="n">sortMethod</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                   <span class="n">labelMask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                   <span class="n">label2Mask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    @brief \python_func{ xbmcplugin.addSortMethod(handle, sortMethod</span>
 <span class="sd">    [,labelMask, label2Mask]) }Adds a sorting method for the media list.</span>
 
@@ -299,7 +296,7 @@
 
 
 <div class="viewcode-block" id="getSetting"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.getSetting">[docs]</a><span class="k">def</span> <span class="nf">getSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the value of a setting as a string.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -319,7 +316,7 @@
 
 
 <div class="viewcode-block" id="setSetting"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setSetting">[docs]</a><span class="k">def</span> <span class="nf">setSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets a plugin setting for the current running plugin.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -336,7 +333,7 @@
 
 
 <div class="viewcode-block" id="setContent"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setContent">[docs]</a><span class="k">def</span> <span class="nf">setContent</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets the plugins content.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -363,7 +360,7 @@
 
 
 <div class="viewcode-block" id="setPluginCategory"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setPluginCategory">[docs]</a><span class="k">def</span> <span class="nf">setPluginCategory</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets the plugins name for skins to display.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -383,7 +380,7 @@
                     <span class="n">color1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">color2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">color3</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets the plugins fanart and color for skins to display.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -403,7 +400,7 @@
 
 
 <div class="viewcode-block" id="setProperty"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setProperty">[docs]</a><span class="k">def</span> <span class="nf">setProperty</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets a container property for this plugin.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -475,11 +472,11 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2022, Roman Miroshnychenko.
+      &copy;2023, Roman Miroshnychenko.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 
