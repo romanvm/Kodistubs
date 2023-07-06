@@ -1,4 +1,16 @@
-import kodistubs_meta
+import datetime
+from configparser import ConfigParser
+from pathlib import Path
+
+setup_cfg = Path(__file__).resolve().parent.parent / 'setup.cfg'
+
+config = ConfigParser()
+config.read([setup_cfg])
+metadata = config['metadata']
+
+VERSION = metadata['version']
+AUTHOR = metadata['author']
+YEAR = datetime.datetime.now().year
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -23,10 +35,10 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = u'Kodistubs'
-copyright = u'{0}, {1}'.format(kodistubs_meta.YEAR, kodistubs_meta.AUTHOR)
-author = kodistubs_meta.AUTHOR
+copyright = u'{0}, {1}'.format(YEAR, AUTHOR)
+author = AUTHOR
 
-version = kodistubs_meta.VERSION
+version = VERSION
 
 language = 'en'
 
