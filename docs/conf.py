@@ -30,7 +30,7 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 autosummary_generate = True
-intersphinx_mapping = {'python': ('https://docs.python.org/3.10', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3.11', None)}
 
 templates_path = ['_templates']
 
