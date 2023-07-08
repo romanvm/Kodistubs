@@ -361,7 +361,7 @@ class Control:
     portion of the manual is dedicated to providing in depth information on how it
     all works, along with tips to make the experience a little more pleasant.
     """
-    
+
     def __init__(self) -> None:
         pass
     
@@ -1930,7 +1930,7 @@ class ControlButton(Control):
 
 class ControlGroup(Control):
     """
-    **Used to group controls together..**
+    **Used to group controls together.**
 
     The group control is one of the most important controls. It allows you to group
     controls together, applying attributes to all of them at once. It also remembers
@@ -2759,11 +2759,11 @@ class Dialog:
         ===== ======================== ============================ 
         Param Name                     Format                       
         ===== ======================== ============================ 
-        0     ShowAndGetNumber         (default format: #)          
-        1     ShowAndGetDate           (default format: DD/MM/YYYY) 
-        2     ShowAndGetTime           (default format: HH:MM)      
-        3     ShowAndGetIPAddress      (default format: #.#.#.#)    
-        4     ShowAndVerifyNewPassword (default format: *)          
+        0     ShowAndGetNumber         (default format: ``#``)
+        1     ShowAndGetDate           (default format: ``DD/MM/YYYY``)
+        2     ShowAndGetTime           (default format: ``HH:MM``)
+        3     ShowAndGetIPAddress      (default format: ``#.#.#.#``)
+        4     ShowAndVerifyNewPassword (default format: ``*``)
         ===== ======================== ============================ 
 
         :param heading: string or unicode - dialog heading (will be ignored for type 4).
@@ -3698,8 +3698,8 @@ class ListItem:
         image   string (http://www.someurl.com/someimage.png)              
         preview [opt] string (http://www.someurl.com/somepreviewimage.png)
         colors  [opt] string (either comma separated Kodi hex values
-                ("FFFFFFFF,DDDDDDDD") or TVDB RGB Int Triplets
-                ("|68,69,59|69,70,58|78,78,68|"))
+                ("``FFFFFFFF,DDDDDDDD``") or TVDB RGB Int Triplets
+                ("``|68,69,59|69,70,58|78,78,68|``"))
         ======= ==========================================================
 
         @python_v18 New function added.
