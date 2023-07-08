@@ -60,7 +60,6 @@ html_theme_options = {
     'github_user': 'romanvm',
     'github_repo': 'Kodistubs',
     'github_banner': True,
-    'font_family': 'Georgia',
 }
 
 html_static_path = ['_static']
