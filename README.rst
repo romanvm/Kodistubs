@@ -16,7 +16,7 @@ You can install Kodistubs into your working virtual environment using ``pip``::
 
     $ pip install Kodistubs
 
-Read `Kodi stubs documentation`_ for more info on how to use Kodi stubs.
+Read `Kodistubs documentation`_ for more info on how to use Kodi stubs.
 
 Kodistubs major version corresponds to the version of Kodi they have been generated from.
 Current Kodistubs are compatible with Python 3.6 and above. Kodistubs for Kodi versions that used
@@ -42,6 +42,6 @@ License: `GPL v.3`_
 .. _Kodi (XBMC): http://kodi.tv
 .. _Discussion topic on Kodi forum: http://forum.kodi.tv/showthread.php?tid=173780
 .. _GPL v.3: http://www.gnu.org/licenses/gpl.html
-.. _Kodi stubs documentation: http://romanvm.github.io/Kodistubs/
+.. _Kodistubs documentation: https://romanvm.github.io/Kodistubs/
 .. _PEP-484: https://www.python.org/dev/peps/pep-0484/#suggested-syntax-for-python-2-7-and-straddling-code
 .. _this script: https://github.com/romanvm/kodistubs-generator
