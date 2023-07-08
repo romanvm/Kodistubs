@@ -38,8 +38,8 @@ source_suffix = '.rst'
 
 master_doc = 'index'
 
-project = u'Kodistubs'
-copyright = u'{0}, {1}'.format(YEAR, AUTHOR)
+project = 'Kodistubs'
+copyright = f'{YEAR}, {AUTHOR}'
 author = AUTHOR
 
 version = VERSION
