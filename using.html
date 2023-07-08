@@ -132,7 +132,7 @@ to write unit tests for your addon code.</p>
 <p>Currently <a class="reference external" href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> is <em>de facto</em> the standard tool for documenting Python code. But for generating
 documentation from docstrings it requires that your modules can be imported without any side-effects
 (i.e. exceptions). If you want to document your addon with Sphinx, add Kodi stubs folder to
-<a class="reference external" href="https://docs.python.org/3.10/library/sys.html#sys.path" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> of <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code> file in your Sphinx project and in most cases your addon modules will be
+<a class="reference external" href="https://docs.python.org/3.11/library/sys.html#sys.path" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> of <code class="file docutils literal notranslate"><span class="pre">conf.py</span></code> file in your Sphinx project and in most cases your addon modules will be
 imported without issues. Just don’t forget to protect your module-level exetutable code with
 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> condition.</p>
 <p>Also the root URL of this documentation (without <code class="file docutils literal notranslate"><span class="pre">index.html</span></code>) can be used as a reference point
