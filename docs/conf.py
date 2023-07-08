@@ -1,8 +1,12 @@
 import datetime
+import sys
 from configparser import ConfigParser
 from pathlib import Path
 
-setup_cfg = Path(__file__).resolve().parent.parent / 'setup.cfg'
+project_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(project_dir))
+
+setup_cfg = project_dir / 'setup.cfg'
 
 config = ConfigParser()
 config.read([setup_cfg])
@@ -26,7 +30,7 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 autosummary_generate = True
-intersphinx_mapping = {'https://docs.python.org/3.10': None}
+intersphinx_mapping = {'python': ('https://docs.python.org/3.10', None)}
 
 templates_path = ['_templates']
 
