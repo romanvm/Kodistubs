@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xbmcdrm &#8212; Kodistubs  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for xbmcdrm</h1><div class="highlight"><pre>
+<span></span><span class="c1"># This file is generated from Kodi source code and post-edited</span>
+<span class="c1"># to correct code style and docstrings formatting.</span>
+<span class="c1"># License: GPL v.3 &lt;https://www.gnu.org/licenses/gpl-3.0.en.html&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">**Kodi&#39;s DRM class.**</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="n">__kodistubs__</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<div class="viewcode-block" id="CryptoSession"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession">[docs]</a><span class="k">class</span> <span class="nc">CryptoSession</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Kodi&#39;s DRM class.**</span>
+
+<span class="sd">    Offers classes and functions that allow a developer to work with DRM-protected</span>
+<span class="sd">    contents like Widevine.</span>
+
+<span class="sd">    This type of functionality is closely related to the type of DRM used and the</span>
+<span class="sd">    service to be implemented.</span>
+
+<span class="sd">    Using the `CryptoSession` constructor allow you to have access to a DRM session.</span>
+<span class="sd">    With a DRM session you can read and write the DRM</span>
+<span class="sd">    properties `GetPropertyString`,`SetPropertyString` and establish session keys</span>
+<span class="sd">    with GetKeyRequest and `ProvideKeyResponse`, or resume previous session keys</span>
+<span class="sd">    with `RestoreKeys`.</span>
+
+<span class="sd">    When the session keys are established you can use these methods to perform</span>
+<span class="sd">    various operations:`Encrypt` /`Decrypt` for data encryption / decryption,`Sign`</span>
+<span class="sd">    /`Verify` for make or verify data-signature. Useful for example to implement</span>
+<span class="sd">    encrypted communication between a client and the server.</span>
+
+<span class="sd">    An example where such functionality is useful is the Message Security Layer</span>
+<span class="sd">    (MSL) transmission protocol used in some VOD applications. This protocol (or</span>
+<span class="sd">    rather framework) is used to increase the level of security in the exchange of</span>
+<span class="sd">    messages (such as licences, manifests or other data), which defines a security</span>
+<span class="sd">    extension / layer on top of the HTTP protocol.</span>
+
+<span class="sd">    Constructor for DRM crypto session</span>
+
+<span class="sd">    :param UUID: string - 16 byte UUID of the DRM system to use</span>
+<span class="sd">    :param cipherAlgorithm: string - Algorithm used for encryption / decryption ciphers</span>
+<span class="sd">    :param macAlgorithm: string - Algorithm used for sign / verify</span>
+<span class="sd">    :raises RuntimeException: If the session can not be established</span>
+
+<span class="sd">    @python_v18 New class added.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        uuid_widevine = &#39;edef8ba9-79d6-4ace-a3c8-27dcd51d21ed&#39;</span>
+<span class="sd">        crypto_session = xbmcdrm.CryptoSession(uuid_widevine, &#39;AES/CBC/NoPadding&#39;, &#39;HmacSHA256&#39;)</span>
+<span class="sd">        ..</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">UUID</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">cipherAlgorithm</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">macAlgorithm</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+<div class="viewcode-block" id="CryptoSession.GetKeyRequest"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.GetKeyRequest">[docs]</a>    <span class="k">def</span> <span class="nf">GetKeyRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+                      <span class="n">mimeType</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                      <span class="n">offlineKey</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                      <span class="n">optionalParameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a key request</span>
+
+<span class="sd">        Generate a key request, used for request/response exchange between the app and a</span>
+<span class="sd">        license server to obtain or release keys used to decrypt encrypted content.</span>
+<span class="sd">        After the app has received the key request response from the license server, it</span>
+<span class="sd">        should deliver to the response to the DRM instance using the</span>
+<span class="sd">        method `ProvideKeyResponse`, to activate the keys.</span>
+
+<span class="sd">        :param init: byte - Initialization bytes container-specific data, its meaning is</span>
+<span class="sd">            interpreted based on the mime type provided in the mimeType</span>
+<span class="sd">            parameter. It could contain, for example, the content ID, key ID</span>
+<span class="sd">            or other data required in generating the key request.</span>
+<span class="sd">        :param mimeType: string - Type of media which is exchanged (e.g. &quot;application/xml&quot;,</span>
+<span class="sd">            &quot;video/mp4&quot;)</span>
+<span class="sd">        :param offlineKey: bool - Specifies the type of the request. The request may be to</span>
+<span class="sd">            acquire keys for Streaming or Offline content</span>
+<span class="sd">        :param optionalParameters: [opt] map - Will be included in the key request message to allow a</span>
+<span class="sd">            client application to provide additional message parameters to the</span>
+<span class="sd">            server</span>
+<span class="sd">        :return: byte - The opaque key request data (challenge) which is send to key server</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v19 With python 3 the init param must be a bytearray instead of byte.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytearray</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.GetPropertyString"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.GetPropertyString">[docs]</a>    <span class="k">def</span> <span class="nf">GetPropertyString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request a system specific property value of the DRM system.</span>
+
+<span class="sd">        :param Name: string - Name of the property to query</span>
+<span class="sd">        :return: Value of the requested property</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.ProvideKeyResponse"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.ProvideKeyResponse">[docs]</a>    <span class="k">def</span> <span class="nf">ProvideKeyResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provide a key response</span>
+
+<span class="sd">        When a key response is received from the license server, must be sent to the DRM</span>
+<span class="sd">        instance by using provideKeyResponse. See also GetKeyRequest.</span>
+
+<span class="sd">        :param response: byte - Key data returned from the license server</span>
+<span class="sd">        :return: A keySetId if the response is for an offline key requests which can be used later</span>
+<span class="sd">            with restoreKeys, else return empty for streaming key requests.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v19 With python 3 the response argument must be a bytearray instead of byte.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.RemoveKeys"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.RemoveKeys">[docs]</a>    <span class="k">def</span> <span class="nf">RemoveKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes all keys currently loaded in a session.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.RestoreKeys"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.RestoreKeys">[docs]</a>    <span class="k">def</span> <span class="nf">RestoreKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keySetId</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Restores session keys stored during previous `ProvideKeyResponse` call.</span>
+
+<span class="sd">        :param keySetId: string - Identifies the saved key set to restore. This value must</span>
+<span class="sd">            never be null.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.SetPropertyString"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.SetPropertyString">[docs]</a>    <span class="k">def</span> <span class="nf">SetPropertyString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a system specific property value in the DRM system.</span>
+
+<span class="sd">        :param name: string - Name of the property. This value must never be null.</span>
+<span class="sd">        :param value: string - Value of the property to set. This value must never be null.</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.Decrypt"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Decrypt">[docs]</a>    <span class="k">def</span> <span class="nf">Decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cipherKeyId</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+                <span class="nb">input</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+                <span class="n">iv</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrypt an encrypted data by using session keys.</span>
+
+<span class="sd">        :param cipherKeyId: byte - Encryption key id (provided from a service handshake)</span>
+<span class="sd">        :param input: byte - Cipher text to decrypt</span>
+<span class="sd">        :param iv: byte - Initialization vector of cipher text</span>
+<span class="sd">        :return: Decrypted input data</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v19 With python 3 all arguments need to be of type bytearray instead of byte.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytearray</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.Encrypt"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Encrypt">[docs]</a>    <span class="k">def</span> <span class="nf">Encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cipherKeyId</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+                <span class="nb">input</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+                <span class="n">iv</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encrypt data by using session keys.</span>
+
+<span class="sd">        :param cipherKeyId: byte - Encryption key id (provided from a service handshake)</span>
+<span class="sd">        :param input: byte - Encrypted text</span>
+<span class="sd">        :param iv: byte - Initialization vector of encrypted text</span>
+<span class="sd">        :return: byte - Encrypted input data</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v19 With python 3 all arguments need to be of type bytearray instead of byte.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytearray</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.Sign"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Sign">[docs]</a>    <span class="k">def</span> <span class="nf">Sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macKeyId</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+             <span class="n">message</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a DRM encrypted signature for a text message.</span>
+
+<span class="sd">        :param macKeyId: byte - HMAC key id (provided from a service handshake)</span>
+<span class="sd">        :param message: byte - Message text on which to base the signature</span>
+<span class="sd">        :return: byte - Signature</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v19 With python 3 all arguments need to be of type bytearray instead of byte.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytearray</span><span class="p">()</span></div>
+    
+<div class="viewcode-block" id="CryptoSession.Verify"><a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Verify">[docs]</a>    <span class="k">def</span> <span class="nf">Verify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macKeyId</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+               <span class="n">message</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">],</span>
+               <span class="n">signature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verify the validity of a DRM signature of a text message.</span>
+
+<span class="sd">        :param macKeyId: byte - HMAC key id (provided from a service handshake)</span>
+<span class="sd">        :param message: byte - Message text on which the signature is based</span>
+<span class="sd">        :param signature: byte - The signature to verify</span>
+<span class="sd">        :return: true when the signature is valid</span>
+
+<span class="sd">        @python_v18 New function added.</span>
+
+<span class="sd">        @python_v19 With python 3 for all arguments is needed to pass bytearray instead of byte.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Kodistubs</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=romanvm&repo=Kodistubs&type=star&v=2&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../using.html">Using Kodistubs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Kodi Python API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Roman Miroshnychenko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/romanvm/Kodistubs" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
