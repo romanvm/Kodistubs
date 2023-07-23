@@ -52,12 +52,12 @@ class CryptoSession:
         crypto_session = xbmcdrm.CryptoSession(uuid_widevine, 'AES/CBC/NoPadding', 'HmacSHA256')
         ..
     """
-    
+
     def __init__(self, UUID: str,
                  cipherAlgorithm: str,
                  macAlgorithm: str) -> None:
         pass
-    
+
     def GetKeyRequest(self, init: Union[str, bytes, bytearray],
                       mimeType: str,
                       offlineKey: bool,
@@ -89,7 +89,7 @@ class CryptoSession:
         @python_v19 With python 3 the init param must be a bytearray instead of byte.
         """
         return bytearray()
-    
+
     def GetPropertyString(self, name: str) -> str:
         """
         Request a system specific property value of the DRM system.
@@ -100,7 +100,7 @@ class CryptoSession:
         @python_v18 New function added.
         """
         return ""
-    
+
     def ProvideKeyResponse(self, response: Union[str, bytes, bytearray]) -> str:
         """
         Provide a key response
@@ -117,7 +117,7 @@ class CryptoSession:
         @python_v19 With python 3 the response argument must be a bytearray instead of byte.
         """
         return ""
-    
+
     def RemoveKeys(self) -> None:
         """
         Removes all keys currently loaded in a session.
@@ -125,7 +125,7 @@ class CryptoSession:
         @python_v18 New function added.
         """
         pass
-    
+
     def RestoreKeys(self, keySetId: str) -> None:
         """
         Restores session keys stored during previous `ProvideKeyResponse` call.
@@ -136,7 +136,7 @@ class CryptoSession:
         @python_v18 New function added.
         """
         pass
-    
+
     def SetPropertyString(self, name: str, value: str) -> None:
         """
         Set a system specific property value in the DRM system.
@@ -147,7 +147,7 @@ class CryptoSession:
         @python_v18 New function added.
         """
         pass
-    
+
     def Decrypt(self, cipherKeyId: Union[str, bytes, bytearray],
                 input: Union[str, bytes, bytearray],
                 iv: Union[str, bytes, bytearray]) -> bytearray:
@@ -164,7 +164,7 @@ class CryptoSession:
         @python_v19 With python 3 all arguments need to be of type bytearray instead of byte.
         """
         return bytearray()
-    
+
     def Encrypt(self, cipherKeyId: Union[str, bytes, bytearray],
                 input: Union[str, bytes, bytearray],
                 iv: Union[str, bytes, bytearray]) -> bytearray:
@@ -181,7 +181,7 @@ class CryptoSession:
         @python_v19 With python 3 all arguments need to be of type bytearray instead of byte.
         """
         return bytearray()
-    
+
     def Sign(self, macKeyId: Union[str, bytes, bytearray],
              message: Union[str, bytes, bytearray]) -> bytearray:
         """
@@ -196,7 +196,7 @@ class CryptoSession:
         @python_v19 With python 3 all arguments need to be of type bytearray instead of byte.
         """
         return bytearray()
-    
+
     def Verify(self, macKeyId: Union[str, bytes, bytearray],
                message: Union[str, bytes, bytearray],
                signature: Union[str, bytes, bytearray]) -> bool:

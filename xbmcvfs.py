@@ -20,11 +20,11 @@ class File:
     :param mode: [opt] string Additional mode options (if no mode is supplied, the
         default is Open for Read).
 
-    ==== ============== 
-    Mode Description    
-    ==== ============== 
-    w    Open for write 
-    ==== ============== 
+    ==== ==============
+    Mode Description
+    ==== ==============
+    w    Open for write
+    ==== ==============
 
     @python_v19 Added context manager support
 
@@ -41,7 +41,7 @@ class File:
             ..
             ..
     """
-    
+
     def __init__(self, filepath: str, mode: Optional[str] = None) -> None:
         pass
 
@@ -50,7 +50,7 @@ class File:
 
     def __exit__(self, exc_type, exc_val, exc_tb):  # Required for context manager
         pass
-    
+
     def read(self, numBytes: int = 0) -> str:
         """
         Read file parts as string.
@@ -74,7 +74,7 @@ class File:
                 ..
         """
         return ""
-    
+
     def readBytes(self, numBytes: int = 0) -> bytearray:
         """
         Read bytes from file.
@@ -98,7 +98,7 @@ class File:
                 ..
         """
         return bytearray()
-    
+
     def write(self, buffer: Union[str,  bytes,  bytearray]) -> bool:
         """
         To write given data in file.
@@ -122,7 +122,7 @@ class File:
                 ..
         """
         return True
-    
+
     def size(self) -> int:
         """
         Get the file size.
@@ -145,7 +145,7 @@ class File:
                 ..
         """
         return 0
-    
+
     def seek(self, seekBytes: int, iWhence: int = 0) -> int:
         """
         Seek to position in file.
@@ -172,7 +172,7 @@ class File:
                 ..
         """
         return 0
-    
+
     def tell(self) -> int:
         """
         Get the current position in the file.
@@ -197,7 +197,7 @@ class File:
                 ..
         """
         return 0
-    
+
     def close(self) -> None:
         """
         Close opened file.
@@ -217,7 +217,7 @@ class File:
                 ..
         """
         pass
-    
+
 
 class Stat:
     """
@@ -237,10 +237,10 @@ class Stat:
         modified = st.st_mtime()
         ..
     """
-    
+
     def __init__(self, path: str) -> None:
         pass
-    
+
     def st_mode(self) -> int:
         """
         To get file protection.
@@ -248,7 +248,7 @@ class Stat:
         :return: st_mode
         """
         return 0
-    
+
     def st_ino(self) -> int:
         """
         To get inode number.
@@ -256,7 +256,7 @@ class Stat:
         :return: st_ino
         """
         return 0
-    
+
     def st_dev(self) -> int:
         """
         To get ID of device containing file.
@@ -266,7 +266,7 @@ class Stat:
         :return: st_dev
         """
         return 0
-    
+
     def st_nlink(self) -> int:
         """
         To get number of hard links.
@@ -274,7 +274,7 @@ class Stat:
         :return: st_nlink
         """
         return 0
-    
+
     def st_uid(self) -> int:
         """
         To get user ID of owner.
@@ -282,7 +282,7 @@ class Stat:
         :return: st_uid
         """
         return 0
-    
+
     def st_gid(self) -> int:
         """
         To get group ID of owner.
@@ -290,7 +290,7 @@ class Stat:
         :return: st_gid
         """
         return 0
-    
+
     def st_size(self) -> int:
         """
         To get total size, in bytes.
@@ -302,7 +302,7 @@ class Stat:
         :return: st_size
         """
         return 0
-    
+
     def st_atime(self) -> int:
         """
         To get time of last access.
@@ -310,7 +310,7 @@ class Stat:
         :return: st_atime
         """
         return 0
-    
+
     def st_mtime(self) -> int:
         """
         To get time of last modification.
@@ -318,7 +318,7 @@ class Stat:
         :return: st_mtime
         """
         return 0
-    
+
     def st_ctime(self) -> int:
         """
         To get time of last status change.
@@ -326,7 +326,7 @@ class Stat:
         :return: st_ctime
         """
         return 0
-    
+
 
 def copy(strSource: str, strDestination: str) -> bool:
     """

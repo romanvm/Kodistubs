@@ -9,8 +9,6 @@ from typing import List, Optional
 __kodistubs__ = True
 
 
-
-
 class Addon:
     """
     **Kodi's addon class.**
@@ -38,10 +36,10 @@ class Addon:
         self.Addon = xbmcaddon.Addon('script.foo.bar')
         ..
     """
-    
+
     def __init__(self, id: Optional[str] = None) -> None:
         pass
-    
+
     def getLocalizedString(self, id: int) -> str:
         """
         Returns an addon's localized 'string'.
@@ -59,7 +57,7 @@ class Addon:
             ..
         """
         return ""
-    
+
     def getSettings(self) -> 'Settings':
         """
         Returns a wrapper around the addon's settings.
@@ -75,7 +73,7 @@ class Addon:
             ..
         """
         return Settings()
-    
+
     def getSetting(self, id: str) -> str:
         """
         Returns the value of a setting as string.
@@ -93,7 +91,7 @@ class Addon:
             ..
         """
         return ""
-    
+
     def getSettingBool(self, id: str) -> bool:
         """
         Returns the value of a setting as a boolean.
@@ -112,7 +110,7 @@ class Addon:
             ..
         """
         return True
-    
+
     def getSettingInt(self, id: str) -> int:
         """
         Returns the value of a setting as an integer.
@@ -131,7 +129,7 @@ class Addon:
             ..
         """
         return 0
-    
+
     def getSettingNumber(self, id: str) -> float:
         """
         Returns the value of a setting as a floating point number.
@@ -150,7 +148,7 @@ class Addon:
             ..
         """
         return 0.0
-    
+
     def getSettingString(self, id: str) -> str:
         """
         Returns the value of a setting as a string.
@@ -169,7 +167,7 @@ class Addon:
             ..
         """
         return ""
-    
+
     def setSetting(self, id: str, value: str) -> None:
         """
         Sets a script setting.
@@ -190,7 +188,7 @@ class Addon:
             ..
         """
         pass
-    
+
     def setSettingBool(self, id: str, value: bool) -> bool:
         """
         Sets a script setting.
@@ -213,7 +211,7 @@ class Addon:
             ..
         """
         return True
-    
+
     def setSettingInt(self, id: str, value: int) -> bool:
         """
         Sets a script setting.
@@ -236,7 +234,7 @@ class Addon:
             ..
         """
         return True
-    
+
     def setSettingNumber(self, id: str, value: float) -> bool:
         """
         Sets a script setting.
@@ -259,7 +257,7 @@ class Addon:
             ..
         """
         return True
-    
+
     def setSettingString(self, id: str, value: str) -> bool:
         """
         Sets a script setting.
@@ -282,7 +280,7 @@ class Addon:
             ..
         """
         return True
-    
+
     def openSettings(self) -> None:
         """
         Opens this scripts settings dialog.
@@ -294,7 +292,7 @@ class Addon:
             ..
         """
         pass
-    
+
     def getAddonInfo(self, id: str) -> str:
         """
         Returns the value of an addon property as a string.
@@ -303,12 +301,12 @@ class Addon:
 
         Choices for the property are
 
-        ====== ========= =========== ========== 
-        author changelog description disclaimer 
-        fanart icon      id          name       
-        path   profile   stars       summary    
-        type   version                          
-        ====== ========= =========== ========== 
+        ====== ========= =========== ==========
+        author changelog description disclaimer
+        fanart icon      id          name
+        path   profile   stars       summary
+        type   version
+        ====== ========= =========== ==========
 
         :return: AddOn property as a string
 
@@ -319,7 +317,7 @@ class Addon:
             ..
         """
         return ""
-    
+
 
 class Settings:
     """
@@ -336,7 +334,7 @@ class Settings:
         settings = xbmcaddon.Addon('id').getSettings()
         ...
     """
-    
+
     def getBool(self, id: str) -> bool:
         """
         Returns the value of a setting as a boolean.
@@ -353,7 +351,7 @@ class Settings:
             ..
         """
         return True
-    
+
     def getInt(self, id: str) -> int:
         """
         Returns the value of a setting as an integer.
@@ -370,7 +368,7 @@ class Settings:
             ..
         """
         return 0
-    
+
     def getNumber(self, id: str) -> float:
         """
         Returns the value of a setting as a floating point number.
@@ -387,7 +385,7 @@ class Settings:
             ..
         """
         return 0.0
-    
+
     def getString(self, id: str) -> str:
         """
         Returns the value of a setting as a unicode string.
@@ -404,7 +402,7 @@ class Settings:
             ..
         """
         return ""
-    
+
     def getBoolList(self, id: str) -> List[bool]:
         """
         Returns the value of a setting as a list of booleans.
@@ -421,7 +419,7 @@ class Settings:
             ..
         """
         return [True]
-    
+
     def getIntList(self, id: str) -> List[int]:
         """
         Returns the value of a setting as a list of integers.
@@ -438,7 +436,7 @@ class Settings:
             ..
         """
         return [0]
-    
+
     def getNumberList(self, id: str) -> List[float]:
         """
         Returns the value of a setting as a list of floating point numbers.
@@ -455,7 +453,7 @@ class Settings:
             ..
         """
         return [0.0]
-    
+
     def getStringList(self, id: str) -> List[str]:
         """
         Returns the value of a setting as a list of unicode strings.
@@ -472,7 +470,7 @@ class Settings:
             ..
         """
         return [""]
-    
+
     def setBool(self, id: str, value: bool) -> None:
         """
         Sets the value of a setting.
@@ -493,7 +491,7 @@ class Settings:
             ..
         """
         pass
-    
+
     def setInt(self, id: str, value: int) -> None:
         """
         Sets the value of a setting.
@@ -514,7 +512,7 @@ class Settings:
             ..
         """
         pass
-    
+
     def setNumber(self, id: str, value: float) -> None:
         """
         Sets the value of a setting.
@@ -535,7 +533,7 @@ class Settings:
             ..
         """
         pass
-    
+
     def setString(self, id: str, value: str) -> None:
         """
         Sets the value of a setting.
@@ -556,7 +554,7 @@ class Settings:
             ..
         """
         pass
-    
+
     def setBoolList(self, id: str, values: List[bool]) -> None:
         """
         Sets the boolean values of a list setting.
@@ -577,7 +575,7 @@ class Settings:
             ..
         """
         pass
-    
+
     def setIntList(self, id: str, values: List[int]) -> None:
         """
         Sets the integer values of a list setting.
@@ -598,7 +596,7 @@ class Settings:
             ..
         """
         pass
-    
+
     def setNumberList(self, id: str, values: List[float]) -> None:
         """
         Sets the floating point values of a list setting.
@@ -619,7 +617,7 @@ class Settings:
             ..
         """
         pass
-    
+
     def setStringList(self, id: str, values: List[str]) -> None:
         """
         Sets the string values of a list setting.

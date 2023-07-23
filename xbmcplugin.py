@@ -9,6 +9,8 @@ through Kodi's standard menu structure. While plugins don't have the same
 flexibility as scripts, they boast significantly quicker development time and a
 more consistent user experience.
 """
+import xbmcgui
+
 from typing import List, Tuple, Optional
 
 __kodistubs__ = True
@@ -171,76 +173,76 @@ def addSortMethod(handle: int,
     :param sortMethod: integer - see available sort methods at the bottom (or see SortUtils).
 
     =================================================================== ================================================
-    Value                                                               Description                                             
+    Value                                                               Description
     =================================================================== ================================================
-    xbmcplugin.SORT_METHOD_NONE                                         Do not sort                                             
-    xbmcplugin.SORT_METHOD_LABEL                                        Sort by label                                           
-    xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE                             Sort by the label and ignore "The" before               
-    xbmcplugin.SORT_METHOD_DATE                                         Sort by the date                                        
-    xbmcplugin.SORT_METHOD_SIZE                                         Sort by the size                                        
-    xbmcplugin.SORT_METHOD_FILE                                         Sort by the file                                        
-    xbmcplugin.SORT_METHOD_DRIVE_TYPE                                   Sort by the drive type                                  
-    xbmcplugin.SORT_METHOD_TRACKNUM                                     Sort by the track number                                
-    xbmcplugin.SORT_METHOD_DURATION                                     Sort by the duration                                    
-    xbmcplugin.SORT_METHOD_TITLE                                        Sort by the title                                       
-    xbmcplugin.SORT_METHOD_TITLE_IGNORE_THE                             Sort by the title and ignore "The" before               
-    xbmcplugin.SORT_METHOD_ARTIST                                       Sort by the artist                                      
-    xbmcplugin.SORT_METHOD_ARTIST_IGNORE_THE                            Sort by the artist and ignore "The" before              
-    xbmcplugin.SORT_METHOD_ALBUM                                        Sort by the album                                       
-    xbmcplugin.SORT_METHOD_ALBUM_IGNORE_THE                             Sort by the album and ignore "The" before               
-    xbmcplugin.SORT_METHOD_GENRE                                        Sort by the genre                                       
-    xbmcplugin.SORT_SORT_METHOD_VIDEO_YEAR, xbmcplugin.SORT_METHOD_YEAR Sort by the year                                        
-    xbmcplugin.SORT_METHOD_VIDEO_RATING                                 Sort by the video rating                                
-    xbmcplugin.SORT_METHOD_PROGRAM_COUNT                                Sort by the program count                               
-    xbmcplugin.SORT_METHOD_PLAYLIST_ORDER                               Sort by the playlist order                              
-    xbmcplugin.SORT_METHOD_EPISODE                                      Sort by the episode                                     
-    xbmcplugin.SORT_METHOD_VIDEO_TITLE                                  Sort by the video title                                 
-    xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE                             Sort by the video sort title                            
+    xbmcplugin.SORT_METHOD_NONE                                         Do not sort
+    xbmcplugin.SORT_METHOD_LABEL                                        Sort by label
+    xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE                             Sort by the label and ignore "The" before
+    xbmcplugin.SORT_METHOD_DATE                                         Sort by the date
+    xbmcplugin.SORT_METHOD_SIZE                                         Sort by the size
+    xbmcplugin.SORT_METHOD_FILE                                         Sort by the file
+    xbmcplugin.SORT_METHOD_DRIVE_TYPE                                   Sort by the drive type
+    xbmcplugin.SORT_METHOD_TRACKNUM                                     Sort by the track number
+    xbmcplugin.SORT_METHOD_DURATION                                     Sort by the duration
+    xbmcplugin.SORT_METHOD_TITLE                                        Sort by the title
+    xbmcplugin.SORT_METHOD_TITLE_IGNORE_THE                             Sort by the title and ignore "The" before
+    xbmcplugin.SORT_METHOD_ARTIST                                       Sort by the artist
+    xbmcplugin.SORT_METHOD_ARTIST_IGNORE_THE                            Sort by the artist and ignore "The" before
+    xbmcplugin.SORT_METHOD_ALBUM                                        Sort by the album
+    xbmcplugin.SORT_METHOD_ALBUM_IGNORE_THE                             Sort by the album and ignore "The" before
+    xbmcplugin.SORT_METHOD_GENRE                                        Sort by the genre
+    xbmcplugin.SORT_SORT_METHOD_VIDEO_YEAR, xbmcplugin.SORT_METHOD_YEAR Sort by the year
+    xbmcplugin.SORT_METHOD_VIDEO_RATING                                 Sort by the video rating
+    xbmcplugin.SORT_METHOD_PROGRAM_COUNT                                Sort by the program count
+    xbmcplugin.SORT_METHOD_PLAYLIST_ORDER                               Sort by the playlist order
+    xbmcplugin.SORT_METHOD_EPISODE                                      Sort by the episode
+    xbmcplugin.SORT_METHOD_VIDEO_TITLE                                  Sort by the video title
+    xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE                             Sort by the video sort title
     xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE_IGNORE_THE                  Sort by the video sort title and ignore
                                                                         "The" before
-    xbmcplugin.SORT_METHOD_PRODUCTIONCODE                               Sort by the production code                             
-    xbmcplugin.SORT_METHOD_SONG_RATING                                  Sort by the song rating                                 
-    xbmcplugin.SORT_METHOD_MPAA_RATING                                  Sort by the mpaa rating                                 
-    xbmcplugin.SORT_METHOD_VIDEO_RUNTIME                                Sort by video runtime                                   
-    xbmcplugin.SORT_METHOD_STUDIO                                       Sort by the studio                                      
-    xbmcplugin.SORT_METHOD_STUDIO_IGNORE_THE                            Sort by the studio and ignore "The" before              
-    xbmcplugin.SORT_METHOD_UNSORTED                                     Use list not sorted                                     
-    xbmcplugin.SORT_METHOD_BITRATE                                      Sort by the bitrate                                     
-    xbmcplugin.SORT_METHOD_LISTENERS                                    Sort by the listeners                                   
-    xbmcplugin.SORT_METHOD_COUNTRY                                      Sort by the country                                     
-    xbmcplugin.SORT_METHOD_DATEADDED                                    Sort by the added date                                  
-    xbmcplugin.SORT_METHOD_FULLPATH                                     Sort by the full path name                              
+    xbmcplugin.SORT_METHOD_PRODUCTIONCODE                               Sort by the production code
+    xbmcplugin.SORT_METHOD_SONG_RATING                                  Sort by the song rating
+    xbmcplugin.SORT_METHOD_MPAA_RATING                                  Sort by the mpaa rating
+    xbmcplugin.SORT_METHOD_VIDEO_RUNTIME                                Sort by video runtime
+    xbmcplugin.SORT_METHOD_STUDIO                                       Sort by the studio
+    xbmcplugin.SORT_METHOD_STUDIO_IGNORE_THE                            Sort by the studio and ignore "The" before
+    xbmcplugin.SORT_METHOD_UNSORTED                                     Use list not sorted
+    xbmcplugin.SORT_METHOD_BITRATE                                      Sort by the bitrate
+    xbmcplugin.SORT_METHOD_LISTENERS                                    Sort by the listeners
+    xbmcplugin.SORT_METHOD_COUNTRY                                      Sort by the country
+    xbmcplugin.SORT_METHOD_DATEADDED                                    Sort by the added date
+    xbmcplugin.SORT_METHOD_FULLPATH                                     Sort by the full path name
     xbmcplugin.SORT_METHOD_LABEL_IGNORE_FOLDERS                         Sort by the label names and ignore related
                                                                         folder names
-    xbmcplugin.SORT_METHOD_LASTPLAYED                                   Sort by last played date                                
-    xbmcplugin.SORT_METHOD_PLAYCOUNT                                    Sort by the play count                                  
-    xbmcplugin.SORT_METHOD_CHANNEL                                      Sort by the channel                                     
-    xbmcplugin.SORT_METHOD_DATE_TAKEN                                   Sort by the taken date                                  
-    xbmcplugin.SORT_METHOD_VIDEO_USER_RATING                            Sort by the rating of the user of video                 
-    xbmcplugin.SORT_METHOD_SONG_USER_RATING                             Sort by the rating of the user of song                  
+    xbmcplugin.SORT_METHOD_LASTPLAYED                                   Sort by last played date
+    xbmcplugin.SORT_METHOD_PLAYCOUNT                                    Sort by the play count
+    xbmcplugin.SORT_METHOD_CHANNEL                                      Sort by the channel
+    xbmcplugin.SORT_METHOD_DATE_TAKEN                                   Sort by the taken date
+    xbmcplugin.SORT_METHOD_VIDEO_USER_RATING                            Sort by the rating of the user of video
+    xbmcplugin.SORT_METHOD_SONG_USER_RATING                             Sort by the rating of the user of song
     =================================================================== ================================================
 
     :param labelMask: [opt] string - the label mask to use for the first label.  applies to:
 
-    ========================== ======================= 
-    sortMethod                 labelMask               
-    ========================== ======================= 
-    SORT_METHOD_TRACKNUM       Defaults to``[%N. ]%T`` 
-    SORT_METHOD_EPISODE        Defaults to``%H. %T``   
-    SORT_METHOD_PRODUCTIONCODE Defaults to``%H. %T``   
-    All other sort methods     Defaults to``%T``       
-    ========================== ======================= 
+    ========================== =======================
+    sortMethod                 labelMask
+    ========================== =======================
+    SORT_METHOD_TRACKNUM       Defaults to``[%N. ]%T``
+    SORT_METHOD_EPISODE        Defaults to``%H. %T``
+    SORT_METHOD_PRODUCTIONCODE Defaults to``%H. %T``
+    All other sort methods     Defaults to``%T``
+    ========================== =======================
 
     :param label2Mask: [opt] string - the label mask to use for the second label. Defaults
         to``%D``  applies to:
 
     ================================ ==================== =======================================
-    SORT_METHOD_NONE                 SORT_METHOD_UNSORTED SORT_METHOD_VIDEO_TITLE                 
-    SORT_METHOD_TRACKNUM             SORT_METHOD_FILE     SORT_METHOD_TITLE                       
-    SORT_METHOD_TITLE_IGNORE_THE     SORT_METHOD_LABEL    SORT_METHOD_LABEL_IGNORE_THE            
-    SORT_METHOD_VIDEO_SORT_TITLE     SORT_METHOD_FULLPATH SORT_METHOD_VIDEO_SORT_TITLE_IGNORE_THE 
-    SORT_METHOD_LABEL_IGNORE_FOLDERS SORT_METHOD_CHANNEL                                          
-    ================================ ==================== ======================================= 
+    SORT_METHOD_NONE                 SORT_METHOD_UNSORTED SORT_METHOD_VIDEO_TITLE
+    SORT_METHOD_TRACKNUM             SORT_METHOD_FILE     SORT_METHOD_TITLE
+    SORT_METHOD_TITLE_IGNORE_THE     SORT_METHOD_LABEL    SORT_METHOD_LABEL_IGNORE_THE
+    SORT_METHOD_VIDEO_SORT_TITLE     SORT_METHOD_FULLPATH SORT_METHOD_VIDEO_SORT_TITLE_IGNORE_THE
+    SORT_METHOD_LABEL_IGNORE_FOLDERS SORT_METHOD_CHANNEL
+    ================================ ==================== =======================================
 
     .. note::
         to add multiple sort methods just call the method multiple times.
@@ -310,10 +312,10 @@ def setContent(handle: int, content: str) -> None:
     Available content strings
 
     ====== ======= ======== ===========
-    files  songs   artists  albums      
-    movies tvshows episodes musicvideos 
-    videos images  games                
-    ====== ======= ======== =========== 
+    files  songs   artists  albums
+    movies tvshows episodes musicvideos
+    videos images  games
+    ====== ======= ======== ===========
 
     Use **videos** for all videos which do not apply to the more specific mentioned
     ones like "movies", "episodes" etc. A good example is youtube.
