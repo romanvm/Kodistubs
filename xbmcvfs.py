@@ -50,7 +50,7 @@ class File:
 
     def __exit__(self, exc_type, exc_val, exc_tb):  # Required for context manager
         pass
-    
+
     def read(self, numBytes: int = 0) -> str:
         """
         Read file parts as string.
@@ -99,7 +99,7 @@ class File:
         """
         return bytearray()
     
-    def write(self, buffer: Union[str,  bytes,  bytearray]) -> bool:
+    def write(self, buffer: Union[str, bytes, bytearray]) -> bool:
         """
         To write given data in file.
 
