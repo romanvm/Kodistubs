@@ -514,7 +514,6 @@ class InfoTagMusic:
         Set the media type of the music item.
 
         :param mediaType: string - Media type.
-
         @python_v20 New function added.
         """
         pass
@@ -1189,9 +1188,9 @@ class VideoStreamDetail:
                  aspect: float = 0.0,
                  duration: int = 0,
                  codec: str = "",
-                 stereoMode: str = "",
+                 stereomode: str = "",
                  language: str = "",
-                 hdrType: str = "") -> None:
+                 hdrtype: str = "") -> None:
         pass
     
     def getWidth(self) -> int:
@@ -1324,11 +1323,11 @@ class VideoStreamDetail:
         """
         pass
     
-    def setStereoMode(self, stereoMode: str) -> None:
+    def setStereoMode(self, stereomode: str) -> None:
         """
         Set the stereo mode of the video stream.
 
-        :param stereoMode: string - Stereo mode of the video stream.
+        :param stereomode: string - Stereo mode of the video stream.
 
         @python_v20 New function added.
         """
@@ -1344,11 +1343,11 @@ class VideoStreamDetail:
         """
         pass
     
-    def setHDRType(self, hdrType: str) -> None:
+    def setHDRType(self, hdrtype: str) -> None:
         """
         Set the HDR type of the stream.
 
-        :param hdrType: string - HDR type of the stream. The following types are supported:
+        :param hdrtype: string - HDR type of the stream. The following types are supported:
             dolbyvision, hdr10, hlg
 
         @python_v20 New function added.
@@ -2046,7 +2045,6 @@ class InfoTagVideo:
         Set the season sort number of the season.
 
         :param sortseason: integer - Season sort number.
-
         @python_v20 New function added.
         """
         pass
@@ -2274,7 +2272,6 @@ class InfoTagVideo:
         Set the writers of the video item.
 
         :param writers: list - Writers.
-
         @python_v20 New function added.
         """
         pass
@@ -3476,7 +3473,6 @@ class RenderCapture:
 
         :param width: Width capture image should be rendered to
         :param height: Height capture image should should be rendered to
-
         @python_v17 Removed the option to pass **flags**
         """
         pass
