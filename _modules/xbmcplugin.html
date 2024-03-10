@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>xbmcplugin &#8212; Kodistubs  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -91,7 +92,9 @@
 <span class="n">SORT_METHOD_VIDEO_YEAR</span> <span class="o">=</span> <span class="mi">18</span>
 
 
-<div class="viewcode-block" id="addDirectoryItem"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addDirectoryItem">[docs]</a><span class="k">def</span> <span class="nf">addDirectoryItem</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<div class="viewcode-block" id="addDirectoryItem">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addDirectoryItem">[docs]</a>
+<span class="k">def</span> <span class="nf">addDirectoryItem</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                      <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                      <span class="n">listitem</span><span class="p">:</span> <span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">,</span>
                      <span class="n">isFolder</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -122,7 +125,10 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="addDirectoryItems"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addDirectoryItems">[docs]</a><span class="k">def</span> <span class="nf">addDirectoryItems</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+
+<div class="viewcode-block" id="addDirectoryItems">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addDirectoryItems">[docs]</a>
+<span class="k">def</span> <span class="nf">addDirectoryItems</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                       <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span>  <span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">,</span>  <span class="nb">bool</span><span class="p">]],</span>
                       <span class="n">totalItems</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -146,7 +152,10 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="endOfDirectory"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.endOfDirectory">[docs]</a><span class="k">def</span> <span class="nf">endOfDirectory</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+
+<div class="viewcode-block" id="endOfDirectory">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.endOfDirectory">[docs]</a>
+<span class="k">def</span> <span class="nf">endOfDirectory</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                    <span class="n">succeeded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                    <span class="n">updateListing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                    <span class="n">cacheToDisc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -171,7 +180,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="setResolvedUrl"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setResolvedUrl">[docs]</a><span class="k">def</span> <span class="nf">setResolvedUrl</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+
+<div class="viewcode-block" id="setResolvedUrl">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setResolvedUrl">[docs]</a>
+<span class="k">def</span> <span class="nf">setResolvedUrl</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                    <span class="n">succeeded</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                    <span class="n">listitem</span><span class="p">:</span> <span class="s1">&#39;xbmcgui.ListItem&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -190,7 +202,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="addSortMethod"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addSortMethod">[docs]</a><span class="k">def</span> <span class="nf">addSortMethod</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+
+<div class="viewcode-block" id="addSortMethod">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addSortMethod">[docs]</a>
+<span class="k">def</span> <span class="nf">addSortMethod</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                   <span class="n">sortMethod</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                   <span class="n">labelMask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                   <span class="n">label2Mask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -294,7 +309,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="getSetting"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.getSetting">[docs]</a><span class="k">def</span> <span class="nf">getSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<div class="viewcode-block" id="getSetting">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.getSetting">[docs]</a>
+<span class="k">def</span> <span class="nf">getSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the value of a setting as a string.</span>
 
@@ -314,7 +332,10 @@
     <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="setSetting"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setSetting">[docs]</a><span class="k">def</span> <span class="nf">setSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="setSetting">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setSetting">[docs]</a>
+<span class="k">def</span> <span class="nf">setSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets a plugin setting for the current running plugin.</span>
 
@@ -331,7 +352,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="setContent"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setContent">[docs]</a><span class="k">def</span> <span class="nf">setContent</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="setContent">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setContent">[docs]</a>
+<span class="k">def</span> <span class="nf">setContent</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets the plugins content.</span>
 
@@ -358,7 +382,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="setPluginCategory"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setPluginCategory">[docs]</a><span class="k">def</span> <span class="nf">setPluginCategory</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="setPluginCategory">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setPluginCategory">[docs]</a>
+<span class="k">def</span> <span class="nf">setPluginCategory</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets the plugins name for skins to display.</span>
 
@@ -374,7 +401,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="setPluginFanart"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setPluginFanart">[docs]</a><span class="k">def</span> <span class="nf">setPluginFanart</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+
+<div class="viewcode-block" id="setPluginFanart">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setPluginFanart">[docs]</a>
+<span class="k">def</span> <span class="nf">setPluginFanart</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                     <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">color1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">color2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -398,7 +428,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="setProperty"><a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setProperty">[docs]</a><span class="k">def</span> <span class="nf">setProperty</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="setProperty">
+<a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setProperty">[docs]</a>
+<span class="k">def</span> <span class="nf">setProperty</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets a container property for this plugin.</span>
 
@@ -416,6 +449,7 @@
 <span class="sd">        ..</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
+
 </pre></div>
 
           </div>
@@ -471,17 +505,17 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2023, Roman Miroshnychenko.
+      &#169;2024, Roman Miroshnychenko.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.0.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
     </div>
 
     
     <a href="https://github.com/romanvm/Kodistubs" class="github">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
     </a>
     
 
