@@ -9,8 +9,6 @@ from typing import List, Optional
 __kodistubs__ = True
 
 
-
-
 class Addon:
     """
     **Kodi's addon class.**
