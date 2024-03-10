@@ -346,9 +346,11 @@ VERTICAL = 1
 
 class Control:
     """
-    **Code based skin access**
+    **Code based skin access.**
 
     Offers classes and functions that manipulate the add-on gui controls.
+
+    **Code based skin access.**
 
     Kodi is noted as having a very flexible and robust framework for its GUI, making
     theme-skinning and personal customization very accessible. Users can create
@@ -454,7 +456,6 @@ class Control:
         Sets the control's visible/hidden state.
 
         :param visible: bool - True=visible / False=hidden.
-
         @python_v19 You can now define the visible state of a control before
         it being added to a window. This value will be taken into account when
         the control is later added.
@@ -775,7 +776,7 @@ class ControlLabel(Control):
         to have several together:
 
     ================ ========== ============== 
-    Defination name  Bitflag    Description    
+    Definition name  Bitflag    Description
     ================ ========== ============== 
     XBFONT_LEFT      0x00000000 Align X left   
     XBFONT_RIGHT     0x00000001 Align X right  
@@ -874,7 +875,7 @@ class ControlEdit(Control):
         to have several together:
 
     ================ ========== ============== 
-    Defination name  Bitflag    Description    
+    Definition name  Bitflag    Description    
     ================ ========== ============== 
     XBFONT_LEFT      0x00000000 Align X left   
     XBFONT_RIGHT     0x00000001 Align X right  
@@ -893,7 +894,9 @@ class ControlEdit(Control):
         arguments require the keyword.  After you create the control, you
         need to add it to the window with addControl().
 
-    @python_v18 Deprecated **isPassword** @python_v19 Removed **isPassword**
+    @python_v18 Deprecated **isPassword**
+
+    @python_v19 Removed **isPassword**
 
     Example::
 
@@ -1053,7 +1056,7 @@ class ControlList(Control):
         used as bits to have several together:
 
     ================ ========== ============== 
-    Defination name  Bitflag    Description    
+    Definition name  Bitflag    Description    
     ================ ========== ============== 
     XBFONT_LEFT      0x00000000 Align X left   
     XBFONT_RIGHT     0x00000001 Align X right  
@@ -1393,7 +1396,7 @@ class ControlFadeLabel(Control):
         to have several together:
 
     ================ ========== ============== 
-    Defination name  Bitflag    Description    
+    Definition name  Bitflag    Description    
     ================ ========== ============== 
     XBFONT_LEFT      0x00000000 Align X left   
     XBFONT_RIGHT     0x00000001 Align X right  
@@ -1796,7 +1799,7 @@ class ControlButton(Control):
         to have several together:
 
     ================ ========== ============== 
-    Defination name  Bitflag    Description    
+    Definition name  Bitflag    Description    
     ================ ========== ============== 
     XBFONT_LEFT      0x00000000 Align X left   
     XBFONT_RIGHT     0x00000001 Align X right  
@@ -1989,7 +1992,7 @@ class ControlRadioButton(Control):
         to have several together:
 
     ================ ========== ============== 
-    Defination name  Bitflag    Description    
+    Definition name  Bitflag    Description    
     ================ ========== ============== 
     XBFONT_LEFT      0x00000000 Align X left   
     XBFONT_RIGHT     0x00000001 Align X right  
@@ -2181,7 +2184,9 @@ class ControlSlider(Control):
                  textureback: Optional[str] = None,
                  texture: Optional[str] = None,
                  texturefocus: Optional[str] = None,
-                 orientation: int = 1) -> None:
+                 orientation: int = VERTICAL,
+                 texturebackdisabled: Optional[str] = None,
+                 texturedisabled: Optional[str] = None) -> None:
         pass
     
     def getPercent(self) -> float:
@@ -2560,7 +2565,7 @@ class Dialog:
                useThumbs: bool = False,
                treatAsFolder: bool = False,
                defaultt: str = "",
-               enableMultiple: bool = False) -> Union[str,  List[str]]:
+               enableMultiple: bool = False) -> Union[str, List[str]]:
         """
         **Browser dialog**
 
@@ -2801,9 +2806,7 @@ class Dialog:
         Builtin Icons:
 
         * xbmcgui.NOTIFICATION_INFO
-
         * xbmcgui.NOTIFICATION_WARNING
-
         * xbmcgui.NOTIFICATION_ERROR
 
         @python_v13 New function added.
@@ -2841,10 +2844,10 @@ class Dialog:
         ``xbmcgui.INPUT_PASSWORD``    (return md5 hash of input, input is masked)
         ============================= =========================================== 
 
-        :param option: [opt] integer - option for the dialog. (see Options below)  Password
-            dialog:  ``xbmcgui.PASSWORD_VERIFY`` (verifies an existing
-            (default) md5 hashed password) Alphanum dialog:
-            ``xbmcgui.ALPHANUM_HIDE_INPUT`` (masks input)
+        :param option: [opt] integer - option for the dialog. (see Options below)
+            Password dialog:  ``xbmcgui.PASSWORD_VERIFY`` (verifies an existing
+            (default) md5 hashed password),
+            Alphanum dialog: ``xbmcgui.ALPHANUM_HIDE_INPUT`` (masks input)
         :param autoclose: [opt] integer - milliseconds to autoclose dialog. (default=do not
             autoclose)
         :return: Returns the entered data as a string. Returns an empty string if dialog was canceled.
@@ -4591,7 +4594,7 @@ class WindowXML(Window):
                  isMedia: bool = False) -> None:
         pass
     
-    def addItem(self, item: Union[str,  ListItem],
+    def addItem(self, item: Union[str, ListItem],
                 position: int = 2147483647) -> None:
         """
         Add a new item to this `Window ``List`.
@@ -4611,7 +4614,7 @@ class WindowXML(Window):
         """
         pass
     
-    def addItems(self, items: List[Union[str,  ListItem]]) -> None:
+    def addItems(self, items: List[Union[str, ListItem]]) -> None:
         """
         Add a list of items to to the window list.
 
@@ -4693,7 +4696,7 @@ class WindowXML(Window):
     
     def clearList(self) -> None:
         """
-        Clear the `Window ``List`.
+        Clear the Window List.
 
         Example::
 
@@ -4794,7 +4797,7 @@ class WindowXMLDialog(WindowXML):
 
     :param xmlFilename: string - the name of the xml file to look for.
     :param scriptPath: string - path to script. used to fallback to if the xml doesn't exist
-        in the current skin. (eg xbmcaddon.Addon().getAddonInfo('path'))
+        in the current skin. (eg ``xbmcaddon.Addon().getAddonInfo('path')``)
     :param defaultSkin: [opt] string - name of the folder in the skins path to look in for the
         xml. (default='Default')
     :param defaultRes: [opt] string - default skins resolution. (1080i, 720p, ntsc16x9, ntsc,
