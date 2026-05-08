@@ -1,10 +1,10 @@
-include xbmc.py
-include xbmcaddon.py
-include xbmcgui.py
-include xbmcplugin.py
-include xbmcvfs.py
-include kodistubs_meta.py
+graft xbmc
+graft xbmcaddon
+graft xbmcdrm
+graft xbmcgui
+graft xbmcplugin
+graft xbmcvfs
 include setup.py
 include LICENSE.txt
 include README.rst
-global-exclude *.pyc *.pyo
+global-exclude *.pyc *.pyo __pycache__
