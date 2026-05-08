@@ -514,10 +514,11 @@ class InfoTagMusic:
         Set the media type of the music item.
 
         :param mediaType: string - Media type.
+
         @python_v20 New function added.
         """
         pass
-    
+
     def setTrack(self, track: int) -> None:
         """
         Set the track number of the song.
@@ -2045,6 +2046,7 @@ class InfoTagVideo:
         Set the season sort number of the season.
 
         :param sortseason: integer - Season sort number.
+
         @python_v20 New function added.
         """
         pass
@@ -2272,6 +2274,7 @@ class InfoTagVideo:
         Set the writers of the video item.
 
         :param writers: list - Writers.
+
         @python_v20 New function added.
         """
         pass
@@ -3473,6 +3476,7 @@ class RenderCapture:
 
         :param width: Width capture image should be rendered to
         :param height: Height capture image should should be rendered to
+
         @python_v17 Removed the option to pass **flags**
         """
         pass

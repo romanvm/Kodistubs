@@ -456,6 +456,7 @@ class Control:
         Sets the control's visible/hidden state.
 
         :param visible: bool - True=visible / False=hidden.
+
         @python_v19 You can now define the visible state of a control before
         it being added to a window. This value will be taken into account when
         the control is later added.
@@ -531,7 +532,7 @@ class Control:
         """
         Sets the control's animations.
 
-        **[(event,attr,)*]**: list - A list of tuples consisting of event and attributes
+        **[(event,attr,)\\*]**: list - A list of tuples consisting of event and attributes
         pairs.
 
         Animating your skin
@@ -1027,7 +1028,7 @@ class ControlEdit(Control):
 
 class ControlList(Control):
     """
-    **Used for a scrolling lists of items. Replaces the list control.**
+    **Used for a scrolling lists of items.** Replaces the list control.
 
     The list container is one of several containers used to display items from file
     lists in various ways. The list container is very flexible - it's only
@@ -1373,8 +1374,7 @@ class ControlList(Control):
 
 class ControlFadeLabel(Control):
     """
-    **Used to show multiple pieces of text in the same position, by fading from one
-    to the other.**
+    **Used to show multiple pieces of text in the same position, fading from one to the other.**
 
     The fade label control is used for displaying multiple pieces of text in the
     same space in Kodi. You can choose the font, size, colour, location and contents
@@ -2872,8 +2872,7 @@ class Dialog:
 
         :param heading: string - dialog heading.
         :param selectedcolor: [opt] string - hex value of the preselected color.
-        :param colorfile: [opt] string - xml file containing color definitions. **XML content
-            style:**
+        :param colorfile: [opt] string - xml file containing color definitions. **XML content style:**
             <colors>
             <color name="white">ffffffff</color>
             <color name="grey">7fffffff</color>
@@ -4029,7 +4028,7 @@ class ListItem:
 
 class Action:
     """
-    **`Action` class.**
+    **Action class.**
 
     This class serves in addition to identify carried out kodi_key_action_ids of
     Kodi and to be able to carry out thereby own necessary steps.
@@ -4571,7 +4570,7 @@ class WindowXML(Window):
         del win
         ..
 
-    On functions defined input variable ``controlId`` (GUI control identifier)** is
+    On functions defined input variable ``controlId`` (GUI control identifier) is
     the on window.xml defined value behind type added with ``id="..."`` and used
     to identify for changes there and on callbacks.
 
@@ -4815,7 +4814,7 @@ class WindowXMLDialog(WindowXML):
         del dialog
         ..
 
-    On functions defined input variable ``controlId`` (GUI control identifier)** is
+    On functions defined input variable ``controlId`` (GUI control identifier) is
     the on window.xml defined value behind type added with ``id="..."`` and used
     to identify for changes there and on callbacks.
 
