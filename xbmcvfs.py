@@ -420,7 +420,7 @@ def makeLegalFilename(filename: str) -> str:
         ..
         # windows
         >> xbmcvfs.makeLegalFilename('C://Trailers/Ice Age: The Meltdown.avi')
-        C:\Trailers\Ice Age_ The Meltdown.avi
+        C:\\Trailers\\Ice Age_ The Meltdown.avi
         # non-windows
         >> xbmcvfs.makeLegalFilename("///\\jk???lj????.mpg")
         /jk___lj____.mpg
@@ -461,7 +461,7 @@ def validatePath(path: str) -> str:
     .. note::
         The result is platform-specific. Only useful if you are coding for
         multiple platfforms for fixing slash problems (e.g. Corrects
-        'Z://something' -> 'Z:\something').
+        'Z://something' -> 'Z:\\something').
 
     @python_v19 New function added (replaces old **xbmc.validatePath**)
 
