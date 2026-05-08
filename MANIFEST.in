@@ -1,9 +1,9 @@
-graft xbmc
-graft xbmcaddon
-graft xbmcdrm
-graft xbmcgui
-graft xbmcplugin
-graft xbmcvfs
+graft src/xbmc
+graft src/xbmcaddon
+graft src/xbmcdrm
+graft src/xbmcgui
+graft src/xbmcplugin
+graft src/xbmcvfs
 include setup.py
 include LICENSE.txt
 include README.rst
