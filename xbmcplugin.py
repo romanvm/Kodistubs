@@ -164,7 +164,7 @@ def addSortMethod(handle: int,
                   labelMask: str = "",
                   label2Mask: str = "") -> None:
     """
-    @brief \python_func{ xbmcplugin.addSortMethod(handle, sortMethod
+    @brief \\python_func{ xbmcplugin.addSortMethod(handle, sortMethod
     [,labelMask, label2Mask]) }Adds a sorting method for the media list.
 
     :param handle: integer - handle the plugin was started with.

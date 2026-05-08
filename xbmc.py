@@ -3639,7 +3639,7 @@ def getLocalizedString(id: int) -> str:
     :return: Localized 'unicode string'
 
     .. note::
-        See strings.po in``\language\{yourlanguage}\`` for which id you
+        See strings.po in``\\language\\{yourlanguage}\\`` for which id you
         need for a string.
 
     Example::
@@ -3960,7 +3960,7 @@ def skinHasImage(image: str) -> bool:
 
     .. note::
         If the media resides in a subfolder include it.
-        (eg. home-myfiles\home-myfiles2.png).
+        (eg. home-myfiles\\home-myfiles2.png).
 
     Example::
 
