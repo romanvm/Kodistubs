@@ -116,3 +116,4 @@ venv/
 venv.cmd
 .venv3/
 docs/_autosummary/xbmc*
+doxygen/xml/

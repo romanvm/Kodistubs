@@ -1,7 +1,8 @@
 """Map C++ / SWIG types to Python type annotation strings."""
 from __future__ import annotations
-import re
 
+import re
+from typing import Optional
 
 _SIMPLE = {
     'void': 'None',
@@ -26,10 +27,13 @@ _SIMPLE = {
     'bytearray': 'bytearray',
     'XBMCAddon::StringOrInt': 'Union[str, int]',
     'StringOrInt': 'Union[str, int]',
+    'XBMCAddon::Properties': 'Dict[str, str]',
+    'Properties': 'Dict[str, str]',
 }
 
 _TYPING_NEEDED: dict[str, set[str]] = {
     'Union[str, int]': {'Union'},
+    'Dict[str, str]': {'Dict'},
 }
 
 
@@ -69,75 +73,104 @@ def _split_template_args(s: str) -> list[str]:
     return [p for p in parts if p]
 
 
-def map_type(cpp_type: str, current_module: str = '') -> tuple[str, set[str]]:
+def map_type(cpp_type: str, current_module: str = '',
+             typedefs: Optional[dict] = None) -> tuple[str, set[str], set[str]]:
     """Map a C++ / SWIG type to a Python type annotation.
 
-    Returns ``(python_type_str, required_typing_imports)``.
+    Returns ``(python_type_str, required_typing_imports, external_modules)`` where
+    ``external_modules`` is the set of other ``xbmc*`` stub modules referenced by
+    the annotation (callers emit them inside an ``if TYPE_CHECKING:`` block).
+
+    Annotations are emitted unquoted; the caller is expected to add
+    ``from __future__ import annotations`` so forward references resolve lazily.
+
+    ``typedefs`` is an optional mapping of fully-qualified C++ typedef names
+    (e.g. ``XBMCAddon::xbmc::PlayParameter``) to their underlying SWIG type
+    strings; encountered typedefs are expanded recursively.
     """
     t = _strip_qualifiers(cpp_type.strip())
+
+    # Resolve typedef chains (with cycle protection)
+    if typedefs:
+        seen: set[str] = set()
+        while t in typedefs and t not in seen:
+            seen.add(t)
+            t = _strip_qualifiers(typedefs[t].strip())
 
     # Simple lookup
     if t in _SIMPLE:
         py = _SIMPLE[t]
-        return py, _TYPING_NEEDED.get(py, set())
+        return py, _TYPING_NEEDED.get(py, set()), set()
 
     # std::unique_ptr<(T)>  — treat as the inner type
     m = re.match(r'^std::unique_ptr<\((.+)\)>$', t)
     if m:
-        return map_type(m.group(1), current_module)
+        return map_type(m.group(1), current_module, typedefs)
 
     # std::vector<(T)>
     m = re.match(r'^std::vector<\((.+)\)>$', t)
     if m:
-        inner, imp = map_type(m.group(1), current_module)
-        return f'List[{inner}]', imp | {'List'}
+        inner, imp, ext = map_type(m.group(1), current_module, typedefs)
+        return f'List[{inner}]', imp | {'List'}, ext
 
     # XBMCAddon::Tuple<(T1, T2, ...)>  or  Tuple<(...)>
     m = re.match(r'^(?:XBMCAddon::)?Tuple<\((.+)\)>$', t)
     if m:
         parts = _split_template_args(m.group(1))
-        mapped = [map_type(p.strip(), current_module) for p in parts]
+        mapped = [map_type(p.strip(), current_module, typedefs) for p in parts]
         inner_strs = [x[0] for x in mapped]
         imports = set().union(*[x[1] for x in mapped]) | {'Tuple'}
-        return f'Tuple[{", ".join(inner_strs)}]', imports
+        externals = set().union(*[x[2] for x in mapped])
+        return f'Tuple[{", ".join(inner_strs)}]', imports, externals
 
     # Alternative<(T1, T2)>  → Union[T1, T2]
     m = re.match(r'^(?:XBMCAddon::)?Alternative<\((.+)\)>$', t)
     if m:
         parts = _split_template_args(m.group(1))
-        mapped = [map_type(p.strip(), current_module) for p in parts]
+        mapped = [map_type(p.strip(), current_module, typedefs) for p in parts]
         inner_strs = [x[0] for x in mapped]
         imports = set().union(*[x[1] for x in mapped]) | {'Union'}
-        return f'Union[{", ".join(inner_strs)}]', imports
+        externals = set().union(*[x[2] for x in mapped])
+        return f'Union[{", ".join(inner_strs)}]', imports, externals
 
     # Dictionary<(T)>  → Dict[str, T]
     m = re.match(r'^(?:XBMCAddon::)?Dictionary<\((.+)\)>$', t)
     if m:
-        val, imp = map_type(m.group(1), current_module)
-        return f'Dict[str, {val}]', imp | {'Dict'}
+        val, imp, ext = map_type(m.group(1), current_module, typedefs)
+        return f'Dict[str, {val}]', imp | {'Dict'}, ext
 
-    # XBMCAddon::xbmcMODULE::ClassName
-    m = re.match(r'^XBMCAddon::(xbmc\w+)::(\w+)$', t)
+    # std::map<(K, V)> or std::map<(K, V, Cmp)> → Dict[K, V] (drop comparator)
+    m = re.match(r'^std::map<\((.+)\)>$', t)
+    if m:
+        parts = _split_template_args(m.group(1))
+        if len(parts) >= 2:
+            key, kimp, kext = map_type(parts[0].strip(), current_module, typedefs)
+            val, vimp, vext = map_type(parts[1].strip(), current_module, typedefs)
+            return f'Dict[{key}, {val}]', kimp | vimp | {'Dict'}, kext | vext
+
+    # XBMCAddon::xbmcMODULE::ClassName  (xbmcMODULE may be bare "xbmc" or "xbmcgui" etc.)
+    m = re.match(r'^XBMCAddon::(xbmc\w*)::(\w+)$', t)
     if m:
         mod, cls = m.group(1), m.group(2)
         if mod == current_module:
-            return f"'{cls}'", set()
-        return f"'{mod}.{cls}'", set()
+            return cls, set(), set()
+        return f'{mod}.{cls}', set(), {mod}
 
     # xbmc::ClassName  (from within xbmc module)
     m = re.match(r'^xbmc::(\w+)$', t)
     if m:
         cls = m.group(1)
         if current_module == 'xbmc':
-            return f"'{cls}'", set()
-        return f"'xbmc.{cls}'", set()
+            return cls, set(), set()
+        return f'xbmc.{cls}', set(), {'xbmc'}
 
     # Plain ClassName (uppercase, assumed same-module forward reference)
     if re.match(r'^[A-Z][A-Za-z0-9_]*$', t):
-        return f"'{t}'", set()
+        return t, set(), set()
 
-    # Fallback
-    return f"'{t}'", set()
+    # Fallback — bare token (whatever it is, leave unquoted; future annotations
+    # defer evaluation, so an unresolved name is harmless until inspected).
+    return t, set(), set()
 
 
 def default_return(py_type: str) -> str:
@@ -175,12 +208,13 @@ def default_return(py_type: str) -> str:
         inner = py_type[6:-1]
         first = _split_template_args(inner)[0]
         return default_return(first.strip())
-    if py_type.startswith("'") and py_type.endswith("'"):
-        cls = py_type[1:-1]
-        # Only instantiate simple class names; skip complex/cross-module types
-        if cls.isidentifier():
-            return f'return {cls}()'
-        return 'pass'
+    # Same-module class name (a bare identifier defined elsewhere in the same file).
+    if py_type.isidentifier():
+        return f'return {py_type}()'
+    # Cross-module class refs (e.g. ``xbmcgui.ListItem``) are imported under
+    # ``TYPE_CHECKING`` only, so they aren't available at runtime — fall through
+    # to ``pass``. The stubs are never actually called; type checkers read the
+    # annotation, not the body.
     return 'pass'
 
 

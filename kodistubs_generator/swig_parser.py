@@ -1,5 +1,6 @@
 """Parse SWIG XML (.i.xml) files to extract Kodi Python API structure."""
 from __future__ import annotations
+
 import os
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
@@ -35,6 +36,7 @@ class ModuleAPI:
     classes: list[ClassDef] = field(default_factory=list)
     functions: list[FunctionDef] = field(default_factory=list)
     constant_names: list[str] = field(default_factory=list)  # names only; values from const_resolver
+    typedefs: dict[str, str] = field(default_factory=dict)   # qualified C++ name → underlying C++ type
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -173,6 +175,11 @@ def _walk_for_classes_and_functions(
 
         elif tag == 'cdecl':
             cattrs = _attrs(child)
+            if cattrs.get('kind') == 'typedef':
+                qname = cattrs.get('name', '')
+                underlying = cattrs.get('type', '')
+                if qname and underlying:
+                    module_api.typedefs[qname] = underlying
             if cattrs.get('kind') == 'function':
                 sym_name = cattrs.get('sym_name', '')
                 if sym_name and sym_name.isidentifier():
