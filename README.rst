@@ -26,13 +26,16 @@ Python 2.x for addons can be found in ``python2`` branch.
 so don't try to run your program outside Kodi unless you add some testing code into Kodistubs
 or use some mocking library to mock Kodi Python API.
 
-Current Kodistubs have been generated from scratch using `this script`_ from Doxygen XML files and
-SWIG XML Python binding definitions that, in their turn, have been generated
-from Kodi sources. Old Kodistubs can be found in ``legacy`` branch.
+Current Kodistubs have been generated from scratch with the help of Claude Code AI from Doxygen XML files
+and SWIG XML Python binding definitions that, in their turn, have been generated from Kodi sources.
+Old Kodistubs can be found in ``legacy`` branch.
 
 I try to keep Kodi stubs in sync with Kodi Python API development, but it may happen
 that I miss something. Don't hesitate to open issues or submit pull requests if you notice
 discrepancies with the actual state of Kodi Python API.
+
+``.claude`` directory contains prompts and skills for Claude Code AI that have been used to create
+the current version of Kodistubs. They can be adapted for other AI agents/assistants, if necessary.
 
 
 `Discussion topic on Kodi forum`_
@@ -44,4 +47,3 @@ License: `GPL v.3`_
 .. _GPL v.3: http://www.gnu.org/licenses/gpl.html
 .. _Kodistubs documentation: https://romanvm.github.io/Kodistubs/
 .. _PEP-484: https://www.python.org/dev/peps/pep-0484/#suggested-syntax-for-python-2-7-and-straddling-code
-.. _this script: https://github.com/romanvm/kodistubs-generator
