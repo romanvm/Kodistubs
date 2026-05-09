@@ -1,1 +1,4 @@
+uv
 Sphinx
+setuptools
+twine
