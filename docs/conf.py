@@ -4,7 +4,7 @@ from configparser import ConfigParser
 from pathlib import Path
 
 project_dir = Path(__file__).resolve().parent.parent
-sys.path.append(str(project_dir))
+sys.path.append(str(project_dir / 'src'))
 
 setup_cfg = project_dir / 'setup.cfg'
 
