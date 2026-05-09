@@ -3689,7 +3689,7 @@ def sleep(timemillis: int) -> None:
 
     :param time: integer - number of msec to sleep.
 
-    :raises PyExc_TypeError: If time is not an integer.
+    :raises TypeError: If time is not an integer.
 
     .. warning::
 
