@@ -1,13 +1,17 @@
 # This file is generated from Kodi source code and post-edited
 # to correct code style and docstrings formatting.
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
+
 """
 **Virtual file system functions on Kodi.**
 
-Offers classes and functions offers access to the Virtual File Server (VFS)
-which you can use to manipulate files and folders.
+Offers classes and functions offers access to the Virtual File Server (VFS) which you can use to manipulate files and
+folders.
 """
-from typing import Union, List, Tuple, Optional
+
+from __future__ import annotations
+
+from typing import List, Optional, Tuple
 
 __kodistubs__ = True
 
@@ -16,15 +20,16 @@ class File:
     """
     **Kodi's file class.**
 
-    :param filepath: string Selected file path
-    :param mode: [opt] string Additional mode options (if no mode is supplied, the
-        default is Open for Read).
+    **Example (v19 and up):**
 
-    ==== ============== 
-    Mode Description    
-    ==== ============== 
-    w    Open for write 
-    ==== ============== 
+    :param filepath: string Selected file path
+    :param mode: [opt] string Additional mode options (if no mode is supplied, the default is Open for Read).
+
+    ==== ==============
+    Mode Description   
+    ==== ==============
+    w    Open for write
+    ==== ==============
 
     @python_v19 Added context manager support
 
@@ -34,28 +39,31 @@ class File:
         f = xbmcvfs.File(file, 'w')
         ..
 
-    Example (v19 and up)::
+    Example::
 
         ..
         with xbmcvfs.File(file, 'w') as f:
-            ..
-            ..
+          ..
+        ..
     """
-    
+
     def __init__(self, filepath: str, mode: Optional[str] = None) -> None:
         pass
 
-    def __enter__(self) -> 'File':  # Required for context manager
-        return self
+    def __enter__(self) -> File:
+        return File()
 
-    def __exit__(self, exc_type, exc_val, exc_tb):  # Required for context manager
+    def __exit__(self) -> None:
         pass
 
     def read(self, numBytes: int = 0) -> str:
         """
         Read file parts as string.
 
+        **Example (v19 and up):**
+
         :param bytes: [opt] How many bytes to read - if not set it will read the whole file
+
         :return: string
 
         Example::
@@ -66,20 +74,23 @@ class File:
             f.close()
             ..
 
-        Example (v19 and up)::
+        Example::
 
             ..
             with xbmcvfs.File(file) as file:
-                b = f.read()
-                ..
+              b = f.read()
+            ..
         """
         return ""
-    
+
     def readBytes(self, numBytes: int = 0) -> bytearray:
         """
         Read bytes from file.
 
+        **Example (v19 and up):**
+
         :param numbytes: How many bytes to read [opt]- if not set it will read the whole file
+
         :return: bytearray
 
         Example::
@@ -90,20 +101,23 @@ class File:
             f.close()
             ..
 
-        Example (v19 and up)::
+        Example::
 
             ..
             with xbmcvfs.File(file) as f:
-                b = f.readBytes()
-                ..
+              b = f.readBytes()
+            ..
         """
         return bytearray()
-    
-    def write(self, buffer: Union[str, bytes, bytearray]) -> bool:
+
+    def write(self, buffer: bytearray) -> bool:
         """
         To write given data in file.
 
+        **Example (v19 and up):**
+
         :param buffer: Buffer to write to file
+
         :return: True on success.
 
         Example::
@@ -114,18 +128,20 @@ class File:
             f.close()
             ..
 
-        Example (v19 and up)::
+        Example::
 
             ..
             with xbmcvfs.File(file, 'w') as f:
-                result = f.write(buffer)
-                ..
+              result = f.write(buffer)
+            ..
         """
         return True
-    
+
     def size(self) -> int:
         """
         Get the file size.
+
+        **Example (v19 and up):**
 
         :return: The file size
 
@@ -137,22 +153,23 @@ class File:
             f.close()
             ..
 
-        Example (v19 and up)::
+        Example::
 
             ..
             with xbmcvfs.File(file) as f:
-                s = f.size()
-                ..
+              s = f.size()
+            ..
         """
         return 0
-    
-    def seek(self, seekBytes: int, iWhence: int = 0) -> int:
+
+    def seek(self, seekBytes: int, iWhence: Optional[int] = None) -> int:
         """
         Seek to position in file.
 
+        **Example (v19 and up):**
+
         :param seekBytes: position in the file
-        :param iWhence: [opt] where in a file to seek from[0 beginning, 1 current , 2 end
-            position]
+        :param iWhence: [opt] where in a file to seek from[0 beginning, 1 current , 2 end position]
 
         @python_v19 Function changed. param **iWhence** is now optional.
 
@@ -164,18 +181,20 @@ class File:
             f.close()
             ..
 
-        Example (v19 and up)::
+        Example::
 
             ..
             with xbmcvfs.File(file) as f:
-                result = f.seek(8129, 0)
-                ..
+              result = f.seek(8129, 0)
+            ..
         """
         return 0
-    
+
     def tell(self) -> int:
         """
         Get the current position in the file.
+
+        **Example (v19 and up):**
 
         :return: The file position
 
@@ -189,18 +208,20 @@ class File:
             f.close()
             ..
 
-        Example (v19 and up)::
+        Example::
 
             ..
             with xbmcvfs.File(file) as f:
-                s = f.tell()
-                ..
+              s = f.tell()
+            ..
         """
         return 0
-    
+
     def close(self) -> None:
         """
         Close opened file.
+
+        **Example (v19 and up):**
 
         Example::
 
@@ -209,22 +230,22 @@ class File:
             f.close()
             ..
 
-        Example (v19 and up)::
+        Example::
 
             ..
             with xbmcvfs.File(file) as f:
-                ..
-                ..
+              ..
+            ..
         """
         pass
-    
+
 
 class Stat:
     """
     **Get file or file system status.**
 
-    These class return information about a file. Execute (search) permission is
-    required on all of the directories in path that lead to the file.
+    These class return information about a file. Execute (search) permission is required on all of the directories in
+    path that lead to the file.
 
     :param path: [string] file or folder
 
@@ -233,14 +254,14 @@ class Stat:
     Example::
 
         ..
-        st = xbmcvfs.Stat(path)
-        modified = st.st_mtime()
+          st = xbmcvfs.Stat(path)
+          modified = st.st_mtime()
         ..
     """
-    
+
     def __init__(self, path: str) -> None:
         pass
-    
+
     def st_mode(self) -> int:
         """
         To get file protection.
@@ -248,7 +269,7 @@ class Stat:
         :return: st_mode
         """
         return 0
-    
+
     def st_ino(self) -> int:
         """
         To get inode number.
@@ -256,7 +277,7 @@ class Stat:
         :return: st_ino
         """
         return 0
-    
+
     def st_dev(self) -> int:
         """
         To get ID of device containing file.
@@ -266,7 +287,7 @@ class Stat:
         :return: st_dev
         """
         return 0
-    
+
     def st_nlink(self) -> int:
         """
         To get number of hard links.
@@ -274,7 +295,7 @@ class Stat:
         :return: st_nlink
         """
         return 0
-    
+
     def st_uid(self) -> int:
         """
         To get user ID of owner.
@@ -282,7 +303,7 @@ class Stat:
         :return: st_uid
         """
         return 0
-    
+
     def st_gid(self) -> int:
         """
         To get group ID of owner.
@@ -290,19 +311,19 @@ class Stat:
         :return: st_gid
         """
         return 0
-    
+
     def st_size(self) -> int:
         """
         To get total size, in bytes.
 
-        The st_size field gives the size of the file (if it is a regular file or a
-        symbolic link) in bytes. The size of a symbolic link (only on Linux and Mac OS X)
-        is the length of the pathname it contains, without a terminating null byte.
+        The st_size field gives the size of the file (if it is a regular file or a symbolic link) in bytes. The size of
+        a symbolic link (only on Linux and Mac OS X) is the length of the pathname it contains, without a terminating
+        null byte.
 
         :return: st_size
         """
         return 0
-    
+
     def st_atime(self) -> int:
         """
         To get time of last access.
@@ -310,7 +331,7 @@ class Stat:
         :return: st_atime
         """
         return 0
-    
+
     def st_mtime(self) -> int:
         """
         To get time of last modification.
@@ -318,7 +339,7 @@ class Stat:
         :return: st_mtime
         """
         return 0
-    
+
     def st_ctime(self) -> int:
         """
         To get time of last status change.
@@ -326,7 +347,7 @@ class Stat:
         :return: st_ctime
         """
         return 0
-    
+
 
 def copy(strSource: str, strDestination: str) -> bool:
     """
@@ -334,7 +355,8 @@ def copy(strSource: str, strDestination: str) -> bool:
 
     :param source: file to copy.
     :param destination: destination file
-    :return: True if successed
+
+    :return: True if successful
 
     Example::
 
@@ -350,7 +372,8 @@ def delete(file: str) -> bool:
     Delete a file
 
     :param file: File to delete
-    :return: True if successed
+
+    :return: True if successful
 
     Example::
 
@@ -367,12 +390,13 @@ def rename(file: str, newFile: str) -> bool:
 
     :param file: File to rename
     :param newFileName: New filename, including the full path
-    :return: True if successed
+
+    :return: True if successful
 
     .. note::
-        Moving files between different filesystem (eg. local to nfs://) is
-        not possible on all platforms. You may have to do it manually by
-        using the copy and deleteFile functions.
+
+        Moving files between different filesystem (eg. local to nfs://) is not possible on all platforms. You may have
+        to do it manually by using the copy and deleteFile functions.
 
     Example::
 
@@ -388,7 +412,8 @@ def exists(path: str) -> bool:
     Check for a file or folder existence
 
     :param path: File or folder (folder must end with slash or backslash)
-    :return: True if successed
+
+    :return: True if successful
 
     Example::
 
@@ -404,14 +429,14 @@ def makeLegalFilename(filename: str) -> str:
     Returns a legal filename or path as a string.
 
     :param filename: string - filename/path to make legal
+
     :return: Legal filename or path as a string
 
     .. note::
-        The returned value is platform-specific. This is due to the fact
-        that the chars that need to be replaced to make a path legal
-        depend on the underlying OS filesystem. This is useful, for
-        example, if you want to create a file or folder based on data over
-        which you have no control (e.g. an external API).
+
+        The returned value is platform-specific. This is due to the fact that the chars that need to be replaced to make
+        a path legal depend on the underlying OS filesystem. This is useful, for example, if you want to create a file
+        or folder based on data over which you have no control (e.g. an external API).
 
     @python_v19 New function added (replaces old **xbmc.makeLegalFilename**)
 
@@ -422,7 +447,7 @@ def makeLegalFilename(filename: str) -> str:
         >> xbmcvfs.makeLegalFilename('C://Trailers/Ice Age: The Meltdown.avi')
         C:\\Trailers\\Ice Age_ The Meltdown.avi
         # non-windows
-        >> xbmcvfs.makeLegalFilename("///\\jk???lj????.mpg")
+        >> xbmcvfs.makeLegalFilename("///\\\\jk???lj????.mpg")
         /jk___lj____.mpg
         ..
     """
@@ -434,11 +459,13 @@ def translatePath(path: str) -> str:
     Returns the translated path.
 
     :param path: string - Path to format
+
     :return: Translated path
 
     .. note::
-        Only useful if you are coding for both Linux and Windows. e.g.
-        Converts 'special://home' -> '/home/[username]/.kodi' on Linux.
+
+        Only useful if you are coding for both Linux and Windows. e.g. Converts 'special://home' ->
+        '/home/[username]/.kodi' on Linux.
 
     @python_v19 New function added (replaces old **xbmc.translatePath**)
 
@@ -456,12 +483,13 @@ def validatePath(path: str) -> str:
     Returns the validated path.
 
     :param path: string - Path to format
+
     :return: Validated path
 
     .. note::
-        The result is platform-specific. Only useful if you are coding for
-        multiple platfforms for fixing slash problems (e.g. Corrects
-        'Z://something' -> 'Z:\\something').
+
+        The result is platform-specific. Only useful if you are coding for multiple platforms for fixing slash problems
+        (e.g. Corrects 'Z://something' -> 'Z:\\something').
 
     @python_v19 New function added (replaces old **xbmc.validatePath**)
 
@@ -479,7 +507,8 @@ def mkdir(path: str) -> bool:
     Create a folder.
 
     :param path: Folder to create
-    :return: True if successed
+
+    :return: True if successful
 
     Example::
 
@@ -497,7 +526,8 @@ def mkdirs(path: str) -> bool:
     Create folder(s) - it will create all folders in the path.
 
     :param path: Folders to create
-    :return: True if successed
+
+    :return: True if successful
 
     Example::
 
@@ -513,8 +543,9 @@ def rmdir(path: str, force: bool = False) -> bool:
     Remove a folder.
 
     :param path: string - Folder to remove
-    :param force: [opt] bool - Force directory removal (default False). This can be
-        useful if the directory is not empty.
+    :param force: [opt] bool - Force directory removal (default False). This can be useful if the directory is not
+        empty.
+
     :return: bool - True if successful, False otherwise
 
     Example::
@@ -531,6 +562,7 @@ def listdir(path: str) -> Tuple[List[str], List[str]]:
     Lists content of a folder.
 
     :param path: Folder to get list from
+
     :return: Directory content list
 
     Example::
@@ -539,4 +571,4 @@ def listdir(path: str) -> Tuple[List[str], List[str]]:
         dirs, files = xbmcvfs.listdir(path)
         ..
     """
-    return [""], [""]
+    return ([], [],)
