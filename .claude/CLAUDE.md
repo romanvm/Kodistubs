@@ -69,3 +69,7 @@ When adding or updating stub content:
 - `piers` — next Kodi version stubs (active development)
 - `legacy` — archived stubs for older Kodi releases
 - `python2` — archived stubs for Kodi versions that used Python 2
+
+## General Rules
+
+- Do not commit anything go Git without explicit confirmation.
