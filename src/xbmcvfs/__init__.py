@@ -10,7 +10,6 @@ folders.
 """
 
 from __future__ import annotations
-
 from typing import List, Optional, Tuple
 
 __kodistubs__ = True

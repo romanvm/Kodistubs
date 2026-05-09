@@ -10,7 +10,6 @@ widgets.
 """
 
 from __future__ import annotations
-
 from typing import Dict, List, Optional, TYPE_CHECKING, Tuple, Union
 
 if TYPE_CHECKING:

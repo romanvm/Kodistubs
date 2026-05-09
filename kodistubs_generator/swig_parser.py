@@ -141,6 +141,30 @@ def _parse_class(class_node: ET.Element) -> Optional[ClassDef]:
     for sym_name_m, overloads in method_groups.items():
         cls.methods.append(_select_overload(overloads))
 
+    # Kodi's binding generator (PythonSwig.cpp.template) wires Python's mapping
+    # protocol when a class has both ``operator []`` and ``size()`` -- mp_length
+    # → __len__ and mp_subscript → __getitem__. ``operator []`` has a
+    # non-identifier sym_name and is filtered out by _parse_functions, so
+    # synthesize the dunder methods here to match the live API surface.
+    index_op_node = next(
+        (c for c in class_node.findall('cdecl')
+         if _attrs(c).get('kind') == 'function'
+         and _attrs(c).get('sym_name', '').strip() == 'operator []'
+         and _attrs(c).get('access', 'public') == 'public'),
+        None,
+    )
+    if index_op_node is not None and any(m.name == 'size' for m in cls.methods):
+        cls.methods.append(FunctionDef(
+            name='__getitem__',
+            params=_parms(index_op_node),
+            cpp_return_type=_attrs(index_op_node).get('type', 'void'),
+        ))
+        cls.methods.append(FunctionDef(
+            name='__len__',
+            params=[],
+            cpp_return_type='int',
+        ))
+
     return cls
 
 

@@ -11,7 +11,6 @@ consistent user experience.
 """
 
 from __future__ import annotations
-
 from typing import List, Optional, TYPE_CHECKING, Tuple
 
 if TYPE_CHECKING:

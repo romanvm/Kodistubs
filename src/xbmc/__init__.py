@@ -11,7 +11,6 @@ this library.
 """
 
 from __future__ import annotations
-
 from typing import Dict, List, Optional, TYPE_CHECKING, Tuple, Union
 
 if TYPE_CHECKING:
@@ -3397,6 +3396,12 @@ class PlayList:
         """
         return 0
 
+    def __getitem__(self, i: int) -> xbmcgui.ListItem:
+        pass
+
+    def __len__(self) -> int:
+        return 0
+
 
 class Monitor:
     """
@@ -3689,7 +3694,7 @@ def sleep(timemillis: int) -> None:
 
     :param time: integer - number of msec to sleep.
 
-    :raises TypeError: If time is not an integer.
+    :raises PyExc_TypeError: If time is not an integer.
 
     .. warning::
 
