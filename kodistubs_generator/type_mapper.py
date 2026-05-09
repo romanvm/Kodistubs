@@ -211,10 +211,14 @@ def default_return(py_type: str) -> str:
     # Same-module class name (a bare identifier defined elsewhere in the same file).
     if py_type.isidentifier():
         return f'return {py_type}()'
-    # Cross-module class refs (e.g. ``xbmcgui.ListItem``) are imported under
-    # ``TYPE_CHECKING`` only, so they aren't available at runtime — fall through
-    # to ``pass``. The stubs are never actually called; type checkers read the
-    # annotation, not the body.
+    # Cross-module class refs (e.g. ``xbmcgui.ListItem``) are imported only
+    # under ``TYPE_CHECKING``, so a bare ``return xbmcgui.ListItem()`` would
+    # ``NameError`` at runtime. Emit a function-local import so the body
+    # both matches the declared return type for static analysis and is
+    # safe to call at runtime.
+    m = re.match(r'^([a-z][a-zA-Z0-9_]*)\.[A-Z][A-Za-z0-9_]*$', py_type)
+    if m:
+        return f'import {m.group(1)}\nreturn {py_type}()'
     return 'pass'
 
 

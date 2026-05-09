@@ -423,8 +423,9 @@ def _generate_function(func: FunctionDef, module: str,
     if rst.strip():
         lines.append(_format_docstring(rst, indent + 4))
 
-    # Body
-    lines.append(f'{prefix}    {body_stmt}')
+    # Body (may span multiple lines, e.g. a local import + return)
+    for stmt in body_stmt.split('\n'):
+        lines.append(f'{prefix}    {stmt}')
 
     return '\n'.join(lines), typing_imports, external_modules
 

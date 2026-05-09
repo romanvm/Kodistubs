@@ -1276,7 +1276,8 @@ class ListItem:
 
         @python_v15 New function added.
         """
-        pass
+        import xbmc
+        return xbmc.InfoTagVideo()
 
     def getMusicInfoTag(self) -> xbmc.InfoTagMusic:
         """
@@ -1286,7 +1287,8 @@ class ListItem:
 
         @python_v15 New function added.
         """
-        pass
+        import xbmc
+        return xbmc.InfoTagMusic()
 
     def getPictureInfoTag(self) -> xbmc.InfoTagPicture:
         """
@@ -1296,7 +1298,8 @@ class ListItem:
 
         @python_v20 New function added.
         """
-        pass
+        import xbmc
+        return xbmc.InfoTagPicture()
 
     def getGameInfoTag(self) -> xbmc.InfoTagGame:
         """
@@ -1306,7 +1309,8 @@ class ListItem:
 
         @python_v20 New function added.
         """
-        pass
+        import xbmc
+        return xbmc.InfoTagGame()
 
 
 class Control:

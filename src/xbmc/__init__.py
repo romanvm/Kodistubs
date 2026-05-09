@@ -314,7 +314,8 @@ class Player:
 
         @python_v20 New function added.
         """
-        pass
+        import xbmcgui
+        return xbmcgui.ListItem()
 
     def getTime(self) -> float:
         """
@@ -3397,7 +3398,8 @@ class PlayList:
         return 0
 
     def __getitem__(self, i: int) -> xbmcgui.ListItem:
-        pass
+        import xbmcgui
+        return xbmcgui.ListItem()
 
     def __len__(self) -> int:
         return 0
