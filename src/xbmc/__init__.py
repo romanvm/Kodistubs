@@ -1494,6 +1494,13 @@ class InfoTagPicture:
         return ""
 
     def getDateTimeTaken(self) -> str:
+        """
+        Get the date and time at which the picture was taken in W3C format.
+
+        :return: [string] Date and time at which the picture was taken in W3C format.
+
+        @python_v20 New function added.
+        """
         return ""
 
     def setResolution(self, width: int, height: int) -> None:

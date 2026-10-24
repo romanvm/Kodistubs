@@ -1409,6 +1409,17 @@ class Control:
         return True
 
     def getPosition(self) -> list[int]:
+        """
+        Returns the control's current position as a x,y integer tuple.
+
+        :return: Current position as a x,y integer tuple
+
+        Example::
+
+            ...
+            pos = self.button.getPosition()
+            ...
+        """
         return []
 
     def getX(self) -> int:
@@ -2272,6 +2283,17 @@ class ControlList(Control):
         pass
 
     def setItemHeight(self, height: int) -> None:
+        """
+        Sets the height of items.
+
+        :param itemHeight: integer - height of items.
+
+        Example::
+
+            ...
+            cList.setItemHeight(25)
+            ...
+        """
         pass
 
     def setSpace(self, space: int) -> None:
