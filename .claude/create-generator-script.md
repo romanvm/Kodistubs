@@ -24,10 +24,14 @@ project root):
 - `KODI_SRC_DIR = '../xbmc'` — the root of the Kodi source checkout. All other Kodi paths are derived from it:
   - `{KODI_SRC_DIR}/xbmc/interfaces/swig` — SWIG interface files (`AddonModule*.i`, `kodi_*.i`).
   - `{KODI_SRC_DIR}/xbmc/interfaces/legacy` — C++ implementation of the Python API with Doxygen comments.
-- `SWIG_EXECUTABLE = None` — path to the SWIG executable. If `None`, auto-detect it in this order:
-  `{KODI_SRC_DIR}/build-*/build/bin/swig` (the SWIG built by Kodi with `-DENABLE_INTERNAL_SWIG=ON`), then `swig`
-  on `PATH`. SWIG 4.5.0 or newer is required (the same floor Kodi's `xbmc/interfaces/swig/CMakeLists.txt`
-  enforces); fail with a clear message otherwise.
+- `SWIG_EXECUTABLE = None` — path to the SWIG executable. If `None`, use the `swig` launcher installed next to the
+  running Python interpreter (`sysconfig.get_path('scripts')`, so an unactivated venv works), then `swig` on `PATH`.
+  SWIG 4.5.0 or newer is required (the same floor Kodi's `xbmc/interfaces/swig/CMakeLists.txt` enforces); fail with
+  a clear message otherwise. Do not look for SWIG in Kodi build directories: they can be cleaned at any time.
+
+SWIG is a project dependency: `requirements-generator.txt` pins the `swig` PyPI package, which ships prebuilt SWIG
+executables for Linux, macOS and Windows. Keep the pin equal to `tools/depends/native/swig/SWIG-VERSION` in the Kodi
+sources (the SWIG Kodi itself builds with).
 - `SWIG_WORK_DIR = 'build/swig'` — scratch directory for SWIG output. Must be git-ignored.
 - `DOXYGEN_XML_DIR = 'doxygen/xml'` — Doxygen XML output directory.
 
@@ -55,6 +59,8 @@ swig -python -c++ -builtin -interface <module> -pyi -w401,389,514,362,302
 - The modules are `xbmc`, `xbmcaddon`, `xbmcgui`, `xbmcplugin`, `xbmcvfs`, `xbmcdrm`. Ignore `xbmcwsgi`.
 - Regenerate SWIG output when the `.i` files or any header listed in the module's SWIG depfile (`-MMD -MF`) is newer
   than the cached XML; otherwise reuse the cache.
+- `kodistubs_generator/swig_runner.py` implements the SWIG lookup (`find_swig()`) and the cached run
+  (`run_swig()`).
 
 When parsing the XML:
 

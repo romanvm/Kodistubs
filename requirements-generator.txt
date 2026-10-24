@@ -1,0 +1,3 @@
+# Dependencies of kodistubs_generator.
+# Keep swig in sync with tools/depends/native/swig/SWIG-VERSION in the Kodi sources.
+swig==4.5.0

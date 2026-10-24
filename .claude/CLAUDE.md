@@ -64,8 +64,8 @@ python -m kodistubs_generator xbmc,xbmcgui # selected modules
 Inputs, relative to the project root:
 - `../xbmc` — Kodi source checkout. Kodi 22+ builds the Python bindings with stock SWIG (4.5+) from
   `xbmc/interfaces/swig/AddonModule*.i`, wrapping the C++ API in `xbmc/interfaces/legacy/`. Kodi no longer ships
-  SWIG XML, so the generator runs SWIG itself with `-xmlout` (Kodi's own `-DENABLE_INTERNAL_SWIG=ON` build puts a
-  suitable binary at `../xbmc/build-*/build/bin/swig`) and caches the output in `build/swig/`.
+  SWIG XML, so the generator runs SWIG itself with `-xmlout` and caches the output in `build/swig/`.
+  SWIG comes from PyPI: `pip install -r requirements-generator.txt` (pinned to the SWIG version Kodi builds with).
 - `doxygen/xml/` — docstring source, produced by `doxygen kodi.doxy` in `doxygen/` from the `legacy/*.h` headers.
 
 Systemic problems in the output must be fixed in `kodistubs_generator/`, not by hand-editing `src/`.
