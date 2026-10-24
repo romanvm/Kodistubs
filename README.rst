@@ -27,7 +27,7 @@ so don't try to run your program outside Kodi unless you add some testing code i
 or use some mocking library to mock Kodi Python API.
 
 Current Kodistubs have been generated from scratch with the help of Claude Code AI from Doxygen XML files
-and SWIG XML Python binding definitions that, in their turn, have been generated from Kodi sources.
+and SWIG XML parse trees of Kodi Python bindings that, in their turn, have been generated from Kodi sources.
 Old Kodistubs can be found in ``legacy`` branch.
 
 I try to keep Kodi stubs in sync with Kodi Python API development, but it may happen
