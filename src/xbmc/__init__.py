@@ -11,17 +11,24 @@ this library.
 """
 
 from __future__ import annotations
-from typing import Dict, List, Optional, TYPE_CHECKING, Tuple, Union
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     import xbmcgui
 
 __kodistubs__ = True
 
+DEVICE_POWER_NO_ADAPTER = -1
+DEVICE_POWER_ON = 0
+DEVICE_POWER_STANDBY = 1
+DEVICE_POWER_TRANSITION_TO_ON = 2
+DEVICE_POWER_TRANSITION_TO_STANDBY = 3
+DEVICE_POWER_UNKNOWN = 4
 DRIVE_NOT_READY = 1
 ENGLISH_NAME = 2
 ISO_639_1 = 0
 ISO_639_2 = 1
+ISO_NAME = 3
 LOGDEBUG = 0
 LOGERROR = 3
 LOGFATAL = 4
@@ -60,8 +67,8 @@ class Player:
 
     def play(
         self,
-        item: Optional[Union[str, PlayList]] = None,
-        listitem: Optional[xbmcgui.ListItem] = None,
+        item: str | PlayList | None = None,
+        listitem: xbmcgui.ListItem | None = None,
         windowed: bool = False,
         startpos: int = -1,
     ) -> None:
@@ -366,17 +373,23 @@ class Player:
 
     def getSubtitles(self) -> str:
         """
-        Get subtitle stream name.
+        Get the language of the current subtitle stream.
 
-        :return: Stream name
+        :return: BCP 47 language tag of the stream, e.g. **en** or **en-AU**, or the stream name when it declares no
+            language
+
+        @python_v22 Language values are BCP 47 tags; previously ISO 639-2 three letter codes.
         """
         return ""
 
-    def getAvailableSubtitleStreams(self) -> List[str]:
+    def getAvailableSubtitleStreams(self) -> list[str]:
         """
-        Get Subtitle stream names.
+        Get the languages of the available subtitle streams.
 
-        :return: List of subtitle streams as name
+        :return: List of BCP 47 language tags, e.g. **en** or **en-AU**; a stream that declares no language is listed by
+            its name
+
+        @python_v22 Language values are BCP 47 tags; previously ISO 639-2 three letter codes.
         """
         return []
 
@@ -477,11 +490,14 @@ class Player:
         """
         return 0.0
 
-    def getAvailableAudioStreams(self) -> List[str]:
+    def getAvailableAudioStreams(self) -> list[str]:
         """
-        Get Audio stream names
+        Get the languages of the available audio streams.
 
-        :return: List of audio streams as name
+        :return: List of BCP 47 language tags, e.g. **en** or **en-AU**; a stream that declares no language is listed by
+            its name
+
+        @python_v22 Language values are BCP 47 tags; previously ISO 639-2 three letter codes.
         """
         return []
 
@@ -499,11 +515,14 @@ class Player:
         """
         pass
 
-    def getAvailableVideoStreams(self) -> List[str]:
+    def getAvailableVideoStreams(self) -> list[str]:
         """
-        Get Video stream names
+        Get the languages of the available video streams.
 
-        :return: List of video streams as name
+        :return: List of BCP 47 language tags, e.g. **en** or **en-AU**; a stream that declares no language is listed by
+            its name
+
+        @python_v22 Language values are BCP 47 tags; previously ISO 639-2 three letter codes.
         """
         return []
 
@@ -639,7 +658,7 @@ class InfoTagGame:
         """
         return ""
 
-    def getGenres(self) -> List[str]:
+    def getGenres(self) -> list[str]:
         """
         Gets the genres of the game.
 
@@ -699,6 +718,68 @@ class InfoTagGame:
         """
         return ""
 
+    def getOriginalTitle(self) -> str:
+        """
+        Gets the original title of the game, such as the one it was first released under.
+
+        :return: [string] original title
+
+        @python_v23 New function added.
+        """
+        return ""
+
+    def getRating(self) -> float:
+        """
+        Gets the rating of the game, out of 10.
+
+        :return: [float] rating
+
+        @python_v23 New function added.
+        """
+        return 0.0
+
+    def getPlayers(self) -> int:
+        """
+        Gets the most players who can play the game at once.
+
+        :return: [integer] players, or 0 if unknown
+
+        @python_v23 New function added.
+        """
+        return 0
+
+    def getAgeRating(self) -> str:
+        """
+        Gets the age rating of the game: the rating board followed by its rating, e.g. "PEGI 12" (Europe, ages 12 and
+        up), "BBFC 15" (UK, ages 15 and up), "ESRB T" (North America, Teen, ages 13 and up) or "CERO B" (Japan, ages 12
+        and up). Each region's board has its own scale, and Kodi doesn't convert between them.
+
+        :return: [string] age rating
+
+        @python_v23 New function added.
+        """
+        return ""
+
+    def getTrailer(self) -> str:
+        """
+        Gets the path or URL of the game's trailer.
+
+        :return: [string] trailer
+
+        @python_v23 New function added.
+        """
+        return ""
+
+    def getTags(self) -> list[str]:
+        """
+        Gets the tags of the game.
+
+        :return: [list] tags
+
+        @python_v23 New function added.
+        """
+        return []
+
     def setTitle(self, title: str) -> None:
         """
         Sets the title of the game.
@@ -719,7 +800,7 @@ class InfoTagGame:
         """
         pass
 
-    def setGenres(self, genres: List[str]) -> None:
+    def setGenres(self, genres: list[str]) -> None:
         """
         Sets the genres of the game.
 
@@ -776,6 +857,68 @@ class InfoTagGame:
         :param gameClient: string - game client.
 
         @python_v20 New function added.
+        """
+        pass
+
+    def setOriginalTitle(self, originalTitle: str) -> None:
+        """
+        Sets the original title of the game, such as the one it was first released under.
+
+        :param originalTitle: string - original title.
+
+        @python_v23 New function added.
+        """
+        pass
+
+    def setRating(self, rating: float) -> None:
+        """
+        Sets the rating of the game, out of 10.
+
+        :param rating: float - rating, from 0.0 to 10.0. Anything outside that is ignored.
+
+        @python_v23 New function added.
+        """
+        pass
+
+    def setPlayers(self, players: int) -> None:
+        """
+        Sets the most players who can play the game at once.
+
+        :param players: integer - number of players, or 0 if unknown.
+
+        @python_v23 New function added.
+        """
+        pass
+
+    def setAgeRating(self, ageRating: str) -> None:
+        """
+        Sets the age rating of the game: the rating board followed by its rating, e.g. "PEGI 12" (Europe, ages 12 and
+        up), "BBFC 15" (UK, ages 15 and up), "ESRB T" (North America, Teen, ages 13 and up) or "CERO B" (Japan, ages 12
+        and up). Each region's board has its own scale, and Kodi doesn't convert between them.
+
+        :param ageRating: string - age rating.
+
+        @python_v23 New function added.
+        """
+        pass
+
+    def setTrailer(self, trailer: str) -> None:
+        """
+        Sets the path or URL of the game's trailer.
+
+        :param trailer: string - trailer path or URL.
+
+        @python_v23 New function added.
+        """
+        pass
+
+    def setTags(self, tags: list[str]) -> None:
+        """
+        Sets the tags of the game.
+
+        :param tags: list - tags.
+
+        @python_v23 New function added.
         """
         pass
 
@@ -878,7 +1021,7 @@ class InfoTagMusic:
         """
         return ""
 
-    def getGenres(self) -> List[str]:
+    def getGenres(self) -> list[str]:
         """
         Returns the list of genres from music tag if present.
 
@@ -1008,7 +1151,7 @@ class InfoTagMusic:
         """
         return ""
 
-    def getMusicBrainzArtistID(self) -> List[str]:
+    def getMusicBrainzArtistID(self) -> list[str]:
         """
         Returns the MusicBrainz Artist IDs from music info tag (if present).
 
@@ -1038,7 +1181,7 @@ class InfoTagMusic:
         """
         return ""
 
-    def getMusicBrainzAlbumArtistID(self) -> List[str]:
+    def getMusicBrainzAlbumArtistID(self) -> list[str]:
         """
         Returns the MusicBrainz Release Artist IDs from music info tag (if present).
 
@@ -1159,7 +1302,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setGenres(self, genres: List[str]) -> None:
+    def setGenres(self, genres: list[str]) -> None:
         """
         Set the genres of the music item.
 
@@ -1259,7 +1402,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setMusicBrainzArtistID(self, musicBrainzArtistID: List[str]) -> None:
+    def setMusicBrainzArtistID(self, musicBrainzArtistID: list[str]) -> None:
         """
         Set the MusicBrainz artist IDs of the music item.
 
@@ -1289,7 +1432,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setMusicBrainzAlbumArtistID(self, musicBrainzAlbumArtistID: List[str]) -> None:
+    def setMusicBrainzAlbumArtistID(self, musicBrainzAlbumArtistID: list[str]) -> None:
         """
         Set the MusicBrainz album artist IDs of the music item.
 
@@ -1762,6 +1905,7 @@ class VideoStreamDetail:
         stereomode: str = "",
         language: str = "",
         hdrtype: str = "",
+        hdrdetail: str = "",
     ) -> None:
         pass
 
@@ -1845,6 +1989,16 @@ class VideoStreamDetail:
         """
         return ""
 
+    def getHDRDetail(self) -> str:
+        """
+        Get the HDR detail of the stream.
+
+        :return: [string] HDR detail of the stream
+
+        @python_v22 New function added.
+        """
+        return ""
+
     def setWidth(self, width: int) -> None:
         """
         Set the width of the video stream in pixel.
@@ -1922,6 +2076,17 @@ class VideoStreamDetail:
         :param hdrtype: string - HDR type of the stream. The following types are supported: dolbyvision, hdr10, hlg
 
         @python_v20 New function added.
+        """
+        pass
+
+    def setHDRDetail(self, hdrdetail: str) -> None:
+        """
+        Set the HDR detail of the stream.
+
+        :param hdrdetail: string - additional HDR type details. Currently only for Dolby Vision: profile and EL type for
+            example: 5, 7FEL, 8.4
+
+        @python_v22 New function added.
         """
         pass
 
@@ -2081,7 +2246,7 @@ class InfoTagVideo:
         """
         return ""
 
-    def getDirectors(self) -> List[str]:
+    def getDirectors(self) -> list[str]:
         """
         Get a list of `film directors <https://en.wikipedia.org/wiki/Film_director>`_ who have made the film (if
         present).
@@ -2102,7 +2267,7 @@ class InfoTagVideo:
         """
         return ""
 
-    def getWriters(self) -> List[str]:
+    def getWriters(self) -> list[str]:
         """
         Get the list of writers (if present) from video info tag.
 
@@ -2122,7 +2287,7 @@ class InfoTagVideo:
         """
         return ""
 
-    def getGenres(self) -> List[str]:
+    def getGenres(self) -> list[str]:
         """
         Get the list of `Video Genres <https://en.wikipedia.org/wiki/Film_genre>`_ if available.
 
@@ -2239,7 +2404,7 @@ class InfoTagVideo:
         """
         return ""
 
-    def getActors(self) -> List[Actor]:
+    def getActors(self) -> list[Actor]:
         """
         Get the cast of the video if available.
 
@@ -2427,7 +2592,7 @@ class InfoTagVideo:
         """
         return ""
 
-    def getArtist(self) -> List[str]:
+    def getArtist(self) -> list[str]:
         """
         To get the artist name (for musicvideos)
 
@@ -2511,12 +2676,12 @@ class InfoTagVideo:
         """
         pass
 
-    def setUniqueIDs(self, uniqueIDs: Dict[str, str], defaultuniqueid: str = "") -> None:
+    def setUniqueIDs(self, uniqueIDs: dict[str, str], defaultuniqueid: str = "") -> None:
         """
         Set the given unique IDs. A unique ID is an identifier used by a (online) video database used to identify a
         video in its database.
 
-        :param values: dictionary - pairs of { 'label: 'value' }`.
+        :param values: dictionary - pairs of ``{ 'label': 'value' }``.
         :param defaultuniqueid: [opt] string - the name of default uniqueID.
 
         - Some example values (any string possible):
@@ -2647,11 +2812,11 @@ class InfoTagVideo:
         """
         pass
 
-    def setRatings(self, ratings: Dict[str, Tuple[float, int]], defaultrating: str = "") -> None:
+    def setRatings(self, ratings: dict[str, tuple[float, int]], defaultrating: str = "") -> None:
         """
         Set the ratings of the video item.
 
-        :param ratings: dictionary - { 'type: (rating, votes) }`.
+        :param ratings: dictionary - ``{ 'type': (rating, votes) }``.
         :param defaultrating: string - Type / Label of the default rating.
 
         @python_v20 New function added.
@@ -2781,7 +2946,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setGenres(self, genre: List[str]) -> None:
+    def setGenres(self, genre: list[str]) -> None:
         """
         Set the genres of the video item.
 
@@ -2791,7 +2956,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setCountries(self, countries: List[str]) -> None:
+    def setCountries(self, countries: list[str]) -> None:
         """
         Set the countries of the video item.
 
@@ -2801,7 +2966,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setDirectors(self, directors: List[str]) -> None:
+    def setDirectors(self, directors: list[str]) -> None:
         """
         Set the directors of the video item.
 
@@ -2811,7 +2976,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setStudios(self, studios: List[str]) -> None:
+    def setStudios(self, studios: list[str]) -> None:
         """
         Set the studios of the video item.
 
@@ -2821,7 +2986,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setWriters(self, writers: List[str]) -> None:
+    def setWriters(self, writers: list[str]) -> None:
         """
         Set the writers of the video item.
 
@@ -2871,7 +3036,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setTags(self, tags: List[str]) -> None:
+    def setTags(self, tags: list[str]) -> None:
         """
         Set the tags of the video item.
 
@@ -3001,7 +3166,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setShowLinks(self, showlinks: List[str]) -> None:
+    def setShowLinks(self, showlinks: list[str]) -> None:
         """
         Set the TV show links of the movie.
 
@@ -3011,7 +3176,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setArtists(self, artists: List[str]) -> None:
+    def setArtists(self, artists: list[str]) -> None:
         """
         Set the artists of the music video item.
 
@@ -3021,7 +3186,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setCast(self, actors: List[Actor]) -> None:
+    def setCast(self, actors: list[Actor]) -> None:
         """
         Set the cast / actors of the video item.
 
@@ -3063,7 +3228,7 @@ class InfoTagVideo:
         """
         pass
 
-    def addSeasons(self, seasons: List[Tuple[int, str, str]]) -> None:
+    def addSeasons(self, seasons: list[tuple[int, str, str]]) -> None:
         """
         Add seasons to the TV show.
 
@@ -3138,7 +3303,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setAvailableFanart(self, images: List[Dict[str, str]]) -> None:
+    def setAvailableFanart(self, images: list[dict[str, str]]) -> None:
         """
         Set available images (needed for video scrapers)
 
@@ -3318,7 +3483,7 @@ class PlayList:
         """
         return 0
 
-    def add(self, url: str, listitem: Optional[xbmcgui.ListItem] = None, index: int = -1) -> None:
+    def add(self, url: str, listitem: xbmcgui.ListItem | None = None, index: int = -1) -> None:
         """
         Adds a new file to the playlist.
 
@@ -3567,7 +3732,7 @@ class Monitor:
         return True
 
 
-def log(msg: str, level: Optional[int] = None) -> None:
+def log(msg: str, level: int | None = None) -> None:
     """
     Write a string to Kodi's log file and the debug window.
 
@@ -3725,7 +3890,7 @@ def getLocalizedString(id: int) -> str:
 
     .. note::
 
-        See strings.po in ``\\language\\{yourlanguage}\\`` for which id you need for a string.
+        See strings.po in ``\\language\\{yourlanguage}\\\\endiskip`` for which id you need for a string.
 
     Example::
 
@@ -3755,24 +3920,35 @@ def getSkinDir() -> str:
     return ""
 
 
-def getLanguage(format: Optional[int] = None, region: bool = False) -> str:
+def getLanguage(format: int | None = None, region: bool = False) -> str:
     """
     Get the active language.
 
     :param format: [opt] format of the returned language string
-    :param region: [opt] append the region delimited by "-" of the language (setting) to the returned language string
+    :param region: [opt] append the region delimited by "-" of the language (setting) to the returned language string.
+        The ISO 639 formats name the region as an ISO 3166-1 code, uppercase, for example **en-AU**
 
-    :return: The active language as a string
+    :return: The active language as a string, or an empty string where the language has no code in the requested format.
+        The region is never returned on its own, so the result is empty rather than a bare **-AU**.
 
-    ================= ==========================================================
-    Value             Description                                               
-    ================= ==========================================================
-    xbmc.ISO_639_1    Two letter code as defined in ISO 639-1                   
-    xbmc.ISO_639_2    Three letter code as defined in ISO 639-2/T or ISO 639-2/B
-    xbmc.ENGLISH_NAME Full language name in English (default)                   
-    ================= ==========================================================
+    ================= ========================================================================================
+    Value             Description                                                                             
+    ================= ========================================================================================
+    xbmc.ISO_639_1    Two letter code as defined in ISO 639-1                                                 
+    xbmc.ISO_639_2    Three letter code as defined in ISO 639-2/T or ISO 639-2/B                              
+    xbmc.ENGLISH_NAME Full language name in English (default)                                                 
+    xbmc.ISO_NAME     Language name in English without qualifiers, "English" rather than "English (Australia)"
+    ================= ========================================================================================
+
+    .. note::
+
+        Not every language has an ISO 639-1 code - Filipino and Asturian are two that do not - so **xbmc.ISO_639_2**
+        answers for more languages than **xbmc.ISO_639_1**.
 
     @python_v13 Added new options **format** and **region**.
+
+    @python_v22 Added the **xbmc.ISO_NAME** format. A language with no code in the requested format returns an empty
+    string; previously the region could be returned on its own.
 
     Example::
 
@@ -3857,6 +4033,29 @@ def getInfoImage(infotag: str) -> str:
 
         ..
         filename = xbmc.getInfoImage('Weather.Conditions')
+        ..
+    """
+    return ""
+
+
+def getDatabaseName(dbType: str) -> str:
+    """
+    Get the name of the database of the supplied type.
+
+    :param dbType: string - database type of the database name to be returned.
+
+    :return: The database name currently in-use.
+
+    .. note::
+
+        Database type values are: addons, epg, music, textures, tv, videos, viewmodes.
+
+    @python_v22 New function added.
+
+    Example::
+
+        ..
+        video_database = xbmc.getDatabaseName('videos')
         ..
     """
     return ""
@@ -3948,6 +4147,57 @@ def getGlobalIdleTime() -> int:
     return 0
 
 
+def getDevicePowerStatus(adapterName: str = "") -> int:
+    """
+    Get the power status of the device attached via HDMI-CEC.
+
+    :param adapterName: [opt] string - the CEC adapter to query, either its name (e.g. ``HDMI 1``) or, for an adapter
+        that the driver didn't name, its port. Defaults to empty, which queries the first adapter that reports a status.
+
+    :return: int - one of the following constants:
+
+    .. note::
+
+        This is the result of calling libCEC's GetDevicePowerStatus. ``DEVICE_POWER_UNKNOWN`` means the device could not
+        be found or queried on the CEC bus. ``DEVICE_POWER_NO_ADAPTER`` means no CEC adapter is present, no adapter
+        matches the given name, or the matching adapter isn't running.
+
+    .. note::
+
+        The name is matched case insensitively.
+
+    @python_v22 New function added.
+
+    Example::
+
+        ..
+        if xbmc.getDevicePowerStatus() == xbmc.DEVICE_POWER_ON:
+            xbmc.log('Device is on')
+
+        if xbmc.getDevicePowerStatus('HDMI 2') == xbmc.DEVICE_POWER_STANDBY: xbmc.log('The device on HDMI 2 is in
+        standby') ..
+    """
+    return 0
+
+
+def getCecAdapterNames() -> list[str]:
+    """
+    Get the names of the HDMI-CEC adapters that are present.
+
+    :return: list - the name of each adapter, in the form that getDevicePowerStatus accepts.
+
+    @python_v22 New function added.
+
+    Example::
+
+        ..
+        for adapter in xbmc.getCecAdapterNames():
+            xbmc.log(f'{adapter}: {xbmc.getDevicePowerStatus(adapter)}')
+        ..
+    """
+    return []
+
+
 def getCacheThumbName(path: str) -> str:
     """
     Get thumb cache filename.
@@ -3965,7 +4215,7 @@ def getCacheThumbName(path: str) -> str:
     return ""
 
 
-def getCleanMovieTitle(path: str, usefoldername: bool = False) -> Tuple[str, str]:
+def getCleanMovieTitle(path: str, usefoldername: bool = False) -> tuple[str, str]:
     """
     Get clean movie title and year string if available.
 
@@ -4121,20 +4371,31 @@ def convertLanguage(language: str, format: int) -> str:
     """
     Returns the given language converted to the given format as a string.
 
-    :param language: string either as name in English, two letter code (ISO 639-1), or three letter code (ISO 639-2/T(B)
+    :param language: string either as name in English, two letter code (ISO 639-1), three letter code (ISO 639-2/T(B),
+        or a BCP 47 language tag
     :param format: format of the returned language string
 
-    :return: Converted Language string
+    :return: Converted Language string, or an empty string where the language is not recognized or has no code in the
+        requested format
 
-    ================= ==========================================================
-    Value             Description                                               
-    ================= ==========================================================
-    xbmc.ISO_639_1    Two letter code as defined in ISO 639-1                   
-    xbmc.ISO_639_2    Three letter code as defined in ISO 639-2/T or ISO 639-2/B
-    xbmc.ENGLISH_NAME Full language name in English (default)                   
-    ================= ==========================================================
+    ================= ========================================================================================
+    Value             Description                                                                             
+    ================= ========================================================================================
+    xbmc.ISO_639_1    Two letter code as defined in ISO 639-1                                                 
+    xbmc.ISO_639_2    Three letter code as defined in ISO 639-2/T or ISO 639-2/B                              
+    xbmc.ENGLISH_NAME Full language name in English (default)                                                 
+    xbmc.ISO_NAME     Language name in English without qualifiers, "English" rather than "English (Australia)"
+    ================= ========================================================================================
+
+    .. note::
+
+        Not every language has an ISO 639-1 code, so **xbmc.ISO_639_2** answers for more languages than
+        **xbmc.ISO_639_1**.
 
     @python_v13 New function added.
+
+    @python_v22 A BCP 47 tag is accepted as input, for example **en-AU**, which the stream language functions of Player
+    return. Added the **xbmc.ISO_NAME** format.
 
     Example::
 

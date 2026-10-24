@@ -10,7 +10,7 @@ widgets.
 """
 
 from __future__ import annotations
-from typing import Dict, List, Optional, TYPE_CHECKING, Tuple, Union
+from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
     import xbmc
@@ -331,8 +331,10 @@ KEY_MOUSE_RIGHTCLICK = 57345
 KEY_MOUSE_START = 57344
 KEY_MOUSE_WHEEL_DOWN = 57602
 KEY_MOUSE_WHEEL_UP = 57601
-KEY_UNICODE = 61952
+KEY_UNICODE = 65534
 KEY_VKEY = 61440
+KEY_VKEY_MASK = 1023
+KEY_VKEY_MAX = 62463
 KEY_VMOUSE = 61439
 NOTIFICATION_ERROR = 'error'
 NOTIFICATION_INFO = 'info'
@@ -462,7 +464,7 @@ class ListItem:
         """
         pass
 
-    def setArt(self, dictionary: Dict[str, str]) -> None:
+    def setArt(self, dictionary: dict[str, str]) -> None:
         """
         Sets the listitem's art
 
@@ -498,7 +500,7 @@ class ListItem:
         """
         pass
 
-    def setUniqueIDs(self, dictionary: Dict[str, str], defaultrating: str = "") -> None:
+    def setUniqueIDs(self, dictionary: dict[str, str], defaultrating: str = "") -> None:
         """
         Sets the listitem's uniqueID
 
@@ -675,7 +677,7 @@ class ListItem:
         """
         return True
 
-    def setInfo(self, type: str, infoLabels: Dict[str, Union[str, List[Union[str, Tuple[str, str]]]]]) -> None:
+    def setInfo(self, type: str, infoLabels: dict[str, str | int | list[str | int | tuple[str, str | int]]]) -> None:
         """
         Sets the listitem's infoLabels.
 
@@ -931,7 +933,7 @@ class ListItem:
         """
         pass
 
-    def setCast(self, actors: List[Dict[str, str]]) -> None:
+    def setCast(self, actors: list[dict[str, str]]) -> None:
         """
         Set cast including thumbnails
 
@@ -961,7 +963,7 @@ class ListItem:
         """
         pass
 
-    def setAvailableFanart(self, images: List[Dict[str, str]]) -> None:
+    def setAvailableFanart(self, images: list[dict[str, str]]) -> None:
         """
         Set available images (needed for video scrapers)
 
@@ -1030,7 +1032,7 @@ class ListItem:
         """
         pass
 
-    def addStreamInfo(self, cType: str, dictionary: Dict[str, str]) -> None:
+    def addStreamInfo(self, cType: str, dictionary: dict[str, str]) -> None:
         """
         Add a stream with details.
 
@@ -1076,7 +1078,7 @@ class ListItem:
         """
         pass
 
-    def addContextMenuItems(self, items: List[Tuple[str, str]], replaceItems: bool = False) -> None:
+    def addContextMenuItems(self, items: list[tuple[str, str]], replaceItems: bool = False) -> None:
         """
         Adds item(s) to the context menu for media lists.
 
@@ -1165,7 +1167,7 @@ class ListItem:
         """
         pass
 
-    def setProperties(self, dictionary: Dict[str, str]) -> None:
+    def setProperties(self, dictionary: dict[str, str]) -> None:
         """
         Sets multiple properties for listitem's
 
@@ -1242,7 +1244,50 @@ class ListItem:
         """
         pass
 
-    def setSubtitles(self, subtitleFiles: List[str]) -> None:
+    def setFileTitle(self, title: str) -> None:
+        """
+        Sets the title of this item's file.
+
+        :param title: string - file title
+
+        @python_v22 New function added. Replaces the setInfo() "title" info label for items without a media info tag.
+        """
+        pass
+
+    def setCount(self, count: int) -> None:
+        """
+        Sets the item count badge shown for this item, e.g. the number of items inside a folder.
+
+        :param count: integer - item count
+
+        @python_v22 New function added. Replaces the setInfo() "count" info label.
+        """
+        pass
+
+    def setSize(self, size: int64_t) -> None:
+        """
+        Sets the file size of this item, in bytes.
+
+        :param size: integer - size in bytes
+
+        @python_v22 New function added. Replaces the setInfo() "size" info label.
+        """
+        pass
+
+    def setOverlay(self, overlay: int) -> None:
+        """
+        Sets the overlay icon of this item, one of the xbmcgui ICON_OVERLAY values (0 to 8).
+
+        :param overlay: integer - overlay icon
+
+        :raises ListItemException: if overlay is outside 0 to 8
+
+        @python_v22 New function added. Replaces the setInfo() "overlay" info label, which silently ignored invalid
+        values.
+        """
+        pass
+
+    def setSubtitles(self, subtitleFiles: list[str]) -> None:
         """
         Sets subtitles for this listitem.
 
@@ -1349,7 +1394,16 @@ class Control:
         """
         return 0
 
-    def getPosition(self) -> List[int]:
+    def __eq__(self, other: Control) -> bool:
+        return True
+
+    def __gt__(self, other: Control) -> bool:
+        return True
+
+    def __lt__(self, other: Control) -> bool:
+        return True
+
+    def getPosition(self) -> list[int]:
         return []
 
     def getX(self) -> int:
@@ -1497,7 +1551,7 @@ class Control:
         """
         pass
 
-    def setAnimations(self, eventAttr: List[Tuple[str, str]]) -> None:
+    def setAnimations(self, eventAttr: list[tuple[str, str]]) -> None:
         """
         Sets the control's animations.
 
@@ -1761,10 +1815,10 @@ class ControlLabel(Control):
         width: int,
         height: int,
         label: str,
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
-        alignment: Optional[int] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
+        alignment: int | None = None,
         hasPath: bool = False,
         angle: int = 0,
     ) -> None:
@@ -1787,11 +1841,11 @@ class ControlLabel(Control):
     def setLabel(
         self,
         label: str = "",
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
-        shadowColor: Optional[str] = None,
-        focusedColor: Optional[str] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
+        shadowColor: str | None = None,
+        focusedColor: str | None = None,
         label2: str = "",
     ) -> None:
         """
@@ -1861,23 +1915,23 @@ class ControlEdit(Control):
         width: int,
         height: int,
         label: str,
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
-        _alignment: Optional[int] = None,
-        focusTexture: Optional[str] = None,
-        noFocusTexture: Optional[str] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
+        _alignment: int | None = None,
+        focusTexture: str | None = None,
+        noFocusTexture: str | None = None,
     ) -> None:
         pass
 
     def setLabel(
         self,
         label: str = "",
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
-        shadowColor: Optional[str] = None,
-        focusedColor: Optional[str] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
+        shadowColor: str | None = None,
+        focusedColor: str | None = None,
         label2: str = "",
     ) -> None:
         """
@@ -2027,22 +2081,22 @@ class ControlList(Control):
         y: int,
         width: int,
         height: int,
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        buttonTexture: Optional[str] = None,
-        buttonFocusTexture: Optional[str] = None,
-        selectedColor: Optional[str] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        buttonTexture: str | None = None,
+        buttonFocusTexture: str | None = None,
+        selectedColor: str | None = None,
         _imageWidth: int = 10,
         _imageHeight: int = 10,
         _itemTextXOffset: int = 10,
         _itemTextYOffset: int = 2,
         _itemHeight: int = 27,
         _space: int = 2,
-        _alignmentY: Optional[int] = None,
+        _alignmentY: int | None = None,
     ) -> None:
         pass
 
-    def addItem(self, item: Union[str, ListItem], sendMessage: bool = True) -> None:
+    def addItem(self, item: str | ListItem, sendMessage: bool = True) -> None:
         """
         Add a new item to this list control.
 
@@ -2056,7 +2110,7 @@ class ControlList(Control):
         """
         pass
 
-    def addItems(self, items: List[Union[str, ListItem]]) -> None:
+    def addItems(self, items: list[str | ListItem]) -> None:
         """
         Adds a list of listitems or strings to this list control.
 
@@ -2303,7 +2357,7 @@ class ControlList(Control):
         """
         return ListItem()
 
-    def setStaticContent(self, items: List[ListItem]) -> None:
+    def setStaticContent(self, items: list[ListItem]) -> None:
         """
         Fills a static list with a list of listitems.
 
@@ -2362,9 +2416,9 @@ class ControlFadeLabel(Control):
         y: int,
         width: int,
         height: int,
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        _alignment: Optional[int] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        _alignment: int | None = None,
     ) -> None:
         pass
 
@@ -2466,8 +2520,8 @@ class ControlTextBox(Control):
         y: int,
         width: int,
         height: int,
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
+        font: str | None = None,
+        textColor: str | None = None,
     ) -> None:
         pass
 
@@ -2604,7 +2658,7 @@ class ControlImage(Control):
         height: int,
         filename: str,
         aspectRatio: int = 0,
-        colorDiffuse: Optional[str] = None,
+        colorDiffuse: str | None = None,
     ) -> None:
         pass
 
@@ -2694,11 +2748,11 @@ class ControlProgress(Control):
         y: int,
         width: int,
         height: int,
-        texturebg: Optional[str] = None,
-        textureleft: Optional[str] = None,
-        texturemid: Optional[str] = None,
-        textureright: Optional[str] = None,
-        textureoverlay: Optional[str] = None,
+        texturebg: str | None = None,
+        textureleft: str | None = None,
+        texturemid: str | None = None,
+        textureright: str | None = None,
+        textureoverlay: str | None = None,
     ) -> None:
         pass
 
@@ -2787,28 +2841,28 @@ class ControlButton(Control):
         width: int,
         height: int,
         label: str,
-        focusTexture: Optional[str] = None,
-        noFocusTexture: Optional[str] = None,
+        focusTexture: str | None = None,
+        noFocusTexture: str | None = None,
         textOffsetX: int = 10,
         textOffsetY: int = 2,
-        alignment: Optional[int] = None,
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
+        alignment: int | None = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
         angle: int = 0,
-        shadowColor: Optional[str] = None,
-        focusedColor: Optional[str] = None,
+        shadowColor: str | None = None,
+        focusedColor: str | None = None,
     ) -> None:
         pass
 
     def setLabel(
         self,
         label: str = "",
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
-        shadowColor: Optional[str] = None,
-        focusedColor: Optional[str] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
+        shadowColor: str | None = None,
+        focusedColor: str | None = None,
         label2: str = "",
     ) -> None:
         """
@@ -2913,6 +2967,33 @@ class ControlGroup(Control):
         pass
 
 
+class ControlVideoWindow(Control):
+    """
+    **Used to embed the video window inside a group of other controls.**
+
+    The video window control is a placeholder that shows the video output of the current playing video within an area of
+    the skin, positioned and sized like any other control.
+
+    :param x: integer - x coordinate of control.
+    :param y: integer - y coordinate of control.
+    :param width: integer - width of control.
+    :param height: integer - height of control.
+
+    .. note::
+
+        This class include also all calls from Control
+
+    Example::
+
+        ...
+        self.videowindow = xbmcgui.ControlVideoWindow(100, 250, 125, 75)
+        ...
+    """
+
+    def __init__(self, x: int, y: int, width: int, height: int) -> None:
+        pass
+
+
 class ControlRadioButton(Control):
     """
     **A radio button control (as used for on/off settings).**
@@ -2964,23 +3045,23 @@ class ControlRadioButton(Control):
         width: int,
         height: int,
         label: str,
-        focusOnTexture: Optional[str] = None,
-        noFocusOnTexture: Optional[str] = None,
-        focusOffTexture: Optional[str] = None,
-        noFocusOffTexture: Optional[str] = None,
-        focusTexture: Optional[str] = None,
-        noFocusTexture: Optional[str] = None,
+        focusOnTexture: str | None = None,
+        noFocusOnTexture: str | None = None,
+        focusOffTexture: str | None = None,
+        noFocusOffTexture: str | None = None,
+        focusTexture: str | None = None,
+        noFocusTexture: str | None = None,
         textOffsetX: int = 10,
         textOffsetY: int = 2,
-        _alignment: Optional[int] = None,
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
+        _alignment: int | None = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
         angle: int = 0,
-        shadowColor: Optional[str] = None,
-        focusedColor: Optional[str] = None,
-        disabledOnTexture: Optional[str] = None,
-        disabledOffTexture: Optional[str] = None,
+        shadowColor: str | None = None,
+        focusedColor: str | None = None,
+        disabledOnTexture: str | None = None,
+        disabledOffTexture: str | None = None,
     ) -> None:
         pass
 
@@ -3020,11 +3101,11 @@ class ControlRadioButton(Control):
     def setLabel(
         self,
         label: str = "",
-        font: Optional[str] = None,
-        textColor: Optional[str] = None,
-        disabledColor: Optional[str] = None,
-        shadowColor: Optional[str] = None,
-        focusedColor: Optional[str] = None,
+        font: str | None = None,
+        textColor: str | None = None,
+        disabledColor: str | None = None,
+        shadowColor: str | None = None,
+        focusedColor: str | None = None,
         label2: str = "",
     ) -> None:
         """
@@ -3117,12 +3198,12 @@ class ControlSlider(Control):
         y: int,
         width: int,
         height: int,
-        textureback: Optional[str] = None,
-        texture: Optional[str] = None,
-        texturefocus: Optional[str] = None,
+        textureback: str | None = None,
+        texture: str | None = None,
+        texturefocus: str | None = None,
         orientation: int = 1,
-        texturebackdisabled: Optional[str] = None,
-        texturedisabled: Optional[str] = None,
+        texturebackdisabled: str | None = None,
+        texturedisabled: str | None = None,
     ) -> None:
         pass
 
@@ -3243,7 +3324,7 @@ class Dialog:
         nolabel: str = "",
         yeslabel: str = "",
         autoclose: int = 0,
-        defaultbutton: Optional[int] = None,
+        defaultbutton: int | None = None,
     ) -> bool:
         """
         The Yes / No dialog can be used to inform the user about questions and get the answer.
@@ -3292,7 +3373,7 @@ class Dialog:
         nolabel: str = "",
         yeslabel: str = "",
         autoclose: int = 0,
-        defaultbutton: Optional[int] = None,
+        defaultbutton: int | None = None,
     ) -> int:
         """
         The YesNoCustom dialog can be used to inform the user about questions and get the answer. The dialog provides a
@@ -3351,7 +3432,7 @@ class Dialog:
     def select(
         self,
         heading: str,
-        list: List[Union[str, ListItem]],
+        list: list[str | ListItem],
         autoclose: int = 0,
         preselect: int = -1,
         useDetails: bool = False,
@@ -3382,7 +3463,7 @@ class Dialog:
         """
         return 0
 
-    def contextmenu(self, list: List[str]) -> int:
+    def contextmenu(self, list: list[str]) -> int:
         """
         :param list: string list - list of items.
 
@@ -3402,11 +3483,11 @@ class Dialog:
     def multiselect(
         self,
         heading: str,
-        options: List[Union[str, ListItem]],
+        options: list[str | ListItem],
         autoclose: int = 0,
-        preselect: Optional[List[int]] = None,
+        preselect: list[int] | None = None,
         useDetails: bool = False,
-    ) -> List[int]:
+    ) -> list[int]:
         """
         :param heading: string or unicode - dialog heading.
         :param options: list of strings / xbmcgui.ListItems - options to choose from.
@@ -3488,7 +3569,7 @@ class Dialog:
         treatAsFolder: bool = False,
         defaultt: str = "",
         enableMultiple: bool = False,
-    ) -> Union[str, List[str]]:
+    ) -> str | list[str]:
         """
         The function offer the possibility to select a file by the user of the add-on.
 
@@ -3612,7 +3693,7 @@ class Dialog:
         useThumbs: bool = False,
         treatAsFolder: bool = False,
         defaultt: str = "",
-    ) -> List[str]:
+    ) -> list[str]:
         """
         The function offer the possibility to select multiple files by the user of the add-on.
 
@@ -3724,7 +3805,7 @@ class Dialog:
         self,
         heading: str,
         defaultt: str = "",
-        type: Optional[int] = None,
+        type: int | None = None,
         option: int = 0,
         autoclose: int = 0,
     ) -> str:
@@ -3764,7 +3845,7 @@ class Dialog:
         heading: str,
         selectedcolor: str = "",
         colorfile: str = "",
-        colorlist: Optional[List[ListItem]] = None,
+        colorlist: list[ListItem] | None = None,
     ) -> str:
         """
         :param heading: string - dialog heading.
@@ -3806,17 +3887,6 @@ class DialogProgress:
     """
 
     def __init__(self) -> None:
-        pass
-
-    def deallocating(self) -> None:
-        """
-        This method is meant to be called from the destructor of the lowest level class.
-
-        It's virtual because it's a convenient place to receive messages that we're about to go be deleted but prior to
-        any real tear-down.
-
-        Any overloading classes need to remember to pass the call up the chain.
-        """
         pass
 
     def create(self, heading: str, message: str = "") -> None:
@@ -3891,17 +3961,6 @@ class DialogProgressBG:
     """
 
     def __init__(self) -> None:
-        pass
-
-    def deallocating(self) -> None:
-        """
-        This method is meant to be called from the destructor of the lowest level class.
-
-        It's virtual because it's a convenient place to receive messages that we're about to go be deleted but prior to
-        any real tear-down.
-
-        Any overloading classes need to remember to pass the call up the chain.
-        """
         pass
 
     def create(self, heading: str, message: str = "") -> None:
@@ -4019,6 +4078,9 @@ class Action:
         :return: [float] second amount
         """
         return 0.0
+
+    def __eq__(self, obj2: Any) -> Any:
+        return Any()
 
 
 class Window:
@@ -4228,7 +4290,7 @@ class Window:
         """
         pass
 
-    def removeControls(self, pControls: List[Control]) -> None:
+    def removeControls(self, pControls: list[Control]) -> None:
         """
         Removes a list of controls from this window.
 
@@ -4401,7 +4463,7 @@ class Window:
         """
         pass
 
-    def addControls(self, pControls: List[Control]) -> None:
+    def addControls(self, pControls: list[Control]) -> None:
         """
         Add a list of Controls to this window.
 
@@ -4506,13 +4568,13 @@ class WindowXML(Window):
         self,
         xmlFilename: str,
         scriptPath: str,
-        defaultSkin: Optional[str] = None,
-        defaultRes: Optional[str] = None,
+        defaultSkin: str | None = None,
+        defaultRes: str | None = None,
         isMedia: bool = False,
     ) -> None:
         pass
 
-    def addItem(self, item: Union[str, ListItem], position: Optional[int] = None) -> None:
+    def addItem(self, item: str | ListItem, position: int | None = None) -> None:
         """
         Add a new item to this Window List.
 
@@ -4528,7 +4590,7 @@ class WindowXML(Window):
         """
         pass
 
-    def addItems(self, items: List[Union[str, ListItem]]) -> None:
+    def addItems(self, items: list[str | ListItem]) -> None:
         """
         Add a list of items to to the window list.
 
@@ -4750,8 +4812,8 @@ class WindowXMLDialog(WindowXML):
         self,
         xmlFilename: str,
         scriptPath: str,
-        defaultSkin: Optional[str] = None,
-        defaultRes: Optional[str] = None,
+        defaultSkin: str | None = None,
+        defaultRes: str | None = None,
     ) -> None:
         pass
 

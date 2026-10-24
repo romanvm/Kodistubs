@@ -11,7 +11,7 @@ consistent user experience.
 """
 
 from __future__ import annotations
-from typing import List, Optional, TYPE_CHECKING, Tuple
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     import xbmcgui
@@ -98,7 +98,7 @@ def addDirectoryItem(
     return True
 
 
-def addDirectoryItems(handle: int, items: List[Tuple[str, xbmcgui.ListItem, bool]], totalItems: int = 0) -> bool:
+def addDirectoryItems(handle: int, items: list[tuple[str, xbmcgui.ListItem, bool]], totalItems: int = 0) -> bool:
     """
     Callback function to pass directory contents back to Kodi as a list.
 
@@ -361,10 +361,10 @@ def setPluginCategory(handle: int, category: str) -> None:
 
 def setPluginFanart(
     handle: int,
-    image: Optional[str] = None,
-    color1: Optional[str] = None,
-    color2: Optional[str] = None,
-    color3: Optional[str] = None,
+    image: str | None = None,
+    color1: str | None = None,
+    color2: str | None = None,
+    color3: str | None = None,
 ) -> None:
     """
     Sets the plugins fanart and color for skins to display.

@@ -10,7 +10,7 @@ folders.
 """
 
 from __future__ import annotations
-from typing import List, Optional, Tuple
+from typing import Any
 
 __kodistubs__ = True
 
@@ -46,14 +46,11 @@ class File:
         ..
     """
 
-    def __init__(self, filepath: str, mode: Optional[str] = None) -> None:
+    def __init__(self, filepath: str, mode: str | None = None) -> None:
         pass
 
     def __enter__(self) -> File:
         return File()
-
-    def __exit__(self) -> None:
-        pass
 
     def read(self, numBytes: int = 0) -> str:
         """
@@ -161,7 +158,7 @@ class File:
         """
         return 0
 
-    def seek(self, seekBytes: int, iWhence: Optional[int] = None) -> int:
+    def seek(self, seekBytes: int, iWhence: int | None = None) -> int:
         """
         Seek to position in file.
 
@@ -236,6 +233,9 @@ class File:
               ..
             ..
         """
+        pass
+
+    def __exit__(self, exc_type: Any = None, exc_value: Any = None, traceback: Any = None) -> None:
         pass
 
 
@@ -556,7 +556,7 @@ def rmdir(path: str, force: bool = False) -> bool:
     return True
 
 
-def listdir(path: str) -> Tuple[List[str], List[str]]:
+def listdir(path: str) -> tuple[list[str], list[str]]:
     """
     Lists content of a folder.
 

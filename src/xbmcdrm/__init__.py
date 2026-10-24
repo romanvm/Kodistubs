@@ -3,11 +3,10 @@
 # License: GPL v.3 <https://www.gnu.org/licenses/gpl-3.0.en.html>
 
 """
-**Kodi's DRM class.**
+**xbmcdrm module**
 """
 
 from __future__ import annotations
-from typing import Dict, Optional
 
 __kodistubs__ = True
 
@@ -59,7 +58,7 @@ class CryptoSession:
         init: bytearray,
         mimeType: str,
         offlineKey: bool,
-        optionalParameters: Dict[str, str],
+        optionalParameters: dict[str, str],
     ) -> bytearray:
         """
         Generate a key request

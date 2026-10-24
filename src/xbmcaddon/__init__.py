@@ -7,7 +7,6 @@
 """
 
 from __future__ import annotations
-from typing import List, Optional
 
 __kodistubs__ = True
 
@@ -38,7 +37,7 @@ class Addon:
         ..
     """
 
-    def __init__(self, id: Optional[str] = None) -> None:
+    def __init__(self, id: str | None = None) -> None:
         pass
 
     def getLocalizedString(self, id: int) -> str:
@@ -411,7 +410,7 @@ class Settings:
         """
         return ""
 
-    def getBoolList(self, id: str) -> List[bool]:
+    def getBoolList(self, id: str) -> list[bool]:
         """
         Returns the value of a setting as a list of booleans.
 
@@ -429,7 +428,7 @@ class Settings:
         """
         return []
 
-    def getIntList(self, id: str) -> List[int]:
+    def getIntList(self, id: str) -> list[int]:
         """
         Returns the value of a setting as a list of integers.
 
@@ -447,7 +446,7 @@ class Settings:
         """
         return []
 
-    def getNumberList(self, id: str) -> List[float]:
+    def getNumberList(self, id: str) -> list[float]:
         """
         Returns the value of a setting as a list of floating point numbers.
 
@@ -465,7 +464,7 @@ class Settings:
         """
         return []
 
-    def getStringList(self, id: str) -> List[str]:
+    def getStringList(self, id: str) -> list[str]:
         """
         Returns the value of a setting as a list of unicode strings.
 
@@ -567,7 +566,7 @@ class Settings:
         """
         pass
 
-    def setBoolList(self, id: str, values: List[bool]) -> None:
+    def setBoolList(self, id: str, values: list[bool]) -> None:
         """
         Sets the boolean values of a list setting.
 
@@ -588,7 +587,7 @@ class Settings:
         """
         pass
 
-    def setIntList(self, id: str, values: List[int]) -> None:
+    def setIntList(self, id: str, values: list[int]) -> None:
         """
         Sets the integer values of a list setting.
 
@@ -609,7 +608,7 @@ class Settings:
         """
         pass
 
-    def setNumberList(self, id: str, values: List[float]) -> None:
+    def setNumberList(self, id: str, values: list[float]) -> None:
         """
         Sets the floating point values of a list setting.
 
@@ -630,7 +629,7 @@ class Settings:
         """
         pass
 
-    def setStringList(self, id: str, values: List[str]) -> None:
+    def setStringList(self, id: str, values: list[str]) -> None:
         """
         Sets the string values of a list setting.
 
