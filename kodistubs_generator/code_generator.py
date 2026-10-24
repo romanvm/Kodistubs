@@ -7,9 +7,9 @@ import textwrap
 from typing import Optional
 
 from .doc_converter import group_class_to_rst, group_module_to_rst, member_to_rst
-from .doxy_parser import DoxygenIndex, get_class_doc, get_class_inheritance, get_member_doc
+from .doxy_parser import DoxygenIndex, get_class_compound, get_class_doc, get_member_doc
 from .swig_parser import ClassDef, FunctionDef, ModuleAPI, Param
-from .type_mapper import default_return, map_default_value, map_type
+from .type_mapper import split_union, default_return, map_default_value, map_type
 
 MAX_LINE_LENGTH = 120
 
@@ -315,10 +315,6 @@ def _format_docstring(rst: str, indent: int = 4) -> str:
     return textwrap.indent('\n'.join(lines), prefix)
 
 
-def _needs_optional(params: list[Param]) -> bool:
-    return any(p.default is not None for p in params)
-
-
 def _build_signature(func: FunctionDef, module: str,
                      typedefs: Optional[dict] = None,
                      is_method: bool = False,
@@ -347,9 +343,9 @@ def _build_signature(func: FunctionDef, module: str,
         external_modules |= ext
         if param.default is not None:
             py_default = map_default_value(param.default)
-            if py_default == 'None' and not py_type.startswith('Optional'):
-                py_type = f'Optional[{py_type}]'
-                typing_imports.add('Optional')
+            if py_default == 'None' and py_type != 'Any' and 'None' not in split_union(py_type):
+                py_type = f'{py_type} | None'
+
             parts.append(f'{param.name}: {py_type} = {py_default}')
         else:
             parts.append(f'{param.name}: {py_type}')
@@ -446,7 +442,7 @@ def _generate_class(cls: ClassDef, module: str,
     lines = []
 
     # Inheritance
-    base = cls.base_class or get_class_inheritance(xml_dir, module, cls.name)
+    base = cls.base_class
 
     if base:
         lines.append(f'class {cls.name}({base}):')
@@ -455,10 +451,10 @@ def _generate_class(cls: ClassDef, module: str,
 
     # Class docstring
     group_compound = get_class_doc(dox, cls.name)
-    if group_compound is not None:
-        rst = group_class_to_rst(group_compound)
-    else:
-        rst = ''
+    rst = group_class_to_rst(group_compound) if group_compound is not None else ''
+    if not rst.strip():
+        class_compound = get_class_compound(dox, cls.name)
+        rst = group_class_to_rst(class_compound) if class_compound is not None else ''
 
     if rst.strip():
         lines.append(_format_docstring(rst, 4))
@@ -554,10 +550,6 @@ def generate_module(
         sections.append(('def', func_code))
 
     # ── Assemble imports ──────────────────────────────────────────────────────
-    needs_optional = _check_needs_optional(api)
-    if needs_optional:
-        typing_imports.add('Optional')
-
     # Don't import the current module from itself (defensive — should never happen
     # since same-module refs are emitted unqualified).
     external_modules.discard(module)
@@ -627,22 +619,3 @@ def _join_with_pep8_spacing(sections: list[tuple[str, str]]) -> str:
         sep = '\n\n\n' if 'def' in (kind, prev_kind) else '\n\n'
         parts.append(sep + text)
     return ''.join(parts)
-
-
-def _check_needs_optional(api: ModuleAPI) -> bool:
-    """Check if any parameter has a None default (needs Optional import)."""
-    def _check_params(params: list[Param]) -> bool:
-        for p in params:
-            if p.default in ('NULL', 'nullptr', '0x0', None):
-                if p.cpp_type not in ('int', 'bool', 'double', 'float'):
-                    return True
-        return False
-
-    for func in api.functions:
-        if _check_params(func.params):
-            return True
-    for cls in api.classes:
-        for method in cls.methods:
-            if _check_params(method.params):
-                return True
-    return False

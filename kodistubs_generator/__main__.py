@@ -33,34 +33,33 @@ def main() -> None:
     # Locate project root (the directory containing this package)
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    # Load settings
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from . import settings  # noqa: E402
+    from . import settings
+    from .code_generator import generate_module
+    from .const_resolver import load_constants
+    from .doxy_parser import load_module_docs
+    from .doxygen_runner import ensure_doxygen_xml
+    from .swig_parser import parse_module
+    from .swig_runner import find_swig, run_swig
 
-    swig_dir = os.path.normpath(
-        os.path.join(project_root, settings.KODI_SWIG_DIR)
-    )
-    xml_dir = os.path.join(project_root, 'doxygen', 'xml')
+    kodi_src = os.path.normpath(os.path.join(project_root, settings.KODI_SRC_DIR))
+    work_dir = os.path.join(project_root, settings.SWIG_WORK_DIR)
+    xml_dir = os.path.join(project_root, settings.DOXYGEN_XML_DIR)
     output_dir = os.path.join(project_root, 'src')
 
-    # Derive kodi source root from swig_dir
-    # KODI_SWIG_DIR = '../xbmc/build/build/swig'  → kodi_src = '../xbmc'
-    kodi_src = os.path.normpath(os.path.join(
-        project_root,
-        os.path.join(os.path.dirname(settings.KODI_SWIG_DIR), '..', '..')
-    ))
-
-    from .swig_parser import parse_module
-    from .doxy_parser import load_module_docs
-    from .const_resolver import load_constants
-    from .code_generator import generate_module
+    try:
+        swig = find_swig(settings.SWIG_EXECUTABLE)
+        ensure_doxygen_xml(project_root, kodi_src, xml_dir)
+    except (FileNotFoundError, RuntimeError) as exc:
+        print(f'ERROR: {exc}', file=sys.stderr)
+        sys.exit(1)
 
     for module in modules:
         print(f'Generating {module}...', flush=True)
         try:
-            api = parse_module(module, swig_dir)
+            swig_xml = run_swig(module, kodi_src, work_dir, swig)
+            api = parse_module(module, swig_xml)
             dox = load_module_docs(module, xml_dir)
-            constants = load_constants(module, swig_dir, kodi_src)
+            constants = load_constants(api, kodi_src)
             generate_module(api, dox, constants, xml_dir, output_dir)
             print(f'  → src/{module}/__init__.py')
         except Exception as exc:

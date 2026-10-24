@@ -1,4 +1,4 @@
-"""Resolve Kodi Python API constant values from .i.cpp and C++ source.
+"""Resolve Kodi Python API constant values from the SWIG XML and C++ source.
 
 The flow is:
 
@@ -6,8 +6,9 @@ The flow is:
    accessor files at construction time, building two indexes — ``_known``
    (identifier or scoped identifier → integer/string value) and ``_getters``
    (``getNAME`` → its raw return expression).
-2. ``parse_constants_from_cpp`` reads the SWIG-generated ``.i.cpp`` and finds
-   every ``PyModule_Add{Int,String}Constant`` call, extracting ``(name, expr)``.
+2. ``load_constants`` takes the constants SWIG reported for a module
+   (``ModuleAPI.constants``): a ready ``numval`` where SWIG evaluated the value,
+   otherwise the C++ initializer expression.
 3. Each ``expr`` is fed to ``EnumResolver.resolve``, which understands integer
    literals, ``static_cast`` wrappers, getter calls (looked up via ``_getters``
    and resolved transitively), scoped/unqualified identifiers, and arithmetic
@@ -20,7 +21,10 @@ import ast
 import operator
 import os
 import re
+import sys
 from typing import Optional
+
+from .swig_parser import ModuleAPI
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Source files scanned for constants
@@ -40,7 +44,7 @@ _HEADER_FILES: tuple[str, ...] = (
     'xbmc/guilib/GUIListItem.h',
     'xbmc/dialogs/GUIDialogBoxBase.h',
     'xbmc/interfaces/legacy/Dialog.h',
-    'xbmc/input/Key.h',
+    'xbmc/peripherals/PeripheralTypes.h',
 )
 
 # ``Module*.cpp`` files: source of ``getNAME() { return EXPR; }`` accessors and
@@ -471,89 +475,36 @@ class EnumResolver:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# .i.cpp parser
+# Loading
 # ──────────────────────────────────────────────────────────────────────────────
 
-_META_CONSTANTS = frozenset({
-    '__author__', '__date__', '__version__', '__credits__', '__platform__',
-})
+def load_constants(api: ModuleAPI, kodi_src: str) -> dict[str, object]:
+    """Resolve the values of a module's constants from its parsed SWIG API.
 
-
-def parse_constants_from_cpp(cpp_path: str,
-                              resolver: EnumResolver) -> dict[str, object]:
-    """Parse ``PyModule_Add{Int,String}Constant`` calls from a ``.i.cpp`` file.
-
-    Returns a dict mapping constant name → Python value (``int`` or ``str``).
+    SWIG gives either an evaluated ``numval`` or the C++ expression used to
+    initialize the constant, which is resolved against the Kodi sources.
     Constants that can't be resolved are emitted with a typed-zero placeholder
-    (``0`` for ints, ``''`` for strings) — better to ship a syntactically valid
-    stub than crash the whole pipeline.
+    (``0`` for ints, ``''`` for strings) and reported on stderr — better to ship
+    a syntactically valid stub than crash the whole pipeline.
     """
-    if not os.path.exists(cpp_path):
-        return {}
-    with open(cpp_path, encoding='utf-8', errors='replace') as f:
-        text = f.read()
-
-    result: dict[str, object] = {}
-
-    # Integer constants.
-    for m in re.finditer(
-        r'PyModule_AddIntConstant\s*\(\s*\w+\s*,\s*"(\w+)"\s*,\s*(.+?)\s*\)\s*;',
-        text,
-    ):
-        name, val_expr = m.group(1), m.group(2).strip()
-        if name in _META_CONSTANTS:
-            continue
-        resolved = resolver.resolve(val_expr)
-        if isinstance(resolved, int):
-            result[name] = resolved
-        else:
-            result[name] = 0  # placeholder
-
-    # String constants (literal ``"..."``).
-    for m in re.finditer(
-        r'PyModule_AddStringConstant\s*\(\s*\w+\s*,\s*"(\w+)"\s*,\s*"([^"]*)"\s*\)\s*;',
-        text,
-    ):
-        name, val = m.group(1), m.group(2)
-        if name in _META_CONSTANTS:
-            continue
-        result[name] = val
-
-    # String constants via getter (``getNAME()``) or arbitrary expression.
-    # The non-greedy ``(.+?)`` plus ``\)\s*;`` anchor handles nested parens
-    # in the value expression (e.g. ``getXXX()`` or ``foo().c_str()``).
-    for m in re.finditer(
-        r'PyModule_AddStringConstant\s*\(\s*\w+\s*,\s*"(\w+)"\s*,\s*(.+?)\s*\)\s*;',
-        text,
-    ):
-        name, val_expr = m.group(1), m.group(2).strip()
-        if name in _META_CONSTANTS:
-            continue
-        if name in result:
-            continue  # already parsed as a literal above
-        if val_expr.startswith('"'):
-            continue  # literal already handled
-        resolved = resolver.resolve(val_expr)
-        if isinstance(resolved, str):
-            result[name] = resolved
-        else:
-            result[name] = ''  # placeholder
-
-    return result
-
-
-def load_constants(module: str, swig_dir: str, kodi_src: str) -> dict[str, object]:
-    """Load all constants for a module from its ``.i.cpp`` file."""
-    cpp_name_map = {
-        'xbmc': 'AddonModuleXbmc',
-        'xbmcaddon': 'AddonModuleXbmcaddon',
-        'xbmcgui': 'AddonModuleXbmcgui',
-        'xbmcplugin': 'AddonModuleXbmcplugin',
-        'xbmcvfs': 'AddonModuleXbmcvfs',
-        'xbmcdrm': 'AddonModuleXbmcdrm',
-    }
-    base = cpp_name_map.get(module, f'AddonModule{module.capitalize()}')
-    cpp_path = os.path.join(swig_dir, f'{base}.i.cpp')
     resolver = EnumResolver(kodi_src)
-    constants = parse_constants_from_cpp(cpp_path, resolver)
-    return {k: v for k, v in constants.items() if k not in _META_CONSTANTS}
+    result: dict[str, object] = {}
+    for name, const in api.constants.items():
+        is_string = 'char' in const.cpp_type
+        value: object = None
+        if const.numval is not None and not is_string:
+            try:
+                value = int(const.numval, 0)
+            except ValueError:
+                pass
+        if value is None:
+            value = resolver.resolve(const.value)
+        if is_string:
+            if not isinstance(value, str):
+                value = ''
+                print(f'  WARNING: cannot resolve {api.name}.{name} = {const.value}', file=sys.stderr)
+        elif not isinstance(value, int):
+            value = 0
+            print(f'  WARNING: cannot resolve {api.name}.{name} = {const.value}', file=sys.stderr)
+        result[name] = value
+    return result

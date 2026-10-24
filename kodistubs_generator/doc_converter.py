@@ -609,15 +609,17 @@ def _flatten_detail_paras(detail: ET.Element) -> list[ET.Element]:
     Some Doxygen output (notably ``xbmcplugin.addSortMethod``) wraps the entire
     detailed description in a ``<sect2>`` whose ``<title>`` carries the brief and
     whose ``<para>`` children carry params/notes/examples. This helper unwraps a
-    single top-level ``<sect2>``/``<sect3>`` so its inner ``<para>`` elements are
+    single top-level ``<sect1>``..``<sect4>`` so its inner ``<para>`` elements are
     treated as if they were direct children of detaileddescription.
     """
-    direct_paras = detail.findall('para')
-    sect_children = [c for c in detail
-                     if c.tag in ('sect1', 'sect2', 'sect3', 'sect4')]
-    if not direct_paras and len(sect_children) == 1:
-        return sect_children[0].findall('para')
-    return direct_paras
+    # Newer Doxygen versions nest them (``<sect1><sect2>...``), so unwrap a chain of single sections.
+    while True:
+        direct_paras = detail.findall('para')
+        sect_children = [c for c in detail
+                         if c.tag in ('sect1', 'sect2', 'sect3', 'sect4')]
+        if direct_paras or len(sect_children) != 1:
+            return direct_paras
+        detail = sect_children[0]
 
 
 def _detail_brief_from_sect_title(detail: ET.Element) -> str:
@@ -632,6 +634,8 @@ def _detail_brief_from_sect_title(detail: ET.Element) -> str:
     if title is None:
         return ''
     text = (title.text or '').strip()
+    if text.startswith('autotoc_md'):
+        return ''   # Doxygen's placeholder for a Markdown heading without text
     text = re.sub(r'^@brief\s*', '', text)
     text = _clean_python_marker(text)
     return text.strip()

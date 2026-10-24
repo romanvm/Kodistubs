@@ -1,10 +1,18 @@
-"""Parse SWIG XML (.i.xml) files to extract Kodi Python API structure."""
+"""Parse SWIG XML (``-xmlout``) trees to extract Kodi Python API structure.
+
+The XML is the parse tree SWIG dumps after Python processing of Kodi's
+``AddonModule*.i`` files (see ``swig_runner.py``), so ``%ignore``, ``%rename``,
+``%extend`` and ``-builtin`` operator slots are already applied. Everything
+that comes from SWIG's own library or from Kodi's ``kodi_*.i`` plumbing files
+is skipped; only declarations from the module's ``.i`` file, ``interfaces/legacy``
+headers and the action/key ID headers are part of the Python API.
+"""
 from __future__ import annotations
 
 import os
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Iterator, Optional
 
 
 @dataclass
@@ -31,12 +39,27 @@ class ClassDef:
 
 
 @dataclass
+class ConstantDef:
+    name: str
+    value: str                      # C++ expression SWIG uses to initialize the constant
+    cpp_type: str
+    numval: Optional[str] = None    # integer value, if SWIG has already evaluated it
+
+
+@dataclass
 class ModuleAPI:
     name: str
     classes: list[ClassDef] = field(default_factory=list)
     functions: list[FunctionDef] = field(default_factory=list)
-    constant_names: list[str] = field(default_factory=list)  # names only; values from const_resolver
+    constants: dict[str, ConstantDef] = field(default_factory=dict)
     typedefs: dict[str, str] = field(default_factory=dict)   # qualified C++ name → underlying C++ type
+
+
+# Module metadata strings published by kodi_common.i; not part of the documented API.
+_META_CONSTANTS = frozenset(('__author__', '__date__', '__version__', '__credits__', '__platform__'))
+
+# Include nodes whose contents belong to the Python API (besides the module's own .i file).
+_API_INCLUDE_MARKERS = ('interfaces/legacy/', 'input/actions/ActionIDs.h', 'input/keymaps/keyboard/KeyIDs.h')
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -52,14 +75,29 @@ def _attrs(node: ET.Element) -> dict[str, str]:
 def _parms(node: ET.Element) -> list[Param]:
     """Extract parameters from a SWIG cdecl/constructor node."""
     params = []
-    for parm in node.findall('.//parm'):
+    for index, parm in enumerate(node.findall('attributelist/parmlist/parm'), start=1):
         pattrs = _attrs(parm)
-        name = pattrs.get('name', '')
         cpp_type = pattrs.get('type', '')
-        default = pattrs.get('value', None)
-        if name and cpp_type:
-            params.append(Param(name=name, cpp_type=cpp_type, default=default))
+        if not cpp_type:
+            continue
+        params.append(Param(name=pattrs.get('name') or f'arg{index}',
+                            cpp_type=cpp_type,
+                            default=pattrs.get('value')))
     return params
+
+
+def _is_ignored(attrs: dict[str, str]) -> bool:
+    return bool(attrs.get('feature_ignore'))
+
+
+def _is_public(attrs: dict[str, str]) -> bool:
+    return attrs.get('access', 'public') == 'public'
+
+
+def _is_api_include(include_name: str, module_interface: str) -> bool:
+    normalized = include_name.replace('\\', '/')
+    return (os.path.basename(normalized) == module_interface
+            or any(marker in normalized for marker in _API_INCLUDE_MARKERS))
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -86,173 +124,127 @@ def _select_overload(group: list[FunctionDef]) -> FunctionDef:
 # Parsing
 # ──────────────────────────────────────────────────────────────────────────────
 
-def _parse_functions(node: ET.Element,
-                     seen: dict[str, list[FunctionDef]]) -> None:
-    """Collect cdecl function nodes with sym_name into seen dict."""
-    for cdecl in node.findall('cdecl'):
-        attrs = _attrs(cdecl)
-        if attrs.get('kind') != 'function':
-            continue
-        sym_name = attrs.get('sym_name', '')
-        if not sym_name or not sym_name.isidentifier():
-            continue
-        func = FunctionDef(
-            name=sym_name,
-            params=_parms(cdecl),
-            cpp_return_type=attrs.get('type', 'void'),
-        )
-        seen.setdefault(sym_name, []).append(func)
+def _function_from_cdecl(cdecl: ET.Element) -> Optional[FunctionDef]:
+    attrs = _attrs(cdecl)
+    if attrs.get('kind') != 'function' or _is_ignored(attrs) or not _is_public(attrs):
+        return None
+    sym_name = attrs.get('sym_name', '')
+    if not sym_name.isidentifier():
+        return None
+    return FunctionDef(name=sym_name, params=_parms(cdecl),
+                       cpp_return_type=attrs.get('type', 'void'))
+
+
+def _class_members(class_node: ET.Element) -> Iterator[ET.Element]:
+    """Yield member nodes of a class, including those added with ``%extend``."""
+    for child in class_node:
+        if child.tag == 'extend':
+            yield from child
+        else:
+            yield child
 
 
 def _parse_class(class_node: ET.Element) -> Optional[ClassDef]:
     """Parse a <class> element into a ClassDef."""
     attrs = _attrs(class_node)
     sym_name = attrs.get('sym_name', '')
-    cpp_name = attrs.get('name', '')
-    if not sym_name:
+    # ``%template()`` instantiations show up as ``__dummy_N__`` classes.
+    if not sym_name or sym_name.startswith('__dummy') or _is_ignored(attrs):
         return None
 
-    cls = ClassDef(name=sym_name, cpp_name=cpp_name)
+    cls = ClassDef(name=sym_name, cpp_name=attrs.get('name', ''))
+    base_node = class_node.find('attributelist/baselist/base')
+    if base_node is not None:
+        cls.base_class = base_node.get('name')   # C++ name as written; resolved to a Python name later
 
-    # Constructor overloads
     ctor_overloads: list[FunctionDef] = []
-    for ctor_node in class_node.findall('.//constructor'):
-        cattrs = _attrs(ctor_node)
-        if not cattrs.get('sym_name'):
-            continue
-        # Only take constructors with 'access': 'public' or no access attr
-        if cattrs.get('access', 'public') != 'public':
-            continue
-        func = FunctionDef(
-            name='__init__',
-            params=_parms(ctor_node),
-            cpp_return_type='void',
-            is_constructor=True,
-        )
-        ctor_overloads.append(func)
+    method_groups: dict[str, list[FunctionDef]] = {}
+    for member in _class_members(class_node):
+        if member.tag == 'constructor':
+            mattrs = _attrs(member)
+            if _is_ignored(mattrs) or not _is_public(mattrs) or not mattrs.get('sym_name'):
+                continue
+            ctor_overloads.append(FunctionDef(name='__init__', params=_parms(member),
+                                              cpp_return_type='void', is_constructor=True))
+        elif member.tag == 'cdecl':
+            func = _function_from_cdecl(member)
+            if func is not None:
+                method_groups.setdefault(func.name, []).append(func)
 
     if ctor_overloads:
         cls.methods.append(_select_overload(ctor_overloads))
-
-    # Method overloads
-    method_groups: dict[str, list[FunctionDef]] = {}
-    _parse_functions(class_node, method_groups)
-
-    for sym_name_m, overloads in method_groups.items():
+    for overloads in method_groups.values():
         cls.methods.append(_select_overload(overloads))
-
-    # Kodi's binding generator (PythonSwig.cpp.template) wires Python's mapping
-    # protocol when a class has both ``operator []`` and ``size()`` -- mp_length
-    # → __len__ and mp_subscript → __getitem__. ``operator []`` has a
-    # non-identifier sym_name and is filtered out by _parse_functions, so
-    # synthesize the dunder methods here to match the live API surface.
-    index_op_node = next(
-        (c for c in class_node.findall('cdecl')
-         if _attrs(c).get('kind') == 'function'
-         and _attrs(c).get('sym_name', '').strip() == 'operator []'
-         and _attrs(c).get('access', 'public') == 'public'),
-        None,
-    )
-    if index_op_node is not None and any(m.name == 'size' for m in cls.methods):
-        cls.methods.append(FunctionDef(
-            name='__getitem__',
-            params=_parms(index_op_node),
-            cpp_return_type=_attrs(index_op_node).get('type', 'void'),
-        ))
-        cls.methods.append(FunctionDef(
-            name='__len__',
-            params=[],
-            cpp_return_type='int',
-        ))
-
     return cls
 
 
-def _walk_for_classes_and_functions(
-    node: ET.Element,
-    module_api: ModuleAPI,
-) -> None:
-    """Recursively walk the SWIG XML tree to collect classes and functions."""
+def _walk(node: ET.Element, api: ModuleAPI, module_interface: str,
+          functions: dict[str, list[FunctionDef]]) -> None:
+    """Recursively walk the SWIG XML tree collecting API declarations."""
     for child in node:
         tag = child.tag
 
-        if tag == 'module':
-            _walk_for_classes_and_functions(child, module_api)
+        if tag == 'include':
+            if _is_api_include(child.get('name') or _attrs(child).get('name', ''), module_interface):
+                _walk(child, api, module_interface, functions)
 
-        elif tag == 'namespace':
-            _walk_for_classes_and_functions(child, module_api)
+        elif tag in ('module', 'namespace'):
+            _walk(child, api, module_interface, functions)
 
         elif tag == 'class':
             cls = _parse_class(child)
             if cls is not None:
-                module_api.classes.append(cls)
-            # Don't recurse into class body for nested classes
+                api.classes.append(cls)
 
         elif tag == 'constant':
             cattrs = _attrs(child)
             name = cattrs.get('sym_name') or cattrs.get('name', '')
-            # Skip metadata constants
-            if name and name not in ('__author__', '__date__', '__version__',
-                                     '__credits__', '__platform__'):
-                if name not in module_api.constant_names:
-                    module_api.constant_names.append(name)
+            if name and name not in _META_CONSTANTS and not _is_ignored(cattrs):
+                api.constants.setdefault(name, ConstantDef(
+                    name=name, value=cattrs.get('value', ''), cpp_type=cattrs.get('type', ''),
+                    numval=cattrs.get('numval')))
 
         elif tag == 'cdecl':
             cattrs = _attrs(child)
-            if cattrs.get('kind') == 'typedef':
-                qname = cattrs.get('name', '')
-                underlying = cattrs.get('type', '')
+            kind = cattrs.get('kind')
+            if kind == 'typedef':
+                qname, underlying = cattrs.get('name', ''), cattrs.get('type', '')
                 if qname and underlying:
-                    module_api.typedefs[qname] = underlying
-            if cattrs.get('kind') == 'function':
-                sym_name = cattrs.get('sym_name', '')
-                if sym_name and sym_name.isidentifier():
-                    func = FunctionDef(
-                        name=sym_name,
-                        params=_parms(child),
-                        cpp_return_type=cattrs.get('type', 'void'),
-                    )
-                    # Check if this is an overload of an existing one
-                    existing = next((f for f in module_api.functions
-                                     if f.name == sym_name), None)
-                    if existing is None:
-                        module_api.functions.append(func)
-                    else:
-                        # Replace if new one has more params
-                        if len(func.params) > len(existing.params):
-                            idx = module_api.functions.index(existing)
-                            module_api.functions[idx] = func
+                    api.typedefs[qname] = underlying
+            elif kind == 'variable' and cattrs.get('feature_immutable') and not _is_ignored(cattrs):
+                # constexpr values (e.g. ACTION_* from ActionIDs.h) are exposed as read-only attributes.
+                name = cattrs.get('sym_name', '')
+                if name and name not in _META_CONSTANTS:
+                    api.constants.setdefault(name, ConstantDef(
+                        name=name, value=cattrs.get('value', ''), cpp_type=cattrs.get('type', ''),
+                        numval=cattrs.get('numval')))
+            elif kind == 'function':
+                func = _function_from_cdecl(child)
+                if func is not None:
+                    functions.setdefault(func.name, []).append(func)
 
-        else:
-            _walk_for_classes_and_functions(child, module_api)
+        elif tag == 'extend':
+            # %extend of a non-class scope adds module-level functions.
+            _walk(child, api, module_interface, functions)
 
 
-def parse_module(module: str, swig_dir: str) -> ModuleAPI:
+def _resolve_bases(api: ModuleAPI) -> None:
+    """Replace C++ base class names with Python class names; drop unreflected bases (e.g. AddonClass)."""
+    # SWIG records bases as written in the header (usually unqualified), so match on the last name segment.
+    by_name = {c.cpp_name.split('::')[-1]: c.name for c in api.classes}
+    for cls in api.classes:
+        cls.base_class = by_name.get(cls.base_class.split('::')[-1]) if cls.base_class else None
+
+
+def parse_module(module: str, xml_path: str) -> ModuleAPI:
     """Parse the SWIG XML for a Kodi Python module and return its API structure."""
-    name_map = {
-        'xbmc': 'AddonModuleXbmc',
-        'xbmcaddon': 'AddonModuleXbmcaddon',
-        'xbmcgui': 'AddonModuleXbmcgui',
-        'xbmcplugin': 'AddonModuleXbmcplugin',
-        'xbmcvfs': 'AddonModuleXbmcvfs',
-        'xbmcdrm': 'AddonModuleXbmcdrm',
-    }
-    base = name_map.get(module, f'AddonModule{module.capitalize()}')
-    xml_path = os.path.join(swig_dir, f'{base}.i.xml')
     if not os.path.exists(xml_path):
         raise FileNotFoundError(f'SWIG XML not found: {xml_path}')
 
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
-
+    root = ET.parse(xml_path).getroot()
     api = ModuleAPI(name=module)
-    _walk_for_classes_and_functions(root, api)
-
-    # Deduplicate function overloads (keep best per name)
-    seen: dict[str, list[FunctionDef]] = {}
-    for f in api.functions:
-        seen.setdefault(f.name, []).append(f)
-    api.functions = [_select_overload(overloads)
-                     for overloads in seen.values()]
-
+    functions: dict[str, list[FunctionDef]] = {}
+    _walk(root, api, f'AddonModule{module.capitalize()}.i', functions)
+    api.functions = [_select_overload(overloads) for overloads in functions.values()]
+    _resolve_bases(api)
     return api

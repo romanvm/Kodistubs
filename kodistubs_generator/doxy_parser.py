@@ -28,6 +28,8 @@ class DoxygenIndex:
     class_group: dict[str, ET.Element] = field(default_factory=dict)
     # class short name → compounddef element
     class_group_by_name: dict[str, ET.Element] = field(default_factory=dict)
+    # class short name → compounddef element of the class itself (fallback docs source)
+    class_compound_by_name: dict[str, ET.Element] = field(default_factory=dict)
     # top-level compounddef (the module-level group)
     top_compound: Optional[ET.Element] = None
 
@@ -67,6 +69,7 @@ def _index_group(compound: ET.Element, idx: DoxygenIndex, xml_dir: str,
             short_name = cpp_name.split('::')[-1]
             idx.class_group[refid] = compound
             idx.class_group_by_name[short_name] = compound
+            idx.class_compound_by_name[short_name] = cls_compound
 
     # Follow inner groups recursively
     for innergroup in compound.findall('innergroup'):
@@ -83,6 +86,7 @@ def _index_group(compound: ET.Element, idx: DoxygenIndex, xml_dir: str,
                         short_name = cpp_name.split('::')[-1]
                         idx.class_group[ic_refid] = sub
                         idx.class_group_by_name[short_name] = sub
+                        idx.class_compound_by_name[short_name] = cls_c
                 _index_group(sub, idx, xml_dir, visited)
 
 
@@ -132,25 +136,10 @@ def get_class_doc(idx: DoxygenIndex, class_name: str) -> Optional[ET.Element]:
     return idx.class_group_by_name.get(class_name)
 
 
-def get_class_inheritance(xml_dir: str, module: str, class_name: str) -> Optional[str]:
-    """Return the Python base class name for a given C++ class, if any."""
-    # Find the class compound XML
-    # Try common refid patterns
-    sanitized_mod = module.replace('xbmc', 'xbmc')
-    candidates = [
-        f'classXBMCAddon_1_1{module}_1_1{class_name}',
-    ]
-    for cid in candidates:
-        compound = _load_xml(xml_dir, cid)
-        if compound is not None:
-            for base in compound.findall('basecompoundref'):
-                prot = base.get('prot', '')
-                if prot != 'public':
-                    continue
-                base_text = base.text or ''
-                # Extract short class name
-                base_class = base_text.split('::')[-1]
-                # Only return if base class is within the same module
-                if f'::{module}::' in base_text or base_text.startswith(f'XBMCAddon::{module}'):
-                    return base_class
-    return None
+def get_class_compound(idx: DoxygenIndex, class_name: str) -> Optional[ET.Element]:
+    """Get the compounddef of the class itself.
+
+    Newer Doxygen versions attach a ``\\defgroup`` description to the class that follows it
+    instead of the group, so this is the fallback source of the class docstring.
+    """
+    return idx.class_compound_by_name.get(class_name)

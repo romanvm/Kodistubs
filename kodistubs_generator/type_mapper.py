@@ -25,17 +25,20 @@ _SIMPLE = {
     'string': 'str',
     'XbmcCommons::Buffer': 'bytearray',
     'bytearray': 'bytearray',
-    'XBMCAddon::StringOrInt': 'Union[str, int]',
-    'StringOrInt': 'Union[str, int]',
-    'XBMCAddon::Properties': 'Dict[str, str]',
-    'Properties': 'Dict[str, str]',
+    'XBMCAddon::StringOrInt': 'str | int',
+    'StringOrInt': 'str | int',
+    'XBMCAddon::Properties': 'dict[str, str]',
+    'Properties': 'dict[str, str]',
+    'PyObject': 'Any',
 }
 
-_TYPING_NEEDED: dict[str, set[str]] = {
-    'Union[str, int]': {'Union'},
-    'Dict[str, str]': {'Dict'},
-}
+# Simple types that need a ``typing`` import.
+_TYPING_NEEDED: dict[str, set[str]] = {'Any': {'Any'}}
 
+# Typedef'd names that are deliberately mapped as written rather than expanded: ``Properties`` is
+# ``Dictionary<StringOrInt>`` in C++, but ``dict[str, str | int]`` would reject plain ``dict[str, str]`` arguments
+# because ``dict`` is invariant.
+_NO_TYPEDEF_EXPANSION = frozenset(('XBMCAddon::Properties', 'Properties'))
 
 def _strip_qualifiers(t: str) -> str:
     """Strip SWIG pointer/reference/const qualifiers."""
@@ -78,7 +81,8 @@ def map_type(cpp_type: str, current_module: str = '',
     """Map a C++ / SWIG type to a Python type annotation.
 
     Returns ``(python_type_str, required_typing_imports, external_modules)`` where
-    ``external_modules`` is the set of other ``xbmc*`` stub modules referenced by
+    ``required_typing_imports`` is currently always empty (builtin generics and ``|`` unions
+    need no imports) and ``external_modules`` is the set of other ``xbmc*`` stub modules referenced by
     the annotation (callers emit them inside an ``if TYPE_CHECKING:`` block).
 
     Annotations are emitted unquoted; the caller is expected to add
@@ -91,7 +95,7 @@ def map_type(cpp_type: str, current_module: str = '',
     t = _strip_qualifiers(cpp_type.strip())
 
     # Resolve typedef chains (with cycle protection)
-    if typedefs:
+    if typedefs and t not in _NO_TYPEDEF_EXPANSION:
         seen: set[str] = set()
         while t in typedefs and t not in seen:
             seen.add(t)
@@ -107,11 +111,11 @@ def map_type(cpp_type: str, current_module: str = '',
     if m:
         return map_type(m.group(1), current_module, typedefs)
 
-    # std::vector<(T)>
+    # std::vector<(T)> or std::vector<(T, std::allocator<(T)>)> (drop allocator)
     m = re.match(r'^std::vector<\((.+)\)>$', t)
     if m:
-        inner, imp, ext = map_type(m.group(1), current_module, typedefs)
-        return f'List[{inner}]', imp | {'List'}, ext
+        inner, imp, ext = map_type(_split_template_args(m.group(1))[0], current_module, typedefs)
+        return f'list[{inner}]', imp, ext
 
     # XBMCAddon::Tuple<(T1, T2, ...)>  or  Tuple<(...)>
     m = re.match(r'^(?:XBMCAddon::)?Tuple<\((.+)\)>$', t)
@@ -119,34 +123,34 @@ def map_type(cpp_type: str, current_module: str = '',
         parts = _split_template_args(m.group(1))
         mapped = [map_type(p.strip(), current_module, typedefs) for p in parts]
         inner_strs = [x[0] for x in mapped]
-        imports = set().union(*[x[1] for x in mapped]) | {'Tuple'}
+        imports = set().union(*[x[1] for x in mapped])
         externals = set().union(*[x[2] for x in mapped])
-        return f'Tuple[{", ".join(inner_strs)}]', imports, externals
+        return f'tuple[{", ".join(inner_strs)}]', imports, externals
 
-    # Alternative<(T1, T2)>  → Union[T1, T2]
+    # Alternative<(T1, T2)>  → T1 | T2
     m = re.match(r'^(?:XBMCAddon::)?Alternative<\((.+)\)>$', t)
     if m:
         parts = _split_template_args(m.group(1))
         mapped = [map_type(p.strip(), current_module, typedefs) for p in parts]
         inner_strs = [x[0] for x in mapped]
-        imports = set().union(*[x[1] for x in mapped]) | {'Union'}
+        imports = set().union(*[x[1] for x in mapped])
         externals = set().union(*[x[2] for x in mapped])
-        return f'Union[{", ".join(inner_strs)}]', imports, externals
+        return ' | '.join(inner_strs), imports, externals
 
-    # Dictionary<(T)>  → Dict[str, T]
+    # Dictionary<(T)>  → dict[str, T]
     m = re.match(r'^(?:XBMCAddon::)?Dictionary<\((.+)\)>$', t)
     if m:
         val, imp, ext = map_type(m.group(1), current_module, typedefs)
-        return f'Dict[str, {val}]', imp | {'Dict'}, ext
+        return f'dict[str, {val}]', imp, ext
 
-    # std::map<(K, V)> or std::map<(K, V, Cmp)> → Dict[K, V] (drop comparator)
+    # std::map<(K, V)> or std::map<(K, V, Cmp)> → dict[K, V] (drop comparator)
     m = re.match(r'^std::map<\((.+)\)>$', t)
     if m:
         parts = _split_template_args(m.group(1))
         if len(parts) >= 2:
             key, kimp, kext = map_type(parts[0].strip(), current_module, typedefs)
             val, vimp, vext = map_type(parts[1].strip(), current_module, typedefs)
-            return f'Dict[{key}, {val}]', kimp | vimp | {'Dict'}, kext | vext
+            return f'dict[{key}, {val}]', kimp | vimp, kext | vext
 
     # XBMCAddon::xbmcMODULE::ClassName  (xbmcMODULE may be bare "xbmc" or "xbmcgui" etc.)
     m = re.match(r'^XBMCAddon::(xbmc\w*)::(\w+)$', t)
@@ -173,6 +177,25 @@ def map_type(cpp_type: str, current_module: str = '',
     return t, set(), set()
 
 
+def split_union(py_type: str) -> list[str]:
+    """Split ``A | B[C | D]`` at the top-level ``|`` only."""
+    depth = 0
+    parts = []
+    current = []
+    for ch in py_type:
+        if ch == '[':
+            depth += 1
+        elif ch == ']':
+            depth -= 1
+        if ch == '|' and depth == 0:
+            parts.append(''.join(current).strip())
+            current = []
+        else:
+            current.append(ch)
+    parts.append(''.join(current).strip())
+    return parts
+
+
 def default_return(py_type: str) -> str:
     """Return a minimal stub expression for the given Python type."""
     if py_type == 'None':
@@ -187,11 +210,11 @@ def default_return(py_type: str) -> str:
         return 'return ""'
     if py_type == 'bytearray':
         return 'return bytearray()'
-    if py_type.startswith('List['):
+    if py_type.startswith('list['):
         return 'return []'
-    if py_type.startswith('Dict['):
+    if py_type.startswith('dict['):
         return 'return {}'
-    if py_type.startswith('Tuple['):
+    if py_type.startswith('tuple['):
         # Build a minimal tuple
         inner = py_type[6:-1]
         parts = _split_template_args(inner)
@@ -203,11 +226,10 @@ def default_return(py_type: str) -> str:
             else:
                 defaults.append('None')
         return f'return ({", ".join(defaults)},)' if defaults else 'return ()'
-    if py_type.startswith('Union['):
+    alternatives = split_union(py_type)
+    if len(alternatives) > 1:
         # Return the first alternative
-        inner = py_type[6:-1]
-        first = _split_template_args(inner)[0]
-        return default_return(first.strip())
+        return default_return(alternatives[0])
     # Same-module class name (a bare identifier defined elsewhere in the same file).
     if py_type.isidentifier():
         return f'return {py_type}()'
@@ -237,7 +259,8 @@ def map_default_value(cpp_default: str) -> str:
     cast_m = re.match(r'static_cast<[^>]+>\((.+)\)$', d)
     if cast_m:
         return cast_m.group(1)
-    if re.match(r'^-?\d+(\.\d+)?([eE][+-]?\d+)?$', d):
-        return d
+    d = re.sub(r'(?<=[\d.])[fF]$', '', d)  # C++ float suffix: 0.0f -> 0.0
+    if re.match(r'^-?\d+(\.\d*)?([eE][+-]?\d+)?$', d):
+        return d + '0' if d.endswith('.') else d
     # Fallback: any unrecognized C++ expression → None
     return 'None'
