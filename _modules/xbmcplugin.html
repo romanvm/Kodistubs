@@ -35,16 +35,17 @@
 <span class="c1"># to correct code style and docstrings formatting.</span>
 <span class="c1"># License: GPL v.3 &lt;https://www.gnu.org/licenses/gpl-3.0.en.html&gt;</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">**Plugin functions on Kodi.**</span>
 
-<span class="sd">Offers classes and functions that allow a developer to present information through Kodi&#39;s standard menu structure. While</span>
-<span class="sd">plugins don&#39;t have the same flexibility as scripts, they boast significantly quicker development time and a more</span>
+<span class="sd">Offers classes and functions that allow a developer to present information through Kodi's standard menu structure. While</span>
+<span class="sd">plugins don't have the same flexibility as scripts, they boast significantly quicker development time and a more</span>
 <span class="sd">consistent user experience.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">xbmcgui</span>
@@ -107,7 +108,7 @@
     <span class="n">isFolder</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">totalItems</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Callback function to pass directory contents back to Kodi.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -126,18 +127,18 @@
 <span class="sd">    Example::</span>
 
 <span class="sd">        ..</span>
-<span class="sd">        if not xbmcplugin.addDirectoryItem(int(sys.argv[1]), &#39;F:\\\\Trailers\\\\300.mov&#39;, listitem,</span>
+<span class="sd">        if not xbmcplugin.addDirectoryItem(int(sys.argv[1]), 'F:\\\\Trailers\\\\300.mov', listitem,</span>
 <span class="sd">                                           totalItems=50): break</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
 
 <div class="viewcode-block" id="addDirectoryItems">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addDirectoryItems">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">addDirectoryItems</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">xbmcgui</span><span class="o">.</span><span class="n">ListItem</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">totalItems</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addDirectoryItems</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">xbmcgui</span><span class="o">.</span><span class="n">ListItem</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]],</span> <span class="n">totalItems</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Callback function to pass directory contents back to Kodi as a list.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -154,7 +155,7 @@
 <span class="sd">        ..</span>
 <span class="sd">        if not xbmcplugin.addDirectoryItems(int(sys.argv[1]), [(url, listitem, False,)]: raise</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
@@ -162,7 +163,7 @@
 <div class="viewcode-block" id="endOfDirectory">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.endOfDirectory">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">endOfDirectory</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">succeeded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">updateListing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">cacheToDisc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Callback function to tell Kodi that the end of the directory listing in a virtualPythonFolder module is reached.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -177,7 +178,7 @@
 <span class="sd">        ..</span>
 <span class="sd">        xbmcplugin.endOfDirectory(int(sys.argv[1]), cacheToDisc=False)</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
@@ -185,7 +186,7 @@
 <div class="viewcode-block" id="setResolvedUrl">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setResolvedUrl">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setResolvedUrl</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">succeeded</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">listitem</span><span class="p">:</span> <span class="n">xbmcgui</span><span class="o">.</span><span class="n">ListItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Callback function to tell Kodi that the file plugin has been resolved to a url</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -197,15 +198,15 @@
 <span class="sd">        ..</span>
 <span class="sd">        xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
 
 <div class="viewcode-block" id="addSortMethod">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.addSortMethod">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">addSortMethod</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sortMethod</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">labelMask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">label2Mask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addSortMethod</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sortMethod</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">labelMask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">label2Mask</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Adds a sorting method for the media list.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -220,7 +221,7 @@
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_LABEL                        | Sort by label                                        |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
-<span class="sd">    | xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE             | Sort by the label and ignore &quot;The&quot; before            |</span>
+<span class="sd">    | xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE             | Sort by the label and ignore "The" before            |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_DATE                         | Sort by the date                                     |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
@@ -236,15 +237,15 @@
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_TITLE                        | Sort by the title                                    |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
-<span class="sd">    | xbmcplugin.SORT_METHOD_TITLE_IGNORE_THE             | Sort by the title and ignore &quot;The&quot; before            |</span>
+<span class="sd">    | xbmcplugin.SORT_METHOD_TITLE_IGNORE_THE             | Sort by the title and ignore "The" before            |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_ARTIST                       | Sort by the artist                                   |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
-<span class="sd">    | xbmcplugin.SORT_METHOD_ARTIST_IGNORE_THE            | Sort by the artist and ignore &quot;The&quot; before           |</span>
+<span class="sd">    | xbmcplugin.SORT_METHOD_ARTIST_IGNORE_THE            | Sort by the artist and ignore "The" before           |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_ALBUM                        | Sort by the album                                    |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
-<span class="sd">    | xbmcplugin.SORT_METHOD_ALBUM_IGNORE_THE             | Sort by the album and ignore &quot;The&quot; before            |</span>
+<span class="sd">    | xbmcplugin.SORT_METHOD_ALBUM_IGNORE_THE             | Sort by the album and ignore "The" before            |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_GENRE                        | Sort by the genre                                    |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
@@ -263,7 +264,7 @@
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE             | Sort by the video sort title                         |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
-<span class="sd">    | xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE_IGNORE_THE  | Sort by the video sort title and ignore &quot;The&quot; before |</span>
+<span class="sd">    | xbmcplugin.SORT_METHOD_VIDEO_SORT_TITLE_IGNORE_THE  | Sort by the video sort title and ignore "The" before |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_PRODUCTIONCODE               | Sort by the production code                          |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
@@ -275,7 +276,7 @@
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_STUDIO                       | Sort by the studio                                   |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
-<span class="sd">    | xbmcplugin.SORT_METHOD_STUDIO_IGNORE_THE            | Sort by the studio and ignore &quot;The&quot; before           |</span>
+<span class="sd">    | xbmcplugin.SORT_METHOD_STUDIO_IGNORE_THE            | Sort by the studio and ignore "The" before           |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
 <span class="sd">    | xbmcplugin.SORT_METHOD_UNSORTED                     | Use list not sorted                                  |</span>
 <span class="sd">    +-----------------------------------------------------+------------------------------------------------------+</span>
@@ -326,7 +327,7 @@
 <span class="sd">        ..</span>
 <span class="sd">        xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORTMETHOD_DATEADDED)</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
@@ -334,7 +335,7 @@
 <div class="viewcode-block" id="getSetting">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.getSetting">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">getSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns the value of a setting as a string.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -349,17 +350,17 @@
 <span class="sd">    Example::</span>
 
 <span class="sd">        ..</span>
-<span class="sd">        apikey = xbmcplugin.getSetting(int(sys.argv[1]), &#39;apikey&#39;)</span>
+<span class="sd">        apikey = xbmcplugin.getSetting(int(sys.argv[1]), 'apikey')</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="s2">""</span></div>
 
 
 
 <div class="viewcode-block" id="setSetting">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setSetting">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setSetting</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Sets a plugin setting for the current running plugin.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -369,9 +370,9 @@
 <span class="sd">    Example::</span>
 
 <span class="sd">        ..</span>
-<span class="sd">        xbmcplugin.setSetting(int(sys.argv[1]), id=&#39;username&#39;, value=&#39;teamxbmc&#39;)</span>
+<span class="sd">        xbmcplugin.setSetting(int(sys.argv[1]), id='username', value='teamxbmc')</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
@@ -379,13 +380,13 @@
 <div class="viewcode-block" id="setContent">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setContent">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setContent</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Sets the plugins content.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
 <span class="sd">    :param content: string - content type (eg. movies)</span>
 
-<span class="sd">    Use **videos** for all videos which do not apply to the more specific mentioned ones like &quot;movies&quot;, &quot;episodes&quot; etc.</span>
+<span class="sd">    Use **videos** for all videos which do not apply to the more specific mentioned ones like "movies", "episodes" etc.</span>
 <span class="sd">    A good example is youtube.</span>
 
 <span class="sd">    @python_v18 Added new **games** content</span>
@@ -393,9 +394,9 @@
 <span class="sd">    Example::</span>
 
 <span class="sd">        ..</span>
-<span class="sd">        xbmcplugin.setContent(int(sys.argv[1]), &#39;movies&#39;)</span>
+<span class="sd">        xbmcplugin.setContent(int(sys.argv[1]), 'movies')</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
@@ -403,7 +404,7 @@
 <div class="viewcode-block" id="setPluginCategory">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setPluginCategory">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setPluginCategory</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Sets the plugins name for skins to display.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -412,9 +413,9 @@
 <span class="sd">    Example::</span>
 
 <span class="sd">        ..</span>
-<span class="sd">        xbmcplugin.setPluginCategory(int(sys.argv[1]), &#39;Comedy&#39;)</span>
+<span class="sd">        xbmcplugin.setPluginCategory(int(sys.argv[1]), 'Comedy')</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
@@ -423,28 +424,28 @@
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setPluginFanart">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setPluginFanart</span><span class="p">(</span>
     <span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">color1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">color2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">color3</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">image</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color1</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color2</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">color3</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Sets the plugins fanart and color for skins to display.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
 <span class="sd">    :param image: [opt] string - path to fanart image.</span>
-<span class="sd">    :param color1: [opt] hexstring - color1. (e.g. &#39;0xFFFFFFFF&#39;)</span>
-<span class="sd">    :param color2: [opt] hexstring - color2. (e.g. &#39;0xFFFF3300&#39;)</span>
-<span class="sd">    :param color3: [opt] hexstring - color3. (e.g. &#39;0xFF000000&#39;)</span>
+<span class="sd">    :param color1: [opt] hexstring - color1. (e.g. '0xFFFFFFFF')</span>
+<span class="sd">    :param color2: [opt] hexstring - color2. (e.g. '0xFFFF3300')</span>
+<span class="sd">    :param color3: [opt] hexstring - color3. (e.g. '0xFF000000')</span>
 
 <span class="sd">    Example::</span>
 
 <span class="sd">        ..</span>
 <span class="sd">        xbmcplugin.setPluginFanart(int(sys.argv[1]),</span>
-<span class="sd">                                   &#39;special://home/addons/plugins/video/Apple movie trailers II/fanart.png&#39;,</span>
-<span class="sd">                                   color2=&#39;0xFFFF3300&#39;)</span>
+<span class="sd">                                   'special://home/addons/plugins/video/Apple movie trailers II/fanart.png',</span>
+<span class="sd">                                   color2='0xFFFF3300')</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 
@@ -452,7 +453,7 @@
 <div class="viewcode-block" id="setProperty">
 <a class="viewcode-back" href="../_autosummary/xbmcplugin.html#xbmcplugin.setProperty">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setProperty</span><span class="p">(</span><span class="n">handle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Sets a container property for this plugin.</span>
 
 <span class="sd">    :param handle: integer - handle the plugin was started with.</span>
@@ -466,9 +467,9 @@
 <span class="sd">    Example::</span>
 
 <span class="sd">        ..</span>
-<span class="sd">        xbmcplugin.setProperty(int(sys.argv[1]), &#39;Emulator&#39;, &#39;M.A.M.E.&#39;)</span>
+<span class="sd">        xbmcplugin.setProperty(int(sys.argv[1]), 'Emulator', 'M.A.M.E.')</span>
 <span class="sd">        ..</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">pass</span></div>
 
 </pre></div>
@@ -529,7 +530,7 @@
       &#169;2026, Roman Miroshnychenko.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

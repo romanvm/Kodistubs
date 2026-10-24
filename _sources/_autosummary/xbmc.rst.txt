@@ -16,9 +16,12 @@
       executebuiltin
       executescript
       getCacheThumbName
+      getCecAdapterNames
       getCleanMovieTitle
       getCondVisibility
       getDVDState
+      getDatabaseName
+      getDevicePowerStatus
       getFreeMem
       getGlobalIdleTime
       getIPAddress

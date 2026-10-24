@@ -31,6 +31,7 @@
       ControlSlider
       ControlSpin
       ControlTextBox
+      ControlVideoWindow
       Dialog
       DialogProgress
       DialogProgressBG
