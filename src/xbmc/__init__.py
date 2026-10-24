@@ -11,6 +11,7 @@ this library.
 """
 
 from __future__ import annotations
+from collections.abc import Mapping, Sequence
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -800,7 +801,7 @@ class InfoTagGame:
         """
         pass
 
-    def setGenres(self, genres: list[str]) -> None:
+    def setGenres(self, genres: Sequence[str]) -> None:
         """
         Sets the genres of the game.
 
@@ -912,7 +913,7 @@ class InfoTagGame:
         """
         pass
 
-    def setTags(self, tags: list[str]) -> None:
+    def setTags(self, tags: Sequence[str]) -> None:
         """
         Sets the tags of the game.
 
@@ -1302,7 +1303,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setGenres(self, genres: list[str]) -> None:
+    def setGenres(self, genres: Sequence[str]) -> None:
         """
         Set the genres of the music item.
 
@@ -1402,7 +1403,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setMusicBrainzArtistID(self, musicBrainzArtistID: list[str]) -> None:
+    def setMusicBrainzArtistID(self, musicBrainzArtistID: Sequence[str]) -> None:
         """
         Set the MusicBrainz artist IDs of the music item.
 
@@ -1432,7 +1433,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setMusicBrainzAlbumArtistID(self, musicBrainzAlbumArtistID: list[str]) -> None:
+    def setMusicBrainzAlbumArtistID(self, musicBrainzAlbumArtistID: Sequence[str]) -> None:
         """
         Set the MusicBrainz album artist IDs of the music item.
 
@@ -2676,7 +2677,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setUniqueIDs(self, uniqueIDs: dict[str, str], defaultuniqueid: str = "") -> None:
+    def setUniqueIDs(self, uniqueIDs: Mapping[str, str], defaultuniqueid: str = "") -> None:
         """
         Set the given unique IDs. A unique ID is an identifier used by a (online) video database used to identify a
         video in its database.
@@ -2812,7 +2813,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setRatings(self, ratings: dict[str, tuple[float, int]], defaultrating: str = "") -> None:
+    def setRatings(self, ratings: Mapping[str, tuple[float, int]], defaultrating: str = "") -> None:
         """
         Set the ratings of the video item.
 
@@ -2946,7 +2947,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setGenres(self, genre: list[str]) -> None:
+    def setGenres(self, genre: Sequence[str]) -> None:
         """
         Set the genres of the video item.
 
@@ -2956,7 +2957,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setCountries(self, countries: list[str]) -> None:
+    def setCountries(self, countries: Sequence[str]) -> None:
         """
         Set the countries of the video item.
 
@@ -2966,7 +2967,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setDirectors(self, directors: list[str]) -> None:
+    def setDirectors(self, directors: Sequence[str]) -> None:
         """
         Set the directors of the video item.
 
@@ -2976,7 +2977,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setStudios(self, studios: list[str]) -> None:
+    def setStudios(self, studios: Sequence[str]) -> None:
         """
         Set the studios of the video item.
 
@@ -2986,7 +2987,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setWriters(self, writers: list[str]) -> None:
+    def setWriters(self, writers: Sequence[str]) -> None:
         """
         Set the writers of the video item.
 
@@ -3036,7 +3037,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setTags(self, tags: list[str]) -> None:
+    def setTags(self, tags: Sequence[str]) -> None:
         """
         Set the tags of the video item.
 
@@ -3166,7 +3167,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setShowLinks(self, showlinks: list[str]) -> None:
+    def setShowLinks(self, showlinks: Sequence[str]) -> None:
         """
         Set the TV show links of the movie.
 
@@ -3176,7 +3177,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setArtists(self, artists: list[str]) -> None:
+    def setArtists(self, artists: Sequence[str]) -> None:
         """
         Set the artists of the music video item.
 
@@ -3186,7 +3187,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setCast(self, actors: list[Actor]) -> None:
+    def setCast(self, actors: Sequence[Actor]) -> None:
         """
         Set the cast / actors of the video item.
 
@@ -3228,7 +3229,7 @@ class InfoTagVideo:
         """
         pass
 
-    def addSeasons(self, seasons: list[tuple[int, str, str]]) -> None:
+    def addSeasons(self, seasons: Sequence[tuple[int, str, str]]) -> None:
         """
         Add seasons to the TV show.
 
@@ -3303,7 +3304,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setAvailableFanart(self, images: list[dict[str, str]]) -> None:
+    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int]]) -> None:
         """
         Set available images (needed for video scrapers)
 

@@ -10,6 +10,7 @@ widgets.
 """
 
 from __future__ import annotations
+from collections.abc import Mapping, Sequence
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -464,7 +465,7 @@ class ListItem:
         """
         pass
 
-    def setArt(self, dictionary: dict[str, str]) -> None:
+    def setArt(self, dictionary: Mapping[str, str | int]) -> None:
         """
         Sets the listitem's art
 
@@ -500,7 +501,7 @@ class ListItem:
         """
         pass
 
-    def setUniqueIDs(self, dictionary: dict[str, str], defaultrating: str = "") -> None:
+    def setUniqueIDs(self, dictionary: Mapping[str, str | int], defaultrating: str = "") -> None:
         """
         Sets the listitem's uniqueID
 
@@ -677,7 +678,11 @@ class ListItem:
         """
         return True
 
-    def setInfo(self, type: str, infoLabels: dict[str, str | int | list[str | int | tuple[str, str | int]]]) -> None:
+    def setInfo(
+        self,
+        type: str,
+        infoLabels: Mapping[str, str | int | Sequence[str | int | tuple[str, str | int]]],
+    ) -> None:
         """
         Sets the listitem's infoLabels.
 
@@ -933,7 +938,7 @@ class ListItem:
         """
         pass
 
-    def setCast(self, actors: list[dict[str, str]]) -> None:
+    def setCast(self, actors: Sequence[Mapping[str, str | int]]) -> None:
         """
         Set cast including thumbnails
 
@@ -963,7 +968,7 @@ class ListItem:
         """
         pass
 
-    def setAvailableFanart(self, images: list[dict[str, str]]) -> None:
+    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int]]) -> None:
         """
         Set available images (needed for video scrapers)
 
@@ -1032,7 +1037,7 @@ class ListItem:
         """
         pass
 
-    def addStreamInfo(self, cType: str, dictionary: dict[str, str]) -> None:
+    def addStreamInfo(self, cType: str, dictionary: Mapping[str, str | int]) -> None:
         """
         Add a stream with details.
 
@@ -1078,7 +1083,7 @@ class ListItem:
         """
         pass
 
-    def addContextMenuItems(self, items: list[tuple[str, str]], replaceItems: bool = False) -> None:
+    def addContextMenuItems(self, items: Sequence[tuple[str, str]], replaceItems: bool = False) -> None:
         """
         Adds item(s) to the context menu for media lists.
 
@@ -1167,7 +1172,7 @@ class ListItem:
         """
         pass
 
-    def setProperties(self, dictionary: dict[str, str]) -> None:
+    def setProperties(self, dictionary: Mapping[str, str | int]) -> None:
         """
         Sets multiple properties for listitem's
 
@@ -1264,7 +1269,7 @@ class ListItem:
         """
         pass
 
-    def setSize(self, size: int64_t) -> None:
+    def setSize(self, size: int) -> None:
         """
         Sets the file size of this item, in bytes.
 
@@ -1287,7 +1292,7 @@ class ListItem:
         """
         pass
 
-    def setSubtitles(self, subtitleFiles: list[str]) -> None:
+    def setSubtitles(self, subtitleFiles: Sequence[str]) -> None:
         """
         Sets subtitles for this listitem.
 
@@ -1551,7 +1556,7 @@ class Control:
         """
         pass
 
-    def setAnimations(self, eventAttr: list[tuple[str, str]]) -> None:
+    def setAnimations(self, eventAttr: Sequence[tuple[str, str]]) -> None:
         """
         Sets the control's animations.
 
@@ -2110,7 +2115,7 @@ class ControlList(Control):
         """
         pass
 
-    def addItems(self, items: list[str | ListItem]) -> None:
+    def addItems(self, items: Sequence[str | ListItem]) -> None:
         """
         Adds a list of listitems or strings to this list control.
 
@@ -2357,7 +2362,7 @@ class ControlList(Control):
         """
         return ListItem()
 
-    def setStaticContent(self, items: list[ListItem]) -> None:
+    def setStaticContent(self, items: Sequence[ListItem]) -> None:
         """
         Fills a static list with a list of listitems.
 
@@ -3432,7 +3437,7 @@ class Dialog:
     def select(
         self,
         heading: str,
-        list: list[str | ListItem],
+        list: Sequence[str | ListItem],
         autoclose: int = 0,
         preselect: int = -1,
         useDetails: bool = False,
@@ -3463,7 +3468,7 @@ class Dialog:
         """
         return 0
 
-    def contextmenu(self, list: list[str]) -> int:
+    def contextmenu(self, list: Sequence[str]) -> int:
         """
         :param list: string list - list of items.
 
@@ -3483,9 +3488,9 @@ class Dialog:
     def multiselect(
         self,
         heading: str,
-        options: list[str | ListItem],
+        options: Sequence[str | ListItem],
         autoclose: int = 0,
-        preselect: list[int] | None = None,
+        preselect: Sequence[int] | None = None,
         useDetails: bool = False,
     ) -> list[int]:
         """
@@ -3845,7 +3850,7 @@ class Dialog:
         heading: str,
         selectedcolor: str = "",
         colorfile: str = "",
-        colorlist: list[ListItem] | None = None,
+        colorlist: Sequence[ListItem] | None = None,
     ) -> str:
         """
         :param heading: string - dialog heading.
@@ -4080,7 +4085,7 @@ class Action:
         return 0.0
 
     def __eq__(self, obj2: Any) -> Any:
-        return Any()
+        pass
 
 
 class Window:
@@ -4290,7 +4295,7 @@ class Window:
         """
         pass
 
-    def removeControls(self, pControls: list[Control]) -> None:
+    def removeControls(self, pControls: Sequence[Control]) -> None:
         """
         Removes a list of controls from this window.
 
@@ -4463,7 +4468,7 @@ class Window:
         """
         pass
 
-    def addControls(self, pControls: list[Control]) -> None:
+    def addControls(self, pControls: Sequence[Control]) -> None:
         """
         Add a list of Controls to this window.
 
@@ -4590,7 +4595,7 @@ class WindowXML(Window):
         """
         pass
 
-    def addItems(self, items: list[str | ListItem]) -> None:
+    def addItems(self, items: Sequence[str | ListItem]) -> None:
         """
         Add a list of items to to the window list.
 

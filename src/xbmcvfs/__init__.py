@@ -50,7 +50,7 @@ class File:
         pass
 
     def __enter__(self) -> File:
-        return File()
+        return self
 
     def read(self, numBytes: int = 0) -> str:
         """
