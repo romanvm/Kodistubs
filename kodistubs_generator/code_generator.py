@@ -386,10 +386,12 @@ def _generate_function(func: FunctionDef, module: str,
                        dox: DoxygenIndex,
                        typedefs: Optional[dict] = None,
                        class_name: Optional[str] = None,
-                       indent: int = 0) -> tuple[str, set[str], set[str]]:
+                       indent: int = 0,
+                       undocumented: Optional[list[str]] = None) -> tuple[str, set[str], set[str]]:
     """Generate a Python function/method definition string.
 
-    Returns ``(code, typing_imports, external_modules)``.
+    Returns ``(code, typing_imports, external_modules)``. The qualified name of a
+    function without Doxygen documentation is appended to ``undocumented``.
     """
     typing_imports: set[str] = set()
     external_modules: set[str] = set()
@@ -419,6 +421,8 @@ def _generate_function(func: FunctionDef, module: str,
 
     if rst.strip():
         lines.append(_format_docstring(rst, indent + 4))
+    elif undocumented is not None:
+        undocumented.append(f'{class_name}.{func_name}' if class_name else func_name)
 
     # Body (may span multiple lines, e.g. a local import + return)
     for stmt in body_stmt.split('\n'):
@@ -433,7 +437,8 @@ def _generate_function(func: FunctionDef, module: str,
 
 def _generate_class(cls: ClassDef, module: str,
                     dox: DoxygenIndex, xml_dir: str,
-                    typedefs: Optional[dict] = None) -> tuple[str, set[str], set[str]]:
+                    typedefs: Optional[dict] = None,
+                    undocumented: Optional[list[str]] = None) -> tuple[str, set[str], set[str]]:
     """Generate a Python class definition string.
 
     Returns ``(code, typing_imports, external_modules)``.
@@ -456,6 +461,8 @@ def _generate_class(cls: ClassDef, module: str,
     if not rst.strip():
         class_compound = get_class_compound(dox, cls.name)
         rst = group_class_to_rst(class_compound) if class_compound is not None else ''
+    if not rst.strip() and undocumented is not None:
+        undocumented.append(cls.name)
 
     if rst.strip():
         lines.append(_format_docstring(rst, 4))
@@ -470,6 +477,7 @@ def _generate_class(cls: ClassDef, module: str,
             typedefs=typedefs,
             class_name=cls.name,
             indent=4,
+            undocumented=undocumented,
         )
         typing_imports |= ti
         external_modules |= ext
@@ -494,8 +502,13 @@ def generate_module(
     constants: dict[str, object],
     xml_dir: str,
     output_dir: str,
-) -> None:
-    """Generate a Python stub __init__.py for a Kodi module."""
+) -> list[str]:
+    """Generate a Python stub __init__.py for a Kodi module.
+
+    Returns the qualified names of the classes, functions and methods for which
+    Doxygen has no documentation (``Class.method`` for methods).
+    """
+    undocumented: list[str] = []
     module = api.name
     typing_imports: set[str] = set()
     external_modules: set[str] = set()
@@ -537,7 +550,7 @@ def generate_module(
 
     # ── Classes ──────────────────────────────────────────────────────────────
     for cls in api.classes:
-        cls_code, ti, ext = _generate_class(cls, module, dox, xml_dir, api.typedefs)
+        cls_code, ti, ext = _generate_class(cls, module, dox, xml_dir, api.typedefs, undocumented)
         typing_imports |= ti
         external_modules |= ext
         sections.append(('def', cls_code))
@@ -545,7 +558,8 @@ def generate_module(
     # ── Module-level functions ────────────────────────────────────────────────
     for func in api.functions:
         func_code, ti, ext = _generate_function(func, module, dox,
-                                                typedefs=api.typedefs, indent=0)
+                                                typedefs=api.typedefs, indent=0,
+                                                undocumented=undocumented)
         typing_imports |= ti
         external_modules |= ext
         sections.append(('def', func_code))
@@ -605,6 +619,8 @@ def generate_module(
     if not os.path.exists(typed_path):
         with open(typed_path, 'w', encoding='utf-8') as f:
             pass
+
+    return undocumented
 
 
 def _join_with_pep8_spacing(sections: list[tuple[str, str]]) -> str:

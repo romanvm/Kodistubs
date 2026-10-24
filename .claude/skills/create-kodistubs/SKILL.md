@@ -151,7 +151,9 @@ The job isn't done until both of these hold:
 - The generated packages are importable and free of Python syntax errors.
 - Every function, class, method and parameter name in SWIG's `build/swig/<module>.pyi` exists in the generated stub
   (the only expected extras in the stubs are read-only global constants the `.pyi` omits). Every API member has a
-  docstring; a missing one usually means stale Doxygen XML.
+  docstring: the generator prints a WARNING per module listing members without Doxygen documentation (constructors are
+  only counted, as Kodi documents them in the class description). A new entry usually means stale Doxygen XML or a
+  changed Doxygen output format.
 - `cd docs && make html` produces clean output — fix every warning and error Sphinx reports.
 
 ## Improving `kodistubs_generator`

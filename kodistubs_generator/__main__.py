@@ -8,6 +8,20 @@ import sys
 ALL_MODULES = ['xbmc', 'xbmcaddon', 'xbmcgui', 'xbmcplugin', 'xbmcvfs', 'xbmcdrm']
 
 
+def _report_undocumented(undocumented: list[str]) -> None:
+    """Report API members without Doxygen documentation.
+
+    Constructors are listed separately: Kodi documents them in the class description.
+    A non-constructor gap usually means stale or changed Doxygen output.
+    """
+    constructors = [n for n in undocumented if n.endswith('.__init__')]
+    others = [n for n in undocumented if not n.endswith('.__init__')]
+    if others:
+        print(f'  WARNING: {len(others)} member(s) without documentation: {", ".join(others)}', file=sys.stderr)
+    if constructors:
+        print(f'  note: {len(constructors)} constructor(s) without own documentation', flush=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description='Generate Kodi Python API stub packages.',
@@ -60,8 +74,9 @@ def main() -> None:
             api = parse_module(module, swig_xml)
             dox = load_module_docs(module, xml_dir)
             constants = load_constants(api, kodi_src)
-            generate_module(api, dox, constants, xml_dir, output_dir)
+            undocumented = generate_module(api, dox, constants, xml_dir, output_dir)
             print(f'  → src/{module}/__init__.py')
+            _report_undocumented(undocumented)
         except Exception as exc:
             print(f'  ERROR: {exc}', file=sys.stderr)
             import traceback
