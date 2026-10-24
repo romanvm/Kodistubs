@@ -338,7 +338,7 @@ def _build_signature(func: FunctionDef, module: str,
     if is_method:
         parts.append('self')
     for param in func.params:
-        py_type, ti, ext = map_type(param.cpp_type, module, typedefs)
+        py_type, ti, ext = map_type(param.cpp_type, module, typedefs, for_param=True)
         typing_imports |= ti
         external_modules |= ext
         if param.default is not None:
@@ -405,7 +405,8 @@ def _generate_function(func: FunctionDef, module: str,
     external_modules |= ext
 
     py_ret, _, _ = map_type(func.cpp_return_type, module, typedefs)
-    body_stmt = default_return(py_ret)
+    # ``return self`` also works when the class constructor has required parameters (e.g. ``File.__enter__``).
+    body_stmt = 'return self' if class_name is not None and py_ret == class_name else default_return(py_ret)
 
     lines.append(f'{prefix}def {func_name}{sig}:')
 
@@ -559,10 +560,14 @@ def generate_module(
         typing_imports.add('TYPE_CHECKING')
 
     import_block_lines: list[str] = ['from __future__ import annotations']
+    abc_imports = typing_imports & {'Mapping', 'Sequence'}
+    typing_imports -= abc_imports
     if typing_imports:
         import_block_lines.append(
             f'from typing import {", ".join(sorted(typing_imports))}'
         )
+    if abc_imports:
+        import_block_lines.insert(1, f'from collections.abc import {", ".join(sorted(abc_imports))}')
     if external_modules:
         import_block_lines.append('')
         import_block_lines.append('if TYPE_CHECKING:')

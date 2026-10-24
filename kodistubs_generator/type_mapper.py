@@ -14,6 +14,16 @@ _SIMPLE = {
     'unsigned long': 'int',
     'unsigned long long': 'int',
     'unsigned short': 'int',
+    'int64_t': 'int',
+    'uint64_t': 'int',
+    'int32_t': 'int',
+    'uint32_t': 'int',
+    'int16_t': 'int',
+    'uint16_t': 'int',
+    'int8_t': 'int',
+    'uint8_t': 'int',
+    'size_t': 'int',
+    'std::size_t': 'int',
     'short': 'int',
     'float': 'float',
     'double': 'float',
@@ -27,18 +37,12 @@ _SIMPLE = {
     'bytearray': 'bytearray',
     'XBMCAddon::StringOrInt': 'str | int',
     'StringOrInt': 'str | int',
-    'XBMCAddon::Properties': 'dict[str, str]',
-    'Properties': 'dict[str, str]',
     'PyObject': 'Any',
 }
 
 # Simple types that need a ``typing`` import.
 _TYPING_NEEDED: dict[str, set[str]] = {'Any': {'Any'}}
 
-# Typedef'd names that are deliberately mapped as written rather than expanded: ``Properties`` is
-# ``Dictionary<StringOrInt>`` in C++, but ``dict[str, str | int]`` would reject plain ``dict[str, str]`` arguments
-# because ``dict`` is invariant.
-_NO_TYPEDEF_EXPANSION = frozenset(('XBMCAddon::Properties', 'Properties'))
 
 def _strip_qualifiers(t: str) -> str:
     """Strip SWIG pointer/reference/const qualifiers."""
@@ -77,7 +81,8 @@ def _split_template_args(s: str) -> list[str]:
 
 
 def map_type(cpp_type: str, current_module: str = '',
-             typedefs: Optional[dict] = None) -> tuple[str, set[str], set[str]]:
+             typedefs: Optional[dict] = None,
+             for_param: bool = False) -> tuple[str, set[str], set[str]]:
     """Map a C++ / SWIG type to a Python type annotation.
 
     Returns ``(python_type_str, required_typing_imports, external_modules)`` where
@@ -91,11 +96,18 @@ def map_type(cpp_type: str, current_module: str = '',
     ``typedefs`` is an optional mapping of fully-qualified C++ typedef names
     (e.g. ``XBMCAddon::xbmc::PlayParameter``) to their underlying SWIG type
     strings; encountered typedefs are expanded recursively.
+
+    ``for_param`` selects annotations for parameters: containers are annotated as the abstract
+    ``Sequence`` / ``Mapping`` (imported from ``collections.abc``) instead of ``list`` / ``dict``,
+    because the invariant concrete types would make type checkers reject e.g. a ``dict[str, str]``
+    argument for a ``dict[str, str | int]`` parameter. Return types keep the concrete types.
     """
     t = _strip_qualifiers(cpp_type.strip())
+    if t in ('XBMCAddon::Properties', 'Properties'):
+        t = 'XBMCAddon::Dictionary<(XBMCAddon::StringOrInt)>'   # typedef from Dictionary.h, also when it is not in ``typedefs``
 
     # Resolve typedef chains (with cycle protection)
-    if typedefs and t not in _NO_TYPEDEF_EXPANSION:
+    if typedefs:
         seen: set[str] = set()
         while t in typedefs and t not in seen:
             seen.add(t)
@@ -109,19 +121,21 @@ def map_type(cpp_type: str, current_module: str = '',
     # std::unique_ptr<(T)>  — treat as the inner type
     m = re.match(r'^std::unique_ptr<\((.+)\)>$', t)
     if m:
-        return map_type(m.group(1), current_module, typedefs)
+        return map_type(m.group(1), current_module, typedefs, for_param)
 
     # std::vector<(T)> or std::vector<(T, std::allocator<(T)>)> (drop allocator)
     m = re.match(r'^std::vector<\((.+)\)>$', t)
     if m:
-        inner, imp, ext = map_type(_split_template_args(m.group(1))[0], current_module, typedefs)
+        inner, imp, ext = map_type(_split_template_args(m.group(1))[0], current_module, typedefs, for_param)
+        if for_param:
+            return f'Sequence[{inner}]', imp | {'Sequence'}, ext
         return f'list[{inner}]', imp, ext
 
     # XBMCAddon::Tuple<(T1, T2, ...)>  or  Tuple<(...)>
     m = re.match(r'^(?:XBMCAddon::)?Tuple<\((.+)\)>$', t)
     if m:
         parts = _split_template_args(m.group(1))
-        mapped = [map_type(p.strip(), current_module, typedefs) for p in parts]
+        mapped = [map_type(p.strip(), current_module, typedefs, for_param) for p in parts]
         inner_strs = [x[0] for x in mapped]
         imports = set().union(*[x[1] for x in mapped])
         externals = set().union(*[x[2] for x in mapped])
@@ -131,7 +145,7 @@ def map_type(cpp_type: str, current_module: str = '',
     m = re.match(r'^(?:XBMCAddon::)?Alternative<\((.+)\)>$', t)
     if m:
         parts = _split_template_args(m.group(1))
-        mapped = [map_type(p.strip(), current_module, typedefs) for p in parts]
+        mapped = [map_type(p.strip(), current_module, typedefs, for_param) for p in parts]
         inner_strs = [x[0] for x in mapped]
         imports = set().union(*[x[1] for x in mapped])
         externals = set().union(*[x[2] for x in mapped])
@@ -140,7 +154,9 @@ def map_type(cpp_type: str, current_module: str = '',
     # Dictionary<(T)>  → dict[str, T]
     m = re.match(r'^(?:XBMCAddon::)?Dictionary<\((.+)\)>$', t)
     if m:
-        val, imp, ext = map_type(m.group(1), current_module, typedefs)
+        val, imp, ext = map_type(m.group(1), current_module, typedefs, for_param)
+        if for_param:
+            return f'Mapping[str, {val}]', imp | {'Mapping'}, ext
         return f'dict[str, {val}]', imp, ext
 
     # std::map<(K, V)> or std::map<(K, V, Cmp)> → dict[K, V] (drop comparator)
@@ -148,8 +164,10 @@ def map_type(cpp_type: str, current_module: str = '',
     if m:
         parts = _split_template_args(m.group(1))
         if len(parts) >= 2:
-            key, kimp, kext = map_type(parts[0].strip(), current_module, typedefs)
-            val, vimp, vext = map_type(parts[1].strip(), current_module, typedefs)
+            key, kimp, kext = map_type(parts[0].strip(), current_module, typedefs, for_param)
+            val, vimp, vext = map_type(parts[1].strip(), current_module, typedefs, for_param)
+            if for_param:
+                return f'Mapping[{key}, {val}]', kimp | vimp | {'Mapping'}, kext | vext
             return f'dict[{key}, {val}]', kimp | vimp, kext | vext
 
     # XBMCAddon::xbmcMODULE::ClassName  (xbmcMODULE may be bare "xbmc" or "xbmcgui" etc.)
@@ -210,6 +228,8 @@ def default_return(py_type: str) -> str:
         return 'return ""'
     if py_type == 'bytearray':
         return 'return bytearray()'
+    if py_type == 'Any':
+        return 'pass'
     if py_type.startswith('list['):
         return 'return []'
     if py_type.startswith('dict['):
