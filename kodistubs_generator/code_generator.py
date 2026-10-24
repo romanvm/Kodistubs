@@ -8,6 +8,7 @@ from typing import Optional
 
 from .doc_converter import group_class_to_rst, group_module_to_rst, member_to_rst
 from .doxy_parser import DoxygenIndex, get_class_compound, get_class_doc, get_member_doc
+from .manual_docs import MANUAL_DOCS
 from .swig_parser import ClassDef, FunctionDef, ModuleAPI, Param
 from .type_mapper import split_union, default_return, map_default_value, map_type
 
@@ -419,10 +420,15 @@ def _generate_function(func: FunctionDef, module: str,
     else:
         rst = ''
 
+    if not rst.strip():
+        qualified_name = f'{class_name}.{func_name}' if class_name else func_name
+        # Reported even when a manual docstring fills the gap: Doxygen still lacks the documentation.
+        if undocumented is not None:
+            undocumented.append(qualified_name)
+        rst = MANUAL_DOCS.get(f'{module}.{qualified_name}', '')
+
     if rst.strip():
         lines.append(_format_docstring(rst, indent + 4))
-    elif undocumented is not None:
-        undocumented.append(f'{class_name}.{func_name}' if class_name else func_name)
 
     # Body (may span multiple lines, e.g. a local import + return)
     for stmt in body_stmt.split('\n'):

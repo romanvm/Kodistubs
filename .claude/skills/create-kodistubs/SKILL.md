@@ -153,7 +153,9 @@ The job isn't done until both of these hold:
   (the only expected extras in the stubs are read-only global constants the `.pyi` omits). Every API member has a
   docstring: the generator prints a WARNING per module listing members without Doxygen documentation (special methods such as
   constructors and operators are only counted, as Kodi has no Doxygen entries for them). A new entry usually means stale Doxygen XML or a
-  changed Doxygen output format.
+  changed Doxygen output format. If the documentation exists in the Kodi sources but Doxygen
+  cannot produce it, add the text to `kodistubs_generator/manual_docs.py`; the member then keeps showing in the
+  report so the upstream gap stays visible.
 - `cd docs && make html` produces clean output — fix every warning and error Sphinx reports.
 
 ## Improving `kodistubs_generator`
