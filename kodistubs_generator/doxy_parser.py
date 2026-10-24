@@ -30,8 +30,42 @@ class DoxygenIndex:
     class_group_by_name: dict[str, ET.Element] = field(default_factory=dict)
     # class short name → compounddef element of the class itself (fallback docs source)
     class_compound_by_name: dict[str, ET.Element] = field(default_factory=dict)
+    # class short name → member name → documented memberdefs found in the class compound itself. Used when
+    # Doxygen does not put a member into the group (e.g. the doc comment lacks ``\ingroup``).
+    class_members: dict[str, dict[str, list[ET.Element]]] = field(default_factory=dict)
     # top-level compounddef (the module-level group)
     top_compound: Optional[ET.Element] = None
+
+
+_PYTHON_FUNC_RE = re.compile(r'\\python_func\{\s*(?:\w+\.)*(\w+)\s*\(')
+
+
+def _has_docs(memberdef: ET.Element) -> bool:
+    return any(''.join(memberdef.find(tag).itertext()).strip()
+               for tag in ('briefdescription', 'detaileddescription')
+               if memberdef.find(tag) is not None)
+
+
+def _documented_python_name(memberdef: ET.Element) -> Optional[str]:
+    """Return the Python function name given in the ``\\python_func{ name(...) }`` marker of the brief text.
+
+    It differs from the C++ member name when the documentation placeholder in Kodi's header is misnamed.
+    """
+    brief = memberdef.find('briefdescription')
+    if brief is None:
+        return None
+    match = _PYTHON_FUNC_RE.search(''.join(brief.itertext()))
+    return match.group(1) if match else None
+
+
+def _register_class(idx: 'DoxygenIndex', short_name: str, group: ET.Element, cls_compound: ET.Element) -> None:
+    idx.class_group_by_name[short_name] = group
+    idx.class_compound_by_name[short_name] = cls_compound
+    members = idx.class_members.setdefault(short_name, {})
+    for memberdef in cls_compound.findall('.//memberdef'):
+        name = memberdef.findtext('name', '')
+        if name and _has_docs(memberdef):
+            members.setdefault(name, []).append(memberdef)
 
 
 def _load_xml(xml_dir: str, group_id: str) -> Optional[ET.Element]:
@@ -57,6 +91,9 @@ def _index_group(compound: ET.Element, idx: DoxygenIndex, xml_dir: str,
         name = memberdef.findtext('name', '')
         if name:
             idx.members.setdefault(name, []).append(memberdef)
+            python_name = _documented_python_name(memberdef)
+            if python_name and python_name != name:
+                idx.members.setdefault(python_name, []).append(memberdef)
 
     # Map class refids to this group
     for innerclass in compound.findall('innerclass'):
@@ -68,8 +105,7 @@ def _index_group(compound: ET.Element, idx: DoxygenIndex, xml_dir: str,
             cpp_name = cls_compound.findtext('compoundname', '')
             short_name = cpp_name.split('::')[-1]
             idx.class_group[refid] = compound
-            idx.class_group_by_name[short_name] = compound
-            idx.class_compound_by_name[short_name] = cls_compound
+            _register_class(idx, short_name, compound, cls_compound)
 
     # Follow inner groups recursively
     for innergroup in compound.findall('innergroup'):
@@ -85,8 +121,7 @@ def _index_group(compound: ET.Element, idx: DoxygenIndex, xml_dir: str,
                         cpp_name = cls_c.findtext('compoundname', '')
                         short_name = cpp_name.split('::')[-1]
                         idx.class_group[ic_refid] = sub
-                        idx.class_group_by_name[short_name] = sub
-                        idx.class_compound_by_name[short_name] = cls_c
+                        _register_class(idx, short_name, sub, cls_c)
                 _index_group(sub, idx, xml_dir, visited)
 
 
@@ -111,6 +146,9 @@ def get_member_doc(idx: DoxygenIndex, func_name: str,
     Optionally filter by qualified C++ class name (e.g. 'Addon').
     """
     candidates = idx.members.get(func_name, [])
+    if not candidates and class_name:
+        # Documented in the class compound only (Doxygen did not put it into the group).
+        candidates = idx.class_members.get(class_name, {}).get(func_name, [])
     if not candidates:
         return None
     if len(candidates) == 1:
