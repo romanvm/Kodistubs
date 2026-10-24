@@ -79,7 +79,8 @@ When adding or updating stub content:
 2. Docstrings use reStructuredText with `:param name:`, `:type name:`, `:return:`, `:rtype:` fields and fenced
    `Example::` blocks.
 3. Version notes follow the `@python_vXX` convention already used throughout (e.g., `@python_v20 New class added.`).
-4. All parameters should have type annotations compatible with Python 3.10+.
+4. All parameters should have type annotations. The project targets Python 3.10+ (`python_requires` in `setup.cfg`),
+   so use builtin generics and `|` unions (`list[str]`, `str | None`) rather than `typing.List` / `Optional`.
 5. Constants are bare module-level assignments with integer or string literals.
 
 ## Branches

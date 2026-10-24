@@ -106,6 +106,8 @@ the generated stub.
 ### Signatures and bodies
 
 - Every function, class, and method must carry a complete call signature with type annotations.
+- The stubs target Python 3.10+: use builtin generics and `|` unions (`list[str]`, `dict[str, str]`, `str | None`)
+  instead of `typing.List`, `Dict`, `Tuple`, `Optional` and `Union`.
 - Parameter names must match the SWIG-exposed names exactly: Kodi enables `%feature("kwargs")` everywhere, so addons
   can pass any argument by keyword.
 - Include Python-only members that Kodi adds through `%extend` blocks in `AddonModule*.i` (e.g.

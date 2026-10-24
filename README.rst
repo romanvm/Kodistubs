@@ -19,7 +19,7 @@ You can install Kodistubs into your working virtual environment using ``pip``::
 Read `Kodistubs documentation`_ for more info on how to use Kodi stubs.
 
 Kodistubs major version corresponds to the version of Kodi they have been generated from.
-Current Kodistubs are compatible with Python 3.6 and above. Kodistubs for Kodi versions that used
+Current Kodistubs are compatible with Python 3.10 and above. Kodistubs for Kodi versions that used
 Python 2.x for addons can be found in ``python2`` branch.
 
 **Warning**: Kodistubs are literally stubs and do not include any useful code,

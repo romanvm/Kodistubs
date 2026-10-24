@@ -86,14 +86,17 @@ The generated `.i.cpp` is only a debugging aid; do not parse it for constants.
 
 ## Type annotations
 
-- Map C++ parameter and return types from the SWIG XML to Python annotations compatible with Python 3.10+.
+- Map C++ parameter and return types from the SWIG XML to Python annotations. The stubs target Python 3.10+, so use
+  builtin generics (`list[str]`, `dict[str, str]`, `tuple[int, str]`, PEP 585) and union syntax (`str | None`,
+  `str | ListItem`, PEP 604) instead of `typing.List`, `Dict`, `Tuple`, `Optional` and `Union`. Import from `typing`
+  only what has no builtin form (e.g. `Any`, `TYPE_CHECKING`).
   Resolve typedefs (`XBMCAddon::String`, `XBMCAddon::Properties`, `InfoLabelDict`, ...) recorded in the XML.
 - Kodi's own Python type intent lives in `xbmc/interfaces/swig/kodi_typing.i` (`pytyping` typemaps). The resolved
   return annotation is available as the `tmap_pytyping` attribute of each function node, and parameter annotations
   appear in the SWIG-generated `{SWIG_WORK_DIR}/<module>.pyi`. Use them as a fallback when the C++ type cannot be
-  mapped, and report disagreements, but prefer precise Python types: `str` (not `Optional[str]`) for `const char*`
-  parameters that do not accept `None`, builtin generics (`List`, `Dict`, `Tuple` from `typing` are acceptable to
-  match the existing stubs), and bare class names for Kodi classes.
+  mapped, and report disagreements, but prefer precise Python types: `str` (not `str | None`) for `const char*`
+  parameters that do not accept `None`, and bare class names for Kodi classes. Convert the `typing.List[...]`-style
+  annotations Kodi uses to the builtin syntax above.
 - Never leave `::`-separated C++ names in the generated Python.
 
 ## Docstrings: Doxygen XML
