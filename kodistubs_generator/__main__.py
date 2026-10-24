@@ -8,18 +8,24 @@ import sys
 ALL_MODULES = ['xbmc', 'xbmcaddon', 'xbmcgui', 'xbmcplugin', 'xbmcvfs', 'xbmcdrm']
 
 
+def _is_dunder(qualified_name: str) -> bool:
+    name = qualified_name.rsplit('.', 1)[-1]
+    return name.startswith('__') and name.endswith('__')
+
+
 def _report_undocumented(undocumented: list[str]) -> None:
     """Report API members without Doxygen documentation.
 
-    Constructors are listed separately: Kodi documents them in the class description.
-    A non-constructor gap usually means stale or changed Doxygen output.
+    Special methods (``__init__``, ``__eq__``, ...) are only counted: Kodi documents constructors in the class
+    description and has no Doxygen entries for the others. A gap in a regular member usually means stale or
+    changed Doxygen output.
     """
-    constructors = [n for n in undocumented if n.endswith('.__init__')]
-    others = [n for n in undocumented if not n.endswith('.__init__')]
-    if others:
-        print(f'  WARNING: {len(others)} member(s) without documentation: {", ".join(others)}', file=sys.stderr)
-    if constructors:
-        print(f'  note: {len(constructors)} constructor(s) without own documentation', flush=True)
+    special = [n for n in undocumented if _is_dunder(n)]
+    regular = [n for n in undocumented if not _is_dunder(n)]
+    if regular:
+        print(f'  WARNING: {len(regular)} member(s) without documentation: {", ".join(regular)}', file=sys.stderr)
+    if special:
+        print(f'  note: {len(special)} special method(s) without own documentation', flush=True)
 
 
 def main() -> None:
