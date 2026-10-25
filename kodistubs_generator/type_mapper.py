@@ -115,6 +115,10 @@ def map_type(cpp_type: str, current_module: str = '',
             t = _strip_qualifiers(typedefs[t].strip())
 
     # Simple lookup
+    # Kodi's Buffer typemap (kodi_buffer.i) accepts str (UTF-8 encoded), bytes and bytearray but returns bytearray.
+    if for_param and t == 'XbmcCommons::Buffer':
+        return 'str | bytes | bytearray', set(), set()
+
     if t in _SIMPLE:
         py = _SIMPLE[t]
         return py, _TYPING_NEEDED.get(py, set()), set()
