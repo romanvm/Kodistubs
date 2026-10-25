@@ -93,7 +93,7 @@
 <a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.GetKeyRequest">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">GetKeyRequest</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">init</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="n">init</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
         <span class="n">mimeType</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">offlineKey</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
         <span class="n">optionalParameters</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
@@ -141,7 +141,7 @@
 
 <div class="viewcode-block" id="CryptoSession.ProvideKeyResponse">
 <a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.ProvideKeyResponse">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ProvideKeyResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ProvideKeyResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Provide a key response</span>
 
@@ -200,7 +200,12 @@
 
 <div class="viewcode-block" id="CryptoSession.Decrypt">
 <a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Decrypt">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">Decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cipherKeyId</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="n">iv</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Decrypt</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cipherKeyId</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="n">iv</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Decrypt an encrypted data by using session keys.</span>
 
@@ -219,7 +224,12 @@
 
 <div class="viewcode-block" id="CryptoSession.Encrypt">
 <a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Encrypt">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">Encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cipherKeyId</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="n">iv</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Encrypt</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cipherKeyId</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="n">iv</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Encrypt data by using session keys.</span>
 
@@ -238,7 +248,7 @@
 
 <div class="viewcode-block" id="CryptoSession.Sign">
 <a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Sign">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">Sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macKeyId</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macKeyId</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytearray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a DRM encrypted signature for a text message.</span>
 
@@ -256,7 +266,12 @@
 
 <div class="viewcode-block" id="CryptoSession.Verify">
 <a class="viewcode-back" href="../_autosummary/xbmcdrm.html#xbmcdrm.CryptoSession.Verify">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">Verify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macKeyId</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">,</span> <span class="n">signature</span><span class="p">:</span> <span class="nb">bytearray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Verify</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">macKeyId</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="n">signature</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Verify the validity of a DRM signature of a text message.</span>
 
