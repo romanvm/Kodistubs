@@ -35,8 +35,9 @@ _SIMPLE = {
     'string': 'str',
     'XbmcCommons::Buffer': 'bytearray',
     'bytearray': 'bytearray',
-    'XBMCAddon::StringOrInt': 'str | int',
-    'StringOrInt': 'str | int',
+    # ``typedef String StringOrInt``: a plain string at runtime; numbers are only accepted as dictionary values.
+    'XBMCAddon::StringOrInt': 'str',
+    'StringOrInt': 'str',
     'PyObject': 'Any',
 }
 
@@ -156,7 +157,7 @@ def map_type(cpp_type: str, current_module: str = '',
     if m:
         val, imp, ext = map_type(m.group(1), current_module, typedefs, for_param)
         if for_param:
-            return f'Mapping[str, {val}]', imp | {'Mapping'}, ext
+            return f'Mapping[str, {_with_numbers(val)}]', imp | {'Mapping'}, ext
         return f'dict[str, {val}]', imp, ext
 
     # std::map<(K, V)> or std::map<(K, V, Cmp)> → dict[K, V] (drop comparator)
@@ -193,6 +194,21 @@ def map_type(cpp_type: str, current_module: str = '',
     # Fallback — bare token (whatever it is, leave unquoted; future annotations
     # defer evaluation, so an unresolved name is harmless until inspected).
     return t, set(), set()
+
+
+def _with_numbers(py_type: str) -> str:
+    """Add ``int | float`` to a dictionary value type.
+
+    Kodi's Dictionary typemap (``kodi_generics.i``) converts ``int`` and ``float`` values with ``str()`` before the
+    regular conversion, so they are accepted wherever the value type accepts a string.
+    """
+    parts = split_union(py_type)
+    if 'str' not in parts:
+        return py_type
+    scalars = [p for p in parts if '[' not in p]
+    containers = [p for p in parts if '[' in p]
+    scalars += [n for n in ('int', 'float') if n not in scalars]
+    return ' | '.join(scalars + containers)
 
 
 def split_union(py_type: str) -> list[str]:
