@@ -37,7 +37,6 @@ discrepancies with the actual state of Kodi Python API.
 ``.claude`` directory contains prompts and skills for Claude Code AI that have been used to create
 the current version of Kodistubs. They can be adapted for other AI agents/assistants, if necessary.
 
-
 `Discussion topic on Kodi forum`_
 
 License: `GPL v.3`_
