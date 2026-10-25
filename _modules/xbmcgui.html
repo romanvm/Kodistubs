@@ -520,7 +520,7 @@
 
 <div class="viewcode-block" id="ListItem.setArt">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setArt">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setArt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setArt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the listitem's art</span>
 
@@ -562,7 +562,7 @@
 
 <div class="viewcode-block" id="ListItem.setUniqueIDs">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setUniqueIDs">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setUniqueIDs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">],</span> <span class="n">defaultrating</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUniqueIDs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">],</span> <span class="n">defaultrating</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the listitem's uniqueID</span>
 
@@ -769,11 +769,7 @@
 
 <div class="viewcode-block" id="ListItem.setInfo">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setInfo">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setInfo</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">infoLabels</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]]],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">infoLabels</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the listitem's infoLabels.</span>
 
@@ -1032,7 +1028,7 @@
 
 <div class="viewcode-block" id="ListItem.setCast">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setCast">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setCast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setCast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Set cast including thumbnails</span>
 
@@ -1065,7 +1061,7 @@
 
 <div class="viewcode-block" id="ListItem.setAvailableFanart">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setAvailableFanart">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setAvailableFanart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">images</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setAvailableFanart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">images</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Set available images (needed for video scrapers)</span>
 
@@ -1140,7 +1136,7 @@
 
 <div class="viewcode-block" id="ListItem.addStreamInfo">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.addStreamInfo">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">addStreamInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cType</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addStreamInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cType</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Add a stream with details.</span>
 
@@ -1284,7 +1280,7 @@
 
 <div class="viewcode-block" id="ListItem.setProperties">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setProperties">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setProperties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setProperties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets multiple properties for listitem's</span>
 
