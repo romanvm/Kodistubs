@@ -43,7 +43,7 @@
 <span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -769,7 +769,7 @@
 
 <div class="viewcode-block" id="ListItem.setInfo">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setInfo">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">infoLabels</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">infoLabels</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the listitem's infoLabels.</span>
 
@@ -1028,7 +1028,7 @@
 
 <div class="viewcode-block" id="ListItem.setCast">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setCast">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setCast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actors</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setCast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actors</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Set cast including thumbnails</span>
 
@@ -1061,7 +1061,7 @@
 
 <div class="viewcode-block" id="ListItem.setAvailableFanart">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setAvailableFanart">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setAvailableFanart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">images</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setAvailableFanart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">images</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Set available images (needed for video scrapers)</span>
 
@@ -1185,7 +1185,7 @@
 
 <div class="viewcode-block" id="ListItem.addContextMenuItems">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.addContextMenuItems">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">addContextMenuItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">replaceItems</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addContextMenuItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">replaceItems</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Adds item(s) to the context menu for media lists.</span>
 
@@ -1427,7 +1427,7 @@
 
 <div class="viewcode-block" id="ListItem.setSubtitles">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ListItem.setSubtitles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setSubtitles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtitleFiles</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setSubtitles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtitleFiles</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets subtitles for this listitem.</span>
 
@@ -1756,7 +1756,7 @@
 
 <div class="viewcode-block" id="Control.setAnimations">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.Control.setAnimations">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setAnimations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventAttr</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setAnimations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eventAttr</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the control's animations.</span>
 
@@ -2381,7 +2381,7 @@
 
 <div class="viewcode-block" id="ControlList.addItems">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ControlList.addItems">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">addItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Adds a list of listitems or strings to this list control.</span>
 
@@ -2482,7 +2482,7 @@
 
 <div class="viewcode-block" id="ControlList.getSpinControl">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ControlList.getSpinControl">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">getSpinControl</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Control</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getSpinControl</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Control</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the associated ControlSpin object.</span>
 
@@ -2521,7 +2521,7 @@
 
 <div class="viewcode-block" id="ControlList.getSelectedItem">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ControlList.getSelectedItem">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">getSelectedItem</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ListItem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getSelectedItem</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ListItem</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the selected item as a ListItem object.</span>
 
@@ -2684,7 +2684,7 @@
 
 <div class="viewcode-block" id="ControlList.setStaticContent">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.ControlList.setStaticContent">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setStaticContent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ListItem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setStaticContent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ListItem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Fills a static list with a list of listitems.</span>
 
@@ -3879,7 +3879,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">heading</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="nb">list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">],</span>
+        <span class="nb">list</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">],</span>
         <span class="n">autoclose</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">preselect</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">useDetails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -3913,7 +3913,7 @@
 
 <div class="viewcode-block" id="Dialog.contextmenu">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.Dialog.contextmenu">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">contextmenu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contextmenu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :param list: string list - list of items.</span>
 
@@ -3936,11 +3936,11 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">multiselect</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">heading</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">options</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">],</span>
+        <span class="n">options</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">],</span>
         <span class="n">autoclose</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">preselect</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">preselect</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">useDetails</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :param heading: string or unicode - dialog heading.</span>
 <span class="sd">        :param options: list of strings / xbmcgui.ListItems - options to choose from.</span>
@@ -4325,7 +4325,7 @@
         <span class="n">heading</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">selectedcolor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="n">colorfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
-        <span class="n">colorlist</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ListItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">colorlist</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ListItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :param heading: string - dialog heading.</span>
@@ -4857,7 +4857,7 @@
 
 <div class="viewcode-block" id="Window.removeControls">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.Window.removeControls">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">removeControls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pControls</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Control</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">removeControls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pControls</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Control</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Removes a list of controls from this window.</span>
 
@@ -5060,7 +5060,7 @@
 
 <div class="viewcode-block" id="Window.addControls">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.Window.addControls">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">addControls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pControls</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Control</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addControls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pControls</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Control</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Add a list of Controls to this window.</span>
 
@@ -5202,7 +5202,7 @@
 
 <div class="viewcode-block" id="WindowXML.addItems">
 <a class="viewcode-back" href="../_autosummary/xbmcgui.html#xbmcgui.WindowXML.addItems">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">addItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">ListItem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Add a list of items to to the window list.</span>
 
