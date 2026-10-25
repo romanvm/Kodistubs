@@ -6,6 +6,7 @@ import re
 import textwrap
 from typing import Optional
 
+from .api_overrides import NULLABLE_RETURNS
 from .doc_converter import group_class_to_rst, group_module_to_rst, member_to_rst
 from .doxy_parser import DoxygenIndex, get_class_compound, get_class_doc, get_member_doc
 from .manual_docs import MANUAL_DOCS
@@ -320,7 +321,8 @@ def _build_signature(func: FunctionDef, module: str,
                      typedefs: Optional[dict] = None,
                      is_method: bool = False,
                      def_indent: int = 0,
-                     name_len: int = 0) -> tuple[str, set[str], set[str]]:
+                     name_len: int = 0,
+                     nullable_return: bool = False) -> tuple[str, set[str], set[str]]:
     """Build a Python function signature string and collect typing imports.
 
     Returns ``(signature_str, typing_imports, external_modules)`` — external
@@ -354,6 +356,8 @@ def _build_signature(func: FunctionDef, module: str,
     py_ret, ti, ext = map_type(func.cpp_return_type, module, typedefs)
     typing_imports |= ti
     external_modules |= ext
+    if nullable_return and py_ret != 'None' and 'None' not in split_union(py_ret):
+        py_ret = f'{py_ret} | None'
 
     if func.is_constructor:
         return_ann = ' -> None'
@@ -400,10 +404,12 @@ def _generate_function(func: FunctionDef, module: str,
     lines = []
 
     func_name = func.name
+    qualified_name = f'{class_name}.{func_name}' if class_name else func_name
     sig, ti, ext = _build_signature(func, module, typedefs,
                                     is_method=class_name is not None,
                                     def_indent=indent,
-                                    name_len=len(func_name))
+                                    name_len=len(func_name),
+                                    nullable_return=f'{module}.{qualified_name}' in NULLABLE_RETURNS)
     typing_imports |= ti
     external_modules |= ext
 
@@ -421,7 +427,6 @@ def _generate_function(func: FunctionDef, module: str,
         rst = ''
 
     if not rst.strip():
-        qualified_name = f'{class_name}.{func_name}' if class_name else func_name
         # Reported even when a manual docstring fills the gap: Doxygen still lacks the documentation.
         if undocumented is not None:
             undocumented.append(qualified_name)
@@ -580,7 +585,7 @@ def generate_module(
         typing_imports.add('TYPE_CHECKING')
 
     import_block_lines: list[str] = ['from __future__ import annotations']
-    abc_imports = typing_imports & {'Mapping', 'Sequence'}
+    abc_imports = typing_imports & {'Iterable', 'Mapping'}
     typing_imports -= abc_imports
     if typing_imports:
         import_block_lines.append(

@@ -99,7 +99,7 @@ def map_type(cpp_type: str, current_module: str = '',
     strings; encountered typedefs are expanded recursively.
 
     ``for_param`` selects annotations for parameters: containers are annotated as the abstract
-    ``Sequence`` / ``Mapping`` (imported from ``collections.abc``) instead of ``list`` / ``dict``,
+    ``Iterable`` / ``Mapping`` (imported from ``collections.abc``) instead of ``list`` / ``dict``,
     because the invariant concrete types would make type checkers reject e.g. a ``dict[str, str]``
     argument for a ``dict[str, str | int]`` parameter. Return types keep the concrete types.
     """
@@ -126,14 +126,19 @@ def map_type(cpp_type: str, current_module: str = '',
     # std::unique_ptr<(T)>  — treat as the inner type
     m = re.match(r'^std::unique_ptr<\((.+)\)>$', t)
     if m:
-        return map_type(m.group(1), current_module, typedefs, for_param)
+        inner, imp, ext = map_type(m.group(1), current_module, typedefs, for_param)
+        # Kodi's unique_ptr out typemap returns None for an empty pointer (Dialog.multiselect when cancelled).
+        if not for_param and 'None' not in split_union(inner):
+            inner = f'{inner} | None'
+        return inner, imp, ext
 
     # std::vector<(T)> or std::vector<(T, std::allocator<(T)>)> (drop allocator)
     m = re.match(r'^std::vector<\((.+)\)>$', t)
     if m:
         inner, imp, ext = map_type(_split_template_args(m.group(1))[0], current_module, typedefs, for_param)
         if for_param:
-            return f'Sequence[{inner}]', imp | {'Sequence'}, ext
+            # SWIG's sequence conversion (traits_asptr_stdseq) accepts any iterable, not just sequences.
+            return f'Iterable[{inner}]', imp | {'Iterable'}, ext
         return f'list[{inner}]', imp, ext
 
     # XBMCAddon::Tuple<(T1, T2, ...)>  or  Tuple<(...)>
