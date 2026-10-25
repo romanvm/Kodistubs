@@ -10,7 +10,7 @@ widgets.
 """
 
 from __future__ import annotations
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -678,7 +678,7 @@ class ListItem:
         """
         return True
 
-    def setInfo(self, type: str, infoLabels: Mapping[str, str | int | float | Sequence[str | tuple[str, str]]]) -> None:
+    def setInfo(self, type: str, infoLabels: Mapping[str, str | int | float | Iterable[str | tuple[str, str]]]) -> None:
         """
         Sets the listitem's infoLabels.
 
@@ -934,7 +934,7 @@ class ListItem:
         """
         pass
 
-    def setCast(self, actors: Sequence[Mapping[str, str | int | float]]) -> None:
+    def setCast(self, actors: Iterable[Mapping[str, str | int | float]]) -> None:
         """
         Set cast including thumbnails
 
@@ -964,7 +964,7 @@ class ListItem:
         """
         pass
 
-    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int | float]]) -> None:
+    def setAvailableFanart(self, images: Iterable[Mapping[str, str | int | float]]) -> None:
         """
         Set available images (needed for video scrapers)
 
@@ -1079,7 +1079,7 @@ class ListItem:
         """
         pass
 
-    def addContextMenuItems(self, items: Sequence[tuple[str, str]], replaceItems: bool = False) -> None:
+    def addContextMenuItems(self, items: Iterable[tuple[str, str]], replaceItems: bool = False) -> None:
         """
         Adds item(s) to the context menu for media lists.
 
@@ -1288,7 +1288,7 @@ class ListItem:
         """
         pass
 
-    def setSubtitles(self, subtitleFiles: Sequence[str]) -> None:
+    def setSubtitles(self, subtitleFiles: Iterable[str]) -> None:
         """
         Sets subtitles for this listitem.
 
@@ -1563,7 +1563,7 @@ class Control:
         """
         pass
 
-    def setAnimations(self, eventAttr: Sequence[tuple[str, str]]) -> None:
+    def setAnimations(self, eventAttr: Iterable[tuple[str, str]]) -> None:
         """
         Sets the control's animations.
 
@@ -2122,7 +2122,7 @@ class ControlList(Control):
         """
         pass
 
-    def addItems(self, items: Sequence[str | ListItem]) -> None:
+    def addItems(self, items: Iterable[str | ListItem]) -> None:
         """
         Adds a list of listitems or strings to this list control.
 
@@ -2211,7 +2211,7 @@ class ControlList(Control):
         """
         pass
 
-    def getSpinControl(self) -> Control:
+    def getSpinControl(self) -> Control | None:
         """
         Returns the associated ControlSpin object.
 
@@ -2244,7 +2244,7 @@ class ControlList(Control):
         """
         return 0
 
-    def getSelectedItem(self) -> ListItem:
+    def getSelectedItem(self) -> ListItem | None:
         """
         Returns the selected item as a ListItem object.
 
@@ -2380,7 +2380,7 @@ class ControlList(Control):
         """
         return ListItem()
 
-    def setStaticContent(self, items: Sequence[ListItem]) -> None:
+    def setStaticContent(self, items: Iterable[ListItem]) -> None:
         """
         Fills a static list with a list of listitems.
 
@@ -3455,7 +3455,7 @@ class Dialog:
     def select(
         self,
         heading: str,
-        list: Sequence[str | ListItem],
+        list: Iterable[str | ListItem],
         autoclose: int = 0,
         preselect: int = -1,
         useDetails: bool = False,
@@ -3486,7 +3486,7 @@ class Dialog:
         """
         return 0
 
-    def contextmenu(self, list: Sequence[str]) -> int:
+    def contextmenu(self, list: Iterable[str]) -> int:
         """
         :param list: string list - list of items.
 
@@ -3506,11 +3506,11 @@ class Dialog:
     def multiselect(
         self,
         heading: str,
-        options: Sequence[str | ListItem],
+        options: Iterable[str | ListItem],
         autoclose: int = 0,
-        preselect: Sequence[int] | None = None,
+        preselect: Iterable[int] | None = None,
         useDetails: bool = False,
-    ) -> list[int]:
+    ) -> list[int] | None:
         """
         :param heading: string or unicode - dialog heading.
         :param options: list of strings / xbmcgui.ListItems - options to choose from.
@@ -3868,7 +3868,7 @@ class Dialog:
         heading: str,
         selectedcolor: str = "",
         colorfile: str = "",
-        colorlist: Sequence[ListItem] | None = None,
+        colorlist: Iterable[ListItem] | None = None,
     ) -> str:
         """
         :param heading: string - dialog heading.
@@ -4313,7 +4313,7 @@ class Window:
         """
         pass
 
-    def removeControls(self, pControls: Sequence[Control]) -> None:
+    def removeControls(self, pControls: Iterable[Control]) -> None:
         """
         Removes a list of controls from this window.
 
@@ -4486,7 +4486,7 @@ class Window:
         """
         pass
 
-    def addControls(self, pControls: Sequence[Control]) -> None:
+    def addControls(self, pControls: Iterable[Control]) -> None:
         """
         Add a list of Controls to this window.
 
@@ -4613,7 +4613,7 @@ class WindowXML(Window):
         """
         pass
 
-    def addItems(self, items: Sequence[str | ListItem]) -> None:
+    def addItems(self, items: Iterable[str | ListItem]) -> None:
         """
         Add a list of items to to the window list.
 

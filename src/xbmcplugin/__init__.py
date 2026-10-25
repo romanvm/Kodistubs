@@ -11,7 +11,7 @@ consistent user experience.
 """
 
 from __future__ import annotations
-from collections.abc import Sequence
+from collections.abc import Iterable
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -99,7 +99,7 @@ def addDirectoryItem(
     return True
 
 
-def addDirectoryItems(handle: int, items: Sequence[tuple[str, xbmcgui.ListItem, bool]], totalItems: int = 0) -> bool:
+def addDirectoryItems(handle: int, items: Iterable[tuple[str, xbmcgui.ListItem, bool]], totalItems: int = 0) -> bool:
     """
     Callback function to pass directory contents back to Kodi as a list.
 

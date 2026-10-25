@@ -11,7 +11,7 @@ this library.
 """
 
 from __future__ import annotations
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -801,7 +801,7 @@ class InfoTagGame:
         """
         pass
 
-    def setGenres(self, genres: Sequence[str]) -> None:
+    def setGenres(self, genres: Iterable[str]) -> None:
         """
         Sets the genres of the game.
 
@@ -913,7 +913,7 @@ class InfoTagGame:
         """
         pass
 
-    def setTags(self, tags: Sequence[str]) -> None:
+    def setTags(self, tags: Iterable[str]) -> None:
         """
         Sets the tags of the game.
 
@@ -1303,7 +1303,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setGenres(self, genres: Sequence[str]) -> None:
+    def setGenres(self, genres: Iterable[str]) -> None:
         """
         Set the genres of the music item.
 
@@ -1403,7 +1403,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setMusicBrainzArtistID(self, musicBrainzArtistID: Sequence[str]) -> None:
+    def setMusicBrainzArtistID(self, musicBrainzArtistID: Iterable[str]) -> None:
         """
         Set the MusicBrainz artist IDs of the music item.
 
@@ -1433,7 +1433,7 @@ class InfoTagMusic:
         """
         pass
 
-    def setMusicBrainzAlbumArtistID(self, musicBrainzAlbumArtistID: Sequence[str]) -> None:
+    def setMusicBrainzAlbumArtistID(self, musicBrainzAlbumArtistID: Iterable[str]) -> None:
         """
         Set the MusicBrainz album artist IDs of the music item.
 
@@ -2954,7 +2954,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setGenres(self, genre: Sequence[str]) -> None:
+    def setGenres(self, genre: Iterable[str]) -> None:
         """
         Set the genres of the video item.
 
@@ -2964,7 +2964,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setCountries(self, countries: Sequence[str]) -> None:
+    def setCountries(self, countries: Iterable[str]) -> None:
         """
         Set the countries of the video item.
 
@@ -2974,7 +2974,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setDirectors(self, directors: Sequence[str]) -> None:
+    def setDirectors(self, directors: Iterable[str]) -> None:
         """
         Set the directors of the video item.
 
@@ -2984,7 +2984,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setStudios(self, studios: Sequence[str]) -> None:
+    def setStudios(self, studios: Iterable[str]) -> None:
         """
         Set the studios of the video item.
 
@@ -2994,7 +2994,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setWriters(self, writers: Sequence[str]) -> None:
+    def setWriters(self, writers: Iterable[str]) -> None:
         """
         Set the writers of the video item.
 
@@ -3044,7 +3044,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setTags(self, tags: Sequence[str]) -> None:
+    def setTags(self, tags: Iterable[str]) -> None:
         """
         Set the tags of the video item.
 
@@ -3174,7 +3174,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setShowLinks(self, showlinks: Sequence[str]) -> None:
+    def setShowLinks(self, showlinks: Iterable[str]) -> None:
         """
         Set the TV show links of the movie.
 
@@ -3184,7 +3184,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setArtists(self, artists: Sequence[str]) -> None:
+    def setArtists(self, artists: Iterable[str]) -> None:
         """
         Set the artists of the music video item.
 
@@ -3194,7 +3194,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setCast(self, actors: Sequence[Actor]) -> None:
+    def setCast(self, actors: Iterable[Actor]) -> None:
         """
         Set the cast / actors of the video item.
 
@@ -3236,7 +3236,7 @@ class InfoTagVideo:
         """
         pass
 
-    def addSeasons(self, seasons: Sequence[tuple[int, str, str]]) -> None:
+    def addSeasons(self, seasons: Iterable[tuple[int, str, str]]) -> None:
         """
         Add seasons to the TV show.
 
@@ -3311,7 +3311,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int | float]]) -> None:
+    def setAvailableFanart(self, images: Iterable[Mapping[str, str | int | float]]) -> None:
         """
         Set available images (needed for video scrapers)
 

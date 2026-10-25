@@ -7,7 +7,7 @@
 """
 
 from __future__ import annotations
-from collections.abc import Sequence
+from collections.abc import Iterable
 
 __kodistubs__ = True
 
@@ -567,7 +567,7 @@ class Settings:
         """
         pass
 
-    def setBoolList(self, id: str, values: Sequence[bool]) -> None:
+    def setBoolList(self, id: str, values: Iterable[bool]) -> None:
         """
         Sets the boolean values of a list setting.
 
@@ -588,7 +588,7 @@ class Settings:
         """
         pass
 
-    def setIntList(self, id: str, values: Sequence[int]) -> None:
+    def setIntList(self, id: str, values: Iterable[int]) -> None:
         """
         Sets the integer values of a list setting.
 
@@ -609,7 +609,7 @@ class Settings:
         """
         pass
 
-    def setNumberList(self, id: str, values: Sequence[float]) -> None:
+    def setNumberList(self, id: str, values: Iterable[float]) -> None:
         """
         Sets the floating point values of a list setting.
 
@@ -630,7 +630,7 @@ class Settings:
         """
         pass
 
-    def setStringList(self, id: str, values: Sequence[str]) -> None:
+    def setStringList(self, id: str, values: Iterable[str]) -> None:
         """
         Sets the string values of a list setting.
 
