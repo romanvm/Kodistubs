@@ -85,8 +85,8 @@ When adding or updating stub content:
 
 ## Branches
 
-- `master` — current stable stubs (Kodi Matrix/Nexus/Omega era, Python 3)
-- `piers` — next Kodi version stubs (active development)
+- `master` — active development; follows the current state of the Kodi project (`../xbmc` master)
+- Per-release branches (e.g. `matrix`, `nexus`) keep stubs for past Kodi versions
 - `legacy` — archived stubs for older Kodi releases
 - `python2` — archived stubs for Kodi versions that used Python 2
 
