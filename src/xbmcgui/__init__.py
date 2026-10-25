@@ -465,7 +465,7 @@ class ListItem:
         """
         pass
 
-    def setArt(self, dictionary: Mapping[str, str | int]) -> None:
+    def setArt(self, dictionary: Mapping[str, str | int | float]) -> None:
         """
         Sets the listitem's art
 
@@ -501,7 +501,7 @@ class ListItem:
         """
         pass
 
-    def setUniqueIDs(self, dictionary: Mapping[str, str | int], defaultrating: str = "") -> None:
+    def setUniqueIDs(self, dictionary: Mapping[str, str | int | float], defaultrating: str = "") -> None:
         """
         Sets the listitem's uniqueID
 
@@ -678,11 +678,7 @@ class ListItem:
         """
         return True
 
-    def setInfo(
-        self,
-        type: str,
-        infoLabels: Mapping[str, str | int | Sequence[str | int | tuple[str, str | int]]],
-    ) -> None:
+    def setInfo(self, type: str, infoLabels: Mapping[str, str | int | float | Sequence[str | tuple[str, str]]]) -> None:
         """
         Sets the listitem's infoLabels.
 
@@ -938,7 +934,7 @@ class ListItem:
         """
         pass
 
-    def setCast(self, actors: Sequence[Mapping[str, str | int]]) -> None:
+    def setCast(self, actors: Sequence[Mapping[str, str | int | float]]) -> None:
         """
         Set cast including thumbnails
 
@@ -968,7 +964,7 @@ class ListItem:
         """
         pass
 
-    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int]]) -> None:
+    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int | float]]) -> None:
         """
         Set available images (needed for video scrapers)
 
@@ -1037,7 +1033,7 @@ class ListItem:
         """
         pass
 
-    def addStreamInfo(self, cType: str, dictionary: Mapping[str, str | int]) -> None:
+    def addStreamInfo(self, cType: str, dictionary: Mapping[str, str | int | float]) -> None:
         """
         Add a stream with details.
 
@@ -1172,7 +1168,7 @@ class ListItem:
         """
         pass
 
-    def setProperties(self, dictionary: Mapping[str, str | int]) -> None:
+    def setProperties(self, dictionary: Mapping[str, str | int | float]) -> None:
         """
         Sets multiple properties for listitem's
 

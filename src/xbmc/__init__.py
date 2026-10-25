@@ -3311,7 +3311,7 @@ class InfoTagVideo:
         """
         pass
 
-    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int]]) -> None:
+    def setAvailableFanart(self, images: Sequence[Mapping[str, str | int | float]]) -> None:
         """
         Set available images (needed for video scrapers)
 
