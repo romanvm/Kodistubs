@@ -106,7 +106,7 @@ class File:
         """
         return bytearray()
 
-    def write(self, buffer: bytearray) -> bool:
+    def write(self, buffer: str | bytes | bytearray) -> bool:
         """
         To write given data in file.
 

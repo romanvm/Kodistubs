@@ -56,7 +56,7 @@ class CryptoSession:
 
     def GetKeyRequest(
         self,
-        init: bytearray,
+        init: str | bytes | bytearray,
         mimeType: str,
         offlineKey: bool,
         optionalParameters: Mapping[str, str],
@@ -98,7 +98,7 @@ class CryptoSession:
         """
         return ""
 
-    def ProvideKeyResponse(self, response: bytearray) -> str:
+    def ProvideKeyResponse(self, response: str | bytes | bytearray) -> str:
         """
         Provide a key response
 
@@ -145,7 +145,12 @@ class CryptoSession:
         """
         pass
 
-    def Decrypt(self, cipherKeyId: bytearray, input: bytearray, iv: bytearray) -> bytearray:
+    def Decrypt(
+        self,
+        cipherKeyId: str | bytes | bytearray,
+        input: str | bytes | bytearray,
+        iv: str | bytes | bytearray,
+    ) -> bytearray:
         """
         Decrypt an encrypted data by using session keys.
 
@@ -161,7 +166,12 @@ class CryptoSession:
         """
         return bytearray()
 
-    def Encrypt(self, cipherKeyId: bytearray, input: bytearray, iv: bytearray) -> bytearray:
+    def Encrypt(
+        self,
+        cipherKeyId: str | bytes | bytearray,
+        input: str | bytes | bytearray,
+        iv: str | bytes | bytearray,
+    ) -> bytearray:
         """
         Encrypt data by using session keys.
 
@@ -177,7 +187,7 @@ class CryptoSession:
         """
         return bytearray()
 
-    def Sign(self, macKeyId: bytearray, message: bytearray) -> bytearray:
+    def Sign(self, macKeyId: str | bytes | bytearray, message: str | bytes | bytearray) -> bytearray:
         """
         Generate a DRM encrypted signature for a text message.
 
@@ -192,7 +202,12 @@ class CryptoSession:
         """
         return bytearray()
 
-    def Verify(self, macKeyId: bytearray, message: bytearray, signature: bytearray) -> bool:
+    def Verify(
+        self,
+        macKeyId: str | bytes | bytearray,
+        message: str | bytes | bytearray,
+        signature: str | bytes | bytearray,
+    ) -> bool:
         """
         Verify the validity of a DRM signature of a text message.
 
