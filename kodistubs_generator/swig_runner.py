@@ -3,7 +3,7 @@
 Kodi no longer ships SWIG XML, so the generator runs SWIG itself with the same
 arguments as ``generate_file()`` in ``xbmc/interfaces/swig/CMakeLists.txt`` plus
 ``-xmlout``. SWIG is taken from the ``swig`` PyPI package (see
-``requirements-generator.txt``) unless ``settings.SWIG_EXECUTABLE`` overrides it.
+``requirements.txt``) unless ``settings.SWIG_EXECUTABLE`` overrides it.
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ def find_swig(configured: Optional[str] = None) -> str:
                      or shutil.which('swig'))
     if candidate is None:
         raise FileNotFoundError(
-            'SWIG not found. Install it with "pip install -r requirements-generator.txt" '
+            'SWIG not found. Install it with "pip install -r requirements.txt" '
             'or set SWIG_EXECUTABLE in kodistubs_generator/settings.py.'
         )
     version = swig_version(candidate)

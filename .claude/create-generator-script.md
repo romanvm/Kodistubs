@@ -29,7 +29,7 @@ project root):
   SWIG 4.5.0 or newer is required (the same floor Kodi's `xbmc/interfaces/swig/CMakeLists.txt` enforces); fail with
   a clear message otherwise. Do not look for SWIG in Kodi build directories: they can be cleaned at any time.
 
-SWIG is a project dependency: `requirements-generator.txt` pins the `swig` PyPI package, which ships prebuilt SWIG
+SWIG is a project dependency: `requirements.txt` pins the `swig` PyPI package, which ships prebuilt SWIG
 executables for Linux, macOS and Windows. Keep the pin equal to `tools/depends/native/swig/SWIG-VERSION` in the Kodi
 sources (the SWIG Kodi itself builds with).
 - `SWIG_WORK_DIR = 'build/swig'` — scratch directory for SWIG output. Must be git-ignored.

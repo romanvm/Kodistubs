@@ -42,7 +42,7 @@ pip install -e .
 Docs use Sphinx with the `autodoc` extension — it imports the stubs to extract docstrings.
 
 ```bash
-# Install Sphinx (one-time)
+# Install Sphinx, SWIG and other dev dependencies (one-time)
 pip install -r requirements.txt
 
 # Build HTML docs
@@ -65,7 +65,7 @@ Inputs, relative to the project root:
 - `../xbmc` — Kodi source checkout. Kodi 22+ builds the Python bindings with stock SWIG (4.5+) from
   `xbmc/interfaces/swig/AddonModule*.i`, wrapping the C++ API in `xbmc/interfaces/legacy/`. Kodi no longer ships
   SWIG XML, so the generator runs SWIG itself with `-xmlout` and caches the output in `build/swig/`.
-  SWIG comes from PyPI: `pip install -r requirements-generator.txt` (pinned to the SWIG version Kodi builds with).
+  SWIG comes from PyPI: `pip install -r requirements.txt` (pinned to the SWIG version Kodi builds with).
 - `doxygen/xml/` — docstring source, produced by `doxygen kodi.doxy` in `doxygen/` from the `legacy/*.h` headers.
 
 Systemic problems in the output must be fixed in `kodistubs_generator/`, not by hand-editing `src/`.

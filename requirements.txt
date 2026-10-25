@@ -2,3 +2,5 @@ uv
 Sphinx
 setuptools
 twine
+# Keep swig in sync with tools/depends/native/swig/SWIG-VERSION in the Kodi sources (used by kodistubs_generator).
+swig==4.5.0
